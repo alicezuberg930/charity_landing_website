@@ -1,6 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: UTM_HelvetIns;
-  src: url("./assets/font/UTM_HelvetIns.ttf");
+  src: url('./assets/font/UTM_HelvetIns.ttf');
+}
+
+a:hover {
+  color: inherit;
+  text-decoration-line: none;
 }
 
 body::-webkit-scrollbar {
@@ -110,7 +119,7 @@ body::-webkit-scrollbar-thumb {
   left: -4px;
   right: -4px;
   background: linear-gradient(purple, violet);
-  content: "";
+  content: '';
   z-index: -1;
   border-radius: 16px;
 }

@@ -1,162 +1,241 @@
 import { Link } from 'react-router-dom'
 import Logo from '../assets/icon/logo.png'
+import { icons } from '../utils/icons'
+import { useRef, useState } from 'react'
 
-export default function Header () {
+const Header = () => {
+  const { FaBars, IoMdArrowDropdown } = icons
+  const tabs = [
+    {
+      name: 'Giới thiệu',
+      children: [
+        {
+          name: 'Quy định',
+          link: '/rule'
+        },
+        {
+          name: 'Tiêu chí nhóm',
+          link: '/criteria'
+        },
+        {
+          name: 'Cơ cấu tổ chức',
+          link: '/structure'
+        }
+      ]
+    },
+    {
+      name: 'Hoạt động',
+      children: [
+        {
+          name: 'Cháo tình thương',
+          link: '/chao-tinh-thuong'
+        },
+        {
+          name: 'Chương trình thường niên',
+          link: '/chuong-trinh-thuong-nien'
+        },
+        {
+          name: 'Hỗ trợ hoàn cảnh',
+          link: '/ho-tro-hoan-canh'
+        },
+        {
+          name: 'Tiếp sức tri thức',
+          link: '/tiep-suc-tri-thuc'
+        }
+      ]
+    },
+    {
+      name: 'Video',
+      link: '/video'
+    },
+    {
+      name: 'Dịch vụ',
+      children: [
+        {
+          name: 'Thiết kế',
+          link: '/design'
+        },
+        {
+          name: 'Chụp ảnh',
+          link: '/photoshoot'
+        }
+      ]
+    },
+    {
+      name: 'Liên lạc',
+      link: '/contact'
+    }
+  ]
+  const [openDropdown, setOpenDropdown] = useState('')
+  const sideBarRef = useRef(null)
+
+  const toggleDropdown = menu => {
+    setOpenDropdown(openDropdown === menu ? null : menu)
+  }
+
   return (
-    <header id='header-bar' className='bg-light'>
-      <nav className='navbar navbar-expand-md navbar-dark font-weight-bold d-flex'>
-        <a href='/' className='position-relative'>
-          <img
-            src={Logo}
-            width='50'
-            height='55'
-            className='d-inline-block mr-3'
-            alt='logo'
-          />
-        </a>
+    <header className='bg-white h-20 content-center z-10 shadow-md'>
+      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 md:px-0'>
+        <div className='flex items-center flex-auto'>
+          <a href='/'>
+            <img
+              src={Logo}
+              width='55'
+              height='55'
+              className='inline-block mr-3'
+              alt='logo'
+            />
+          </a>
+          <span className='hidden md:block'>
+            <div className='flex flex-col items-end'>
+              <h4 className='text-main-color font-bold text-2xl -tracking-wider'>
+                ÁNH SÁNG TỪ THIỆN
+              </h4>
+              <span className='font-semibold'>Since 2010</span>
+            </div>
+          </span>
+        </div>
         <button
-          style={{ background: 'purple' }}
-          className='navbar-toggler'
-          type='button'
-          data-toggle='collapse'
-          data-target='#navbarText'
-          aria-controls='navbarText'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
+          className='block md:hidden'
+          onClick={() => sideBarRef.current.classList.toggle('-right-56')}
         >
-          <span className='navbar-toggler-icon'></span>
+          <FaBars size={30} fill='purple' />
         </button>
-        <span className='navbar-text collapse navbar-collapse d-flex flex-column align-items-start'>
-          <div className='collapse navbar-collapse navbar-nav d-flex flex-column align-items-end'>
-            <h4
-              className='main-theme collapse navbar-collapse navbar-nav'
-              style={{ fontFamily: 'UTM_HelvetIns' }}
+        <ul className='flex-none text-main-color font-bold gap-7 hidden md:flex'>
+          <li className='relative'>
+            <button
+              className='flex'
+              onClick={() => toggleDropdown('introduction')}
             >
-              ÁNH SÁNG TỪ THIỆN
-            </h4>
-            <span className='text-dark collapse navbar-collapse'>
-              Since 2010
-            </span>
-          </div>
-        </span>
-        <div
-          className='collapse navbar-collapse justify-content-end'
-          id='navbarText'
-        >
-          <ul className='navbar-nav mr-auto justify-content-end flex-grow-1'>
-            <li className='nav-item vertical-divider pl-3 pr-3 dropdown'>
-              <a
-                className='nav-link dropdown-toggle'
-                href='/'
-                id='navbarDropdownMenuLink'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-                style={{ color: 'purple' }}
-              >
-                <span>Giới thiệu</span>
-              </a>
-              <div
-                className='dropdown-menu'
-                aria-labelledby='navbarDropdownMenuLink'
-              >
-                <Link to='/rule' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>Quy định</span>
+              <span>Giới thiệu</span>
+              <IoMdArrowDropdown size={24} />
+            </button>
+            <div
+              className={`${
+                openDropdown === 'introduction' ? 'block' : 'hidden'
+              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+            >
+              <div className='flex flex-col'>
+                <Link to='/rule' className='px-3 py-2 hover:bg-gray-200'>
+                  <span>Quy định</span>
                 </Link>
-                <Link to='/criteria' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>
-                    Tiêu chí nhóm
-                  </span>
+                <Link to='/criteria' className='px-3 py-2 hover:bg-gray-200'>
+                  <span>Tiêu chí nhóm</span>
                 </Link>
-                <Link to='/structure' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>
-                    Cơ cấu tổ chức
-                  </span>
+                <Link to='/structure' className='px-3 py-2 hover:bg-gray-200'>
+                  <span>Cơ cấu tổ chức</span>
                 </Link>
               </div>
-            </li>
-            <li className='nav-item vertical-divider pl-3 pr-3 dropdown'>
-              <a
-                className='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdownMenuLink'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-                style={{ color: 'purple' }}
-              >
-                <span>Hoạt động</span>
-              </a>
-              <div
-                className='dropdown-menu'
-                aria-labelledby='navbarDropdownMenuLink'
-              >
-                <Link to='/chao-tinh-thuong' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>
-                    Cháo tình thương
-                  </span>
+            </div>
+          </li>
+          <li className='relative'>
+            <button className='flex' onClick={() => toggleDropdown('movement')}>
+              <span>Hoạt động</span>
+              <IoMdArrowDropdown size={24} />
+            </button>
+            <div
+              className={`${
+                openDropdown === 'movement' ? 'block' : 'hidden'
+              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+            >
+              <div className='flex flex-col'>
+                <Link
+                  to='/chao-tinh-thuong'
+                  className='px-3 py-2 hover:bg-gray-200'
+                >
+                  <span>Cháo tình thương</span>
                 </Link>
                 <Link
                   to='/chuong-trinh-thuong-nien'
-                  className='text-decoration-none'
+                  className='px-3 py-2 hover:bg-gray-200'
                 >
-                  <span className='dropdown-item main-theme'>
-                    Chương trình thường niên
-                  </span>
+                  <span>Chương trình thường niên</span>
                 </Link>
-                <Link to='/ho-tro-hoan-canh' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>
-                    Hỗ trợ hoàn cảnh
-                  </span>
+                <Link
+                  to='/ho-tro-hoan-canh'
+                  className='px-3 py-2 hover:bg-gray-200'
+                >
+                  <span>Hỗ trợ hoàn cảnh</span>
                 </Link>
-                <Link to='/tiep-suc-tri-thuc' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>
-                    Tiếp sức tri thức
-                  </span>
-                </Link>
-              </div>
-            </li>
-            <li className='nav-item vertical-divider pl-3 pr-3'>
-              <Link to='/video' className='text-decoration-none'>
-                <span className='nav-link'>
-                  <span className='main-theme'>Video</span>
-                </span>
-              </Link>
-            </li>
-            <li className='nav-item vertical-divider pl-3 pr-3 dropdown'>
-              <a
-                className='nav-link dropdown-toggle'
-                href='#'
-                id='navbarDropdownMenuLink'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-                style={{ color: 'purple' }}
-              >
-                <span>Dịch vụ</span>
-              </a>
-              <div
-                className='dropdown-menu'
-                aria-labelledby='navbarDropdownMenuLink'
-              >
-                <Link to='/design' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>Thiết kế</span>
-                </Link>
-                <Link to='/photoshoot' className='text-decoration-none'>
-                  <span className='dropdown-item main-theme'>Chụp ảnh</span>
+                <Link
+                  to='/tiep-suc-tri-thuc'
+                  className='px-3 py-2 hover:bg-gray-200'
+                >
+                  <span>Tiếp sức tri thức</span>
                 </Link>
               </div>
-            </li>
-            <li className='nav-item pl-3'>
-              <Link to='/contact' className='text-decoration-none'>
-                <span className='nav-link'>
-                  <span className='main-theme'>Liên hệ</span>
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+          <li className='relative'>
+            <Link to='/video'>
+              <span>Video</span>
+            </Link>
+          </li>
+          <li className='relative'>
+            <button className='flex' onClick={() => toggleDropdown('service')}>
+              <span>Dịch vụ</span>
+              <IoMdArrowDropdown size={24} />
+            </button>
+            <div
+              className={`${
+                openDropdown === 'service' ? 'block' : 'hidden'
+              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+            >
+              <div className='flex flex-col'>
+                <Link to='/design' className='px-3 py-2 hover:bg-gray-200'>
+                  <span>Thiết kế</span>
+                </Link>
+                <Link to='/photoshoot' className='px-3 py-2 hover:bg-gray-200'>
+                  <span>Chụp ảnh</span>
+                </Link>
+              </div>
+            </div>
+          </li>
+          <li className='relative'>
+            <Link to='/contact'>
+              <span>Liên hệ</span>
+            </Link>
+          </li>
+        </ul>
       </nav>
+      <aside
+        ref={sideBarRef}
+        className='fixed bg-white shadow-lg overflow-auto top-20 right-0 h-screen w-56 z-[99] transition-all duration-700'
+      >
+        {tabs.map(tab => {
+          return (
+            <div key={tab.name}>
+              {tab.link !== undefined ? (
+                <Link
+                  className='block px-3 py-2 hover:bg-gray-200'
+                  to={tab.link}
+                >
+                  {tab.name}
+                </Link>
+              ) : (
+                <>
+                  <button className='px-3 py-2 font-semibold'>
+                    <span>{tab.name}</span>
+                  </button>
+                  {tab.children.map(children => {
+                    return (
+                      <Link
+                        to={children.link}
+                        key={children.link}
+                        className='block text-main-color px-3 py-2 hover:bg-gray-200'
+                      >
+                        {children.name}
+                      </Link>
+                    )
+                  })}
+                </>
+              )}
+            </div>
+          )
+        })}
+      </aside>
     </header>
   )
 }
+
+export default Header

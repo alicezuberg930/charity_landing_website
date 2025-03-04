@@ -15,6 +15,7 @@ import ContactPage from './pages/ContactPage'
 import NewsPage from './pages/NewsPage'
 import ActivityDetailsPage from './pages/ActivityDetailsPage'
 import React from 'react'
+import AdminPage from './pages/AdminPage'
 
 const App = () => {
   return (
@@ -51,6 +52,8 @@ const App = () => {
         path='/tiep-suc-tri-thuc/details'
         element={<ActivityDetailsPage />}
       />
+      {/* Admin routes */}
+      <Route path='/cms' element={<AdminPage />} />
     </Routes>
   )
 }
