@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Section from "../components/Section";
+import React, { useEffect, useState } from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Section from '../components/Section'
 
-function RulePage() {
+function RulePage () {
   return (
     <>
       <Header />
-      <div className="container">
-        <Section title={"QUY ĐỊNH NHÓM"} />
-        <div className="container">
-          <div class="row">
-            <div class="col-12">
-              <strong className="main-theme">
+      <div className='container'>
+        <Section title={'QUY ĐỊNH NHÓM'} />
+        <div className='container'>
+          <div class='row'>
+            <div class='col-12'>
+              <strong className='main-theme'>
                 I. NGÀY THÀNH LẬP VÀ KẾ HOẠCH THU CHI
               </strong>
               <ul>
@@ -39,9 +39,9 @@ function RulePage() {
               </ul>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <strong className="main-theme">
+          <div class='row'>
+            <div class='col-12'>
+              <strong className='main-theme'>
                 II. HÌNH THỨC THAM GIA NHÓM
               </strong>
               <ul>
@@ -71,9 +71,9 @@ function RulePage() {
               </ul>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <strong className="main-theme">
+          <div class='row'>
+            <div class='col-12'>
+              <strong className='main-theme'>
                 III. MỤC ĐÍCH VÀ HÌNH THỨC HOẠT ĐỘNG
               </strong>
               <ul>
@@ -117,9 +117,9 @@ function RulePage() {
               </ul>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <strong className="main-theme">
+          <div class='row'>
+            <div class='col-12'>
+              <strong className='main-theme'>
                 IV. KHEN THƯỞNG VÀ TẶNG QUÀ
               </strong>
               <ul>
@@ -134,7 +134,7 @@ function RulePage() {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export default RulePage;
+export default RulePage

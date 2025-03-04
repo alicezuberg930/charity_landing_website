@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Section from "../components/Section";
-import chart from "../assets/other/organizational_chart.jpg";
+import React, { useEffect, useState } from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Section from '../components/Section'
+import chart from '../assets/other/organizational_chart.jpg'
 
-function StructurePage() {
+function StructurePage () {
   return (
     <>
       <Header />
-      <div className="container">
-        <Section title={"CƠ CẤU TỔ CHỨC CỦA NHÓM"} />
-        <div className="row">
-          <div className="col-12 image-container-2 mb-4">
-            <img src={chart} width={"100%"} />
+      <div className='container'>
+        <Section title={'CƠ CẤU TỔ CHỨC CỦA NHÓM'} />
+        <div className='row'>
+          <div className='col-12 image-container-2 mb-4'>
+            <img src={chart} width={'100%'} />
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-6">
+        <div className='row'>
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">I. Trưởng Nhóm (01 người)</strong>
+              <strong className='main-theme'>I. Trưởng Nhóm (01 người)</strong>
             </p>
             <ol>
               <li>Lập kế hoạch, chiến lược cho Nhóm hoạt động.</li>
@@ -38,14 +38,14 @@ function StructurePage() {
               <li>Xây dựng, viết bài trên website.</li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, biết vi tính, biết giao tiếp, biết lập kế hoạch, tham gia đầy
               đủ.
             </p>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">
+              <strong className='main-theme'>
                 II. Dẫn Chương Trình (02 người)
               </strong>
             </p>
@@ -57,16 +57,16 @@ function StructurePage() {
               </li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, biết vi tính, tham gia đầy đủ các chương trình lớn
             </p>
           </div>
         </div>
         <hr />
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-6">
+        <div className='row'>
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">III. Trợ Lý (02 người)</strong>
+              <strong className='main-theme'>III. Trợ Lý (02 người)</strong>
             </p>
             <ol>
               <li>Hỗ trợ Trưởng Nhóm</li>
@@ -86,14 +86,14 @@ function StructurePage() {
               </li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện</strong>: tìm tòi, học
+              <strong className='main-theme'>Điều kiện</strong>: tìm tòi, học
               hỏi, biết vi tính, biết giao tiếp, biết lập kế hoạch, biết cách xử
               lý tốt trong mọi tình huống, tham gia đầy đủ.
             </p>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">
+              <strong className='main-theme'>
                 IV: Quản lý nhân sự (01 người)
               </strong>
             </p>
@@ -109,17 +109,17 @@ function StructurePage() {
               <li>Kết hợp cùng Trưởng Nhóm chọn ngày để đi từ thiện..</li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, biết vi tính, biết giao tiếp, biết lập kế hoạch, siêng
               năng,tham gia đầy đủ.
             </p>
           </div>
         </div>
         <hr />
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-6">
+        <div className='row'>
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">
+              <strong className='main-theme'>
                 V: Thiết kế &amp; thư kí (02 người)
               </strong>
             </p>
@@ -133,15 +133,15 @@ function StructurePage() {
               <li>Viết biên bản nội cung cuộc họp nhóm.</li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, biết đồ hoạ, biết giao tiếp, biết lập kế hoạch, siêng năng,
               tham gia đầy đủ.&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>&nbsp;</p>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">
+              <strong className='main-theme'>
                 VI: Phó Nhóm Quản Trị Web (01 người)
               </strong>
             </p>
@@ -157,17 +157,17 @@ function StructurePage() {
               </li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, giỏi về lập trình website, quản lý tốt tổ website, tham gia
               nhóm đầy đủ.
             </p>
           </div>
         </div>
         <hr />
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-6">
+        <div className='row'>
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
-              <strong className="main-theme">VII: Các Tổ Trưởng</strong>
+              <strong className='main-theme'>VII: Các Tổ Trưởng</strong>
             </p>
             <ol>
               <li>
@@ -186,15 +186,15 @@ function StructurePage() {
               <li>Tìm thành viên đại diện đi họp nếu như ngày đó vắng mặt.</li>
             </ol>
             <p>
-              <strong className="main-theme">Điều kiện:</strong> tìm tòi, học
+              <strong className='main-theme'>Điều kiện:</strong> tìm tòi, học
               hỏi, biết vi tính, biết giao tiếp, biết lập kế hoạch, siêng
               năng,tham gia đầy đủ.
             </p>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className='col-sm-12 col-md-12 col-lg-6'>
             <p>
               <span>
-                <strong className="text-danger">LƯU Ý</strong>
+                <strong className='text-danger'>LƯU Ý</strong>
               </span>
             </p>
             <ol>
@@ -225,7 +225,7 @@ function StructurePage() {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export default StructurePage;
+export default StructurePage

@@ -1,35 +1,35 @@
-import Header from "../components/Header";
-import Section from "../components/Section";
-import Footer from "../components/Footer";
-import ActivityBody from "../components/ActivityBody";
+import Header from '../components/Header'
+import Section from '../components/Section'
+import Footer from '../components/Footer'
+import ActivityBody from '../components/ActivityBody'
 
-function HoTroHoanCanh() {
+function HoTroHoanCanh () {
   let response = {
-    category: "ho-tro-hoan-canh",
+    category: 'ho-tro-hoan-canh',
     data: [
       {
-        banner: "vu-lan-trang-2017-27-600x450.jpg",
+        banner: 'vu-lan-trang-2017-27-600x450.jpg',
         images: [
-          "vu-lan-trang-2017-1.jpg",
-          "vu-lan-trang-2017-2.jpg",
-          "vu-lan-trang-2017-3.jpg",
-          "vu-lan-trang-2017-4.jpg",
-          "vu-lan-trang-2017-5.jpg",
-          "vu-lan-trang-2017-6.jpg",
-          "vu-lan-trang-2017-7.jpg",
-          "vu-lan-trang-2017-8.jpg",
-          "vu-lan-trang-2017-9.jpg",
-          "vu-lan-trang-2017-10.jpg",
-          "vu-lan-trang-2017-11.jpg",
-          "vu-lan-trang-2017-12.jpg",
-          "vu-lan-trang-2017-13.jpg",
-          "vu-lan-trang-2017-14.jpg",
-          "vu-lan-trang-2017-15.jpg",
-          "vu-lan-trang-2017-16.jpg",
-          "vu-lan-trang-2017-17.jpg",
-          "vu-lan-trang-2017-18.jpg",
+          'vu-lan-trang-2017-1.jpg',
+          'vu-lan-trang-2017-2.jpg',
+          'vu-lan-trang-2017-3.jpg',
+          'vu-lan-trang-2017-4.jpg',
+          'vu-lan-trang-2017-5.jpg',
+          'vu-lan-trang-2017-6.jpg',
+          'vu-lan-trang-2017-7.jpg',
+          'vu-lan-trang-2017-8.jpg',
+          'vu-lan-trang-2017-9.jpg',
+          'vu-lan-trang-2017-10.jpg',
+          'vu-lan-trang-2017-11.jpg',
+          'vu-lan-trang-2017-12.jpg',
+          'vu-lan-trang-2017-13.jpg',
+          'vu-lan-trang-2017-14.jpg',
+          'vu-lan-trang-2017-15.jpg',
+          'vu-lan-trang-2017-16.jpg',
+          'vu-lan-trang-2017-17.jpg',
+          'vu-lan-trang-2017-18.jpg'
         ],
-        title: "VU LAN TRẮNG 2017",
+        title: 'VU LAN TRẮNG 2017',
         description: `<ul>
         <li>Đợt 1 (ngày 10.09.2017): 13 phần quà phát ở Huyện Mỏ Cày Bắc, Tỉnh Bến Tre.</li>
         <li>Đợt 2 (ngày 17.09.2017): 05 phần quà + 01CPU (100% new) ở Huyện Chợ Gạo, Tỉnh 
@@ -37,26 +37,26 @@ function HoTroHoanCanh() {
         <li><strong>Nhóm Ánh Sáng</strong> xin chân thành cảm ơn các mạnh 
         thường quân gần xa đã cùng chung tay ủng hộ góp sức với nhóm. Kính chúc sức khoẻ &amp; may mắn đến 
         với mọi người. Tiền còn dư sẽ được chuyển sang chương trình Vui Mùa Trung Thu 2017 (ngày 30.09.2017).</li></ul>`,
-        key: 1,
+        key: 1
       },
       {
-        banner: "vu-lan-trang-2016-23-768x432.jpg",
+        banner: 'vu-lan-trang-2016-23-768x432.jpg',
         images: [
-          "vu-lan-trang-2016-1.jpg",
-          "vu-lan-trang-2016-2.jpg",
-          "vu-lan-trang-2016-3.jpg",
-          "vu-lan-trang-2016-4.jpg",
-          "vu-lan-trang-2016-5.jpg",
-          "vu-lan-trang-2016-6.jpg",
-          "vu-lan-trang-2016-7.jpg",
-          "vu-lan-trang-2016-8.jpg",
-          "vu-lan-trang-2016-9.jpg",
-          "vu-lan-trang-2016-10.jpg",
-          "vu-lan-trang-2016-11.jpg",
-          "vu-lan-trang-2016-12.jpg",
-          "vu-lan-trang-2016-13.jpg",
+          'vu-lan-trang-2016-1.jpg',
+          'vu-lan-trang-2016-2.jpg',
+          'vu-lan-trang-2016-3.jpg',
+          'vu-lan-trang-2016-4.jpg',
+          'vu-lan-trang-2016-5.jpg',
+          'vu-lan-trang-2016-6.jpg',
+          'vu-lan-trang-2016-7.jpg',
+          'vu-lan-trang-2016-8.jpg',
+          'vu-lan-trang-2016-9.jpg',
+          'vu-lan-trang-2016-10.jpg',
+          'vu-lan-trang-2016-11.jpg',
+          'vu-lan-trang-2016-12.jpg',
+          'vu-lan-trang-2016-13.jpg'
         ],
-        title: "HỖ TRỢ HOÀN CẢNH KHÓ KHĂN - CẢM THƯƠNG",
+        title: 'HỖ TRỢ HOÀN CẢNH KHÓ KHĂN - CẢM THƯƠNG',
         description: `<ul>
         <li>Đợt 1 (ngày 17.07.2016): 04 Hoàn Cảnh tại Cần Giuộc, Long An.</li>
         <li>Đợt 2 (ngày 24.07.2016): 02 Hoàn cảnh tại Xã Mỹ Hòa, Huyện Tháp Mười, Đồng Tháp 
@@ -65,23 +65,23 @@ function HoTroHoanCanh() {
         (có 1 số hoàn cảnh không lấy được hình tư liệu do vắng vào bệnh viện).</li>
         <li>Đợt 4 (ngày 07.08.2016): 10 hoàn cảnh tại Mỹ Thành &amp; Giồng Trôm, 
         Tỉnh Bến Tre.</li></ul>`,
-        key: 2,
+        key: 2
       },
       {
-        banner: "cam-thuong-banner.jpg",
+        banner: 'cam-thuong-banner.jpg',
         images: [
-          "cam-thuong-1.jpg",
-          "cam-thuong-2.jpg",
-          "cam-thuong-3.jpg",
-          "cam-thuong-4.jpg",
-          "cam-thuong-5.jpg",
-          "cam-thuong-6.jpg",
-          "cam-thuong-7.jpg",
-          "cam-thuong-8.jpg",
-          "cam-thuong-9.jpg",
-          "cam-thuong-10.jpg",
+          'cam-thuong-1.jpg',
+          'cam-thuong-2.jpg',
+          'cam-thuong-3.jpg',
+          'cam-thuong-4.jpg',
+          'cam-thuong-5.jpg',
+          'cam-thuong-6.jpg',
+          'cam-thuong-7.jpg',
+          'cam-thuong-8.jpg',
+          'cam-thuong-9.jpg',
+          'cam-thuong-10.jpg'
         ],
-        title: "HỖ TRỢ HOÀN CẢNH KHÓ KHĂN - CẢM THƯƠNG",
+        title: 'HỖ TRỢ HOÀN CẢNH KHÓ KHĂN - CẢM THƯƠNG',
         description: `<ul>
         <li>CẢM THƯƠNG! Cuộc sống có mấy ai biết trước được lòng người, hôm nay thương thương nhớ nhớ, ngày mai sẽ còn 
         không? Khi thời khỏe mạnh vẫn là vợ chồng nhưng đến khi bệnh tật thì mới hay người đó thương mình không?
@@ -98,37 +98,37 @@ function HoTroHoanCanh() {
         cánh tay Chị cũng rất mỏi mệt, Chị đang ao ước có một chiếc xe điện để giúp chị di chuyển cho dễ dàng. Hiện tại nhóm Ánh 
         Sáng đã đến và khảo sát giá của một chiếc xe điện cũ là 3 triệu. Hiện tại Chị có tích lũy được một triệu, như vậy sẽ còn thiếu 2 
         triệu. Nhóm Ánh Sáng xin các mạnh thường quân và các bạn cùng chung tay cùng nhóm Ánh Sáng biến giấc mơ thành hiện thực.</li></ul>.`,
-        key: 3,
+        key: 3
       },
       {
-        banner: "vu-lan-trang-2015-banner.jpg",
+        banner: 'vu-lan-trang-2015-banner.jpg',
         images: [
-          "vu-lan-trang-2015-1.jpg",
-          "vu-lan-trang-2015-2.jpg",
-          "vu-lan-trang-2015-3.jpg",
-          "vu-lan-trang-2015-4.jpg",
-          "vu-lan-trang-2015-5.jpg",
-          "vu-lan-trang-2015-6.jpg",
-          "vu-lan-trang-2015-7.jpg",
-          "vu-lan-trang-2015-8.jpg",
-          "vu-lan-trang-2015-9.jpg",
-          "vu-lan-trang-2015-10.jpg",
-          "vu-lan-trang-2015-11.jpg",
-          "vu-lan-trang-2015-12.jpg",
-          "vu-lan-trang-2015-13.jpg",
-          "vu-lan-trang-2015-14.jpg",
-          "vu-lan-trang-2015-15.jpg",
-          "vu-lan-trang-2015-16.jpg",
-          "vu-lan-trang-2015-17.jpg",
-          "vu-lan-trang-2015-18.jpg",
-          "vu-lan-trang-2015-19.jpg",
-          "vu-lan-trang-2015-20.jpg",
-          "vu-lan-trang-2015-21.jpg",
-          "vu-lan-trang-2015-22.jpg",
-          "vu-lan-trang-2015-23.jpg",
-          "vu-lan-trang-2015-24.jpg",
+          'vu-lan-trang-2015-1.jpg',
+          'vu-lan-trang-2015-2.jpg',
+          'vu-lan-trang-2015-3.jpg',
+          'vu-lan-trang-2015-4.jpg',
+          'vu-lan-trang-2015-5.jpg',
+          'vu-lan-trang-2015-6.jpg',
+          'vu-lan-trang-2015-7.jpg',
+          'vu-lan-trang-2015-8.jpg',
+          'vu-lan-trang-2015-9.jpg',
+          'vu-lan-trang-2015-10.jpg',
+          'vu-lan-trang-2015-11.jpg',
+          'vu-lan-trang-2015-12.jpg',
+          'vu-lan-trang-2015-13.jpg',
+          'vu-lan-trang-2015-14.jpg',
+          'vu-lan-trang-2015-15.jpg',
+          'vu-lan-trang-2015-16.jpg',
+          'vu-lan-trang-2015-17.jpg',
+          'vu-lan-trang-2015-18.jpg',
+          'vu-lan-trang-2015-19.jpg',
+          'vu-lan-trang-2015-20.jpg',
+          'vu-lan-trang-2015-21.jpg',
+          'vu-lan-trang-2015-22.jpg',
+          'vu-lan-trang-2015-23.jpg',
+          'vu-lan-trang-2015-24.jpg'
         ],
-        title: "VU LAN TRẮNG THÁNG 08.2015",
+        title: 'VU LAN TRẮNG THÁNG 08.2015',
         description: `Nhóm Ánh Sáng xin chân thành cảm ơn các mạnh thường quân, các tình nguyện viên & các thành viên đã cùng nhóm thực hiện sứ mệnh tháng 08.2015.
         <ul>
         <li>ĐỢT 1: ngày 09.08.2015 (Xã Hiệp Hòa, Huyện Đức Hòa, Tỉnh Long An) - 10 hoàn cảnh cụ già neo đơn khó khăn.</li>
@@ -137,23 +137,23 @@ function HoTroHoanCanh() {
         <li>ĐỢT 4: ngày 02.09.2015 (Xã Tăng Hòa, Huyện Gò Công Đông, Tỉnh Tiền Giang) - 03 hoàn cảnh cụ già neo đơn khó khăn.</li>
         <li>ĐỢT 5: ngày 06.09.2015 (Phường 7, Quận 8, TP.HCM).</li>
         </ul>`,
-        key: 4,
+        key: 4
       },
       {
-        banner: "ho-tro-hoan-canh-kho-khan-banner.jpg",
+        banner: 'ho-tro-hoan-canh-kho-khan-banner.jpg',
         images: [
-          "ho-tro-hoan-canh-kho-khan-1.jpg",
-          "ho-tro-hoan-canh-kho-khan-2.jpg",
-          "ho-tro-hoan-canh-kho-khan-3.jpg",
-          "ho-tro-hoan-canh-kho-khan-4.jpg",
-          "ho-tro-hoan-canh-kho-khan-5.jpg",
-          "ho-tro-hoan-canh-kho-khan-6.jpg",
-          "ho-tro-hoan-canh-kho-khan-7.jpg",
-          "ho-tro-hoan-canh-kho-khan-8.jpg",
-          "ho-tro-hoan-canh-kho-khan-9.jpg",
-          "ho-tro-hoan-canh-kho-khan-10.jpg",
+          'ho-tro-hoan-canh-kho-khan-1.jpg',
+          'ho-tro-hoan-canh-kho-khan-2.jpg',
+          'ho-tro-hoan-canh-kho-khan-3.jpg',
+          'ho-tro-hoan-canh-kho-khan-4.jpg',
+          'ho-tro-hoan-canh-kho-khan-5.jpg',
+          'ho-tro-hoan-canh-kho-khan-6.jpg',
+          'ho-tro-hoan-canh-kho-khan-7.jpg',
+          'ho-tro-hoan-canh-kho-khan-8.jpg',
+          'ho-tro-hoan-canh-kho-khan-9.jpg',
+          'ho-tro-hoan-canh-kho-khan-10.jpg'
         ],
-        title: "HỖ TRỢ HOÀN CẢNH - LÁ VÀNG",
+        title: 'HỖ TRỢ HOÀN CẢNH - LÁ VÀNG',
         description: `<ul>
         <li>Cuộc đời như là đóa hoa vô thường, sớm nở tối tàn. Đâu ai biết được ngày mai sẽ ra sao? Hôm nay ta khỏe mạnh ngày mai ta mang như thế nào? 
         Có con nhưng ta có nhờ vả được con mình không? Hoàn cảnh gia đình chú Nguyễn Văn Thành (sn: 1953) hiện cư ngụ tại số 141/10 Hoài Thanh Phường 14 Quận 08 Tp.HCM. 
@@ -162,22 +162,22 @@ function HoTroHoanCanh() {
         phải đành bỏ việc để ở nhà chăm sóc cho vợ đang bị bệnh tai biến là Cô Đoàn Thị Màu (sinh năm: 1956) bị té gãy xương hông &amp; bệnh tai biến không thể đi tới 
         lui được nữa. Khi xưa còn khỏe mạnh Cô bán vé số kiếm sống qua ngày. Bây giờ lâm bệnh chỉ còn biết ngồi một chổ, hàng xóm ai cho gì ăn đó.
         Nhóm Ánh Sáng hi vọng các mạnh thường quân càng sẻ chia một chút ấm áp tình thương đến với Chú Thành &amp; Cô Màu.</li></ul>`,
-        key: 5,
-      },
-    ],
-  };
-  let numberOfCardsPerRow = [];
+        key: 5
+      }
+    ]
+  }
+  let numberOfCardsPerRow = []
   for (let i = 0; i < response.data.length / 2; i++) {
-    numberOfCardsPerRow.push("unique_" + i);
+    numberOfCardsPerRow.push('unique_' + i)
   }
   return (
     <>
       <Header />
-      <Section title={"HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH"} />
+      <Section title={'HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH'} />
       <ActivityBody information={{ response, numberOfCardsPerRow }} />
       <Footer />
     </>
-  );
+  )
 }
 
-export default HoTroHoanCanh;
+export default HoTroHoanCanh

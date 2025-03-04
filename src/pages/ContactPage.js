@@ -1,25 +1,25 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Section from "../components/Section";
-import GoogleMap from "../components/GoogleMap";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Section from '../components/Section'
+import GoogleMap from '../components/GoogleMap'
 
-function ContactPage() {
+function ContactPage () {
   return (
     <>
       <Header />
-      <div className="container">
-        <Section title={"THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN"} />
+      <div className='container'>
+        <Section title={'THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN'} />
         <GoogleMap />
-        <div className="row">
-          <div className="col-lg-6 col-md-12 col-sm-12">
-            <Section title={"THÔNG TIN LIÊN HỆ"} />
+        <div className='row'>
+          <div className='col-lg-6 col-md-12 col-sm-12'>
+            <Section title={'THÔNG TIN LIÊN HỆ'} />
             <ul>
               <li>
                 <p>
                   <strong>
                     Website:
-                    <a href="https://anhsangtuthien.com">
-                      {" "}
+                    <a href='https://anhsangtuthien.com'>
+                      {' '}
                       www.anhsangtuthien.com
                     </a>
                   </strong>
@@ -42,14 +42,14 @@ function ContactPage() {
               <li>
                 <p>
                   <strong>
-                    Telephone:<a href="tel:02866802558"> 028.66.802.558</a>
+                    Telephone:<a href='tel:02866802558'> 028.66.802.558</a>
                   </strong>
                 </p>
               </li>
             </ul>
           </div>
-          <div className="col-lg-6 col-md-12 col-sm-12">
-            <Section title={"THÔNG TIN CHUYỂN KHOẢN"} />
+          <div className='col-lg-6 col-md-12 col-sm-12'>
+            <Section title={'THÔNG TIN CHUYỂN KHOẢN'} />
             <ul>
               <li>
                 <p>
@@ -82,7 +82,7 @@ function ContactPage() {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export default ContactPage;
+export default ContactPage
