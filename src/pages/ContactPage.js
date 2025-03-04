@@ -35,8 +35,14 @@ function ContactPage () {
               </li>
               <li>
                 <p>
-                  <strong>Địa chỉ</strong>: 1647/55 Phạm Thế Hiển P6, Q8, Tp.Hồ
-                  Chí Minh.
+                  <strong>Địa chỉ nấu cháo: </strong>: 269/37 Bà Hom, P.13, Quận
+                  6, Tp.Hồ Chí Minh.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <strong>Kho lưu trữ: </strong>: 25 đường 52B, P. Tân Tạo, Q.
+                  Bình Tân, Tp.Hồ Chí Minh.
                 </p>
               </li>
               <li>
