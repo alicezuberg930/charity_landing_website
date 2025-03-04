@@ -1,9 +1,7 @@
-import Header from '../components/Header'
 import Section from '../components/Section'
-import Footer from '../components/Footer'
 import ActivityBody from '../components/ActivityBody'
 
-function HoTroHoanCanh () {
+const HoTroHoanCanh = () => {
   let response = {
     category: 'ho-tro-hoan-canh',
     data: [
@@ -172,10 +170,8 @@ function HoTroHoanCanh () {
   }
   return (
     <>
-      <Header />
       <Section title={'HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH'} />
       <ActivityBody information={{ response, numberOfCardsPerRow }} />
-      <Footer />
     </>
   )
 }

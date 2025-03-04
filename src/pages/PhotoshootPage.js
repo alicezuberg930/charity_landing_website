@@ -1,6 +1,4 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Section from '../components/Section'
 import { importAll } from '../utils/import_img'
 const images = importAll(
@@ -10,9 +8,8 @@ const images = importAll(
 function DesignPage () {
   return (
     <>
-      <Header />
-      <div className='container'>
-        <Section title={'NHẬN CHỤP ALBUM ẢNH CƯỚI'} />
+      <Section title={'NHẬN CHỤP ALBUM ẢNH CƯỚI'} />
+      <div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
@@ -92,7 +89,7 @@ function DesignPage () {
         </div>
       </div>
       <Section title={'NHẬN CHỤP ẢNH HỘI TIỆC'} />
-      <div className='container'>
+      <div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
@@ -172,7 +169,7 @@ function DesignPage () {
         </div>
       </div>
       <Section title={'NHẬN CHỤP ẢNH EM BÉ'} />
-      <div className='container'>
+      <div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
@@ -241,7 +238,7 @@ function DesignPage () {
         </div>
       </div>
       <Section title={'NHẬN CHỤP ẢNH KỈ YẾU'} />
-      <div className='container'>
+      <div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
@@ -331,8 +328,6 @@ function DesignPage () {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   )
 }

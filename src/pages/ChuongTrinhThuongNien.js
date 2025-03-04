@@ -1,9 +1,7 @@
-import Header from '../components/Header'
 import Section from '../components/Section'
-import Footer from '../components/Footer'
 import ActivityBody from '../components/ActivityBody'
 
-function ChuongTrinhThuongNien () {
+const ChuongTrinhThuongNien = () => {
   let response = {
     category: 'chao-tinh-thuong',
     data: [
@@ -567,12 +565,11 @@ function ChuongTrinhThuongNien () {
   for (let i = 0; i < response.data.length / 2; i++) {
     numberOfCardsPerRow.push('unique_' + i)
   }
+
   return (
     <>
-      <Header />
       <Section title={'HOẠT ĐỘNG CHƯƠNG TRÌNH THƯỜNG NIÊN'} />
       <ActivityBody information={{ response, numberOfCardsPerRow }} />
-      <Footer />
     </>
   )
 }

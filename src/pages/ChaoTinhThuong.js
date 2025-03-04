@@ -1,6 +1,4 @@
-import Header from '../components/Header'
 import Section from '../components/Section'
-import Footer from '../components/Footer'
 import ActivityBody from '../components/ActivityBody'
 
 function ChaoTinhThuong () {
@@ -296,10 +294,8 @@ function ChaoTinhThuong () {
   }
   return (
     <>
-      <Header />
       <Section title={'HOẠT ĐỘNG CHÁO TÌNH THƯƠNG'} />
       <ActivityBody information={{ response, numberOfCardsPerRow }} />
-      <Footer />
     </>
   )
 }

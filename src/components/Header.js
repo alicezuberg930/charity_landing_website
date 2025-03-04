@@ -75,7 +75,7 @@ const Header = () => {
 
   return (
     <header className='bg-white h-20 content-center z-10 shadow-md'>
-      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 md:px-0'>
+      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-2 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <a href='/'>
             <img
@@ -97,7 +97,7 @@ const Header = () => {
         </div>
         <button
           className='block md:hidden'
-          onClick={() => sideBarRef.current.classList.toggle('-right-56')}
+          onClick={() => sideBarRef.current.classList.toggle('right-0')}
         >
           <FaBars size={30} fill='purple' />
         </button>
@@ -113,7 +113,7 @@ const Header = () => {
             <div
               className={`${
                 openDropdown === 'introduction' ? 'block' : 'hidden'
-              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link to='/rule' className='px-3 py-2 hover:bg-gray-200'>
@@ -136,7 +136,7 @@ const Header = () => {
             <div
               className={`${
                 openDropdown === 'movement' ? 'block' : 'hidden'
-              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link
@@ -179,7 +179,7 @@ const Header = () => {
             <div
               className={`${
                 openDropdown === 'service' ? 'block' : 'hidden'
-              } overflow-hidden absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link to='/design' className='px-3 py-2 hover:bg-gray-200'>
@@ -200,7 +200,7 @@ const Header = () => {
       </nav>
       <aside
         ref={sideBarRef}
-        className='fixed bg-white shadow-lg overflow-auto top-20 right-0 h-screen w-56 z-[99] transition-all duration-700'
+        className='fixed bg-white shadow-lg overflow-auto top-20 -right-56 h-screen w-56 z-[99] transition-all duration-700'
       >
         {tabs.map(tab => {
           return (

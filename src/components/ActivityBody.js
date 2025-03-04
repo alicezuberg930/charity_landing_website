@@ -4,9 +4,9 @@ const images = importAll(
   require.context('../assets/activity_image', false, /\.(png|jpe?g|svg)$/)
 )
 
-export default function ActivityBody ({ information }) {
+const ActivityBody = ({ information }) => {
   return (
-    <div className='container'>
+    <>
       {information.numberOfCardsPerRow.map((cardNumber, index) => {
         return (
           <div className='row mt-5 mb-5' key={cardNumber}>
@@ -41,6 +41,8 @@ export default function ActivityBody ({ information }) {
           </div>
         )
       })}
-    </div>
+    </>
   )
 }
+
+export default ActivityBody

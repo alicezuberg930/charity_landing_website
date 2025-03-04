@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Constants from '../constants/global_variables'
 import axios from 'axios'
 import PlayList from '../components/PlayList'
@@ -54,7 +52,6 @@ function VideoPage () {
 
   return (
     <div>
-      <Header />
       <Section title={'VIDEO CHÁO TÌNH THƯƠNG'} />
       <PlayList id={Constants.PLAYLIST_1} videos={playList_1} />
       <Section title={'VIDEO TIẾP SỨC TRI THỨC'} />
@@ -63,7 +60,6 @@ function VideoPage () {
       <PlayList id={Constants.PLAYLIST_3} videos={playList_3} />
       <Section title={'VIDEO HỖ TRỢ HOÀN CẢNH KHÓ KHĂN'} />
       <PlayList id={Constants.PLAYLIST_4} videos={playList_4} />
-      <Footer />
     </div>
   )
 }

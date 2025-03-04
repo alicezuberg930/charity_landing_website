@@ -1,23 +1,16 @@
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Section from '../components/Section'
 
-function NewsPage () {
+const NewsPage = () => {
   return (
-    <>
-      <Header />
-      <div className='container'>
-        <Section title={'THƯ VẬN ĐỘNG'} />
-        <embed
-          className='mb-5'
-          width={'100%'}
-          height={'1000px'}
-          src='https://drive.google.com/file/d/1GPnBwxJA8fj64-R-1QJeA331fzGo054n/preview'
-          type='application/pdf'
-        ></embed>
-      </div>
-      <Footer />
-    </>
+    <div className='mb-6'>
+      <Section title={'THƯ VẬN ĐỘNG'} />
+      <embed
+        className='block h-screen'
+        width={'100%'}
+        src='https://drive.google.com/file/d/1GPnBwxJA8fj64-R-1QJeA331fzGo054n/preview'
+        type='application/pdf'
+      />
+    </div>
   )
 }
 

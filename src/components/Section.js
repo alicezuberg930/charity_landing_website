@@ -1,12 +1,11 @@
-export default function Section ({ title }) {
+const Section = ({ title }) => {
   return (
-    <div className='container mt-4 mb-4'>
-      <h3 className='main-theme bold d-flex justify-content-center align-items-center'>
-        <div className='seprarator'></div>
-        <p className='section-title-main'>{title}</p>
-        <div className='seprarator'></div>
+    <div className='mt-4 mb-4 border-[1px] border-purple-900 p-2 rounded-xl w-fit mx-auto'>
+      <h3 className='text-main-color font-bold'>
+        <p className='text-center'>{title}</p>
       </h3>
     </div>
   )
 }
- 
+
+export default Section
