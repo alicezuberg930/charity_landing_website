@@ -27,11 +27,9 @@ function ContactPage () {
               </li>
               <li>
                 <p>
-                  <strong>Hotline</strong>
+                  <strong>Hotline</strong>: 0986.44.99.14 - 0938.88.44.07 (Mr.
+                  Tân)
                 </p>
-                <p>0986.44.99.14 (Tân)</p>
-                <p>0934.323.278 (Thảo)</p>
-                <p>0983.770.671 (Toàn)</p>
               </li>
               <li>
                 <p>
