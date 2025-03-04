@@ -25,7 +25,7 @@ export default function ActivityBody ({ information }) {
                           style={{ objectFit: 'cover', height: '18rem' }}
                           className='card-img-top'
                           src={images[dataRow.banner]}
-                          alt='Card image cap'
+                          alt='Card'
                         />
                         <div className='card-body'>
                           <h5 className='card-title'>{dataRow.title}</h5>

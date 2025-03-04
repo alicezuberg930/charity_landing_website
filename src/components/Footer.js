@@ -31,33 +31,42 @@ export default function Footer () {
               <li className='nav-item mb-1'>
                 <a
                   target='_blank'
-                  rel='noopener'
+                  rel='noreferrer'
                   href='https://www.facebook.com/profile.php?id=100064669450553'
                   className='mr-3'
                 >
-                  <img src={facebook} width={50} height={50} />
+                  <img src={facebook} width={50} height={50} alt='facebook' />
                 </a>
                 <a
                   target='_blank'
-                  rel='noopener'
+                  rel='noreferrer'
                   href='http://zaloapp.com/qr/p/1wi43cqb45nhd'
                   className='mr-3'
                 >
-                  <img src={zalo} width={50} height={50} />
+                  <img src={zalo} width={50} height={50} alt='zalo' />
                 </a>
                 <a
                   target='_blank'
-                  rel='noopener'
+                  rel='noreferrer'
                   href='https://www.youtube.com/channel/UCWOjhTJBvyQXanFiy5SeyFA/videos'
                 >
-                  <img src={youtube} width={50} height={50} />
+                  <img src={youtube} width={50} height={50} alt='youtube' />
                 </a>
               </li>
             </ul>
           </div>
           <div className='col-lg-6 col-md-12 col-sm-12'>
             <h4 className='main-theme'>THEO DÕI CHÚNG TÔI</h4>
-            <div
+            <div className='' style={{ width: '100%' }}>
+              <iframe
+                src='https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100064669450553&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true'
+                width='100%'
+                height='500'
+                style={{ border: 'none', overflow: 'hidden' }}
+                allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+              ></iframe>
+            </div>
+            {/* <div
               className='fb-page'
               data-href='https://www.facebook.com/profile.php?id=100064669450553'
               data-tabs='timeline'
@@ -77,7 +86,7 @@ export default function Footer () {
                   Trang Ánh Sáng Từ Thiện
                 </a>
               </blockquote>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

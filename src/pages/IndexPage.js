@@ -38,6 +38,7 @@ function IndexPage () {
             </div>
             <Link to={'/news'}>
               <img
+                alt='news_image'
                 src={AlertImage}
                 width={'100%'}
                 height={'100%'}
@@ -52,13 +53,3 @@ function IndexPage () {
 }
 
 export default IndexPage
-
-{
-  /* {typeof backEnd.products === "undefined" ? (
-        <p>loading</p>
-      ) : (
-        backEnd.products.map((aa, i) => {
-          return <p key={i}>{aa.product_name}</p>;
-        })
-      )} */
-}

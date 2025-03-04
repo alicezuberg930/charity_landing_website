@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Section from '../components/Section'
@@ -12,7 +12,7 @@ function StructurePage () {
         <Section title={'CƠ CẤU TỔ CHỨC CỦA NHÓM'} />
         <div className='row'>
           <div className='col-12 image-container-2 mb-4'>
-            <img src={chart} width={'100%'} />
+            <img src={chart} width={'100%'} alt='structure' />
           </div>
         </div>
         <div className='row'>

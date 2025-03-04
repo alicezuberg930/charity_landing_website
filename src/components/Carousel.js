@@ -20,7 +20,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['nuoc-uong-dong-chai-4-300x300.jpg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>
@@ -37,7 +37,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['moc-khoa-nhua-treo-deo-1-300x300.jpeg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>
@@ -52,7 +52,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['bo-ly-anh-sang-tu-thien-2019-300x300.jpg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>
@@ -71,7 +71,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['non-thoi-trang-soc-dua-2-300x300.jpg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>
@@ -86,7 +86,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['tui-rut-du-lich-anh-sang-tu-thien.jpg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>
@@ -103,7 +103,7 @@ export default function Carousel () {
                 <div className='image-wrapper'>
                   <img
                     src={images['Viet-bic-xanh-nhua-ma-kim-loai-3-300x300.jpg']}
-                    alt='Card image cap'
+                    alt='Card'
                   />
                 </div>
                 <div className='card-body'>

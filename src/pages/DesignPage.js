@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Section from '../components/Section'
@@ -29,14 +29,18 @@ function DesignPage () {
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
-              <img src={images['chao.jpg']} width={'100%'} />
+              <img src={images['chao.jpg']} width={'100%'} alt='chao' />
             </div>
           </div>
         </div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
-              <img src={images['cung-be-den-truong-a.jpg']} width={'100%'} />
+              <img
+                src={images['cung-be-den-truong-a.jpg']}
+                width={'100%'}
+                alt='cung-be-den-truong-a'
+              />
             </div>
           </div>
         </div>
@@ -46,6 +50,7 @@ function DesignPage () {
               <img
                 src={images['Mua-He-Yeu-Thuong-2018-1400x700.jpg']}
                 width={'100%'}
+                alt='Mua-He-Yeu-Thuong-2018-1400x700'
               />
             </div>
           </div>
@@ -53,14 +58,22 @@ function DesignPage () {
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
-              <img src={images['tiep-suc-tri-thuc.jpg']} width={'100%'} />
+              <img
+                src={images['tiep-suc-tri-thuc.jpg']}
+                width={'100%'}
+                alt='tiep-suc-tri-thuc'
+              />
             </div>
           </div>
         </div>
         <div className='row mt-3 mb-3'>
           <div className='col small-12 large-12'>
             <div className='col-inner image-container-2'>
-              <img src={images['vu-lan-trang.jpg']} width={'100%'} />
+              <img
+                src={images['vu-lan-trang.jpg']}
+                width={'100%'}
+                alt='vu-lan-trang'
+              />
             </div>
           </div>
         </div>
@@ -70,6 +83,7 @@ function DesignPage () {
               <img
                 src={images['vui-mua-trung-thu-1400x653.jpg']}
                 width={'100%'}
+                alt='vui-mua-trung-thu'
               />
             </div>
           </div>

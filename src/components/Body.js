@@ -8,7 +8,7 @@ export default function Body () {
     <div className='container'>
       <div className='pt-5 pb-5 row justify-content-center'>
         <div className='col-lg-6 col-md-12'>
-          <img src={images['preview_1.jpg']} width={'100%'} />
+          <img src={images['preview_1.jpg']} width={'100%'} alt='preview_1' />
         </div>
         <div className='col-lg-6 col-md-12 d-flex flex-column justify-content-center'>
           <h3 className='main-theme font-weight-bold'>CHÁO TÌNH THƯƠNG</h3>
@@ -29,13 +29,13 @@ export default function Body () {
           </span>
         </div>
         <div className='col-lg-6 order-lg-2 col-sm-12 order-sm-1'>
-          <img src={images['preview_2.jpg']} width={'100%'} />
+          <img src={images['preview_2.jpg']} width={'100%'} alt='preview_2' />
         </div>
       </div>
       <div className='dotted-horizontal-divider'></div>
       <div className='pt-5 pb-5 row justify-content-center'>
         <div className='col-lg-6 col-md-12'>
-          <img src={images['preview_3.jpg']} width={'100%'} />
+          <img src={images['preview_3.jpg']} width={'100%'} alt='preview_3' />
         </div>
         <div className='col-lg-6 col-md-12 d-flex flex-column justify-content-center'>
           <h3 className='main-theme font-weight-bold'>TIẾP SỨC TRI THỨC</h3>
@@ -55,7 +55,7 @@ export default function Body () {
           </span>
         </div>
         <div className='col-lg-6 order-lg-2 col-sm-12 order-sm-1'>
-          <img src={images['preview_4.jpg']} width={'100%'} />
+          <img src={images['preview_4.jpg']} width={'100%'} alt='preview_4' />
         </div>
       </div>
       <div className='dotted-horizontal-divider'></div>

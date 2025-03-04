@@ -47,7 +47,7 @@ export default function Header () {
             <li className='nav-item vertical-divider pl-3 pr-3 dropdown'>
               <a
                 className='nav-link dropdown-toggle'
-                href='#'
+                href='/'
                 id='navbarDropdownMenuLink'
                 data-toggle='dropdown'
                 aria-haspopup='true'

@@ -40,7 +40,7 @@ const PlayList = ({ id, videos }) => {
           {VideoArray.map((video, i) => {
             return (
               <React.Fragment key={i}>
-                {i == 0 ? (
+                {i === 0 ? (
                   <div className='carousel-item active'>
                     {IFrameItems(i, TempVideos)}
                   </div>
