@@ -19,25 +19,28 @@ export default function Banner () {
         <li data-target='#carouselExampleIndicators' data-slide-to='1'></li>
         <li data-target='#carouselExampleIndicators' data-slide-to='2'></li>
       </ol>
-      <div className='carousel-inner'>
+      <div
+        className='carousel-inner'
+        style={{ height: '80vh', display: 'block' }}
+      >
         <div className='carousel-item active'>
           <img
             className='d-block w-100'
-            src={images['zippo_banner_1.jpg']}
+            src={images['chao-tinh-thuong.jpg']}
             alt='First slide'
           />
         </div>
         <div className='carousel-item'>
           <img
             className='d-block w-100'
-            src={images['zippo_banner_2.jpg']}
+            src={images['chuong-trinh-thuong-nien.jpg']}
             alt='Second slide'
           />
         </div>
         <div className='carousel-item'>
           <img
             className='d-block w-100'
-            src={images['zippo_banner_3.jpg']}
+            src={images['hoan-canh-kho-khan.jpg']}
             alt='Third slide'
           />
         </div>
