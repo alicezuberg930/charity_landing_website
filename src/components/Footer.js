@@ -57,7 +57,7 @@ export default function Footer () {
           </div>
           <div className='col-lg-6 col-md-12 col-sm-12'>
             <h4 className='main-theme'>THEO DÕI CHÚNG TÔI</h4>
-            <div
+            {/* <div
               className='fb-page'
               data-href='https://www.facebook.com/profile.php?id=100064669450553'
               data-tabs='timeline'
@@ -77,7 +77,7 @@ export default function Footer () {
                   Trang Ánh Sáng Từ Thiện
                 </a>
               </blockquote>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
