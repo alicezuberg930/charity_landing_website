@@ -1,4 +1,4 @@
-import './global.css'
+import './output.css'
 import { Routes, Route } from 'react-router-dom'
 import VideoPage from './pages/VideoPage'
 import IndexPage from './pages/IndexPage'
