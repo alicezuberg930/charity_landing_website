@@ -125,6 +125,12 @@ const Header = () => {
                 <Link to='/structure' className='px-3 py-2 hover:bg-gray-200'>
                   <span>Cơ cấu tổ chức</span>
                 </Link>
+                <Link
+                  to='/cms/activities'
+                  className='px-3 py-2 hover:bg-gray-200'
+                >
+                  <span>CMS</span>
+                </Link>
               </div>
             </div>
           </li>
