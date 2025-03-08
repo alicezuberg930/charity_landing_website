@@ -1,7 +1,25 @@
 import { CiBellOn } from 'react-icons/ci'
-import { FaBars, FaChevronDown, FaRegTrashAlt, FaUser } from 'react-icons/fa'
-import { IoMdArrowDropdown } from 'react-icons/io'
-import { MdCancel, MdLogout, MdModeEdit } from 'react-icons/md'
+import {
+  FaBars,
+  FaChevronCircleDown,
+  FaChevronDown,
+  FaRegShareSquare,
+  FaRegTrashAlt,
+  FaUser
+} from 'react-icons/fa'
+import {
+  IoIosAddCircleOutline,
+  IoIosInformationCircleOutline,
+  IoMdArrowDropdown
+} from 'react-icons/io'
+import {
+  MdCancel,
+  MdEventNote,
+  MdLogout,
+  MdModeEdit,
+  MdPostAdd
+} from 'react-icons/md'
+import { PiFlagBanner } from 'react-icons/pi'
 import { RiImageAddFill } from 'react-icons/ri'
 
 export const icons = {
@@ -14,5 +32,12 @@ export const icons = {
   FaUser,
   RiImageAddFill,
   FaRegTrashAlt,
-  MdModeEdit
+  MdModeEdit,
+  FaRegShareSquare,
+  FaChevronCircleDown,
+  IoIosAddCircleOutline,
+  PiFlagBanner,
+  IoIosInformationCircleOutline,
+  MdEventNote,
+  MdPostAdd
 }

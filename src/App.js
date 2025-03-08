@@ -1,4 +1,4 @@
-import './output.css'
+import './styles/output.css'
 import { Routes, Route } from 'react-router-dom'
 import VideoPage from './pages/VideoPage'
 import IndexPage from './pages/IndexPage'
@@ -18,11 +18,17 @@ import React from 'react'
 import AdminPage from './pages/AdminPage'
 import { PATH } from './utils/path'
 import PublicPage from './pages/PublicPage'
-import AdminActivitiesPage from './pages/AdminActitivesPage'
+import PostsPage from './pages/cms/PostsPage'
+import CreatePostPage from './pages/cms/CreatePostPage'
+import EventsPage from './pages/cms/EventsPage'
+import CreateEventPage from './pages/cms/CreateEventPage'
+import CreateBannerPage from './pages/cms/CreateBannerPage'
+import InformationPage from './pages/cms/InformationPage'
 
 const App = () => {
   return (
     <Routes>
+      {/* User's routes */}
       <Route path={PATH.HOME} element={<PublicPage />}>
         <Route path={PATH.PUBLIC} element={<IndexPage />} />
         <Route path='design' element={<DesignPage />} />
@@ -57,11 +63,17 @@ const App = () => {
           element={<ActivityDetailsPage />}
         />
       </Route>
-      {/* Admin routes */}
-      <Route path='/cms' element={<AdminPage />}>
-        <Route path='activities' element={<AdminActivitiesPage />} />
-        <Route path='events' element={<AdminActivitiesPage />} />
-        <Route path='information' element={<AdminActivitiesPage />} />
+      {/* Admin's routes */}
+      <Route path={PATH.CMS} element={<AdminPage />}>
+        <Route path='activities' element={<PostsPage />} />
+        <Route path='activities/create' element={<CreatePostPage />} />
+        <Route path='events' element={<EventsPage />} />
+        <Route path='events/create' element={<CreateEventPage />} />
+        <Route path='banners' element={<EventsPage />} />
+        <Route path='banners/create' element={<CreateBannerPage />} />
+        <Route path='information' element={<InformationPage />} />
+        <Route path='information' element={<InformationPage />} />
+        <Route path='information/config' element={<InformationPage />} />
       </Route>
     </Routes>
   )

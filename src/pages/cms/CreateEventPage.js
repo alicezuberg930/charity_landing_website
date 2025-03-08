@@ -1,14 +1,17 @@
 import { useState } from 'react'
-import CustomCKEditor from '../components/CustomCKEditor'
-import CustomDatePicker from '../components/CustomDatePicker'
-import CustomImagePicker from '../components/CustomImagePicker'
+import CustomCKEditor from '../../components/CustomCKEditor'
+import CustomDatePicker from '../../components/CustomDatePicker'
+import CustomImagePicker from '../../components/CustomImagePicker'
 
-const AdminActivitiesPage = () => {
+const CreateEventPage = () => {
   const [content, setContent] = useState('')
   const [images, setImages] = useState([]) // { file: File | null, url: string }[]
 
-  const getValue = value => {
-    setContent(value)
+  const handleSubmitForm = e => {
+    e.preventDefault()
+    const object = new FormData(e.currentTarget)
+    const entries = Object.fromEntries(object.entries())
+    console.log(entries)
   }
 
   return (
@@ -20,7 +23,7 @@ const AdminActivitiesPage = () => {
         </span>
       </div>
 
-      <div className='space-y-6'>
+      <form onSubmit={handleSubmitForm} className='space-y-6'>
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Tiêu đề</span>
           <div className='mt-2'>
@@ -28,13 +31,14 @@ const AdminActivitiesPage = () => {
               type='text'
               className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
               placeholder='Nhập tiêu đề'
+              name='title'
             />
           </div>
         </div>
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Nội dung</span>
           <div className='mt-2'>
-            <CustomCKEditor defaultValue={'Nhập nội dung'} value={getValue} />
+            <CustomCKEditor defaultValue={'Nhập nội dung'} />
           </div>
         </div>
         <div className='h-fit'>
@@ -84,9 +88,9 @@ const AdminActivitiesPage = () => {
         <button type='submit' className='rounded-md px-6 py-2 bg-main-color '>
           <span className='text-white'>Lưu thông tin</span>
         </button>
-      </div>
+      </form>
     </div>
   )
 }
 
-export default AdminActivitiesPage
+export default CreateEventPage

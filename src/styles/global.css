@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: UTM_HelvetIns;
-  src: url('./assets/font/UTM_HelvetIns.ttf');
+  src: url('../assets/font/UTM_HelvetIns.ttf');
 }
 
 a:hover {
@@ -23,6 +23,10 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: purple;
+}
+
+input {
+  outline: none;
 }
 
 /* to be deleted */
@@ -92,7 +96,7 @@ body::-webkit-scrollbar-thumb {
 
 .image-container-2 {
   border: 10px solid transparent;
-  border-image: url('./assets/other/border.png') 30 round;
+  border-image: url('../assets/other/border.png') 30 round;
 }
 
 .purple-border {

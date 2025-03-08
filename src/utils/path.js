@@ -1,4 +1,5 @@
 export const PATH = {
   PUBLIC: '/',
-  HOME: ''
+  HOME: '',
+  CMS: '/cms'
 }
