@@ -1,3 +1,4 @@
+import { PATH } from './utils/path'
 import './styles/output.css'
 import { Routes, Route } from 'react-router-dom'
 import VideoPage from './pages/VideoPage'
@@ -15,14 +16,13 @@ import ContactPage from './pages/ContactPage'
 import NewsPage from './pages/NewsPage'
 import ActivityDetailsPage from './pages/ActivityDetailsPage'
 import React from 'react'
-import AdminPage from './pages/AdminPage'
-import { PATH } from './utils/path'
 import PublicPage from './pages/PublicPage'
 import PostsPage from './pages/cms/PostsPage'
 import CreatePostPage from './pages/cms/CreatePostPage'
 import EventsPage from './pages/cms/EventsPage'
 import CreateEventPage from './pages/cms/CreateEventPage'
 import CreateBannerPage from './pages/cms/CreateBannerPage'
+import AdminPage from './pages/cms/AdminPage'
 import InformationPage from './pages/cms/InformationPage'
 
 const App = () => {
@@ -72,8 +72,6 @@ const App = () => {
         <Route path='banners' element={<EventsPage />} />
         <Route path='banners/create' element={<CreateBannerPage />} />
         <Route path='information' element={<InformationPage />} />
-        <Route path='information' element={<InformationPage />} />
-        <Route path='information/config' element={<InformationPage />} />
       </Route>
     </Routes>
   )

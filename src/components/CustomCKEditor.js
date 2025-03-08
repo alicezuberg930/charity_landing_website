@@ -79,7 +79,7 @@ import '../styles/custom_ckeditor.css'
  */
 const LICENSE_KEY = 'GPL' // or <YOUR_LICENSE_KEY>.
 
-const CustomCKEditor = () => {
+const CustomCKEditor = ({ onChange }) => {
   const editorContainerRef = useRef(null)
   const editorMenuBarRef = useRef(null)
   const editorToolbarRef = useRef(null)
@@ -400,9 +400,7 @@ const CustomCKEditor = () => {
             <div ref={editorRef}>
               {editorConfig && (
                 <CKEditor
-                  onChange={(e, editor) => {
-                    console.log(editor.getData())
-                  }}
+                  onChange={(e, editor) => onChange(editor.getData())}
                   onReady={editor => {
                     editorToolbarRef.current.appendChild(
                       editor.ui.view.toolbar.element

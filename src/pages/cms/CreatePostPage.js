@@ -2,16 +2,51 @@ import { useState } from 'react'
 import CustomCKEditor from '../../components/CustomCKEditor'
 import CustomDatePicker from '../../components/CustomDatePicker'
 import CustomImagePicker from '../../components/CustomImagePicker'
+import { useUploadFileHook } from '../../hooks/file.hook'
+import { useCreatePostHook } from '../../hooks/post.hook'
 
 const CreatePostPage = () => {
-  const [content, setContent] = useState('')
+  const [description, setDescription] = useState('')
+  const [cover, setCover] = useState([]) // { file: File | null, url: string }[]
+  const upload = useUploadFileHook()
   const [images, setImages] = useState([]) // { file: File | null, url: string }[]
+  const create = useCreatePostHook()
 
-  const handleSubmitForm = e => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault()
     const object = new FormData(e.currentTarget)
     const entries = Object.fromEntries(object.entries())
-    console.log(entries)
+    console.log({ ...entries, description })
+    let coverUrl = ""
+    let imageUrls = []
+    // upload cover photo
+    if (cover.length > 0) {
+      const coverForm = new FormData()
+      coverForm.set("files", cover[0].file)
+      await new Promise(resolve => {
+        upload.mutate({ file: coverForm }, {
+          onSuccess(data) {
+            coverUrl = data.data[0]
+            resolve(null)
+          }
+        })
+      })
+    }
+    // upload details photo
+    if (images.length > 0) {
+      const imagesForm = new FormData()
+      images.forEach((image) => { imagesForm.append('files', image.file) })
+      await new Promise(resolve => {
+        upload.mutate({ file: imagesForm }, {
+          onSuccess(data) {
+            imageUrls = data.data
+            resolve(null)
+          }
+        })
+      })
+    }
+    const post = { ...entries, cover: coverUrl, images: imageUrls }
+    create.mutate({ post })
   }
 
   return (
@@ -27,18 +62,15 @@ const CreatePostPage = () => {
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Tiêu đề</span>
           <div className='mt-2'>
-            <input
-              type='text'
+            <input type='text' placeholder='Nhập tiêu đề' name='title'
               className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-              placeholder='Nhập tiêu đề'
-              name='title'
             />
           </div>
         </div>
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Nội dung</span>
           <div className='mt-2'>
-            <CustomCKEditor defaultValue={'Nhập nội dung'} />
+            <CustomCKEditor defaultValue={'Nhập nội dung'} onChange={(val) => setDescription(val)} />
           </div>
         </div>
         <div className='h-fit'>
@@ -50,16 +82,11 @@ const CreatePostPage = () => {
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Loại hoạt động</span>
           <div className='mt-2'>
-            <select
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-              name='category'
-            >
-              <option value={'chao-tinh-thuong'}>Cháo tình thương</option>
-              <option value={'chuong-trinh-thuong-nien'}>
-                Chương trình thường niên
-              </option>
-              <option value={'ho-tro-hoan-canh'}>Hỗ trợ hoàn cảnh</option>
-              <option value={'tiep-suc-tri-thuc'}>Tiếp sức tri thức</option>
+            <select className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color' name='category'>
+              <option value='chao-tinh-thuong'>Cháo tình thương</option>
+              <option value='chuong-trinh-thuong-nien'>Chương trình thường niên</option>
+              <option value='ho-tro-hoan-canh'>Hỗ trợ hoàn cảnh</option>
+              <option value='tiep-suc-tri-thuc'>Tiếp sức tri thức</option>
             </select>
           </div>
         </div>
@@ -68,9 +95,9 @@ const CreatePostPage = () => {
           <div className='mt-2 p-3 bg-gray-100 rounded-md'>
             <CustomImagePicker
               isMultiple={false}
-              images={images}
-              setImages={setImages}
-              id='banner'
+              images={cover}
+              setImages={setCover}
+              id='cover'
             />
           </div>
         </div>
