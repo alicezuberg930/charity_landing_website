@@ -1,5 +1,6 @@
 import Section from '../components/Section'
 import PostList from '../components/PostList'
+import { useGetPostsHook } from '../hooks/post.hook'
 
 const HoTroHoanCanh = () => {
   let response = {
