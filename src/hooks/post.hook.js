@@ -4,10 +4,10 @@ import { toast } from "react-toastify"
 import { API } from "../utils/api"
 import { showResponseError } from "../utils/utils"
 
-export const useGetPostsHook = () => {
+export const useGetPostsHook = ({ filter }) => {
     return useQuery({
         queryKey: [API.POSTS],
-        queryFn: () => getPosts(),
+        queryFn: () => getPosts({ filter }),
         placeholderData: (previousData, _) => previousData,
     })
 }

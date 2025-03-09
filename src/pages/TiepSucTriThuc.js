@@ -1,5 +1,5 @@
 import Section from '../components/Section'
-import ActivityBody from '../components/ActivityBody'
+import PostList from '../components/PostList'
 
 const TiepSucTriThuc = () => {
   let response = {
@@ -77,14 +77,12 @@ const TiepSucTriThuc = () => {
       }
     ]
   }
-  let numberOfCardsPerRow = []
-  for (let i = 0; i < response.data.length / 2; i++) {
-    numberOfCardsPerRow.push('unique_' + i)
-  }
+  const { data: posts, isLoading } = useGetPostsHook({ category: 'tiep-suc-tri-thuc' })
+
   return (
     <>
       <Section title={'HOẠT ĐỘNG TIẾP SỨC TRI THỨC'} />
-      <ActivityBody information={{ response, numberOfCardsPerRow }} />
+      <PostList information={{ response }} />
     </>
   )
 }

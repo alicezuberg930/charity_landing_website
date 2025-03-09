@@ -1,7 +1,8 @@
 import Section from '../components/Section'
-import ActivityBody from '../components/ActivityBody'
+import PostList from '../components/PostList'
+import { useGetPostsHook } from '../hooks/post.hook'
 
-function ChaoTinhThuong () {
+const ChaoTinhThuong = () => {
   let response = {
     category: 'chao-tinh-thuong',
     data: [
@@ -55,7 +56,7 @@ function ChaoTinhThuong () {
         ],
         title: 'Chương trình Cháo tình thương bệnh viện 115 năm 2018',
         description: `Danh sách nhà hảo tâm chương trình cháo tình thương bệnh viện 115 Hồ Chí Minh
-          <table class="table table-striped">
+          <table class='table table-striped'>
             <tbody>
             <tr>
             <td>1</td>
@@ -85,7 +86,7 @@ function ChaoTinhThuong () {
             <tr>
             <td>6</td>
             <td>Gia đình Em Thanh (Phan Văn Hớn, Q12, Tp.HCM)</td>
-            <td width="353">10 lít dầu ăn,<br>
+            <td width='353'>10 lít dầu ăn,<br>
             10 bịch bột ngọt &amp; 20 bịch đường</td>
             </tr>
             <tr>
@@ -141,7 +142,7 @@ function ChaoTinhThuong () {
             <tr>
             <td>17</td>
             <td>Mỹ Bình (Q8, Tp.HCM)</td>
-            <td width="353">05 thùng mì, 01 lốc nước tương<br>
+            <td width='353'>05 thùng mì, 01 lốc nước tương<br>
             &amp; 1 thùng nước tương</td>
             </tr>
             <tr>
@@ -156,7 +157,7 @@ function ChaoTinhThuong () {
             </tr>
             <tr>
             <td>20</td>
-            <td width="342">Kho Tư Tài C3-4F (Chị Đinh, Thủy, Nhung, Lam, Mỹ, Ưới, Liễu, Nhung)</td>
+            <td width='342'>Kho Tư Tài C3-4F (Chị Đinh, Thủy, Nhung, Lam, Mỹ, Ưới, Liễu, Nhung)</td>
             <td>450,000 đ</td>
             </tr>
             <tr>
@@ -288,14 +289,12 @@ function ChaoTinhThuong () {
       }
     ]
   }
-  let numberOfCardsPerRow = []
-  for (let i = 0; i < response.data.length / 2; i++) {
-    numberOfCardsPerRow.push('unique_' + i)
-  }
+  const { data: posts, isLoading } = useGetPostsHook({ category: 'chao-tinh-thuong' })
+
   return (
     <>
       <Section title={'HOẠT ĐỘNG CHÁO TÌNH THƯƠNG'} />
-      <ActivityBody information={{ response, numberOfCardsPerRow }} />
+      <PostList information={{ response }} />
     </>
   )
 }

@@ -1,9 +1,10 @@
 import Section from '../components/Section'
-import ActivityBody from '../components/ActivityBody'
+import PostList from '../components/PostList'
+import { useGetPostsHook } from '../hooks/post.hook'
 
 const ChuongTrinhThuongNien = () => {
   let response = {
-    category: 'chao-tinh-thuong',
+    category: 'chuong-trinh-thuong-nien',
     data: [
       {
         banner: 'mua-he-yeu-thuong-2018-43-768x512.jpg',
@@ -561,15 +562,12 @@ const ChuongTrinhThuongNien = () => {
       }
     ]
   }
-  let numberOfCardsPerRow = []
-  for (let i = 0; i < response.data.length / 2; i++) {
-    numberOfCardsPerRow.push('unique_' + i)
-  }
+  const { data: posts, isLoading } = useGetPostsHook({ category: 'chuong-trinh-thuong-nien' })
 
   return (
     <>
       <Section title={'HOẠT ĐỘNG CHƯƠNG TRÌNH THƯỜNG NIÊN'} />
-      <ActivityBody information={{ response, numberOfCardsPerRow }} />
+      <PostList information={{ response }} />
     </>
   )
 }

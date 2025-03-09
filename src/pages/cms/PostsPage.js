@@ -1,14 +1,33 @@
 import { icons } from '../../utils/icons'
 import { Link } from 'react-router-dom'
-import { useGetPostsHook } from '../../hooks/post.hook'
+import { useDeletePostHook, useGetPostsHook } from '../../hooks/post.hook'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
 const PostsPage = () => {
   const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
-  const { data: posts, isLoading } = useGetPostsHook()
+  const filter = {}
+  const { data: posts, isLoading } = useGetPostsHook({})
+  const remove = useDeletePostHook()
   const dummy = []
   for (let i = 0; i <= 100; i++) {
     dummy.push(i)
+  }
+
+  const handleDelete = (id) => {
+    withReactContent(Swal).fire({
+      title: 'Bạn có chắc chắn không?',
+      text: 'Bạn sẽ không thể đảo ngược hành động',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
+    }).then(result => {
+      if (result.isConfirmed) remove.mutate({ id })
+    })
   }
 
   return (
@@ -94,7 +113,7 @@ const PostsPage = () => {
                             </Link>
                           </button>
 
-                          <button className='bg-main-color p-3 rounded-lg' title='Xóa'>
+                          <button className='bg-main-color p-3 rounded-lg' title='Xóa' onClick={() => handleDelete(post._id)}>
                             <FaRegTrashAlt size={16} fill='#fff' />
                           </button>
 

@@ -36,10 +36,7 @@ const App = () => {
         <Route path='photoshoot' element={<PhotoshootPage />} />
         <Route path='video' element={<VideoPage />} />
         <Route path='chao-tinh-thuong' element={<ChaoTinhThuong />} />
-        <Route
-          path='chuong-trinh-thuong-nien'
-          element={<ChuongTrinhThuongNien />}
-        />
+        <Route path='chuong-trinh-thuong-nien' element={<ChuongTrinhThuongNien />} />
         <Route path='ho-tro-hoan-canh' element={<HoTroHoanCanh />} />
         <Route path='tiep-suc-tri-thuc' element={<TiepSucTriThuc />} />
         <Route path='rule' element={<RulePage />} />
@@ -47,22 +44,10 @@ const App = () => {
         <Route path='structure' element={<StructurePage />} />
         <Route path='contact' element={<ContactPage />} />
         <Route path='news' element={<NewsPage />} />
-        <Route
-          path='chao-tinh-thuong/details'
-          element={<ActivityDetailsPage />}
-        />
-        <Route
-          path='chuong-trinh-thuong-nien/details'
-          element={<ActivityDetailsPage />}
-        />
-        <Route
-          path='ho-tro-hoan-canh/details'
-          element={<ActivityDetailsPage />}
-        />
-        <Route
-          path='tiep-suc-tri-thuc/details'
-          element={<ActivityDetailsPage />}
-        />
+        <Route path='chao-tinh-thuong/details' element={<ActivityDetailsPage />} />
+        <Route path='chuong-trinh-thuong-nien/details' element={<ActivityDetailsPage />} />
+        <Route path='ho-tro-hoan-canh/details' element={<ActivityDetailsPage />} />
+        <Route path='tiep-suc-tri-thuc/details' element={<ActivityDetailsPage />} />
       </Route>
       {/* Admin's routes */}
       <Route path={PATH.CMS} element={<AdminPage />}>

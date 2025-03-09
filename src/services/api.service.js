@@ -44,8 +44,8 @@ export const deletePost = async ({ id }) => {
     return response.data
 }
 
-export const getPosts = async () => {
-    const response = await axioInstance({ url: API.POSTS, method: "GET" })
+export const getPosts = async ({ filter }) => {
+    const response = await axioInstance({ url: API.POSTS, method: "GET", params: filter })
     return response.data
 }
 

@@ -1,0 +1,17 @@
+{
+  "activityAddress": "string",
+  "storageAddress": "string",
+  "email": "string",
+  "hotline": "string",
+  "facebookUrl": "string",
+  "zaloURL": "string",
+  "youtubeURL": "string",
+  "googleMapURL": "string",
+  "websiteURL": "string",
+  "telephone": "string",
+  "achaubankNumber": "string",
+  "viettinbankNumber": "string",
+  "sacombankNumber": "string",
+  "vietcombankNumber": "string",
+  "agribankNumber": "string"
+}
