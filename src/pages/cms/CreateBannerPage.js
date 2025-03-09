@@ -10,8 +10,8 @@ const CreateBannerPage = () => {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()
-    const object = new FormData(e.currentTarget)
-    const entries = Object.fromEntries(object.entries())
+    const form = new FormData(e.currentTarget)
+    const entries = Object.fromEntries(form.entries())
     let imageUrl = ""
     if (image.length > 0) {
       const imageForm = new FormData()

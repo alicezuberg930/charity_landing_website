@@ -14,8 +14,8 @@ const CreatePostPage = () => {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()
-    const object = new FormData(e.currentTarget)
-    const entries = Object.fromEntries(object.entries())
+    const form = new FormData(e.currentTarget)
+    const entries = Object.fromEntries(form.entries())
     let coverUrl = ""
     let imageUrls = []
     if (cover.length > 0) {

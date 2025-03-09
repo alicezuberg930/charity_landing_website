@@ -3,6 +3,7 @@ import { useDeleteBannerHook, useGetBannersHook } from "../../hooks/banner.hook"
 import { icons } from "../../utils/icons"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import LoadingShimmerList from "../../components/LoadingShimmerList"
 
 const BannersPage = () => {
     const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
@@ -65,8 +66,14 @@ const BannersPage = () => {
                         </thead>
 
                         <tbody className='bg-white divide-y divide-gray-200'>
-                            {
-                                banners && banners.data.map((banner, i) => {
+                            {isLoading ?
+                                <tr>
+                                    <td colSpan={7}>
+                                        <div className='p-3'>
+                                            <LoadingShimmerList />
+                                        </div>
+                                    </td>
+                                </tr> : banners && banners.data.map((banner, i) => {
                                     return (
                                         <tr key={i} className='font-medium text-sm'>
                                             <td className='px-3 py-2'>
@@ -109,7 +116,7 @@ const BannersPage = () => {
                 </div>
                 {/* Phan trang */}
             </div>
-        </div>
+        </div >
     )
 }
 

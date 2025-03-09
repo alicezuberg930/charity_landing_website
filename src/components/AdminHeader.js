@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { icons } from '../utils/icons'
 import { Link } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const AdminHeader = () => {
         <div className='flex items-center flex-shrink-0 space-x-6'>
           <div className='relative'>
             <div className='flex items-center gap-5'>
-              <button onClick={() => {}}>
+              <button onClick={() => { }}>
                 <CiBellOn className='w-5 h-5' />
               </button>
               <button
@@ -37,9 +37,8 @@ const AdminHeader = () => {
             </div>
             <div>
               <div
-                className={`${
-                  isCollapsed ? 'hidden' : 'block'
-                } absolute right-0 mt-2 text-gray-600 w-max bg-white border border-gray-100 rounded-md shadow-md`}
+                className={`${isCollapsed ? 'hidden' : 'block'
+                  } absolute right-0 mt-2 text-gray-600 w-max bg-white border border-gray-100 rounded-md shadow-md`}
               >
                 <div className='flex'>
                   <Link
@@ -65,4 +64,4 @@ const AdminHeader = () => {
   )
 }
 
-export default AdminHeader
+export default memo(AdminHeader)

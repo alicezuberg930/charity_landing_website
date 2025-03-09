@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { icons } from '../utils/icons'
 
@@ -57,4 +57,4 @@ const AdminSidebar = () => {
   )
 }
 
-export default AdminSidebar
+export default memo(AdminSidebar)

@@ -1,6 +1,6 @@
-import React from "react"
+import React, { memo } from "react"
 
-const LoadingShimmer = ({ count = 5 }) => {
+const LoadingShimmerItem = ({ count = 5 }) => {
     return (
         <div className="space-y-4">
             {Array.from({ length: count }).map((_, index) => (
@@ -19,4 +19,4 @@ const LoadingShimmer = ({ count = 5 }) => {
     )
 }
 
-export default LoadingShimmer
+export default memo(LoadingShimmerItem)

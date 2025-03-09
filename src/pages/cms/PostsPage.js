@@ -1,6 +1,7 @@
 import { icons } from '../../utils/icons'
 import { Link } from 'react-router-dom'
 import { useGetPostsHook } from '../../hooks/post.hook'
+import LoadingShimmerList from '../../components/LoadingShimmerList'
 
 const PostsPage = () => {
   const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
@@ -53,8 +54,14 @@ const PostsPage = () => {
             </thead>
 
             <tbody className='bg-white divide-y divide-gray-200'>
-              {
-                posts && posts.data.map((post, i) => {
+              {isLoading ?
+                <tr>
+                  <td colSpan={7}>
+                    <div className='p-3'>
+                      <LoadingShimmerList />
+                    </div>
+                  </td>
+                </tr> : posts && posts.data.map((post, i) => {
                   return (
                     <tr key={i} className='font-medium text-sm'>
                       <td className='px-3 py-2'>

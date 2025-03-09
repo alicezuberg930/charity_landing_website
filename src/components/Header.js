@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import Logo from '../assets/icon/logo.png'
 import { icons } from '../utils/icons'
-import { useRef, useState } from 'react'
+import { memo, useRef, useState } from 'react'
 
 const Header = () => {
   const { FaBars, IoMdArrowDropdown } = icons
@@ -79,7 +78,7 @@ const Header = () => {
         <div className='flex items-center flex-auto'>
           <a href='/'>
             <img
-              src={Logo}
+              src='./assets/logo.png'
               width='55'
               height='55'
               className='inline-block mr-3'
@@ -111,9 +110,8 @@ const Header = () => {
               <IoMdArrowDropdown size={24} />
             </button>
             <div
-              className={`${
-                openDropdown === 'introduction' ? 'block' : 'hidden'
-              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              className={`${openDropdown === 'introduction' ? 'block' : 'hidden'
+                } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link to='/rule' className='px-3 py-2 hover:bg-gray-200'>
@@ -129,7 +127,7 @@ const Header = () => {
                   to='/cms/activities'
                   className='px-3 py-2 hover:bg-gray-200'
                 >
-                  <span>CMS</span>
+                  <span>Web Admin</span>
                 </Link>
               </div>
             </div>
@@ -140,9 +138,8 @@ const Header = () => {
               <IoMdArrowDropdown size={24} />
             </button>
             <div
-              className={`${
-                openDropdown === 'movement' ? 'block' : 'hidden'
-              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              className={`${openDropdown === 'movement' ? 'block' : 'hidden'
+                } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link
@@ -183,9 +180,8 @@ const Header = () => {
               <IoMdArrowDropdown size={24} />
             </button>
             <div
-              className={`${
-                openDropdown === 'service' ? 'block' : 'hidden'
-              } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
+              className={`${openDropdown === 'service' ? 'block' : 'hidden'
+                } absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}
             >
               <div className='flex flex-col'>
                 <Link to='/design' className='px-3 py-2 hover:bg-gray-200'>
@@ -244,4 +240,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)

@@ -1,10 +1,6 @@
 import { useGetBannersHook } from '../hooks/banner.hook'
-import { importAll } from '../utils/import_img'
 import CustomSlider from './CustomSlider'
-import LoadingShimmer from './LoadingShimmer'
-const images = importAll(
-  require.context('../assets/other', false, /\.(png|jpe?g|svg)$/)
-)
+import LoadingShimmerList from './LoadingShimmerList'
 
 const LandingBanner = () => {
   const bannerSettings = {
@@ -18,13 +14,13 @@ const LandingBanner = () => {
 
   return (
     <>
-      {isLoading ? <LoadingShimmer /> :
+      {isLoading ? <LoadingShimmerList /> :
         <CustomSlider {...bannerSettings}>
           {
             banners && banners.data.map(banner => {
               return (
                 <div key={banner._id} className='aspect-video w-full max-h-[75vh]'>
-                  <img className='object-cover h-full w-full' src={banner.image} alt={banner.image} />
+                  <img className='object-center h-full w-full' src={banner.image} alt={banner.image} />
                 </div>
               )
             })

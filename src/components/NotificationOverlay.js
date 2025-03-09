@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { memo, useRef } from "react"
 import { icons } from "../utils/icons"
 import { Link } from "react-router-dom"
 import AlertImage from '../assets/other/thong-bao.jpg'
@@ -25,4 +25,4 @@ const NotificationOverlay = () => {
     )
 }
 
-export default NotificationOverlay
+export default memo(NotificationOverlay)
