@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Constants from '../constants/global_variables'
+import Constants from '../utils/global_variables'
 import axios from 'axios'
 import PlayList from '../components/PlayList'
 import Section from '../components/Section'

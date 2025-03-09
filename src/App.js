@@ -1,5 +1,5 @@
 import { PATH } from './utils/path'
-import './styles/output.css'
+import './styles/global.css'
 import { Routes, Route } from 'react-router-dom'
 import VideoPage from './pages/VideoPage'
 import IndexPage from './pages/IndexPage'
@@ -24,6 +24,7 @@ import CreateEventPage from './pages/cms/CreateEventPage'
 import CreateBannerPage from './pages/cms/CreateBannerPage'
 import AdminPage from './pages/cms/AdminPage'
 import InformationPage from './pages/cms/InformationPage'
+import BannersPage from './pages/cms/BannersPage'
 
 const App = () => {
   return (
@@ -69,7 +70,7 @@ const App = () => {
         <Route path='activities/create' element={<CreatePostPage />} />
         <Route path='events' element={<EventsPage />} />
         <Route path='events/create' element={<CreateEventPage />} />
-        <Route path='banners' element={<EventsPage />} />
+        <Route path='banners' element={<BannersPage />} />
         <Route path='banners/create' element={<CreateBannerPage />} />
         <Route path='information' element={<InformationPage />} />
       </Route>

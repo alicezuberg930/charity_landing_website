@@ -14,7 +14,7 @@ export const createBanner = async ({ banner }) => {
 }
 
 export const updateBanner = async ({ id, banner }) => {
-    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "PUT", data: banner })
+    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "PATCH", data: banner })
     return response.data
 }
 
@@ -35,7 +35,7 @@ export const createPost = async ({ post }) => {
 }
 
 export const updatePost = async ({ id, post }) => {
-    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "PUT", data: post })
+    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "PATCH", data: post })
     return response.data
 }
 

@@ -16,10 +16,8 @@ const CreatePostPage = () => {
     e.preventDefault()
     const object = new FormData(e.currentTarget)
     const entries = Object.fromEntries(object.entries())
-    console.log({ ...entries, description })
     let coverUrl = ""
     let imageUrls = []
-    // upload cover photo
     if (cover.length > 0) {
       const coverForm = new FormData()
       coverForm.set("files", cover[0].file)
@@ -32,7 +30,6 @@ const CreatePostPage = () => {
         })
       })
     }
-    // upload details photo
     if (images.length > 0) {
       const imagesForm = new FormData()
       images.forEach((image) => { imagesForm.append('files', image.file) })
@@ -45,7 +42,7 @@ const CreatePostPage = () => {
         })
       })
     }
-    const post = { ...entries, cover: coverUrl, images: imageUrls }
+    const post = { ...entries, description, cover: coverUrl, images: imageUrls }
     create.mutate({ post })
   }
 
