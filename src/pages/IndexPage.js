@@ -1,4 +1,4 @@
-import Banner from '../components/Banner'
+import LandingBanner from '../components/LandingBanner'
 import Body from '../components/Body'
 import Carousel from '../components/Carousel'
 import GoogleMap from '../components/GoogleMap'
@@ -7,7 +7,7 @@ import NotificationOverlay from '../components/NotificationOverlay'
 function IndexPage() {
   return (
     <>
-      <Banner />
+      <LandingBanner />
       <Body />
       <Carousel />
       <GoogleMap />

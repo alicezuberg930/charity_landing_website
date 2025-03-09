@@ -3,6 +3,8 @@ import {
   FaBars,
   FaChevronCircleDown,
   FaChevronDown,
+  FaChevronLeft,
+  FaChevronRight,
   FaRegShareSquare,
   FaRegTrashAlt,
   FaUser
@@ -39,5 +41,7 @@ export const icons = {
   PiFlagBanner,
   IoIosInformationCircleOutline,
   MdEventNote,
-  MdPostAdd
+  MdPostAdd,
+  FaChevronLeft,
+  FaChevronRight
 }
