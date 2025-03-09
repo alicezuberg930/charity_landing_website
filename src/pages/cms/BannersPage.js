@@ -1,13 +1,31 @@
 import { Link } from "react-router-dom"
-import { useGetBannersHook } from "../../hooks/banner.hook"
+import { useDeleteBannerHook, useGetBannersHook } from "../../hooks/banner.hook"
 import { icons } from "../../utils/icons"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const BannersPage = () => {
     const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
     const { data: banners, isLoading } = useGetBannersHook()
+    const remove = useDeleteBannerHook()
     const dummy = []
     for (let i = 0; i <= 100; i++) {
         dummy.push(i)
+    }
+
+    const handleDelete = (id) => {
+        withReactContent(Swal).fire({
+            title: 'Bạn có chắc chắn không?',
+            text: 'Bạn sẽ không thể đảo ngược hành động',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then(result => {
+            if (result.isConfirmed) remove.mutate({ id })
+        })
     }
 
     return (
@@ -37,7 +55,7 @@ const BannersPage = () => {
                                 <th className='px-3 py-2 text-start'>
                                     <span>Thứ tự</span>
                                 </th>
-                                <th className='px-3 py-2 text-start w-36'>
+                                <th className='px-3 py-2 text-start w-60'>
                                     <span>Ảnh bìa</span>
                                 </th>
                                 <th className='px-3 py-2 text-start'>
@@ -60,7 +78,7 @@ const BannersPage = () => {
                                             </td>
 
                                             <td className='px-3 py-2'>
-                                                <div className='w-36 h-44 relative'>
+                                                <div className='aspect-video relative'>
                                                     <img src={banner.image} alt={banner.image} className='w-full h-full object-cover' />
                                                 </div>
                                             </td>
@@ -73,7 +91,7 @@ const BannersPage = () => {
                                                         </Link>
                                                     </button>
 
-                                                    <button className='bg-main-color p-3 rounded-lg' title='Xóa'>
+                                                    <button className='bg-main-color p-3 rounded-lg' title='Xóa' onClick={() => handleDelete(banner._id)}>
                                                         <FaRegTrashAlt size={16} fill='#fff' />
                                                     </button>
 

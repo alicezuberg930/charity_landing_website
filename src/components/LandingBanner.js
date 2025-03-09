@@ -1,5 +1,7 @@
+import { useGetBannersHook } from '../hooks/banner.hook'
 import { importAll } from '../utils/import_img'
 import CustomSlider from './CustomSlider'
+import LoadingShimmer from './LoadingShimmer'
 const images = importAll(
   require.context('../assets/other', false, /\.(png|jpe?g|svg)$/)
 )
@@ -12,31 +14,24 @@ const LandingBanner = () => {
     infinite: true,
     showDot: true,
   }
+  const { data: banners, isLoading } = useGetBannersHook()
 
   return (
-    <CustomSlider {...bannerSettings}>
-      <div className='aspect-video w-full max-h-[75vh]'>
-        <img
-          className='object-cover h-full w-full'
-          src={images['chao-tinh-thuong.jpg']}
-          alt='First slide'
-        />
-      </div>
-      <div className='aspect-video w-full max-h-[75vh]'>
-        <img
-          className='object-cover h-full w-full'
-          src={images['chuong-trinh-thuong-nien.jpg']}
-          alt='Second slide'
-        />
-      </div>
-      <div className='aspect-video w-full max-h-[75vh]'>
-        <img
-          className='object-cover h-full w-full'
-          src={images['hoan-canh-kho-khan.jpg']}
-          alt='Third slide'
-        />
-      </div>
-    </CustomSlider>
+    <>
+      {isLoading ? <LoadingShimmer /> :
+        <CustomSlider {...bannerSettings}>
+          {
+            banners && banners.data.map(banner => {
+              return (
+                <div key={banner._id} className='aspect-video w-full max-h-[75vh]'>
+                  <img className='object-cover h-full w-full' src={banner.image} alt={banner.image} />
+                </div>
+              )
+            })
+          }
+        </CustomSlider>
+      }
+    </>
   )
 }
 
