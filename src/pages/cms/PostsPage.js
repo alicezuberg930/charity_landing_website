@@ -42,7 +42,7 @@ const PostsPage = () => {
               <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
             </div>
           </div>
-          <Link to={'/cms/banners/create'} className='flex items-center bg-main-color px-4 py-2 rounded-xl w-fit'>
+          <Link to={'/cms/activities/create'} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
             <IoIosAddCircleOutline size={20} />
             <span className='pl-2'>Thêm mới</span>
           </Link>
