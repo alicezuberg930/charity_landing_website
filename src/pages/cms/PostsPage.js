@@ -84,7 +84,7 @@ const PostsPage = () => {
                   return (
                     <tr key={i} className='font-medium text-sm'>
                       <td className='px-3 py-2'>
-                        <span>{i}</span>
+                        <span>{i + 1}</span>
                       </td>
 
                       <td className='px-3 py-2'>

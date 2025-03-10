@@ -1,5 +1,5 @@
 import Section from '../components/Section'
-import PostList from '../components/PostList'
+import ActivityList from '../components/ActivityList'
 import { useGetPostsHook } from '../hooks/post.hook'
 
 const TiepSucTriThuc = () => {
@@ -83,7 +83,7 @@ const TiepSucTriThuc = () => {
   return (
     <>
       <Section title={'HOẠT ĐỘNG TIẾP SỨC TRI THỨC'} />
-      <PostList information={{ response }} />
+      <ActivityList information={{ response }} />
     </>
   )
 }

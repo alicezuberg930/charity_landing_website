@@ -4,8 +4,10 @@ import CustomDatePicker from '../../components/CustomDatePicker'
 import CustomImagePicker from '../../components/CustomImagePicker'
 import { useUploadFileHook } from '../../hooks/file.hook'
 import { useCreatePostHook } from '../../hooks/post.hook'
+import LoadingOverlay from '../../components/LoadingOverlay'
 
 const CreatePostPage = () => {
+  const [isProcessing, setIsProcessing] = useState(false)
   const [description, setDescription] = useState('')
   const [cover, setCover] = useState([]) // { file: File | null, url: string }[]
   const upload = useUploadFileHook()
@@ -14,6 +16,7 @@ const CreatePostPage = () => {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()
+    setIsProcessing(true)
     const form = new FormData(e.currentTarget)
     const entries = Object.fromEntries(form.entries())
     let coverUrl = ""
@@ -43,7 +46,9 @@ const CreatePostPage = () => {
       })
     }
     const post = { ...entries, description, cover: coverUrl, images: imageUrls }
-    create.mutate({ post })
+    create.mutate({ post }, {
+      onSettled(_) { setIsProcessing(false) }
+    })
   }
 
   return (
@@ -54,7 +59,6 @@ const CreatePostPage = () => {
           Điền đầy đủ thông tin của bài viết
         </span>
       </div>
-
       <form onSubmit={handleSubmitForm} className='space-y-6'>
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Tiêu đề</span>
@@ -113,6 +117,7 @@ const CreatePostPage = () => {
           <span className='text-white'>Lưu thông tin</span>
         </button>
       </form>
+      <LoadingOverlay isLoading={isProcessing} />
     </div>
   )
 }

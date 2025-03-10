@@ -1,8 +1,4 @@
 import { useLocation } from 'react-router-dom'
-import { importAll } from '../utils/import_img'
-const images = importAll(
-  require.context('../assets/activity_image', false, /\.(png|jpe?g|svg)$/)
-)
 
 const ActivityDetailsPage = () => {
   const location = useLocation()
@@ -10,54 +6,35 @@ const ActivityDetailsPage = () => {
 
   return (
     <div>
-      <div className='row mt-4'>
-        <div className='col-12 text-center'>
-          <h3 className='main-theme'>{details.title}</h3>
-          <hr />
+      <div className='mt-4'>
+        <div className='text-center'>
+          <span className='text-main-color font-bold text-lg'>{details.title}</span>
+          <hr className='my-4 block'></hr>
         </div>
       </div>
-      <div className='row mt-4'>
-        <div className='col-12 d-flex justify-content-center'>
-          <div
-            className='image-wrapper image-container'
-            style={{ width: '80%', height: '100%' }}
-          >
-            <img
-              src={images[details.banner]}
-              width={'100%'}
-              height={'100%'}
-              alt={details.banner}
-            />
-          </div>
+      <div className='mt-4'>
+        <div className='aspect-video mx-auto w-full md:w-4/5 rounded-2xl relative image-container'>
+          <img src={details.cover} className='w-full h-full object-cover rounded-xl' alt={details.title} />
         </div>
       </div>
-      <div className='row mt-4'>
-        <div
-          className='col-12'
-          dangerouslySetInnerHTML={{ __html: details.description }}
-        ></div>
+      <div className='mt-4'>
+        <div className='w-fit mx-auto' dangerouslySetInnerHTML={{ __html: details.description }}></div>
       </div>
-      <div className='row mt-4 mb-4'>
-        <div className='col-12 d-flex flex-column align-items-center'>
-          <div className='w-100 text-center'>
-            <h3 className='main-theme'>Hình ảnh thực hiện chương trình</h3>
-            <hr />
+      <div className='my-4'>
+        <div>
+          <div className='text-center'>
+            <h3 className='text-main-color'>Hình ảnh thực hiện chương trình</h3>
+            <hr className='block my-4'></hr>
           </div>
-          {details.images.map(image => {
-            return (
-              <div
-                className='image-wrapper image-container mt-2 mb-2'
-                style={{ width: '65%', height: '100%' }}
-              >
-                <img
-                  src={images[image]}
-                  width={'100%'}
-                  height={'100%'}
-                  alt={image}
-                />
-              </div>
-            )
-          })}
+          {
+            details.images.map(image => {
+              return (
+                <div className='rounded-2xl mx-auto my-4 aspect-video w-full md:w-3/5 relative image-container'>
+                  <img src={image} className='h-full w-full object-cover rounded-xl' alt={image} />
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>
