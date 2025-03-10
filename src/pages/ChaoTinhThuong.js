@@ -4,7 +4,7 @@ import LoadingShimmerList from '../components/LoadingShimmerList'
 import ActivityListTemp from '../components/PostListTemp'
 
 const ChaoTinhThuong = () => {
-  const { data: posts, isLoading } = useGetPostsHook({ category: 'chao-tinh-thuong' })
+  const { data: posts, isLoading } = useGetPostsHook({ filter: { category: 'chao-tinh-thuong' } })
 
   return (
     <>

@@ -33,7 +33,7 @@ const PublicPage = () => {
               <div className='max-w-screen-xl mx-auto'>
                 <Outlet />
               </div>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </div>
         </div>

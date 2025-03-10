@@ -170,7 +170,6 @@ const CustomCKEditor = ({ onChange }) => {
           LinkImage,
           List,
           ListProperties,
-          Markdown,
           MediaEmbed,
           Mention,
           PageBreak,
@@ -400,7 +399,10 @@ const CustomCKEditor = ({ onChange }) => {
             <div ref={editorRef}>
               {editorConfig && (
                 <CKEditor
-                  onChange={(e, editor) => onChange(editor.getData())}
+                  onChange={(e, editor) => {
+                    const data = editor.getData()
+                    if (onChange) onChange(data)
+                  }}
                   onReady={editor => {
                     editorToolbarRef.current.appendChild(
                       editor.ui.view.toolbar.element

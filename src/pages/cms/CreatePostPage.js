@@ -13,7 +13,7 @@ const CreatePostPage = () => {
   const upload = useUploadFileHook()
   const [images, setImages] = useState([]) // { file: File | null, url: string }[]
   const create = useCreatePostHook()
-
+  console.log(description)
   const handleSubmitForm = async (e) => {
     e.preventDefault()
     setIsProcessing(true)

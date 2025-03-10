@@ -6,7 +6,7 @@ import { showResponseError } from "../utils/utils"
 
 export const useGetPostsHook = ({ filter }) => {
     return useQuery({
-        queryKey: [API.POSTS],
+        queryKey: [API.POSTS, filter],
         queryFn: () => getPosts({ filter }),
         placeholderData: (previousData, _) => previousData,
     })
