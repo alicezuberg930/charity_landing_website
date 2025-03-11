@@ -1,4 +1,4 @@
-import LoadingShimmerList from '../components/LoadingShimmerList'
+import LoadingShimmerItemList from '../components/LoadingShimmerItemList'
 import ActivityListTemp from '../components/PostListTemp'
 import Section from '../components/Section'
 import { useGetPostsHook } from '../hooks/post.hook'
@@ -9,7 +9,7 @@ const TiepSucTriThuc = () => {
   return (
     <>
       <Section title={'HOẠT ĐỘNG TIẾP SỨC TRI THỨC'} />
-      {isLoading ? <LoadingShimmerList /> : posts.data && <ActivityListTemp posts={posts.data} />}
+      {isLoading ? <LoadingShimmerItemList count={9} /> : posts.data && <ActivityListTemp posts={posts.data} />}
     </>
   )
 }
