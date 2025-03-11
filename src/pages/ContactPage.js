@@ -3,11 +3,11 @@ import GoogleMap from '../components/GoogleMap'
 
 const ContactPage = () => {
   return (
-    <div className='mb-6'>
+    <div className='mb-6 px-2 md:px-0'>
       <Section title={'THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN'} />
       <GoogleMap />
-      <div className='row'>
-        <div className='col-lg-6 col-md-12 col-sm-12'>
+      <div className='flex flex-col md:flex-row'>
+        <div className='flex-1'>
           <Section title={'THÔNG TIN LIÊN HỆ'} />
           <ul>
             <li>
@@ -51,7 +51,7 @@ const ContactPage = () => {
             </li>
           </ul>
         </div>
-        <div className='col-lg-6 col-md-12 col-sm-12'>
+        <div className='flex-1'>
           <Section title={'THÔNG TIN CHUYỂN KHOẢN'} />
           <ul>
             <li>
