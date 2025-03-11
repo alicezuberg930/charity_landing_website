@@ -2,7 +2,7 @@ import LandingBanner from '../components/LandingBanner'
 import Body from '../components/Body'
 import Carousel from '../components/Carousel'
 import GoogleMap from '../components/GoogleMap'
-import NotificationOverlay from '../components/NotificationOverlay'
+import EventOverlay from '../components/EventOverlay'
 
 function IndexPage() {
   return (
@@ -11,7 +11,7 @@ function IndexPage() {
       <Body />
       <Carousel />
       <GoogleMap />
-      <NotificationOverlay />
+      <EventOverlay />
     </>
   )
 }

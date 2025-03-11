@@ -67,20 +67,3 @@ button {
   -webkit-filter: drop-shadow(3px 3px 0 purple) drop-shadow(-3px -3px 0 purple);
   filter: drop-shadow(3px 3px 0 purple) drop-shadow(-3px -3px 0 purple);
 }
-
-.criteria-image {
-  object-fit: cover;
-  height: 35rem;
-}
-
-@media (max-width: 768px) {
-  .criteria-image {
-    height: 25rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .criteria-image {
-    height: 20rem;
-  }
-}

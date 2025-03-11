@@ -1,6 +1,7 @@
 import { CiBellOn } from 'react-icons/ci'
 import {
   FaBars,
+  FaCheck,
   FaChevronCircleDown,
   FaChevronDown,
   FaChevronLeft,
@@ -43,5 +44,6 @@ export const icons = {
   MdEventNote,
   MdPostAdd,
   FaChevronLeft,
-  FaChevronRight
+  FaChevronRight,
+  FaCheck,
 }

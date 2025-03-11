@@ -59,3 +59,24 @@ export const getInformation = async () => {
     const response = await axioInstance({ url: API.INFORMATION, method: "GET" })
     return response.data
 }
+
+// sự kiện
+export const createEvent = async ({ event }) => {
+    const response = await axioInstance({ url: API.EVENTS, method: "POST", data: event })
+    return response.data
+}
+
+export const updateEvent = async ({ id, event }) => {
+    const response = await axioInstance({ url: `${API.EVENTS}/${id}`, method: "PATCH", data: event })
+    return response.data
+}
+
+export const deleteEvent = async ({ id }) => {
+    const response = await axioInstance({ url: `${API.EVENTS}/${id}`, method: "DELETE" })
+    return response.data
+}
+
+export const getEvents = async ({ filter }) => {
+    const response = await axioInstance({ url: API.EVENTS, method: "GET", params: filter })
+    return response.data
+}
