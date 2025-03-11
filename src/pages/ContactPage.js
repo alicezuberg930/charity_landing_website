@@ -1,7 +1,10 @@
 import Section from '../components/Section'
 import GoogleMap from '../components/GoogleMap'
+import { useGetInformationHook } from '../hooks/information.hook'
 
 const ContactPage = () => {
+  const { data: information } = useGetInformationHook()
+
   return (
     <div className='mb-6 px-2 md:px-0'>
       <Section title={'THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN'} />
@@ -15,37 +18,34 @@ const ContactPage = () => {
                 <strong>
                   Website:
                   <a
-                    href='https://www.anhsangtuthien.com'
+                    href={information?.data?.websiteURL ?? "/"}
                     className='text-main-color'
                   >
                     {' '}
-                    www.anhsangtuthien.com
+                    {information?.data?.websiteURL ?? ""}
                   </a>
                 </strong>
               </p>
             </li>
             <li>
               <p>
-                <strong>Hotline</strong>: 0986.44.99.14 - 0938.88.44.07 (Mr.
-                Tân)
+                <strong>Hotline</strong>: {information?.data?.hotline ?? ""}
               </p>
             </li>
             <li>
               <p>
-                <strong>Địa chỉ nấu cháo: </strong>: 269/37 Bà Hom, P.13, Quận
-                6, Tp.Hồ Chí Minh.
+                <strong>Địa chỉ nấu cháo: </strong>: {information?.data?.activityAddress ?? ""}
               </p>
             </li>
             <li>
               <p>
-                <strong>Kho lưu trữ: </strong>: 25 đường 52B, P. Tân Tạo, Q.
-                Bình Tân, Tp.Hồ Chí Minh.
+                <strong>Kho lưu trữ: </strong>: {information?.data?.storageAddress ?? ""}
               </p>
             </li>
             <li>
               <p>
                 <strong>
-                  Telephone:<a href='tel:02866802558'> 028.66.802.558</a>
+                  Telephone:<a href={`tel:${information?.data?.telephone}`}> {information?.data?.telephone ?? ""}</a>
                 </strong>
               </p>
             </li>
@@ -60,23 +60,19 @@ const ContactPage = () => {
               </p>
             </li>
             <li>
-              <p>Ngân hàng Á Châu: 119.743.029 (chi nhánh: Minh Phụng).</p>
+              <p>Ngân hàng Á Châu: {information?.data?.achaubankNumber ?? ""}</p>
             </li>
             <li>
-              <p>
-                Ngân hàng Viettinbank: 711A.151.29031 (chi nhánh số 5, Quận 5).
-              </p>
+              <p>Ngân hàng Viettinbank: {information?.data?.viettinbankNumber ?? ""}</p>
             </li>
             <li>
-              <p>Ngân hàng Sacombank: 0601.0913.4905 (chi nhánh Chợ Lớn).</p>
+              <p>Ngân hàng Sacombank: {information?.data?.sacombankNumber ?? ""}</p>
             </li>
             <li>
-              <p>
-                Ngân hàng Vietcombank: 0181.00.33.57.031 (chi nhánh Tp.HCM).
-              </p>
+              <p>Ngân hàng Vietcombank: {information?.data?.vietcombankNumber ?? ""}</p>
             </li>
             <li>
-              <p>Ngân hàng Agribank: 6421205182610 (chi nhánh Hùng Vương).</p>
+              <p>Ngân hàng Agribank: {information?.data?.agribankNumber ?? ""}</p>
             </li>
           </ul>
         </div>
