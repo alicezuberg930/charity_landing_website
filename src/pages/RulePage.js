@@ -5,10 +5,10 @@ const RulePage = () => {
   return (
     <div className='mb-6'>
       <Section title={'QUY ĐỊNH NHÓM'} />
-      <div>
-        <div class='row'>
-          <div class='col-12'>
-            <strong className='main-theme'>
+      <div className='space-y-4'>
+        <div>
+          <div>
+            <strong className='text-main-color'>
               I. NGÀY THÀNH LẬP VÀ KẾ HOẠCH THU CHI
             </strong>
             <ul>
@@ -17,8 +17,8 @@ const RulePage = () => {
               </li>
               <li>Ngày thành lập nhóm: 29-08-2010.</li>
               <li>
-                Số tiền quyên góp Quỹ Từ Thiện tối thiểu là 60.000đ/ người/
-                tháng. Thông báo tài chính của nhóm sẽ báo qua mail ban quản lý.
+                Số tiền quyên góp Quỹ Từ Thiện tối thiểu là 60.000đ/người/tháng. 
+                Thông báo tài chính của nhóm sẽ báo qua mail ban quản lý.
                 Tiền đóng trực tiếp cho Thủ Quỹ/ hoặc Tổ Trưởng chuyển về Trưởng
                 Nhóm/ Thủ Quỹ.
               </li>
@@ -35,9 +35,9 @@ const RulePage = () => {
             </ul>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-12'>
-            <strong className='main-theme'>II. HÌNH THỨC THAM GIA NHÓM</strong>
+        <div>
+          <div>
+            <strong className='text-main-color'>II. HÌNH THỨC THAM GIA NHÓM</strong>
             <ul>
               <li>
                 Khi có thành viên gia nhập vào nhóm: phải cung cấp các thông tin
@@ -65,9 +65,9 @@ const RulePage = () => {
             </ul>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-12'>
-            <strong className='main-theme'>
+        <div>
+          <div>
+            <strong className='text-main-color'>
               III. MỤC ĐÍCH VÀ HÌNH THỨC HOẠT ĐỘNG
             </strong>
             <ul>
@@ -111,9 +111,9 @@ const RulePage = () => {
             </ul>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-12'>
-            <strong className='main-theme'>IV. KHEN THƯỞNG VÀ TẶNG QUÀ</strong>
+        <div>
+          <div>
+            <strong className='text-main-color'>IV. KHEN THƯỞNG VÀ TẶNG QUÀ</strong>
             <ul>
               <li>
                 Cuối năm sẽ tổng kết tuyên dương và tặng quà cho các thành viên,
