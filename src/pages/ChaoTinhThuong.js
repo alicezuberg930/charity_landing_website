@@ -1,6 +1,6 @@
 import Section from '../components/Section'
 import { useGetPostsHook } from '../hooks/post.hook'
-import ActivityListTemp from '../components/PostListTemp'
+import ActivityList from '../components/ActivityList'
 import LoadingShimmerItemList from '../components/LoadingShimmerItemList'
 
 const ChaoTinhThuong = () => {
@@ -9,7 +9,7 @@ const ChaoTinhThuong = () => {
   return (
     <>
       <Section title={'HOẠT ĐỘNG CHÁO TÌNH THƯƠNG'} />
-      {isLoading ? <LoadingShimmerItemList count={9} /> : posts.data && <ActivityListTemp posts={posts.data} />}
+      {isLoading ? <LoadingShimmerItemList count={9} /> : posts.data && <ActivityList posts={posts.data} />}
     </>
   )
 }
