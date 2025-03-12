@@ -1,6 +1,5 @@
 import React from 'react'
 import Section from '../components/Section'
-import chart from '../assets/other/organizational_chart.jpg'
 
 const StructurePage = () => {
   return (
@@ -9,7 +8,7 @@ const StructurePage = () => {
       <div className='space-y-12 mb-6 px-2 md:px-0'>
         <div className=''>
           <div className='image-container rounded-2xl relative mb-4 aspect-video mx-auto max-w-screen-md'>
-            <img src={chart} className='w-full h-full object-center rounded-xl' alt='structure' />
+            <img src='./assets/organizational_chart.jpg' className='w-full h-full object-center rounded-xl' alt='structure' />
           </div>
         </div>
         <div className='flex gap-8 flex-col md:flex-row'>

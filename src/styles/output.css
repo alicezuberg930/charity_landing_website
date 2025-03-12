@@ -579,18 +579,6 @@ video {
   }
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
 .fixed {
   position: fixed;
 }
@@ -703,8 +691,9 @@ video {
   order: 2;
 }
 
-.m-0 {
-  margin: 0px;
+.-mx-0 {
+  margin-left: -0px;
+  margin-right: -0px;
 }
 
 .mx-auto {
@@ -740,16 +729,8 @@ video {
   margin-bottom: 0.625rem;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .mb-6 {
@@ -823,6 +804,10 @@ video {
 
 .hidden {
   display: none;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
 }
 
 .aspect-video {
@@ -1132,6 +1117,10 @@ video {
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 .text-ellipsis {
@@ -1504,7 +1493,7 @@ video {
 @font-face {
   font-family: UTM_HelvetIns;
 
-  src: url('../assets/font/UTM_HelvetIns.ttf');
+  src: url('../font/UTM_HelvetIns.ttf');
 }
 
 a:hover {
@@ -1545,13 +1534,6 @@ button {
   content: '';
   z-index: -1;
   border-radius: 16px;
-}
-
-/* to be deleted */
-
-.image-container-2 {
-  border: 10px solid transparent;
-  border-image: url('../assets/other/border.png') 30 round;
 }
 
 .hover\:scale-105:hover {
@@ -1648,6 +1630,11 @@ button {
 }
 
 @media (min-width: 1024px) {
+  .lg\:-mx-3 {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+
   .lg\:w-1\/3 {
     width: 33.333333%;
   }

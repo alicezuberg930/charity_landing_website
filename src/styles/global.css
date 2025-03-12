@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: UTM_HelvetIns;
-  src: url('../assets/font/UTM_HelvetIns.ttf');
+  src: url('../font/UTM_HelvetIns.ttf');
 }
 
 a:hover {
@@ -45,10 +45,4 @@ button {
   content: '';
   z-index: -1;
   border-radius: 16px;
-}
-
-/* to be deleted */
-.image-container-2 {
-  border: 10px solid transparent;
-  border-image: url('../assets/other/border.png') 30 round;
 }

@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom'
 const ActivityDetailsPage = () => {
   const location = useLocation()
   const { details } = location.state
-
   return (
     <div>
       <div className='mt-4'>
