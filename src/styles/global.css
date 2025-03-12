@@ -12,15 +12,15 @@ a:hover {
   text-decoration-line: none;
 }
 
-body::-webkit-scrollbar {
+div::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-body::-webkit-scrollbar-track {
+div::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-body::-webkit-scrollbar-thumb {
+div::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: purple;
 }
@@ -48,22 +48,7 @@ button {
 }
 
 /* to be deleted */
-.main-theme {
-  color: purple;
-}
-
-.dotted-horizontal-divider {
-  border-bottom: 2px dotted purple;
-  max-width: 80%;
-  margin: 0 auto;
-}
-
 .image-container-2 {
   border: 10px solid transparent;
   border-image: url('../assets/other/border.png') 30 round;
-}
-
-.purple-border {
-  -webkit-filter: drop-shadow(3px 3px 0 purple) drop-shadow(-3px -3px 0 purple);
-  filter: drop-shadow(3px 3px 0 purple) drop-shadow(-3px -3px 0 purple);
 }

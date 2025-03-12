@@ -14,7 +14,7 @@ const ActivityList = ({ posts }) => {
                   </div>
 
                   <div className='shadow-md space-y-3 rounded-lg overflow-hidden'>
-                    <div className='w-full h-72'>
+                    <div className='w-full h-72 overflow-hidden'>
                       <img className='transition-transform duration-500 hover:scale-105 h-full w-full object-cover' src={post.cover} alt={post.title} />
                     </div>
                     <div className='space-y-3 p-3'>

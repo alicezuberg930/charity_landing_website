@@ -1,19 +1,19 @@
 import LandingBanner from '../components/LandingBanner'
 import Body from '../components/Body'
-import Carousel from '../components/Carousel'
+import DonationSlider from '../components/DonationSlider'
 import GoogleMap from '../components/GoogleMap'
 import EventOverlay from '../components/EventOverlay'
 
-function IndexPage() {
+function HomePage() {
   return (
     <>
       <LandingBanner />
       <Body />
-      <Carousel />
+      <DonationSlider />
       <GoogleMap />
       <EventOverlay />
     </>
   )
 }
 
-export default IndexPage
+export default HomePage

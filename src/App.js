@@ -2,7 +2,7 @@ import { PATH } from './utils/path'
 import './styles/global.css'
 import { Routes, Route } from 'react-router-dom'
 import VideoPage from './pages/VideoPage'
-import IndexPage from './pages/IndexPage'
+import HomePage from './pages/HomePage'
 import DesignPage from './pages/DesignPage'
 import PhotoshootPage from './pages/PhotoshootPage'
 import ChaoTinhThuong from './pages/ChaoTinhThuong'
@@ -31,7 +31,7 @@ const App = () => {
     <Routes>
       {/* User's routes */}
       <Route path={PATH.HOME} element={<PublicPage />}>
-        <Route path={PATH.PUBLIC} element={<IndexPage />} />
+        <Route path={PATH.PUBLIC} element={<HomePage />} />
         <Route path='design' element={<DesignPage />} />
         <Route path='photoshoot' element={<PhotoshootPage />} />
         <Route path='video' element={<VideoPage />} />

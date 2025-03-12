@@ -3,21 +3,17 @@ import Section from '../components/Section'
 
 const RulePage = () => {
   return (
-    <div className='mb-6'>
+    <>
       <Section title={'QUY ĐỊNH NHÓM'} />
-      <div className='space-y-4'>
+      <div className='space-y-12 mb-6'>
         <div>
           <div>
-            <strong className='text-main-color'>
-              I. NGÀY THÀNH LẬP VÀ KẾ HOẠCH THU CHI
-            </strong>
+            <strong className='text-main-color'>I. NGÀY THÀNH LẬP VÀ KẾ HOẠCH THU CHI</strong>
             <ul>
-              <li>
-                Tên nhóm: <strong>Ánh Sáng từ thiện</strong>
-              </li>
+              <li>Tên nhóm: <strong>Ánh Sáng từ thiện</strong></li>
               <li>Ngày thành lập nhóm: 29-08-2010.</li>
               <li>
-                Số tiền quyên góp Quỹ Từ Thiện tối thiểu là 60.000đ/người/tháng. 
+                Số tiền quyên góp Quỹ Từ Thiện tối thiểu là 60.000đ/người/tháng.
                 Thông báo tài chính của nhóm sẽ báo qua mail ban quản lý.
                 Tiền đóng trực tiếp cho Thủ Quỹ/ hoặc Tổ Trưởng chuyển về Trưởng
                 Nhóm/ Thủ Quỹ.
@@ -67,9 +63,7 @@ const RulePage = () => {
         </div>
         <div>
           <div>
-            <strong className='text-main-color'>
-              III. MỤC ĐÍCH VÀ HÌNH THỨC HOẠT ĐỘNG
-            </strong>
+            <strong className='text-main-color'>III. MỤC ĐÍCH VÀ HÌNH THỨC HOẠT ĐỘNG</strong>
             <ul>
               <li>
                 <strong>Mục đích:</strong> giúp đỡ và chia sẻ phần nào những khó
@@ -115,15 +109,12 @@ const RulePage = () => {
           <div>
             <strong className='text-main-color'>IV. KHEN THƯỞNG VÀ TẶNG QUÀ</strong>
             <ul>
-              <li>
-                Cuối năm sẽ tổng kết tuyên dương và tặng quà cho các thành viên,
-                quản lý, tổ hoạt động tích cực nhất trong năm
-              </li>
+              <li>Cuối năm sẽ tổng kết tuyên dương và tặng quà cho các thành viên, quản lý, tổ hoạt động tích cực nhất trong năm</li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

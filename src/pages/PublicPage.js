@@ -29,7 +29,7 @@ const PublicPage = () => {
         <div className='h-full'>
           <div className='flex flex-col h-full'>
             <Header />
-            <div className='flex-1 overflow-auto'>
+            <div className='flex-1 overflow-y-auto overflow-x-hidden'>
               <div className='max-w-screen-xl mx-auto'>
                 <Outlet />
               </div>
