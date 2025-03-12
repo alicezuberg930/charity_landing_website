@@ -1,3 +1,4 @@
+import axios from "axios"
 import axioInstance from "../configs/axios.config"
 import { API } from "../utils/api"
 
@@ -78,5 +79,11 @@ export const deleteEvent = async ({ id }) => {
 
 export const getEvents = async ({ filter }) => {
     const response = await axioInstance({ url: API.EVENTS, method: "GET", params: filter })
+    return response.data
+}
+
+
+export const getYoutubePlaylistVideos = async ({ playlistId }) => {
+    const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=20&playlistId=${playlistId}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
     return response.data
 }
