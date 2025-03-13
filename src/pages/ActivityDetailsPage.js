@@ -1,8 +1,10 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 const ActivityDetailsPage = () => {
   const location = useLocation()
   const { details } = location.state
+  // const { slug } = useParams()
+
   return (
     <div>
       <div className='mt-4'>
@@ -28,7 +30,7 @@ const ActivityDetailsPage = () => {
           {
             details.images.map(image => {
               return (
-                <div className='rounded-2xl mx-auto my-4 aspect-video w-full md:w-3/5 relative image-container'>
+                <div key={image} className='rounded-2xl mx-auto my-4 aspect-video w-full md:w-3/5 relative image-container'>
                   <img src={image} className='h-full w-full object-cover rounded-xl' alt={image} />
                 </div>
               )

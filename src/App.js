@@ -44,10 +44,10 @@ const App = () => {
         <Route path='structure' element={<StructurePage />} />
         <Route path='contact' element={<ContactPage />} />
         <Route path='news' element={<NewsPage />} />
-        <Route path='chao-tinh-thuong/details' element={<ActivityDetailsPage />} />
-        <Route path='chuong-trinh-thuong-nien/details' element={<ActivityDetailsPage />} />
-        <Route path='ho-tro-hoan-canh/details' element={<ActivityDetailsPage />} />
-        <Route path='tiep-suc-tri-thuc/details' element={<ActivityDetailsPage />} />
+        <Route path='chao-tinh-thuong/:slug' element={<ActivityDetailsPage />} />
+        <Route path='chuong-trinh-thuong-nien/:slug' element={<ActivityDetailsPage />} />
+        <Route path='ho-tro-hoan-canh/:slug' element={<ActivityDetailsPage />} />
+        <Route path='tiep-suc-tri-thuc/:slug' element={<ActivityDetailsPage />} />
       </Route>
       {/* Admin's routes */}
       <Route path={PATH.CMS} element={<AdminPage />}>

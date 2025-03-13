@@ -9,7 +9,7 @@ const TiepSucTriThuc = () => {
   return (
     <>
       <Section title={'HOẠT ĐỘNG TIẾP SỨC TRI THỨC'} />
-      {isLoading ? <LoadingShimmerItemList count={9} /> : posts.data && <ActivityList posts={posts.data} />}
+      {isLoading ? <LoadingShimmerItemList count={9} /> : posts && posts?.data && <ActivityList posts={posts.data} />}
     </>
   )
 }
