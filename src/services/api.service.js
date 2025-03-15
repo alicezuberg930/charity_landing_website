@@ -50,6 +50,11 @@ export const getPosts = async ({ filter }) => {
     return response.data
 }
 
+export const getPostDetails = async ({ id }) => {
+    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "GET" })
+    return response.data
+}
+
 // thông tin website
 export const updateInformation = async ({ information }) => {
     const response = await axioInstance({ url: API.INFORMATION, method: "POST", data: information })

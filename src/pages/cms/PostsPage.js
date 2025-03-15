@@ -4,11 +4,12 @@ import { useDeletePostHook, useGetPostsHook } from '../../hooks/post.hook'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import { slugify } from '../../utils/utils'
 
 const PostsPage = () => {
   const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
-  const filter = {}
-  const { data: posts, isLoading } = useGetPostsHook({})
+  const filter = { page: 1 }
+  const { data: posts, isLoading } = useGetPostsHook({ filter })
   const remove = useDeletePostHook()
   const dummy = []
   for (let i = 0; i <= 100; i++) {
@@ -107,19 +108,13 @@ const PostsPage = () => {
 
                       <td className='px-3 py-2'>
                         <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                          <button className='bg-main-color p-3 rounded-lg' title='Chi tiết'>
-                            <Link to={`/cms/posts/${post._id}`}>
-                              <FaRegShareSquare size={16} fill='#fff' />
-                            </Link>
-                          </button>
-
                           <button className='bg-main-color p-3 rounded-lg' title='Xóa' onClick={() => handleDelete(post._id)}>
                             <FaRegTrashAlt size={16} fill='#fff' />
                           </button>
 
-                          <button className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
+                          <Link to={`/cms/activities/update/${post._id}`} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
                             <MdModeEdit size={16} fill='#fff' />
-                          </button>
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -131,7 +126,7 @@ const PostsPage = () => {
         </div>
         {/* Phan trang */}
       </div>
-    </div>
+    </div >
   )
 }
 

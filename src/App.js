@@ -25,6 +25,7 @@ import CreateBannerPage from './pages/cms/CreateBannerPage'
 import AdminPage from './pages/cms/AdminPage'
 import InformationPage from './pages/cms/InformationPage'
 import BannersPage from './pages/cms/BannersPage'
+import UpdatePostPage from './pages/cms/UpdatePostPage'
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
       <Route path={PATH.CMS} element={<AdminPage />}>
         <Route path='activities' element={<PostsPage />} />
         <Route path='activities/create' element={<CreatePostPage />} />
+        <Route path='activities/update/:id' element={<UpdatePostPage />} />
         <Route path='events' element={<EventsPage />} />
         <Route path='events/create' element={<CreateEventPage />} />
         <Route path='banners' element={<BannersPage />} />
