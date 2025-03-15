@@ -112,6 +112,14 @@ const InformationPage = () => {
           </div>
         </div>
         <div className='h-fit'>
+          <span className='font-semibold text-lg'>STK Á VP bank</span>
+          <div className='mt-2'>
+            <input type='text' placeholder='Nhập STK ngân hàng' name='vpbankNumber' defaultValue={information?.data?.vpbankNumber}
+              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
+            />
+          </div>
+        </div>
+        <div className='h-fit'>
           <span className='font-semibold text-lg'>STK Viettinbank</span>
           <div className='mt-2'>
             <input type='text' placeholder='Nhập STK ngân hàng' name='viettinbankNumber' defaultValue={information?.data?.viettinbankNumber}

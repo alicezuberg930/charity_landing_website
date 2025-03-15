@@ -42,13 +42,6 @@ const ContactPage = () => {
                 <strong>Kho lưu trữ: </strong>: {information?.data?.storageAddress ?? ""}
               </p>
             </li>
-            <li>
-              <p>
-                <strong>
-                  Telephone:<a href={`tel:${information?.data?.telephone}`}> {information?.data?.telephone ?? ""}</a>
-                </strong>
-              </p>
-            </li>
           </ul>
         </div>
         <div className='flex-1'>
@@ -63,16 +56,7 @@ const ContactPage = () => {
               <p>Ngân hàng Á Châu: {information?.data?.achaubankNumber ?? ""}</p>
             </li>
             <li>
-              <p>Ngân hàng Viettinbank: {information?.data?.viettinbankNumber ?? ""}</p>
-            </li>
-            <li>
-              <p>Ngân hàng Sacombank: {information?.data?.sacombankNumber ?? ""}</p>
-            </li>
-            <li>
-              <p>Ngân hàng Vietcombank: {information?.data?.vietcombankNumber ?? ""}</p>
-            </li>
-            <li>
-              <p>Ngân hàng Agribank: {information?.data?.agribankNumber ?? ""}</p>
+              <p>Ngân hàng VPBank: {information?.data?.vpbankNumber ?? ""}</p>
             </li>
           </ul>
         </div>
