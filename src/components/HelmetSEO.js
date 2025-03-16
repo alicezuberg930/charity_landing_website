@@ -9,7 +9,7 @@ const HelmetSEO = ({ title, image, url, keywords = [], description }) => {
             {/* multiple meta elements */}
             <meta name="description" content={description} />
             <meta property="og:type" content="article" />
-            <meta property="og:image" content={image || './assets/logo.png'} />
+            {/* <meta property="og:image" content={image || 'https://anhsangtuthien.com/assets/logo.png'} /> */}
             <meta property="og:url" content={url} />
             <meta property="og:description" content={description} />
 
