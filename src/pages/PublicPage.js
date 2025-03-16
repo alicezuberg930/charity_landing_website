@@ -25,9 +25,9 @@ const PublicPage = () => {
 
   return (
     <>
-      <div className='w-full h-screen '>
-        <div className='h-full '>
-          <div className='flex flex-col h-full '>
+      <div className='w-full h-screen overflow-hidden'>
+        <div className='h-full overflow-hidden'>
+          <div className='flex flex-col h-full overflow-hidden'>
             <Header />
             <div className='flex-auto overflow-y-auto overflow-x-hidden'>
               <div className='max-w-screen-xl mx-auto px-3 lg:px-0'>
