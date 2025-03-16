@@ -95,15 +95,6 @@ const InformationPage = () => {
           </div>
         </div>
         <div className='h-fit'>
-          <span className='font-semibold text-lg'>Số điện thoại bàn</span>
-          <div className='mt-2'>
-            <input type='text' placeholder='Nhập số điện thoại bàn' name='telephone' defaultValue={information?.data?.telephone}
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-            />
-          </div>
-        </div>
-
-        <div className='h-fit'>
           <span className='font-semibold text-lg'>STK Á châu bank</span>
           <div className='mt-2'>
             <input type='text' placeholder='Nhập STK ngân hàng' name='achaubankNumber' defaultValue={information?.data?.achaubankNumber}
@@ -112,41 +103,9 @@ const InformationPage = () => {
           </div>
         </div>
         <div className='h-fit'>
-          <span className='font-semibold text-lg'>STK Á VP bank</span>
+          <span className='font-semibold text-lg'>STK VP bank</span>
           <div className='mt-2'>
             <input type='text' placeholder='Nhập STK ngân hàng' name='vpbankNumber' defaultValue={information?.data?.vpbankNumber}
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-            />
-          </div>
-        </div>
-        <div className='h-fit'>
-          <span className='font-semibold text-lg'>STK Viettinbank</span>
-          <div className='mt-2'>
-            <input type='text' placeholder='Nhập STK ngân hàng' name='viettinbankNumber' defaultValue={information?.data?.viettinbankNumber}
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-            />
-          </div>
-        </div>
-        <div className='h-fit'>
-          <span className='font-semibold text-lg'>STK sacombank</span>
-          <div className='mt-2'>
-            <input type='text' placeholder='Nhập STK ngân hàng' name='sacombankNumber' defaultValue={information?.data?.sacombankNumber}
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-            />
-          </div>
-        </div>
-        <div className='h-fit'>
-          <span className='font-semibold text-lg'>STK vietcombank</span>
-          <div className='mt-2'>
-            <input type='text' placeholder='Nhập STK ngân hàng' name='vietcombankNumber' defaultValue={information?.data?.vietcombankNumber}
-              className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-            />
-          </div>
-        </div>
-        <div className='h-fit'>
-          <span className='font-semibold text-lg'>STK agribank</span>
-          <div className='mt-2'>
-            <input type='text' placeholder='Nhập STK ngân hàng' name='agribankNumber' defaultValue={information?.data?.agribankNumber}
               className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
             />
           </div>

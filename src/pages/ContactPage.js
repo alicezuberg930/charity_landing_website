@@ -34,12 +34,12 @@ const ContactPage = () => {
             </li>
             <li>
               <p>
-                <strong>Địa chỉ nấu cháo: </strong>: {information?.data?.activityAddress ?? ""}
+                <strong>Địa chỉ nấu cháo:</strong> {information?.data?.activityAddress ?? ""}
               </p>
             </li>
             <li>
               <p>
-                <strong>Kho lưu trữ: </strong>: {information?.data?.storageAddress ?? ""}
+                <strong>Kho lưu trữ:</strong> {information?.data?.storageAddress ?? ""}
               </p>
             </li>
           </ul>
