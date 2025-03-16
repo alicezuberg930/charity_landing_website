@@ -5,8 +5,8 @@ const Footer = () => {
   const { data: information } = useGetInformationHook()
 
   return (
-    <footer className="border-t border-gray-300 bg-gray-100">
-      <div className='max-w-screen-xl mx-auto py-12 flex gap-4 flex-col md:flex-row px-3 lg:px-0'>
+    <footer className="border-t border-gray-300 bg-gray-100 py-12 px-3 lg:px-0">
+      <div className='max-w-screen-xl mx-auto flex gap-4 flex-col md:flex-row'>
         <div className='flex-1'>
           <span className='text-main-color font-semibold text-xl'>
             THÔNG TIN VỀ CHÚNG TÔI
