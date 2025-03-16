@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { useSEO } from '../hooks/seo'
+import HelmetSEO from '../components/HelmetSEO'
 // import { useDispatch, useSelector } from 'react-redux'
 // import { isScrollTop } from '../store/actions/home_actions'
 
@@ -23,14 +23,13 @@ const PublicPage = () => {
   //       dispatch(isScrollTop(false))
   //     }
   //   }
-  useSEO({
-    title: "Nhóm Ánh sáng từ thiện - Nơi tình thương toả sáng",
-    description: "Trang website ghi lại các hoạt động tình nguyện của các nhà hảo tâm và nhóm Ánh sáng từ thiện được thành lập từ năm 2010",
-    keywords: ["Ánh sáng từ thiện", "Từ thiện", "Cháo tình thương", "Chương trình thường niên", "Hỗ trợ hoàn cảnh", "Tiếp sức tri thức"],
-  })
-
   return (
     <>
+      <HelmetSEO
+        title={'Nhóm Ánh sáng từ thiện - Nơi tình thương toả sáng'}
+        description={'Trang website ghi lại các hoạt động tình nguyện của các nhà hảo tâm và nhóm Ánh sáng từ thiện được thành lập từ năm 2010'}
+        keywords={["Ánh sáng từ thiện", "Từ thiện", "Cháo tình thương", "Chương trình thường niên", "Hỗ trợ hoàn cảnh", "Tiếp sức tri thức"]}
+      />
       <div className='w-full h-screen overflow-hidden'>
         <div className='h-full overflow-hidden'>
           <div className='flex flex-col h-full overflow-hidden'>

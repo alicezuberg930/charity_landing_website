@@ -1,15 +1,9 @@
 import Section from '../components/Section'
 import GoogleMap from '../components/GoogleMap'
 import { useGetInformationHook } from '../hooks/information.hook'
-import { useSEO } from '../hooks/seo'
 
 const ContactPage = () => {
   const { data: information } = useGetInformationHook()
-  useSEO({
-    title: "Thông tin liên lạc",
-    description: "Trang chứa thông tin liên lạc của nhóm ánh sáng từ thiện",
-    keywords: ["Ánh sáng từ thiện", "Từ thiện", "Cháo tình thương", "Chương trình thường niên", "Hỗ trợ hoàn cảnh", "Tiếp sức tri thức"],
-  })
 
   return (
     <div className='mb-6'>

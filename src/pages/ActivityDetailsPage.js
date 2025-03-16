@@ -1,21 +1,18 @@
 import { useLocation, useParams } from 'react-router-dom'
-import { useSEO } from '../hooks/seo'
+import HelmetSEO from '../components/HelmetSEO'
 
 const ActivityDetailsPage = () => {
   const location = useLocation()
   const { details } = location.state
   // const { slug } = useParams()
-  useSEO({
-    title: details.title,
-    description: details.description,
-    keywords: ["Ánh sáng từ thiện", "Từ thiện", "Cháo tình thương", "Chương trình thường niên", "Hỗ trợ hoàn cảnh", "Tiếp sức tri thức"],
-    ogTitle: details.title,
-    ogDescription: details.description,
-    ogImage: details.cover
-  })
 
   return (
     <div>
+      <HelmetSEO
+        title={details.title}
+        description={details.description}
+        image={details.cover}
+      />
       <div className='mt-4'>
         <div className='text-center'>
           <span className='text-main-color font-bold text-lg'>{details.title}</span>
