@@ -4,7 +4,7 @@ import DonationSlider from '../components/DonationSlider'
 import GoogleMap from '../components/GoogleMap'
 import EventOverlay from '../components/EventOverlay'
 
-function HomePage() {
+const HomePage = () => {
   return (
     <>
       <LandingBanner />
