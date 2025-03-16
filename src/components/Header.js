@@ -79,7 +79,7 @@ const Header = () => {
   }
 
   return (
-    <header className='bg-white h-20 content-center z-10 shadow-md'>
+    <header className='bg-white h-20 content-center z-10 shadow-md flex-none'>
       <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <Link to='/'>
