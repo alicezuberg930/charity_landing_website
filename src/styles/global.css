@@ -13,7 +13,7 @@ a:hover {
 }
 
 div::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 4px;
 }
 
 div::-webkit-scrollbar-track {
