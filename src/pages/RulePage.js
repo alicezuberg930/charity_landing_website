@@ -1,7 +1,14 @@
 import React from 'react'
 import Section from '../components/Section'
+import { useSEO } from '../hooks/seo'
 
 const RulePage = () => {
+  useSEO({
+    title: "Quy định",
+    description: "Trang chứa quy định của nhóm ánh sáng từ thiện",
+    keywords: ["Ánh sáng từ thiện", "Từ thiện", "Cháo tình thương", "Chương trình thường niên", "Hỗ trợ hoàn cảnh", "Tiếp sức tri thức"],
+  })
+
   return (
     <>
       <Section title='QUY ĐỊNH NHÓM' />
