@@ -2,7 +2,7 @@ import React, { memo } from "react"
 
 const LoadingShimmerItemList = ({ count = 5 }) => {
     return (
-        <div className="flex flex-wrap mb-4 animate-pulse">
+        <div className="flex flex-wrap mb-4 animate-pulse -mx-2.5">
             {
                 Array.from({ length: count }).map((_, i) => (
                     <div className='w-full p-2.5 sm:w-1/2 lg:w-1/3' key={i}>

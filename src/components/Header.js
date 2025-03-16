@@ -6,6 +6,14 @@ const Header = () => {
   const { FaBars, IoMdArrowDropdown } = icons
   const tabs = [
     {
+      name: 'Video',
+      link: '/video'
+    },
+    {
+      name: 'Liên hệ',
+      link: '/contact'
+    },
+    {
       name: 'Giới thiệu',
       children: [
         {
@@ -44,10 +52,6 @@ const Header = () => {
       ]
     },
     {
-      name: 'Video',
-      link: '/video'
-    },
-    {
       name: 'Dịch vụ',
       children: [
         {
@@ -60,21 +64,23 @@ const Header = () => {
         }
       ]
     },
-    {
-      name: 'Liên lạc',
-      link: '/contact'
-    }
   ]
   const [openDropdown, setOpenDropdown] = useState('')
   const sideBarRef = useRef(null)
+  const overlayRef = useRef(null)
 
   const toggleDropdown = menu => {
     setOpenDropdown(openDropdown === menu ? null : menu)
   }
 
+  const handleToggleSidebar = () => {
+    sideBarRef.current.classList.toggle('right-0')
+    overlayRef.current.classList.toggle('hidden')
+  }
+
   return (
     <header className='bg-white h-20 content-center z-10 shadow-md'>
-      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-2 lg:px-0'>
+      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <Link to='/'>
             <img src='./assets/logo.png' className='inline-block mr-3 w-14 h-14' alt='logo' />
@@ -86,7 +92,7 @@ const Header = () => {
             </div>
           </span>
         </div>
-        <button className='block md:hidden' onClick={() => sideBarRef.current.classList.toggle('right-0')}>
+        <button className='block md:hidden' onClick={handleToggleSidebar}>
           <FaBars size={30} fill='purple' />
         </button>
         <ul className='flex-none text-main-color font-bold gap-7 hidden md:flex'>
@@ -162,27 +168,24 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <aside ref={sideBarRef} className='fixed bg-white shadow-lg overflow-auto top-20 -right-56 h-screen w-56 z-[99] transition-all duration-700'>
+      {/* right sidebar */}
+      <div ref={overlayRef} onClick={handleToggleSidebar} className='fixed hidden top-20 right-0 left-0 bottom-0 bg-[rgba(0,0,0,.5)]'></div>
+      <aside ref={sideBarRef} className='fixed bg-white shadow-lg overflow-auto top-20 -right-56 h-screen w-56 z-[99] transition-all duration-500'>
         {
           tabs.map(tab => {
             return (
               <div key={tab.name}>
-                {tab.link !== undefined ? (
-                  <Link
-                    className='block px-3 py-2 hover:bg-gray-200'
-                    to={tab.link}
-                  >
-                    {tab.name}
-                  </Link>
+                {tab.link ? (
+                  <Link className='block text-main-color p-2 hover:bg-gray-200' to={tab.link} onClick={handleToggleSidebar}>{tab.name}</Link>
                 ) : (
                   <>
-                    <button className='px-3 py-2 font-semibold'>
+                    <button className='p-2 font-semibold'>
                       <span>{tab.name}</span>
                     </button>
                     {
                       tab.children.map(children => {
                         return (
-                          <Link to={children.link} key={children.link} className='block text-main-color px-3 py-2 hover:bg-gray-200'>
+                          <Link to={children.link} key={children.link} onClick={handleToggleSidebar} className='block text-main-color p-2 hover:bg-gray-200'>
                             {children.name}
                           </Link>
                         )

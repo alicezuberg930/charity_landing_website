@@ -6,12 +6,12 @@ const ContactPage = () => {
   const { data: information } = useGetInformationHook()
 
   return (
-    <div className='mb-6 px-2 md:px-0'>
-      <Section title={'THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN'} />
+    <div className='mb-6'>
+      <Section title='THÔNG TIN LIÊN HỆ NHÓM ÁNH SÁNG TỪ THIỆN' />
       <GoogleMap />
       <div className='flex flex-col md:flex-row'>
         <div className='flex-1'>
-          <Section title={'THÔNG TIN LIÊN HỆ'} />
+          <Section title='THÔNG TIN LIÊN HỆ' />
           <ul>
             <li>
               <p>
@@ -45,7 +45,7 @@ const ContactPage = () => {
           </ul>
         </div>
         <div className='flex-1'>
-          <Section title={'THÔNG TIN CHUYỂN KHOẢN'} />
+          <Section title='THÔNG TIN CHUYỂN KHOẢN' />
           <ul>
             <li>
               <p>

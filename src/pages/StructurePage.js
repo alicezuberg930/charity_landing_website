@@ -4,8 +4,8 @@ import Section from '../components/Section'
 const StructurePage = () => {
   return (
     <>
-      <Section title={'CƠ CẤU TỔ CHỨC CỦA NHÓM'} />
-      <div className='space-y-12 mb-6 px-2 md:px-0'>
+      <Section title='CƠ CẤU TỔ CHỨC CỦA NHÓM' />
+      <div className='space-y-12 mb-6'>
         <div className=''>
           <div className='image-container rounded-2xl relative mb-4 aspect-video mx-auto max-w-screen-md'>
             <img src='./assets/organizational_chart.jpg' className='w-full h-full object-center rounded-xl' alt='structure' />

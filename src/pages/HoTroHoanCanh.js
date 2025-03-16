@@ -8,7 +8,7 @@ const HoTroHoanCanh = () => {
 
   return (
     <>
-      <Section title={'HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH'} />
+      <Section title='HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH' />
       {isLoading ? <LoadingShimmerItemList count={9} /> : posts && posts?.data && <ActivityList posts={posts.data} />}
     </>
   )

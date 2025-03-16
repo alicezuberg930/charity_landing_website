@@ -7,6 +7,7 @@ const PlayListSlider = ({ videos }) => {
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
+    showDot: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -20,14 +21,14 @@ const PlayListSlider = ({ videos }) => {
   }
 
   return (
-    <div className='my-4'>
+    <div className='my-4 -mx-2'>
       {
         <CustomSlider {...settings}>
           {
             videos.map((video, i) => {
               const videoId = 'https://www.youtube-nocookie.com/embed/' + video
               return (
-                <div key={i} className='my-2 px-2'>
+                <div key={i} className='px-2'>
                   <iframe
                     title={video}
                     key={video}

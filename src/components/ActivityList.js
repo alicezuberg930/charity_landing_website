@@ -3,7 +3,7 @@ import { slugify } from '../utils/utils'
 
 const ActivityList = ({ posts }) => {
   return (
-    <div className='flex flex-wrap mb-4'>
+    <div className='flex flex-wrap mb-4 -mx-2.5'>
       {
         posts.map((post, i) => {
           return (

@@ -3,7 +3,7 @@ import Section from '../components/Section'
 const NewsPage = () => {
   return (
     <div className='mb-6'>
-      <Section title={'THƯ VẬN ĐỘNG'} />
+      <Section title='THƯ VẬN ĐỘNG' />
       <embed
         className='block h-screen'
         width={'100%'}

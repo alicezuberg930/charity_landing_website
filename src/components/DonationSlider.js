@@ -53,8 +53,8 @@ const DonationSlider = () => {
   ]
   return (
     <div className='my-6'>
-      <Section title={'SẢN PHẨM QUYÊN GÓP CỦA NHÓM'} />
-      <div className='-mx-0 lg:-mx-3'>
+      <Section title='SẢN PHẨM QUYÊN GÓP CỦA NHÓM' />
+      <div className='-mx-3'>
         <CustomSlider {...settings}>
           {
             donationProducts.map(product => {

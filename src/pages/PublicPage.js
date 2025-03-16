@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from '../components/Footer'
@@ -30,7 +30,7 @@ const PublicPage = () => {
           <div className='flex flex-col h-full'>
             <Header />
             <div className='flex-1 overflow-y-auto overflow-x-hidden'>
-              <div className='max-w-screen-xl mx-auto'>
+              <div className='max-w-screen-xl mx-auto px-3 lg:px-0'>
                 <Outlet />
               </div>
               <Footer />

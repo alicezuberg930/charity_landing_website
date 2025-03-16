@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer className="border-t border-gray-300 bg-gray-100">
-      <div className='max-w-screen-xl mx-auto py-12 flex gap-4 flex-col md:flex-row px-2 md:px-0'>
+      <div className='max-w-screen-xl mx-auto py-12 flex gap-4 flex-col md:flex-row px-3 lg:px-0'>
         <div className='flex-1'>
           <span className='text-main-color font-semibold text-xl'>
             THÔNG TIN VỀ CHÚNG TÔI

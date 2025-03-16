@@ -14,7 +14,7 @@ import { icons } from "../utils/icons"
 // }
 
 const CustomSlider = ({
-    children, slidesToShow = 1, autoplay = false, autoplaySpeed = 3000, infinite = true, responsive = [], customMargin = 2, showDot = true, showButton = true
+    children, slidesToShow = 1, autoplay = false, autoplaySpeed = 3000, infinite = true, responsive = [], showDot = true, showButton = true
 }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const sliderRef = useRef(null)
@@ -122,7 +122,7 @@ const CustomSlider = ({
                     <FaChevronLeft size={24} fill="white" />
                 </button>
             }
-            <div className={`flex duration-1000 ease-in-out -mx-${customMargin}`} ref={sliderRef}
+            <div className={`flex duration-1000 ease-in-out`} ref={sliderRef}
                 style={{
                     transform: `translateX(-${totalTranslate}%)`,
                     transition: isDragging ? 'none' : 'transform 0.6s ease-in-out'

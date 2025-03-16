@@ -4,7 +4,7 @@ import Section from '../components/Section'
 const RulePage = () => {
   return (
     <>
-      <Section title={'QUY ĐỊNH NHÓM'} />
+      <Section title='QUY ĐỊNH NHÓM' />
       <div className='space-y-12 mb-6'>
         <div>
           <div>
