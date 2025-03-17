@@ -33,7 +33,7 @@ const CustomImagePicker = ({
 
     const newFiles = []
     if (e.dataTransfer.items) {
-      ;[...e.dataTransfer.items].forEach(item => {
+      [...e.dataTransfer.items].forEach(item => {
         if (item.kind === 'file') {
           const file = item.getAsFile()
           if (file) {
@@ -43,7 +43,6 @@ const CustomImagePicker = ({
         }
       })
     }
-
     setTempFiles(prev => [...prev, ...newFiles].slice(0, limit))
     setImages && setImages(prev => [...prev, ...newFiles].slice(0, limit))
   }
@@ -62,7 +61,6 @@ const CustomImagePicker = ({
         const url = URL.createObjectURL(file)
         newFiles.push({ file, url })
       }
-
       newFiles = newFiles.slice(0, 8)
       setTempFiles(prev => [...prev, ...newFiles].slice(0, limit))
       setImages && setImages(prev => [...prev, ...newFiles].slice(0, limit))
@@ -76,14 +74,12 @@ const CustomImagePicker = ({
   const handleDragOver = (e, index) => {
     e.preventDefault()
     if (draggedIndex === null || draggedIndex === index) return
-
     setTempFiles(prev => {
       const updatedFiles = [...prev]
       const [draggedFile] = updatedFiles.splice(draggedIndex, 1)
       updatedFiles.splice(index, 0, draggedFile)
       return updatedFiles
     })
-
     setDraggedIndex(index)
   }
 
@@ -104,52 +100,42 @@ const CustomImagePicker = ({
       {tempfiles.length > 0 && (
         <div>
           <div className='flex flex-wrap gap-3 max-h-[268px] overflow-auto'>
-            {tempfiles.slice(0, limit).map((file, i) => (
-              <div
-                draggable
-                key={i}
-                onDragStart={() => handleDragStart(i)}
-                onDragOver={e => handleDragOver(e, i)}
-                onDragEnd={handleDragEnd}
-              >
-                <div className='rounded-md overflow-hidden relative h-32 w-44 bg-gray-300'>
-                  <img
-                    className='object-cover w-full h-full'
-                    src={file.url}
-                    alt={`Uploaded file ${i}`}
-                  />
-
-                  <div>
-                    <div className='text-white top-1 right-1 absolute bg-gray-300 rounded-full p-2'>
-                      <FaRegTrashAlt
-                        fill='purple'
-                        size={14}
-                        onClick={() => {
-                          setTempFiles(prev =>
-                            prev.filter((_, index) => index !== i)
-                          )
-                          setImages &&
-                            setImages(prev =>
+            {
+              tempfiles.slice(0, limit).map((file, i) => (
+                <div draggable key={i}
+                  onDragStart={() => handleDragStart(i)}
+                  onDragOver={e => handleDragOver(e, i)}
+                  onDragEnd={handleDragEnd}
+                >
+                  <div className='rounded-md overflow-hidden relative h-32 w-44 bg-gray-300'>
+                    <img className='object-cover w-full h-full' src={file.url} alt={`Uploaded file ${i}`} />
+                    <div>
+                      <div className='text-white top-1 right-1 absolute bg-gray-300 rounded-full p-2'>
+                        <FaRegTrashAlt
+                          fill='purple'
+                          size={14}
+                          onClick={() => {
+                            setTempFiles(prev =>
                               prev.filter((_, index) => index !== i)
                             )
-                        }}
-                      />
+                            setImages &&
+                              setImages(prev =>
+                                prev.filter((_, index) => index !== i)
+                              )
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </div>
       )}
       {/* Dropzone */}
-      <div
-        onDragOver={e => {
-          e.preventDefault()
-        }}
-        onDrop={handleDrop}
-        className={`${tempfiles.length < limit ? 'block' : 'hidden'} ${tempfiles.length > 0 && 'mt-5'
-          } border border-dashed border-gray-400 rounded-lg w-fit`}
+      <div onDragOver={e => { e.preventDefault() }} onDrop={handleDrop}
+        className={`${tempfiles.length < limit ? 'block' : 'hidden'} ${tempfiles.length > 0 && 'mt-5'} border border-dashed border-gray-400 rounded-lg w-fit`}
       >
         <label htmlFor={id} className='flex items-center py-3 px-5'>
           <RiImageAddFill size={24} />
@@ -159,14 +145,8 @@ const CustomImagePicker = ({
             </span>
           )}
         </label>
-        <input
-          multiple={isMultiple}
-          disabled={isDisabled}
-          type='file'
-          accept='image/*'
-          id={id}
-          className='hidden option-file-input'
-          onChange={handleFileChange}
+        <input multiple={isMultiple} disabled={isDisabled} type='file' accept='image/*' id={id}
+          className='hidden option-file-input' onChange={handleFileChange}
         />
       </div>
     </div>
