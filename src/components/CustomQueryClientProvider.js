@@ -1,9 +1,17 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { useState } from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const CustomQueryClientProvider = ({ children }) => {
-    const [queryClient] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 10000 * 60 } } }))
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                staleTime: 1000 * 60,
+                refetchOnMount: false,
+                refetchOnReconnect: false,
+                refetchOnWindowFocus: false
+            }
+        }
+    })
 
     return (
         <QueryClientProvider client={queryClient} >

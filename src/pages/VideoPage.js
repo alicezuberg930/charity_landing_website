@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import PlayListSlider from '../components/PlayListSlider'
 import Section from '../components/Section'
 import { getYoutubePlaylistVideos } from '../services/api.service'

@@ -27,15 +27,14 @@ const CustomSlider = ({
     const [dragOffset, setDragOffset] = useState(0)
     const [dragDistance, setDragDistance] = useState(0)
 
-    const updateSlidesToShow = () => {
-        let newSlidesToShow = slidesToShow
-        responsive.forEach((breakpoint) => {
-            if (window.innerWidth <= breakpoint.breakpoint) newSlidesToShow = breakpoint.slidesToShow
-        })
-        setVisibleSlides(newSlidesToShow)
-    }
-
     useEffect(() => {
+        const updateSlidesToShow = () => {
+            let newSlidesToShow = slidesToShow
+            responsive.forEach((breakpoint) => {
+                if (window.innerWidth <= breakpoint.breakpoint) newSlidesToShow = breakpoint.slidesToShow
+            })
+            setVisibleSlides(newSlidesToShow)
+        }
         updateSlidesToShow()
         window.addEventListener("resize", updateSlidesToShow)
         return () => window.removeEventListener("resize", updateSlidesToShow)
@@ -155,7 +154,7 @@ const CustomSlider = ({
                     {
                         React.Children.map(children, (_, i) => {
                             return (
-                                <div key={i} className={`rounded-full ${currentIndex == i ? 'bg-main-color' : `bg-purple-200`} p-1`}></div>
+                                <div key={i} className={`rounded-full ${currentIndex === i ? 'bg-main-color' : `bg-purple-200`} p-1`}></div>
                             )
                         })
                     }

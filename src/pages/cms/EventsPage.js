@@ -6,7 +6,7 @@ import LoadingShimmerList from '../../components/LoadingShimmerList'
 import { useDeleteEventHook, useGetEventsHook } from '../../hooks/event.hook'
 
 const EventsPage = () => {
-  const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit, MdCancel, FaCheck } = icons
+  const { IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit, MdCancel, FaCheck } = icons
   const { data: events, isLoading } = useGetEventsHook({})
   const remove = useDeleteEventHook()
   const dummy = []

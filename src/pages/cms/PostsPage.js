@@ -4,10 +4,9 @@ import { useDeletePostHook, useGetPostsHook } from '../../hooks/post.hook'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
-import { slugify } from '../../utils/utils'
 
 const PostsPage = () => {
-  const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
+  const { IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
   const filter = { page: 1 }
   const { data: posts, isLoading } = useGetPostsHook({ filter })
   const remove = useDeletePostHook()

@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 
 export const showResponseError = (error) => {
     if (isAxiosError(error)) {
-        if (error.code == "ERR_NETWORK") {
+        if (error.code === "ERR_NETWORK") {
             toast.error(error.message)
         } else {
             const err = error.response?.data.message

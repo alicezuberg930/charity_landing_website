@@ -14,7 +14,7 @@ const CustomImagePicker = ({
 }) => {
   const [tempfiles, setTempFiles] = useState([])
   const [draggedIndex, setDraggedIndex] = useState(null)
-  const { RiImageAddFill, FaRegTrashAlt, MdModeEdit } = icons
+  const { RiImageAddFill, FaRegTrashAlt } = icons
 
   useEffect(() => {
     if (images !== undefined) setTempFiles(images)
@@ -148,9 +148,8 @@ const CustomImagePicker = ({
           e.preventDefault()
         }}
         onDrop={handleDrop}
-        className={`${tempfiles.length < limit ? 'block' : 'hidden'} ${
-          tempfiles.length > 0 && 'mt-5'
-        } border border-dashed border-gray-400 rounded-lg w-fit`}
+        className={`${tempfiles.length < limit ? 'block' : 'hidden'} ${tempfiles.length > 0 && 'mt-5'
+          } border border-dashed border-gray-400 rounded-lg w-fit`}
       >
         <label htmlFor={id} className='flex items-center py-3 px-5'>
           <RiImageAddFill size={24} />

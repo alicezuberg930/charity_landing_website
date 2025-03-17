@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createBanner, deleteBanner, getBanners, getInformation, updateBanner, updateInformation } from "../services/api.service"
+import { getInformation, updateInformation } from "../services/api.service"
 import { toast } from "react-toastify"
 import { API } from "../utils/api"
 import { showResponseError } from "../utils/utils"

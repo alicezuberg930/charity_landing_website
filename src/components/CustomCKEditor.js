@@ -41,7 +41,6 @@ import {
   LinkImage,
   List,
   ListProperties,
-  Markdown,
   MediaEmbed,
   Mention,
   PageBreak,
