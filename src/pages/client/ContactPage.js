@@ -1,6 +1,6 @@
-import Section from '../components/Section'
-import GoogleMap from '../components/GoogleMap'
-import { useGetInformationHook } from '../hooks/information.hook'
+import Section from '../../components/Section'
+import GoogleMap from '../../components/GoogleMap'
+import { useGetInformationHook } from '../../hooks/information.hook'
 
 const ContactPage = () => {
   const { data: information } = useGetInformationHook()

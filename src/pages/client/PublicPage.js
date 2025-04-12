@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Footer from '../../components/Footer'
+import Header from '../../components/Header'
 // import { useDispatch, useSelector } from 'react-redux'
 // import { isScrollTop } from '../store/actions/home_actions'
 

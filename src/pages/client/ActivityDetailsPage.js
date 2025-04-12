@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import HelmetSEO from '../components/HelmetSEO'
+import HelmetSEO from '../../components/HelmetSEO'
 
 const ActivityDetailsPage = () => {
   const location = useLocation()

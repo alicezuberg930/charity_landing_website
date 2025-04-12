@@ -2,6 +2,7 @@ import { memo, useRef } from "react"
 import { icons } from "../utils/icons"
 import { Link } from "react-router-dom"
 import { useGetEventsHook } from "../hooks/event.hook"
+import { ROUTES } from '../routes/path'
 
 const EventOverlay = () => {
     const { MdCancel } = icons
@@ -18,7 +19,7 @@ const EventOverlay = () => {
                             <div className='absolute top-3 right-3'>
                                 <MdCancel size={24} onClick={removeOverlay} fill="purple" />
                             </div>
-                            <Link to={'/news'} className="w-full h-full block">
+                            <Link to={ROUTES.news} className="w-full h-full block">
                                 <img alt='event' src={event.data[0].image} className="object-cover w-full h-full" />
                             </Link>
                         </div>

@@ -1,32 +1,34 @@
 import { Link } from 'react-router-dom'
 import { icons } from '../utils/icons'
 import { memo, useRef, useState } from 'react'
+import { ROOT_HOME } from '../routes/path'
+import { ROUTES } from '../routes/path'
 
 const Header = () => {
   const { FaBars, IoMdArrowDropdown } = icons
   const tabs = [
     {
       name: 'Video',
-      link: '/video'
+      link: ROUTES.video
     },
     {
       name: 'Liên hệ',
-      link: '/contact'
+      link: ROUTES.contact
     },
     {
       name: 'Giới thiệu',
       children: [
         {
           name: 'Quy định',
-          link: '/rule'
+          link: ROUTES.rule
         },
         {
           name: 'Tiêu chí nhóm',
-          link: '/criteria'
+          link: ROUTES.criteria
         },
         {
           name: 'Cơ cấu tổ chức',
-          link: '/structure'
+          link: ROUTES.structure
         }
       ]
     },
@@ -35,19 +37,19 @@ const Header = () => {
       children: [
         {
           name: 'Cháo tình thương',
-          link: '/chao-tinh-thuong'
+          link: ROUTES.chaoTinhThuong
         },
         {
           name: 'Chương trình thường niên',
-          link: '/chuong-trinh-thuong-nien'
+          link: ROUTES.chuongTrinhThuongNien
         },
         {
           name: 'Hỗ trợ hoàn cảnh',
-          link: '/ho-tro-hoan-canh'
+          link: ROUTES.hoTroHoanCanh
         },
         {
           name: 'Tiếp sức tri thức',
-          link: '/tiep-suc-tri-thuc'
+          link: ROUTES.tiepSucTriThuc
         }
       ]
     },
@@ -56,11 +58,11 @@ const Header = () => {
       children: [
         {
           name: 'Thiết kế',
-          link: '/design'
+          link: ROUTES.design
         },
         {
           name: 'Chụp ảnh',
-          link: '/photoshoot'
+          link: ROUTES.photoshoot
         }
       ]
     },
@@ -82,7 +84,7 @@ const Header = () => {
     <header className='bg-white h-20 content-center z-10 shadow-md flex-none'>
       <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 lg:px-0'>
         <div className='flex items-center flex-auto'>
-          <Link to='/'>
+          <Link to={ROOT_HOME}>
             <img src='./assets/logo.png' className='inline-block mr-3 w-14 h-14' alt='logo' />
           </Link>
           <span className='hidden md:block'>
@@ -103,18 +105,15 @@ const Header = () => {
             </button>
             <div className={`${openDropdown === 'introduction' ? 'block' : 'hidden'} absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}>
               <div className='flex flex-col'>
-                <Link to='/rule' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.rule} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Quy định</span>
                 </Link>
-                <Link to='/criteria' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.criteria} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Tiêu chí nhóm</span>
                 </Link>
-                <Link to='/structure' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.structure} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Cơ cấu tổ chức</span>
                 </Link>
-                {/* <Link to='/cms/activities' className='px-3 py-2 hover:bg-gray-200'>
-                  <span>Web Admin</span>
-                </Link> */}
               </div>
             </div>
           </li>
@@ -125,23 +124,23 @@ const Header = () => {
             </button>
             <div className={`${openDropdown === 'movement' ? 'block' : 'hidden'} absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}>
               <div className='flex flex-col'>
-                <Link to='/chao-tinh-thuong' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.chaoTinhThuong} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Cháo tình thương</span>
                 </Link>
-                <Link to='/chuong-trinh-thuong-nien' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.chuongTrinhThuongNien} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Chương trình thường niên</span>
                 </Link>
-                <Link to='/ho-tro-hoan-canh' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.hoTroHoanCanh} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Hỗ trợ hoàn cảnh</span>
                 </Link>
-                <Link to='/tiep-suc-tri-thuc' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.tiepSucTriThuc} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Tiếp sức tri thức</span>
                 </Link>
               </div>
             </div>
           </li>
           <li className='relative'>
-            <Link to='/video'>
+            <Link to={ROUTES.video}>
               <span>Video</span>
             </Link>
           </li>
@@ -152,17 +151,17 @@ const Header = () => {
             </button>
             <div className={`${openDropdown === 'service' ? 'block' : 'hidden'} absolute left-1/2 -translate-x-1/2 top-10 bg-white z-[999] rounded-md border border-gray-300 shadow-lg w-max`}>
               <div className='flex flex-col'>
-                <Link to='/design' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.design} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Thiết kế</span>
                 </Link>
-                <Link to='/photoshoot' className='px-3 py-2 hover:bg-gray-200'>
+                <Link to={ROUTES.photoshoot} className='px-3 py-2 hover:bg-gray-200'>
                   <span>Chụp ảnh</span>
                 </Link>
               </div>
             </div>
           </li>
           <li className='relative'>
-            <Link to='/contact'>
+            <Link to={ROUTES.contact}>
               <span>Liên hệ</span>
             </Link>
           </li>

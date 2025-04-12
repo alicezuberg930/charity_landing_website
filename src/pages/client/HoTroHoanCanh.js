@@ -1,9 +1,9 @@
-import LoadingShimmerItemList from '../components/LoadingShimmerItemList'
-import ActivityList from '../components/ActivityList'
-import Section from '../components/Section'
-import { useGetPostsHook } from '../hooks/post.hook'
+import LoadingShimmerItemList from '../../components/LoadingShimmerItemList'
+import ActivityList from '../../components/ActivityList'
+import Section from '../../components/Section'
+import { useGetPostsHook } from '../../hooks/post.hook'
 
-const HoTroHoanCanh = () => {
+const HoTroHoanCanhPage = () => {
   const { data: posts, isLoading } = useGetPostsHook({ filter: { category: 'ho-tro-hoan-canh' } })
 
   return (
@@ -14,4 +14,4 @@ const HoTroHoanCanh = () => {
   )
 }
 
-export default HoTroHoanCanh
+export default HoTroHoanCanhPage

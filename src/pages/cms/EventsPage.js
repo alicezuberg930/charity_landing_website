@@ -4,6 +4,7 @@ import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
 import { useDeleteEventHook, useGetEventsHook } from '../../hooks/event.hook'
+import { ROUTES } from '../../routes/path'
 
 const EventsPage = () => {
   const { IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit, MdCancel, FaCheck } = icons
@@ -41,7 +42,7 @@ const EventsPage = () => {
               <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
             </div>
           </div>
-          <Link to={'/cms/events/create'} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
+          <Link to={ROUTES.event.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
             <IoIosAddCircleOutline size={20} />
             <span className='pl-2'>Thêm mới</span>
           </Link>

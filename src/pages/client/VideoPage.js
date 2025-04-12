@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import PlayListSlider from '../components/PlayListSlider'
-import Section from '../components/Section'
-import { getYoutubePlaylistVideos } from '../services/api.service'
-import { showResponseError } from '../utils/utils'
+import PlayListSlider from '../../components/PlayListSlider'
+import Section from '../../components/Section'
+import { getYoutubePlaylistVideos } from '../../services/api.service'
+import { showResponseError } from '../../utils/utils'
 
 function VideoPage() {
   const PLAYLIST_1 = 'PLPKGUz9dF9sIs4HYrmu2CZ4QRsRtnElTn'

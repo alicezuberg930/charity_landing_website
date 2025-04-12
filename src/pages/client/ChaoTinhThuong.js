@@ -1,9 +1,9 @@
-import Section from '../components/Section'
-import { useGetPostsHook } from '../hooks/post.hook'
-import ActivityList from '../components/ActivityList'
-import LoadingShimmerItemList from '../components/LoadingShimmerItemList'
+import Section from '../../components/Section'
+import { useGetPostsHook } from '../../hooks/post.hook'
+import ActivityList from '../../components/ActivityList'
+import LoadingShimmerItemList from '../../components/LoadingShimmerItemList'
 
-const ChaoTinhThuong = () => {
+const ChaoTinhThuongPage = () => {
   const { data: posts, isLoading } = useGetPostsHook({ filter: { category: 'chao-tinh-thuong' } })
 
   return (
@@ -14,4 +14,4 @@ const ChaoTinhThuong = () => {
   )
 }
 
-export default ChaoTinhThuong
+export default ChaoTinhThuongPage

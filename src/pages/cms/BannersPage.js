@@ -4,6 +4,7 @@ import { icons } from "../../utils/icons"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import LoadingShimmerList from "../../components/LoadingShimmerList"
+import { ROUTES } from "../../routes/path"
 
 const BannersPage = () => {
     const { FaRegShareSquare, IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
@@ -41,7 +42,7 @@ const BannersPage = () => {
                             <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
                         </div>
                     </div>
-                    <Link to={'/cms/banners/create'} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
+                    <Link to={ROUTES.banner.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
                         <IoIosAddCircleOutline size={20} />
                         <span className='pl-2'>Thêm mới</span>
                     </Link>
@@ -92,12 +93,6 @@ const BannersPage = () => {
 
                                             <td className='px-3 py-2'>
                                                 <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                                                    <button className='bg-main-color p-3 rounded-lg' title='Chi tiết'>
-                                                        <Link to={`/cms/banners/${banner._id}`}>
-                                                            <FaRegShareSquare size={16} fill='#fff' />
-                                                        </Link>
-                                                    </button>
-
                                                     <button className='bg-main-color p-3 rounded-lg' title='Xóa' onClick={() => handleDelete(banner._id)}>
                                                         <FaRegTrashAlt size={16} fill='#fff' />
                                                     </button>

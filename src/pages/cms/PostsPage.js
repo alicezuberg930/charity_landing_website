@@ -4,6 +4,7 @@ import { useDeletePostHook, useGetPostsHook } from '../../hooks/post.hook'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import { ROUTES } from '../../routes/path'
 
 const PostsPage = () => {
   const { IoIosAddCircleOutline, FaRegTrashAlt, MdModeEdit } = icons
@@ -42,7 +43,7 @@ const PostsPage = () => {
               <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
             </div>
           </div>
-          <Link to={'/cms/activities/create'} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
+          <Link to={ROUTES.post.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
             <IoIosAddCircleOutline size={20} />
             <span className='pl-2'>Thêm mới</span>
           </Link>
@@ -111,7 +112,7 @@ const PostsPage = () => {
                             <FaRegTrashAlt size={16} fill='#fff' />
                           </button>
 
-                          <Link to={`/cms/activities/update/${post._id}`} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
+                          <Link to={ROUTES.post.edit(post._id)} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
                             <MdModeEdit size={16} fill='#fff' />
                           </Link>
                         </div>

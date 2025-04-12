@@ -1,28 +1,29 @@
 import { memo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { icons } from '../utils/icons'
+import { ROUTES } from '../routes/path'
 
 const AdminSidebar = () => {
   const { MdCancel, PiFlagBanner, IoIosInformationCircleOutline, MdEventNote, MdPostAdd } = icons
   const [isCollapsed, setIsCollapsed] = useState(true)
   const menuItems = [
     {
-      path: '/cms/activities',
+      path: ROUTES.post.list,
       icon: <MdPostAdd size={24} />,
       name: 'Hoạt động'
     },
     {
-      path: '/cms/events',
+      path: ROUTES.event.list,
       icon: <MdEventNote size={24} />,
       name: 'Sự kiện'
     },
     {
-      path: '/cms/information',
+      path: ROUTES.information,
       icon: <IoIosInformationCircleOutline size={24} />,
       name: 'Thông tin'
     },
     {
-      path: '/cms/banners',
+      path: ROUTES.banner.list,
       icon: <PiFlagBanner size={24} />,
       name: 'Banner'
     }
