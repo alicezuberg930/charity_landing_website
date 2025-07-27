@@ -1,2 +1,1 @@
-# Website đã được deploy bằng github-pages. sử dụng link này để đến website
-https://alicezuberg930.github.io/webtuthien/
+#Website has been deployed and has a domain name at anhsangtuthien.com
