@@ -95,7 +95,7 @@ const Footer = () => {
         </div>
       </footer>
       <div className="text-center py-4 bg-gray-600">
-        <span className="font-semibold text-sm text-white">Nguyễn Vĩnh Tiến 2025 @ Cập nhật 15/05/2025</span>
+        <span className="font-semibold text-sm text-white">Nguyễn Vĩnh Tiến 2025 @ Cập nhật 27/07/2025</span>
       </div>
     </>
   )

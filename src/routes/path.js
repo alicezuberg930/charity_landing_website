@@ -41,5 +41,6 @@ export const ROUTES = {
     new: path(ROOT_CMS, '/event/new'),
     edit: (id) => path(ROOT_CMS, `/event/edit/${id}`),
   },
-  information: 'information'
+  information: 'information',
+  login: path(ROOT_CMS, '/login')
 }

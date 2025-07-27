@@ -2,7 +2,7 @@ import { memo } from "react"
 
 const GoogleMap = () => {
   return (
-    <div className='my-5 w-full max-h-[500px] aspect-video'>
+    <div className='my-20 w-full max-h-[500px] aspect-video'>
       <iframe
         title='headquarter'
         className="w-full h-full"

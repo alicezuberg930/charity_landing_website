@@ -1,10 +1,14 @@
 import { Navigate, useRoutes } from "react-router-dom"
 import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
-import { PostsPage, CreatePostPage, EventsPage, CreateEventPage, CreateBannerPage, AdminPage, InformationPage, BannersPage, UpdatePostPage } from '../pages/cms/'
+import { LoginPage, PostsPage, CreatePostPage, EventsPage, CreateEventPage, CreateBannerPage, AdminPage, InformationPage, BannersPage, UpdatePostPage } from '../pages/cms/'
 import { ROOT_CMS, ROOT_HOME, ROUTES } from "./path"
 
 export const Router = () => {
     return useRoutes([
+        {
+            path: '/login',
+            element: <LoginPage />
+        },
         {
             path: ROOT_HOME,
             element: (
@@ -73,6 +77,7 @@ export const Router = () => {
                     element: <InformationPage />
                 },
             ]
-        }
+        },
+
     ])
 }

@@ -52,7 +52,7 @@ const DonationSlider = () => {
     },
   ]
   return (
-    <div className='my-6'>
+    <div className='mt-20'>
       <Section title='SẢN PHẨM QUYÊN GÓP CỦA NHÓM' />
       <div className='-mx-3'>
         <CustomSlider {...settings}>

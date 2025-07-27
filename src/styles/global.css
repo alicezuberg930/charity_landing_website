@@ -12,6 +12,11 @@ a:hover {
   text-decoration-line: none;
 }
 
+input {
+  outline: none;
+  border: none;
+}
+
 div::-webkit-scrollbar {
   width: 4px;
 }
