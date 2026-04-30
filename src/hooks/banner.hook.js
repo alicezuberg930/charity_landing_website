@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createBanner, deleteBanner, getBanners, updateBanner } from "../services/api.service"
+import { createBanner, deleteBanner, getBannerDetails, getBanners, updateBanner } from "../services/api.service"
 import { toast } from "react-toastify"
 import { API } from "../utils/api"
 import { showResponseError } from "../utils/utils"
 
-export const useGetBannersHook = () => {
+export const useGetBannersHook = (params) => {
     return useQuery({
         queryKey: [API.BANNERS],
-        queryFn: () => getBanners(),
+        queryFn: () => getBanners(params),
         placeholderData: (previousData, _) => previousData,
     })
 }
@@ -51,5 +51,13 @@ export const useUpdateBannerHook = () => {
         onError(error) {
             showResponseError(error)
         },
+    })
+}
+
+export const useGetBannerDetailsHook = ({ id }) => {
+    return useQuery({
+        queryKey: [API.BANNERS, id],
+        queryFn: () => getBannerDetails({ id }),
+        placeholderData: (previousData, _) => previousData,
     })
 }

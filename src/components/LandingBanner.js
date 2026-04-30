@@ -10,7 +10,7 @@ const LandingBanner = () => {
     infinite: true,
     showDot: true,
   }
-  const { data: banners, isLoading } = useGetBannersHook()
+  const { data: banners, isLoading } = useGetBannersHook({ isActive: true })
 
   return (
     <>

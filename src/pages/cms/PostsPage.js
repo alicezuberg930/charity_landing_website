@@ -11,10 +11,6 @@ const PostsPage = () => {
   const filter = { page: 1 }
   const { data: posts, isLoading } = useGetPostsHook({ filter })
   const remove = useDeletePostHook()
-  const dummy = []
-  for (let i = 0; i <= 100; i++) {
-    dummy.push(i)
-  }
 
   const handleDelete = (id) => {
     withReactContent(Swal).fire({

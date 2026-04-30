@@ -1,6 +1,6 @@
 import { Navigate, useRoutes } from "react-router-dom"
 import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
-import { LoginPage, PostsPage, CreatePostPage, EventsPage, CreateEventPage, CreateBannerPage, AdminPage, InformationPage, BannersPage, UpdatePostPage } from '../pages/cms/'
+import { UpdateCreatePostPage, UpdateCreateBannerPage, LoginPage, PostsPage, EventsPage, CreateEventPage, AdminPage, InformationPage, BannersPage } from '../pages/cms/'
 import { ROOT_CMS, ROOT_HOME, ROUTES } from "./path"
 
 export const Router = () => {
@@ -50,8 +50,8 @@ export const Router = () => {
                     children: [
                         { element: <Navigate to='/cms/post/list' replace />, index: true },
                         { path: 'list', element: <PostsPage /> },
-                        { path: 'new', element: <CreatePostPage /> },
-                        { path: 'edit/:id', element: <UpdatePostPage /> },
+                        { path: 'new', element: <UpdateCreatePostPage /> },
+                        { path: 'edit/:id', element: <UpdateCreatePostPage /> },
                     ],
                 },
                 {
@@ -59,8 +59,8 @@ export const Router = () => {
                     children: [
                         { element: <Navigate to='/cms/banner/list' replace />, index: true },
                         { path: 'list', element: <BannersPage /> },
-                        { path: 'new', element: <CreateBannerPage /> },
-                        // { path: 'edit/:id', element: < /> },
+                        { path: 'new', element: <UpdateCreateBannerPage /> },
+                        { path: 'edit/:id', element: <UpdateCreateBannerPage /> },
                     ],
                 },
                 {

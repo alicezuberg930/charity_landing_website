@@ -70,7 +70,7 @@ const HandlePostBody = ({ selectedPost }) => {
     return (
         <div className='bg-white rounded-md p-4'>
             <div className='flex flex-col gap-1 mb-10'>
-                <span className='text-xl font-bold'>Tạo bài viết</span>
+                <span className='text-xl font-bold'>{selectedPost ? 'Sửa' : 'Tạo'} bài viết</span>
                 <span className='text-sm text-gray-500'>
                     Điền đầy đủ thông tin của bài viết
                 </span>

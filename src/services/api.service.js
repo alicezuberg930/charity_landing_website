@@ -24,8 +24,13 @@ export const deleteBanner = async ({ id }) => {
     return response.data
 }
 
-export const getBanners = async () => {
-    const response = await axioInstance({ url: API.BANNERS, method: "GET" })
+export const getBanners = async (params) => {
+    const response = await axioInstance({ url: API.BANNERS, method: "GET", params })
+    return response.data
+}
+
+export const getBannerDetails = async ({ id }) => {
+    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "GET" })
     return response.data
 }
 

@@ -97,9 +97,9 @@ const BannersPage = () => {
                                                         <FaRegTrashAlt size={16} fill='#fff' />
                                                     </button>
 
-                                                    <button className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
+                                                    <Link to={ROUTES.banner.edit(banner._id)} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
                                                         <MdModeEdit size={16} fill='#fff' />
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </td>
                                         </tr>
