@@ -1,11 +1,10 @@
 import { Link } from '@tanstack/react-router'
-import { icons } from '../utils/icons'
+import { ChevronDown, Menu } from 'lucide-react'
 import { memo, useRef, useState } from 'react'
 import { ROOT_HOME } from '../routes/path'
 import { ROUTES } from '../routes/path'
 
 const Header = () => {
-  const { ChevronDown, Menu } = icons
   const tabs = [
     {
       name: 'Video',

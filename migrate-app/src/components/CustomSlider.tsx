@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { icons } from "../utils/icons"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 type SliderBreakpoint = {
     breakpoint: number
@@ -23,7 +23,6 @@ const CustomSlider = ({
     const [currentIndex, setCurrentIndex] = useState(0)
     const sliderRef = useRef<HTMLDivElement | null>(null)
     const totalSlides = React.Children.count(children)
-    const { ChevronLeft, ChevronRight } = icons
     const [visibleSlides, setVisibleSlides] = useState(slidesToShow)
     // Add states for touch/drag functionality
     const [isDragging, setIsDragging] = useState(false)

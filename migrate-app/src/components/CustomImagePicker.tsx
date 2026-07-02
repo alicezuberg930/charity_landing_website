@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent, type DragEvent, type Dispatch, type SetStateAction } from 'react'
-import { icons } from '../utils/icons'
+import { ImagePlus, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 export type PickedImage = {
@@ -30,7 +30,6 @@ const CustomImagePicker = ({
 }: CustomImagePickerProps) => {
   const [tempfiles, setTempFiles] = useState<PickedImage[]>([])
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
-  const { ImagePlus, Trash2 } = icons
 
   useEffect(() => {
     if (images !== undefined) setTempFiles(images)

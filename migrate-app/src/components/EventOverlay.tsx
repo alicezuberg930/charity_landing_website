@@ -1,11 +1,10 @@
 import { memo, useRef } from "react"
-import { icons } from "../utils/icons"
 import { Link } from "@tanstack/react-router"
+import { CircleX } from "lucide-react"
 import { useGetEventsHook } from "../hooks/event.hook"
 import { ROUTES } from '../routes/path'
 
 const EventOverlay = () => {
-    const { CircleX } = icons
     const ref = useRef<HTMLDivElement | null>(null)
     const { data: event } = useGetEventsHook({ filter: { isActive: true } })
     const removeOverlay = () => ref.current?.classList.add('hidden')

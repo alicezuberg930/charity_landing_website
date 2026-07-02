@@ -1,13 +1,12 @@
 import { Link } from "@tanstack/react-router"
 import { useDeleteBannerHook, useGetBannersHook } from "../../hooks/banner.hook"
-import { icons } from "../../utils/icons"
+import { CirclePlus, Pencil, Trash2 } from "lucide-react"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import LoadingShimmerList from "../../components/LoadingShimmerList"
 import { ROUTES } from "../../routes/path"
 
 const BannersPage = () => {
-    const { CirclePlus, Pencil, Trash2 } = icons
     const { data: banners, isLoading } = useGetBannersHook()
     const remove = useDeleteBannerHook()
     const dummy: number[] = []

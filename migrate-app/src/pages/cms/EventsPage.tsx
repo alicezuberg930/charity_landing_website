@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { icons } from '../../utils/icons'
+import { Check, CirclePlus, CircleX, Pencil, Trash2 } from 'lucide-react'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
@@ -7,7 +7,6 @@ import { useDeleteEventHook, useGetEventsHook } from '../../hooks/event.hook'
 import { ROUTES } from '../../routes/path'
 
 const EventsPage = () => {
-  const { Check, CirclePlus, CircleX, Pencil, Trash2 } = icons
   const { data: events, isLoading } = useGetEventsHook({})
   const remove = useDeleteEventHook()
   const dummy: number[] = []

@@ -1,10 +1,9 @@
 import { memo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { icons } from '../utils/icons'
+import { CalendarDays, CircleX, FilePlus2, Flag, Info } from 'lucide-react'
 import { ROUTES } from '../routes/path'
 
 const AdminSidebar = () => {
-  const { CalendarDays, CircleX, FilePlus2, Flag, Info } = icons
   const [isCollapsed, setIsCollapsed] = useState(true)
   const menuItems = [
     {

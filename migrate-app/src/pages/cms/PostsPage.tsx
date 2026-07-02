@@ -1,5 +1,5 @@
-import { icons } from '../../utils/icons'
 import { Link } from '@tanstack/react-router'
+import { CirclePlus, Pencil, Trash2 } from 'lucide-react'
 import { useDeletePostHook, useGetPostsHook } from '../../hooks/post.hook'
 import LoadingShimmerList from '../../components/LoadingShimmerList'
 import withReactContent from 'sweetalert2-react-content'
@@ -7,7 +7,6 @@ import Swal from 'sweetalert2'
 import { ROUTES } from '../../routes/path'
 
 const PostsPage = () => {
-  const { CirclePlus, Pencil, Trash2 } = icons
   const filter = { page: 1 }
   const { data: posts, isLoading } = useGetPostsHook({ filter })
   const remove = useDeletePostHook()

@@ -1,9 +1,8 @@
 import { memo, useState } from 'react'
-import { icons } from '../utils/icons'
 import { Link } from '@tanstack/react-router'
+import { Bell, ChevronDown, LogOut, Menu, User } from 'lucide-react'
 
 const AdminHeader = () => {
-  const { Bell, ChevronDown, LogOut, Menu, User } = icons
   const [isCollapsed, setCollapseSidebar] = useState(true)
 
   return (
