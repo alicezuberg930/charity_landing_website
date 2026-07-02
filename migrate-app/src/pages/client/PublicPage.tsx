@@ -1,6 +1,5 @@
 import { Outlet } from '@tanstack/react-router'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { Toaster } from '../../components/ui/sonner'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 // import { useDispatch, useSelector } from 'react-redux'
@@ -37,7 +36,7 @@ const PublicPage = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <Toaster richColors />
     </>
   )
 }

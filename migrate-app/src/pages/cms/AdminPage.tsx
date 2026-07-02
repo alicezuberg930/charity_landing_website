@@ -1,8 +1,7 @@
 import { Outlet } from '@tanstack/react-router'
 import AdminHeader from '../../components/AdminHeader'
 import AdminSidebar from '../../components/AdminSidebar'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { Toaster } from '../../components/ui/sonner'
 
 const AdminPage = () => {
   return (
@@ -20,7 +19,7 @@ const AdminPage = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <Toaster richColors />
     </>
   )
 }

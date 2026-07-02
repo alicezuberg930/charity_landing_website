@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createEvent, deleteEvent, getEvents, updateEvent } from "../services/api.service"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import { API } from "../utils/api"
-import { showResponseError } from "../utils/utils"
+import { showResponseError } from "../lib/utils"
 
 export const useGetEventsHook = ({ filter }: any = {}) => {
     return useQuery({

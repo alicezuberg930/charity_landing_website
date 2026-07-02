@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type DragEvent, type Dispatch, type SetStateAction } from 'react'
 import { icons } from '../utils/icons'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 export type PickedImage = {
   file: File | null

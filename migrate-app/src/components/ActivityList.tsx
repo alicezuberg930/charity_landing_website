@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { slugify } from '../utils/utils'
+import { slugify } from "../lib/utils"
 
 const ActivityList = ({ posts }) => {
   return (

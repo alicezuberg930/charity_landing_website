@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createPost, deletePost, getPostDetails, getPosts, updatePost } from "../services/api.service"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import { API } from "../utils/api"
-import { showResponseError } from "../utils/utils"
+import { showResponseError } from "../lib/utils"
 
 export const useGetPostsHook = ({ filter }: any = {}) => {
     return useQuery({

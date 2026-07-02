@@ -1,6 +1,6 @@
 import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterProvider } from "@tanstack/react-router"
 import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
-import { UpdateCreatePostPage, UpdateCreateBannerPage, LoginPage, PostsPage, EventsPage, CreateEventPage, AdminPage, InformationPage, BannersPage } from '../pages/cms/'
+import { UpdateCreatePostPage, UpdateCreateBannerPage, LoginPage, PostsPage, EventsPage, CreateEventPage, AdminPage, InformationPage, BannersPage } from '../pages/cms'
 import { ROOT_CMS } from "./path"
 
 const rootRoute = createRootRoute({
@@ -15,7 +15,7 @@ const loginRoute = createRoute({
 
 const publicRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: '/',
+    id: 'public',
     component: PublicPage,
 })
 

@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import CustomImagePicker, { type PickedImage } from '../components/CustomImagePicker'
+import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreateBannerHook, useUpdateBannerHook } from '../hooks/banner.hook'
 import CustomSwitch from './CustomSwitch'

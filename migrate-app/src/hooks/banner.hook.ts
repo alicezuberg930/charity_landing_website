@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createBanner, deleteBanner, getBannerDetails, getBanners, updateBanner } from "../services/api.service"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import { API } from "../utils/api"
-import { showResponseError } from "../utils/utils"
+import { showResponseError } from "../lib/utils"
 
 export const useGetBannersHook = (params?: any) => {
     return useQuery({
