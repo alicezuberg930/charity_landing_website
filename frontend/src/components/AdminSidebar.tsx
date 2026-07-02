@@ -41,16 +41,14 @@ const AdminSidebar = () => {
       </div>
       <div className='px-2'>
         {
-          menuItems.map((v, i) => {
-            return (
-              <Link key={i} to={v.path}
-                className={`${'' === v.path ? 'bg-[#4e6aaf]' : ''} p-2 mt-3 flex items-center rounded-md cursor-pointer hover:bg-[#4e6aaf] text-white`}
-              >
-                {v.icon}
-                <span className='text-sm ml-3 text-gray-200'>{v.name}</span>
-              </Link>
-            )
-          })
+          menuItems.map((v, i) => (
+            <Link key={i} to={v.path}
+              className={`${'' === v.path ? 'bg-[#4e6aaf]' : ''} p-2 mt-3 flex items-center rounded-md cursor-pointer hover:bg-[#4e6aaf] text-white`}
+            >
+              {v.icon}
+              <span className='text-sm ml-3 text-gray-200'>{v.name}</span>
+            </Link>
+          ))
         }
       </div>
     </aside>

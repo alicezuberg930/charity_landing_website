@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
-import CustomQueryClientProvider from './components/CustomQueryClientProvider'
 import './styles/global.css'
+import { Router } from '@/routes'
+import { QueryClientProvider } from './components/QueryClientProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
+
 root.render(
   <React.StrictMode>
-    <CustomQueryClientProvider>
-      <App />
-    </CustomQueryClientProvider>
+    <QueryClientProvider>
+      <Router />
+    </QueryClientProvider>
   </React.StrictMode>
 )
 

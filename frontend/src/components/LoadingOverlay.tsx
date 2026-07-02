@@ -1,15 +1,6 @@
-// import { useEffect } from "react"
-// import { useDispatch, useSelector } from "react-redux"
-// import { setIsLoadingOverlay } from "../services/common.slice"
+import { memo } from "react"
 
 const LoadingOverlay = ({ isLoading }) => {
-    // const { isLoading } = useSelector((state: any) => state.common)
-    // const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     dispatch(setIsLoadingOverlay(false))
-    // }, [])
-
     return (
         <div className={`absolute select-none top-0 bottom-0 right-0 left-0 bg-[rgba(0,0,0,.3)] z-50 ${isLoading ? '' : 'hidden'}`}>
             <div className="w-full h-full relative">
@@ -21,4 +12,4 @@ const LoadingOverlay = ({ isLoading }) => {
     )
 }
 
-export default LoadingOverlay
+export default memo(LoadingOverlay)

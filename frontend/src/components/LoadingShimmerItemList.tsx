@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 
 const LoadingShimmerItemList = ({ count = 5 }) => {
     return (

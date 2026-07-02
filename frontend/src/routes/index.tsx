@@ -2,6 +2,7 @@ import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterPro
 import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
 import { UpdateCreatePostPage, UpdateCreateBannerPage, LoginPage, PostsPage, EventsPage, CreateEventPage, AdminPage, InformationPage, BannersPage } from '../pages/cms'
 import { ROOT_CMS } from "./path"
+import { queryClient } from "@/components/QueryClientProvider"
 
 const rootRoute = createRootRoute({
     component: Outlet,
@@ -73,6 +74,11 @@ const routeTree = rootRoute.addChildren([
     cmsRoute.addChildren(cmsChildRoutes),
 ])
 
-const router = createRouter({ routeTree })
+const router = createRouter({
+    routeTree,
+    context: { queryClient: queryClient() },
+    defaultPreload: 'intent',
+    defaultPreloadStaleTime: 0,
+})
 
 export const Router = () => <RouterProvider router={router} />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import CustomSlider from './CustomSlider'
 
 const PlayListSlider = ({ videos }) => {
@@ -49,4 +49,4 @@ const PlayListSlider = ({ videos }) => {
   )
 }
 
-export default PlayListSlider
+export default memo(PlayListSlider)

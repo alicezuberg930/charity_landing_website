@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PlayListSlider from '@/components/PlayListSlider'
 import Section from '@/components/Section'
 import { getYoutubePlaylistVideos } from '@/services/api.service'
 import { showResponseError } from '@/lib/utils'
+import { playlistIds } from '@/lib/constants'
 
 function VideoPage() {
-  const PLAYLIST_1 = 'PLPKGUz9dF9sIs4HYrmu2CZ4QRsRtnElTn'
-  const PLAYLIST_2 = 'PLPKGUz9dF9sIfAlTR27e7lTJoS702DEu2'
-  const PLAYLIST_3 = 'PLPKGUz9dF9sLgp2ggkQBE6CH5oivdwGeG'
-  const PLAYLIST_4 = 'PLPKGUz9dF9sLHRvV9ENks8WQrWNQsb1SD'
   const [playList_1, setPlayList_1] = useState<string[]>([])
   const [playList_2, setPlayList_2] = useState<string[]>([])
   const [playList_3, setPlayList_3] = useState<string[]>([])
@@ -26,10 +23,10 @@ function VideoPage() {
   }
 
   useEffect(() => {
-    fetchYoutubePlaylistVideos({ playlistId: PLAYLIST_1, setPlayList: setPlayList_1 })
-    fetchYoutubePlaylistVideos({ playlistId: PLAYLIST_2, setPlayList: setPlayList_2 })
-    fetchYoutubePlaylistVideos({ playlistId: PLAYLIST_3, setPlayList: setPlayList_3 })
-    fetchYoutubePlaylistVideos({ playlistId: PLAYLIST_4, setPlayList: setPlayList_4 })
+    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_1, setPlayList: setPlayList_1 })
+    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_2, setPlayList: setPlayList_2 })
+    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_3, setPlayList: setPlayList_3 })
+    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_4, setPlayList: setPlayList_4 })
   }, [])
 
   const playlists = [
@@ -66,7 +63,6 @@ function VideoPage() {
     </>
   )
 }
-
 export default VideoPage
 
 // https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=5&pageToken=EAAaBlBUOkNBVQ&playlistId=PLPKGUz9dF9sLHRvV9ENks8WQrWNQsb1SD&key=AIzaSyBEUVRN522VqnGAxtZLtq9d9yYejaE05T8
