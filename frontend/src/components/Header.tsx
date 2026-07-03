@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { Menu } from 'lucide-react'
-import { memo, useRef } from 'react'
+import { memo } from 'react'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,6 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu'
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { ROOT_HOME } from '../routes/path'
 import { ROUTES } from '../routes/path'
 
@@ -88,14 +90,6 @@ const tabs: NavItem[] = [
 const desktopTabs = [tabs[2], tabs[3], tabs[0], tabs[4], tabs[1]]
 
 const Header = () => {
-  const sideBarRef = useRef<HTMLElement | null>(null)
-  const overlayRef = useRef<HTMLDivElement | null>(null)
-
-  const handleToggleSidebar = () => {
-    sideBarRef.current?.classList.toggle('right-0')
-    overlayRef.current?.classList.toggle('hidden')
-  }
-
   return (
     <header className='bg-white h-20 content-center z-10 shadow-md flex-none px-2'>
       <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 lg:px-0'>
@@ -110,9 +104,46 @@ const Header = () => {
             </div>
           </span>
         </div>
-        <button className='block md:hidden' onClick={handleToggleSidebar}>
-          <Menu size={30} color='purple' />
-        </button>
+        {/* mobile menu */}
+        <Sheet>
+          <SheetTrigger aria-label='Menu' className='block md:hidden' type='button'>
+            <Menu size={30} color='purple' />
+          </SheetTrigger>
+          <SheetContent
+            side='right'
+            className='w-56 gap-0 overflow-auto bg-white p-0 text-main-color data-[side=right]:w-56 sm:max-w-56'
+            showCloseButton={false}
+          >
+            <SheetTitle className='sr-only'>Menu</SheetTitle>
+            <Accordion className='w-full' multiple>
+              {tabs.map(tab => (
+                'link' in tab ? (
+                  <SheetClose key={tab.name} render={<Link to={tab.link} />} nativeButton={false} className='block p-2 text-main-color hover:bg-gray-200'>
+                    {tab.name}
+                  </SheetClose>
+                ) : (
+                  <AccordionItem key={tab.name} value={tab.name} className='border-0'>
+                    <AccordionTrigger className='p-2 font-semibold text-main-color hover:no-underline'>
+                      <span>{tab.name}</span>
+                    </AccordionTrigger>
+                    <AccordionContent className='pb-0 [&_a]:no-underline'>
+                      {tab.children.map(child => (
+                        <SheetClose
+                          key={child.link}
+                          render={<Link to={child.link} />}
+                          nativeButton={false}
+                          className='block p-2 text-main-color hover:bg-gray-200'
+                        >
+                          {child.name}
+                        </SheetClose>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                )
+              ))}
+            </Accordion>
+          </SheetContent>
+        </Sheet>
         {/* desktop menu */}
         <NavigationMenu
           render={<div />}
@@ -136,9 +167,7 @@ const Header = () => {
                     <NavigationMenuTrigger className='h-auto rounded-none p-0 font-bold text-main-color hover:bg-transparent focus:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent data-popup-open:bg-transparent data-popup-open:hover:bg-transparent'>
                       <span>{tab.name}</span>
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent
-                      className='w-max min-w-44 rounded-md border border-gray-300 bg-white p-1 text-main-color shadow-lg'
-                    >
+                    <NavigationMenuContent className='w-max min-w-44 rounded-md border border-gray-300 bg-white p-1 text-main-color shadow-lg'>
                       {tab.children.map(child => (
                         <NavigationMenuLink
                           key={child.link}
@@ -157,34 +186,6 @@ const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
-      {/* right sidebar */}
-      <div
-        ref={overlayRef}
-        onClick={handleToggleSidebar} className='fixed hidden top-20 right-0 left-0 bottom-0 bg-[rgba(0,0,0,.5)]'
-      />
-      {/* mobile menu */}
-      <aside ref={sideBarRef} className='fixed bg-white shadow-lg overflow-auto top-20 -right-56 h-screen w-56 z-99 transition-all duration-500'>
-        {
-          tabs.map(tab => (
-            <div key={tab.name}>
-              {'link' in tab ? (
-                <Link className='block text-main-color p-2 hover:bg-gray-200' to={tab.link} onClick={handleToggleSidebar}>{tab.name}</Link>
-              ) : (
-                <>
-                  <button className='p-2 font-semibold'>
-                    <span>{tab.name}</span>
-                  </button>
-                  {tab.children.map(children => (
-                    <Link to={children.link} key={children.link} onClick={handleToggleSidebar} className='block text-main-color p-2 hover:bg-gray-200'>
-                      {children.name}
-                    </Link>
-                  ))}
-                </>
-              )}
-            </div>
-          ))
-        }
-      </aside>
     </header>
   )
 }
