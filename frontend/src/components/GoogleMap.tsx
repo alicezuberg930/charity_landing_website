@@ -1,6 +1,6 @@
-import { memo, type ReactElement } from "react"
+import { memo } from "react"
 
-const GoogleMap = (): ReactElement => {
+const GoogleMap = () => {
   return (
     <div className='my-20 w-full max-h-125 aspect-video'>
       <iframe

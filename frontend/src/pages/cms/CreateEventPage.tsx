@@ -1,14 +1,10 @@
-import { useState } from 'react'
-import CustomImagePicker from '../../components/CustomImagePicker'
+import { useState, type FormEvent } from 'react'
+import CustomImagePicker, { type PickedImage } from '../../components/CustomImagePicker'
 import { useUploadFileHook } from '../../hooks/file.hook'
 import { useCreateEventHook } from '../../hooks/event.hook'
 import CustomSwitch from '../../components/CustomSwitch'
 import LoadingOverlay from '../../components/LoadingOverlay'
-
-type PickedImage = {
-  file: File | null
-  url: string
-}
+import type { EventPayload } from '@/@types/event'
 
 const CreateEventPage = () => {
   const [isProcessing, setIsProcessing] = useState(false)
@@ -17,7 +13,7 @@ const CreateEventPage = () => {
   const create = useCreateEventHook()
   const [isActive, setIsActive] = useState(false)
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsProcessing(true)
     let imageUrl = ""
@@ -33,7 +29,7 @@ const CreateEventPage = () => {
         })
       })
     }
-    const event = { isActive, image: imageUrl }
+    const event: EventPayload = { isActive, image: imageUrl }
     create.mutate({ event }, {
       onSettled(_) { setIsProcessing(false) }
     })

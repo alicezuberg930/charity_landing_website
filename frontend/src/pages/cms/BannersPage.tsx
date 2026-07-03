@@ -1,10 +1,9 @@
 import { Link } from "@tanstack/react-router"
 import { useDeleteBannerHook, useGetBannersHook } from "../../hooks/banner.hook"
-import { CirclePlus, Pencil, Trash2 } from "lucide-react"
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { CirclePlus, Pencil } from "lucide-react"
 import LoadingShimmerList from "../../components/LoadingShimmerList"
 import { ROUTES } from "../../routes/path"
+import DeleteConfirmPopover from "../../components/DeleteConfirmPopover"
 
 const BannersPage = () => {
     const { data: banners, isLoading } = useGetBannersHook()
@@ -15,18 +14,7 @@ const BannersPage = () => {
     }
 
     const handleDelete = (id) => {
-        withReactContent(Swal).fire({
-            title: 'Bạn có chắc chắn không?',
-            text: 'Bạn sẽ không thể đảo ngược hành động',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa',
-            cancelButtonText: 'Hủy'
-        }).then(result => {
-            if (result.isConfirmed) remove.mutate({ id })
-        })
+        remove.mutate({ id })
     }
 
     return (
@@ -92,9 +80,7 @@ const BannersPage = () => {
 
                                             <td className='px-3 py-2'>
                                                 <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                                                    <button className='bg-main-color p-3 rounded-lg' title='Xóa' onClick={() => handleDelete(banner._id)}>
-                                                        <Trash2 size={16} color='#fff' />
-                                                    </button>
+                                                    <DeleteConfirmPopover onConfirm={() => handleDelete(banner._id)} />
 
                                                     <Link to={ROUTES.banner.edit(banner._id)} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
                                                         <Pencil size={16} color='#fff' />

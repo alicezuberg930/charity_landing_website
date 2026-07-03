@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import PlayListSlider from '@/components/PlayListSlider'
 import Section from '@/components/Section'
 import { getYoutubePlaylistVideos } from '@/services/api.service'
 import { showResponseError } from '@/lib/utils'
 import { playlistIds } from '@/lib/constants'
+
+type FetchYoutubePlaylistVideosParams = {
+  playlistId: string
+  setPlayList: Dispatch<SetStateAction<string[]>>
+}
 
 function VideoPage() {
   const [playList_1, setPlayList_1] = useState<string[]>([])
@@ -11,11 +16,11 @@ function VideoPage() {
   const [playList_3, setPlayList_3] = useState<string[]>([])
   const [playList_4, setPlayList_4] = useState<string[]>([])
 
-  const fetchYoutubePlaylistVideos = async ({ playlistId, setPlayList }) => {
+  const fetchYoutubePlaylistVideos = async ({ playlistId, setPlayList }: FetchYoutubePlaylistVideosParams) => {
     try {
       const response = await getYoutubePlaylistVideos({ playlistId })
       let contentDetails: string[] = []
-      response.items.map(item => contentDetails.push(item.contentDetails.videoId))
+      response.items.forEach(item => contentDetails.push(item.contentDetails.videoId))
       setPlayList([...new Set(contentDetails)])
     } catch (error) {
       showResponseError(error)

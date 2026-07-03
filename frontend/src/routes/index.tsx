@@ -1,8 +1,25 @@
 import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterProvider } from "@tanstack/react-router"
+import { lazy, Suspense, type ComponentType } from "react"
 import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
-import { UpdateCreatePostPage, UpdateCreateBannerPage, LoginPage, PostsPage, EventsPage, CreateEventPage, AdminPage, InformationPage, BannersPage } from '../pages/cms'
 import { ROOT_CMS } from "./path"
 import { queryClient } from "@/components/QueryClientProvider"
+import LoadingShimmerList from "@/components/LoadingShimmerList"
+
+const LoginPage = lazy(() => import('../pages/cms/LoginPage'))
+const AdminPage = lazy(() => import('../pages/cms/AdminPage'))
+const PostsPage = lazy(() => import('../pages/cms/PostsPage'))
+const UpdateCreatePostPage = lazy(() => import('../pages/cms/UpdateCreatePostPage'))
+const BannersPage = lazy(() => import('../pages/cms/BannersPage'))
+const UpdateCreateBannerPage = lazy(() => import('../pages/cms/UpdateCreateBannerPage'))
+const EventsPage = lazy(() => import('../pages/cms/EventsPage'))
+const CreateEventPage = lazy(() => import('../pages/cms/CreateEventPage'))
+const InformationPage = lazy(() => import('../pages/cms/InformationPage'))
+
+const lazyRoute = (Component: ComponentType) => () => (
+    <Suspense fallback={<LoadingShimmerList />}>
+        <Component />
+    </Suspense>
+)
 
 const rootRoute = createRootRoute({
     component: Outlet,
@@ -11,7 +28,7 @@ const rootRoute = createRootRoute({
 const loginRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: '/login',
-    component: LoginPage,
+    component: lazyRoute(LoginPage),
 })
 
 const publicRoute = createRoute({
@@ -49,23 +66,23 @@ const publicChildRoutes = [
 const cmsRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: ROOT_CMS,
-    component: AdminPage,
+    component: lazyRoute(AdminPage),
 })
 
 const cmsChildRoutes = [
     createRoute({ getParentRoute: () => cmsRoute, path: '/', component: () => <Navigate to='/cms/post/list' replace /> }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'post', component: () => <Navigate to='/cms/post/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/list', component: PostsPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/new', component: UpdateCreatePostPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/edit/$id', component: UpdateCreatePostPage }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'post/list', component: lazyRoute(PostsPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'post/new', component: lazyRoute(UpdateCreatePostPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'post/edit/$id', component: lazyRoute(UpdateCreatePostPage) }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'banner', component: () => <Navigate to='/cms/banner/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/list', component: BannersPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/new', component: UpdateCreateBannerPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/edit/$id', component: UpdateCreateBannerPage }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/list', component: lazyRoute(BannersPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/new', component: lazyRoute(UpdateCreateBannerPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/edit/$id', component: lazyRoute(UpdateCreateBannerPage) }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'event', component: () => <Navigate to='/cms/event/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'event/list', component: EventsPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'event/new', component: CreateEventPage }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'information', component: InformationPage }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'event/list', component: lazyRoute(EventsPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'event/new', component: lazyRoute(CreateEventPage) }),
+    createRoute({ getParentRoute: () => cmsRoute, path: 'information', component: lazyRoute(InformationPage) }),
 ]
 
 const routeTree = rootRoute.addChildren([

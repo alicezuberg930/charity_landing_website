@@ -12,4 +12,20 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          router: ['@tanstack/react-router'],
+          query: ['@tanstack/react-query'],
+          ui: ['@base-ui/react', 'lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
+          animation: ['framer-motion'],
+          carousel: ['embla-carousel-react'],
+          editor: ['ckeditor5', '@ckeditor/ckeditor5-react'],
+          charts: ['recharts'],
+        },
+      },
+    },
+  }
 })

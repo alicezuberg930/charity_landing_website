@@ -1,9 +1,10 @@
 import { useLocation } from '@tanstack/react-router'
 import HelmetSEO from '../../components/HelmetSEO'
+import type { Post } from '@/@types/post'
 
 const ActivityDetailsPage = () => {
   const location = useLocation()
-  const { details } = location.state as unknown as { details: any }
+  const { details } = location.state as unknown as { details: Post }
   // const { slug } = useParams()
 
   return (
@@ -34,7 +35,7 @@ const ActivityDetailsPage = () => {
             <hr className='block my-4'></hr>
           </div>
           {
-            details.images.map(image => {
+            details.images.map((image) => {
               return (
                 <div key={image} className='rounded-2xl mx-auto my-4 aspect-video w-full md:w-3/5 relative image-container'>
                   <img src={image} className='h-full w-full object-cover rounded-xl' alt={image} />

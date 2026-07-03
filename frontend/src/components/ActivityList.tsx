@@ -1,7 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import { slugify } from "../lib/utils"
+import type { Post } from '@/@types/post'
 
-const ActivityList = ({ posts }) => {
+type ActivityListProps = {
+  posts: Post[]
+}
+
+const ActivityList = ({ posts }: ActivityListProps) => {
   return (
     <div className='flex flex-wrap mb-4 -mx-2.5'>
       {
@@ -9,7 +14,11 @@ const ActivityList = ({ posts }) => {
           return (
             <div className='w-full p-2.5 sm:w-1/2 lg:w-1/3' key={i}>
               <div className='w-full'>
-                <Link className='block relative' to={`/${post.category}/${slugify(post.title)}-${post._id}`} state={{ details: post } as any}>
+                <Link
+                  className='block relative'
+                  to={`/${post.category}/${slugify(post.title)}-${post._id}`}
+                  state={(prev) => ({ ...prev, details: post })}
+                >
                   <div className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-2 z-[1]'>
                     <span className='text-white text-xs'>{post.date}</span>
                   </div>

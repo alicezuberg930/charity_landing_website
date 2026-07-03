@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
-import CustomCKEditor from './CustomCKEditor'
+import { lazy, useEffect, useState, type FormEvent } from 'react'
 import CustomDatePicker from './CustomDatePicker'
-import CustomImagePicker from './CustomImagePicker'
+import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreatePostHook, useUpdatePostHook } from '../hooks/post.hook'
 import LoadingOverlay from './LoadingOverlay'
+import type { Post, PostPayload } from '@/@types/post'
+const CustomCKEditor = lazy(() => import('./CustomCKEditor'))
 
-type PickedImage = {
-    file: File | null
-    url: string
+type HandlePostBodyProps = {
+    selectedPost?: Post
 }
 
-const HandlePostBody = ({ selectedPost }) => {
+const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
     const [isProcessing, setIsProcessing] = useState(false)
-    const [description, setDescription] = useState(null)
+    const [description, setDescription] = useState<string | null>(null)
     const [cover, setCover] = useState<PickedImage[]>([])
     const upload = useUploadFileHook()
     const [images, setImages] = useState<PickedImage[]>([])
@@ -33,12 +33,12 @@ const HandlePostBody = ({ selectedPost }) => {
         }
     }, [selectedPost])
 
-    const handleSubmitForm = async (e) => {
+    const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setIsProcessing(true)
         const form = new FormData(e.currentTarget)
-        const entries = Object.fromEntries(form.entries())
-        let coverUrl = cover[0].url
+        const entries: Record<string, FormDataEntryValue> = Object.fromEntries(form.entries())
+        let coverUrl = cover[0]?.url ?? ''
         let imageUrls = images.map(image => image.url)
         if (cover.length > 0 && cover[0].file != null) {
             const coverForm = new FormData()
@@ -64,7 +64,7 @@ const HandlePostBody = ({ selectedPost }) => {
                 })
             })
         }
-        const post = { ...entries, description, cover: coverUrl, images: imageUrls }
+        const post: PostPayload = { ...entries, description, cover: coverUrl, images: imageUrls }
         if (selectedPost === undefined) {
             create.mutate({ post }, { onSettled(_) { setIsProcessing(false) } })
         } else {

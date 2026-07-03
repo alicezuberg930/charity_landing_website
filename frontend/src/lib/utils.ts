@@ -1,25 +1,23 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { toast } from "sonner"
+import { HttpError } from './repository/http-error'
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-import { isAxiosError } from "axios"
-import { toast } from "sonner"
-
 export const showResponseError = (error: unknown) => {
-  if (isAxiosError(error)) {
-    if (error.code === "ERR_NETWORK") {
-      toast.error(error.message)
+  if (error instanceof HttpError) {
+    const data = error.data as { message?: unknown } | undefined
+    const err = data?.message ?? error.message
+    if (Array.isArray(err)) {
+      err.forEach(e => toast.error(String(e)))
     } else {
-      const err = error.response?.data.message
-      if (Array.isArray(err)) {
-        err.forEach(e => toast.error(e))
-      } else {
-        toast.error(err)
-      }
+      toast.error(String(err))
     }
+  } else if (error instanceof Error) {
+    toast.error(error.message)
   } else {
     toast.error("Lỗi không xác định")
   }

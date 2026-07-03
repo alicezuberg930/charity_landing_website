@@ -1,100 +1,128 @@
-import axios from "axios"
-import axioInstance from "../configs/axios.config"
-import { API } from "../lib/api"
+import { httpClient } from '@/lib/repository/http-client'
+import type {
+    BannerDetailsResponse,
+    BannerListResponse,
+    BannerMutationResponse,
+    CreateBannerParams,
+    DeleteBannerParams,
+    GetBannerDetailsParams,
+    GetBannersParams,
+    UpdateBannerParams,
+} from '@/@types/banner'
+import type {
+    CreateEventParams,
+    DeleteEventParams,
+    EventListResponse,
+    EventMutationResponse,
+    GetEventsParams,
+    UpdateEventParams,
+} from '@/@types/event'
+import type { UploadFileParams, UploadFileResponse } from '@/@types/file'
+import type {
+    InformationMutationResponse,
+    InformationResponse,
+    UpdateInformationParams,
+} from '@/@types/information'
+import type {
+    CreatePostParams,
+    DeletePostParams,
+    GetPostDetailsParams,
+    GetPostsParams,
+    PostDetailsResponse,
+    PostListResponse,
+    PostMutationResponse,
+    UpdatePostParams,
+} from '@/@types/post'
+import type {
+    YoutubePlaylistVideosParams,
+    YoutubePlaylistVideosResponse,
+} from '@/@types/youtube'
+import { API } from '../lib/api'
 
 // common
-export const uploadFile = async ({ file }) => {
-    const response = await axioInstance({ url: API.UPLOAD_FILE, method: "POST", data: file })
-    return response.data
+export const uploadFile = async ({ file }: UploadFileParams) => {
+    return httpClient.post<UploadFileResponse>(API.UPLOAD_FILE, file)
 }
 
 // banner
-export const createBanner = async ({ banner }) => {
-    const response = await axioInstance({ url: API.BANNERS, method: "POST", data: banner })
-    return response.data
+export const createBanner = async ({ banner }: CreateBannerParams) => {
+    return httpClient.post<BannerMutationResponse>(API.BANNERS, banner)
 }
 
-export const updateBanner = async ({ id, banner }) => {
-    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "PATCH", data: banner })
-    return response.data
+export const updateBanner = async ({ id, banner }: UpdateBannerParams) => {
+    return httpClient.patch<BannerMutationResponse>(`${API.BANNERS}/${id}`, banner)
 }
 
-export const deleteBanner = async ({ id }) => {
-    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "DELETE" })
-    return response.data
+export const deleteBanner = async ({ id }: DeleteBannerParams) => {
+    return httpClient.delete<BannerMutationResponse>(`${API.BANNERS}/${id}`)
 }
 
-export const getBanners = async (params) => {
-    const response = await axioInstance({ url: API.BANNERS, method: "GET", params })
-    return response.data
+export const getBanners = async (params?: GetBannersParams) => {
+    return httpClient.get<BannerListResponse>(API.BANNERS, params)
 }
 
-export const getBannerDetails = async ({ id }) => {
-    const response = await axioInstance({ url: `${API.BANNERS}/${id}`, method: "GET" })
-    return response.data
+export const getBannerDetails = async ({ id }: GetBannerDetailsParams) => {
+    return httpClient.get<BannerDetailsResponse>(`${API.BANNERS}/${id}`)
 }
 
-// bài đăng
-export const createPost = async ({ post }) => {
-    const response = await axioInstance({ url: API.POSTS, method: "POST", data: post })
-    return response.data
+// post
+export const createPost = async ({ post }: CreatePostParams) => {
+    return httpClient.post<PostMutationResponse>(API.POSTS, post)
 }
 
-export const updatePost = async ({ id, post }) => {
-    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "PATCH", data: post })
-    return response.data
+export const updatePost = async ({ id, post }: UpdatePostParams) => {
+    return httpClient.patch<PostMutationResponse>(`${API.POSTS}/${id}`, post)
 }
 
-export const deletePost = async ({ id }) => {
-    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "DELETE" })
-    return response.data
+export const deletePost = async ({ id }: DeletePostParams) => {
+    return httpClient.delete<PostMutationResponse>(`${API.POSTS}/${id}`)
 }
 
-export const getPosts = async ({ filter }) => {
-    const response = await axioInstance({ url: API.POSTS, method: "GET", params: filter })
-    return response.data
+export const getPosts = async ({ filter }: GetPostsParams = {}) => {
+    return httpClient.get<PostListResponse>(API.POSTS, filter)
 }
 
-export const getPostDetails = async ({ id }) => {
-    const response = await axioInstance({ url: `${API.POSTS}/${id}`, method: "GET" })
-    return response.data
+export const getPostDetails = async ({ id }: GetPostDetailsParams) => {
+    return httpClient.get<PostDetailsResponse>(`${API.POSTS}/${id}`)
 }
 
-// thông tin website
-export const updateInformation = async ({ information }) => {
-    const response = await axioInstance({ url: API.INFORMATION, method: "POST", data: information })
-    return response.data
+// information
+export const updateInformation = async ({ information }: UpdateInformationParams) => {
+    return httpClient.post<InformationMutationResponse>(API.INFORMATION, information)
 }
 
 export const getInformation = async () => {
-    const response = await axioInstance({ url: API.INFORMATION, method: "GET" })
-    return response.data
+    return httpClient.get<InformationResponse>(API.INFORMATION)
 }
 
-// sự kiện
-export const createEvent = async ({ event }) => {
-    const response = await axioInstance({ url: API.EVENTS, method: "POST", data: event })
-    return response.data
+// event
+export const createEvent = async ({ event }: CreateEventParams) => {
+    return httpClient.post<EventMutationResponse>(API.EVENTS, event)
 }
 
-export const updateEvent = async ({ id, event }) => {
-    const response = await axioInstance({ url: `${API.EVENTS}/${id}`, method: "PATCH", data: event })
-    return response.data
+export const updateEvent = async ({ id, event }: UpdateEventParams) => {
+    return httpClient.patch<EventMutationResponse>(`${API.EVENTS}/${id}`, event)
 }
 
-export const deleteEvent = async ({ id }) => {
-    const response = await axioInstance({ url: `${API.EVENTS}/${id}`, method: "DELETE" })
-    return response.data
+export const deleteEvent = async ({ id }: DeleteEventParams) => {
+    return httpClient.delete<EventMutationResponse>(`${API.EVENTS}/${id}`)
 }
 
-export const getEvents = async ({ filter }) => {
-    const response = await axioInstance({ url: API.EVENTS, method: "GET", params: filter })
-    return response.data
+export const getEvents = async ({ filter }: GetEventsParams = {}) => {
+    return httpClient.get<EventListResponse>(API.EVENTS, filter)
 }
 
-
-export const getYoutubePlaylistVideos = async ({ playlistId }) => {
+export const getYoutubePlaylistVideos = async ({ playlistId }: YoutubePlaylistVideosParams) => {
     const googleApiKey = import.meta.env.REACT_APP_GOOGLE_API_KEY ?? import.meta.env.VITE_GOOGLE_API_KEY
-    const response = await axios.get(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=20&playlistId=${playlistId}&key=${googleApiKey}`)
-    return response.data
+
+    return httpClient.get<YoutubePlaylistVideosResponse>(
+        'https://youtube.googleapis.com/youtube/v3/playlistItems',
+        {
+            part: 'snippet,contentDetails',
+            maxResults: 20,
+            playlistId,
+            key: googleApiKey,
+        },
+        { credentials: 'omit' }
+    )
 }

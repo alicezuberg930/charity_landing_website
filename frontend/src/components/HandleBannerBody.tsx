@@ -4,20 +4,10 @@ import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreateBannerHook, useUpdateBannerHook } from '../hooks/banner.hook'
 import CustomSwitch from './CustomSwitch'
 import LoadingOverlay from './LoadingOverlay'
-
-type Banner = {
-    _id: string
-    image: string
-    isActive: boolean
-    order?: string | number
-}
+import type { Banner, BannerPayload } from '@/@types/banner'
 
 type HandleBannerBodyProps = {
     selectedBanner?: Banner
-}
-
-type UploadFileResponse = {
-    data: string[]
 }
 
 const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
@@ -45,14 +35,14 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
             imageForm.set("files", image[0].file)
             await new Promise<void>(resolve => {
                 upload.mutate({ file: imageForm }, {
-                    onSuccess(data: UploadFileResponse) {
+                    onSuccess(data) {
                         imageUrl = data.data[0]
                         resolve()
                     }
                 })
             })
         }
-        const banner = { ...entries, image: imageUrl, isActive }
+        const banner: BannerPayload = { ...entries, image: imageUrl, isActive }
         if (selectedBanner === undefined) {
             create.mutate({ banner }, { onSettled() { setIsProcessing(false) } })
         } else {

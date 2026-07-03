@@ -36,6 +36,7 @@ const createQueryClient = () => new QueryClient({
                     if (error.status === 304) {
                         toast.error('Content not modified!')
                     }
+                    toast.error(error.message)
                 }
             },
         },

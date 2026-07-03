@@ -3,10 +3,20 @@ import { createBanner, deleteBanner, getBannerDetails, getBanners, updateBanner 
 import { toast } from "sonner"
 import { API } from "../lib/api"
 import { showResponseError } from "../lib/utils"
+import type {
+    BannerFilter,
+    BannerListResponse,
+    BannerDetailsResponse,
+    BannerMutationResponse,
+    CreateBannerParams,
+    DeleteBannerParams,
+    GetBannerDetailsParams,
+    UpdateBannerParams,
+} from "@/@types/banner"
 
-export const useGetBannersHook = (params?: any) => {
-    return useQuery({
-        queryKey: [API.BANNERS],
+export const useGetBannersHook = (params?: BannerFilter) => {
+    return useQuery<BannerListResponse>({
+        queryKey: [API.BANNERS, params],
         queryFn: () => getBanners(params),
         placeholderData: (previousData, _) => previousData,
     })
@@ -14,8 +24,8 @@ export const useGetBannersHook = (params?: any) => {
 
 export const useDeleteBannerHook = () => {
     const queryClient = useQueryClient()
-    return useMutation<any, any, any>({
-        mutationFn: ({ id }: any) => deleteBanner({ id }),
+    return useMutation<BannerMutationResponse, unknown, DeleteBannerParams>({
+        mutationFn: ({ id }) => deleteBanner({ id }),
         onSuccess(data) {
             toast.success(data.message)
             queryClient.invalidateQueries({ queryKey: [API.BANNERS] })
@@ -28,8 +38,8 @@ export const useDeleteBannerHook = () => {
 
 export const useCreateBannerHook = () => {
     const queryClient = useQueryClient()
-    return useMutation<any, any, any>({
-        mutationFn: ({ banner }: any) => createBanner({ banner }),
+    return useMutation<BannerMutationResponse, unknown, CreateBannerParams>({
+        mutationFn: ({ banner }) => createBanner({ banner }),
         onSuccess(data) {
             toast.success(data.message)
             queryClient.invalidateQueries({ queryKey: [API.BANNERS] })
@@ -42,8 +52,8 @@ export const useCreateBannerHook = () => {
 
 export const useUpdateBannerHook = () => {
     const queryClient = useQueryClient()
-    return useMutation<any, any, any>({
-        mutationFn: ({ id, banner }: any) => updateBanner({ id, banner }),
+    return useMutation<BannerMutationResponse, unknown, UpdateBannerParams>({
+        mutationFn: ({ id, banner }) => updateBanner({ id, banner }),
         onSuccess(data) {
             toast.success(data.message)
             queryClient.invalidateQueries({ queryKey: [API.BANNERS] })
@@ -54,10 +64,11 @@ export const useUpdateBannerHook = () => {
     })
 }
 
-export const useGetBannerDetailsHook = ({ id }: any) => {
-    return useQuery({
+export const useGetBannerDetailsHook = ({ id }: GetBannerDetailsParams) => {
+    return useQuery<BannerDetailsResponse>({
         queryKey: [API.BANNERS, id],
         queryFn: () => getBannerDetails({ id }),
+        enabled: Boolean(id),
         placeholderData: (previousData, _) => previousData,
     })
 }
