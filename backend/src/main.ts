@@ -20,7 +20,7 @@ async function bootstrap() {
   // cors configurations - allow origins from environment variable or defaults
   const allowedOrigins = [
     'http://localhost:5173',
-    'https://anhsangtuthien.com',
+    'https://www.anhsangtuthien.com',
     'https://webtinhthuong.onrender.com',
   ]  
   const corsOrigins = configService.get<string>('CORS_ORIGINS')
