@@ -1,14 +1,48 @@
-import React from 'react'
 import Section from '../../components/Section'
+import { Tree, TreeNode } from 'react-organizational-chart'
+
+const StructureLabel = ({ title }: { title: string }) => (
+  <div className='rounded-2xl border border-main-color bg-white px-4 py-3 text-center text-sm font-semibold text-slate-900 shadow-sm'>
+    {title}
+  </div>
+)
 
 const StructurePage = () => {
   return (
     <>
       <Section title='CƠ CẤU TỔ CHỨC CỦA NHÓM' />
       <div className='space-y-12 mb-6'>
-        <div className=''>
-          <div className='image-container rounded-2xl relative mb-4 aspect-video mx-auto max-w-screen-md'>
-            <img src='./assets/organizational_chart.jpg' className='w-full h-full object-center rounded-xl' alt='structure' />
+        <div className='overflow-x-auto py-6'>
+          <div className='mx-auto max-w-screen-lg'>
+            <Tree
+              lineWidth={'3px'}
+              lineColor='#8b5cf6'
+              lineBorderRadius={'10px'}
+              label={<StructureLabel title='Trưởng Nhóm' />}
+            >
+              <TreeNode
+                label={<StructureLabel title='Trợ Lý' />}
+              />
+              <TreeNode
+                label={<StructureLabel title='Dẫn Chương Trình' />}
+              />
+              <TreeNode
+                label={<StructureLabel title='Quản Trị Web' />}
+              />
+              <TreeNode
+                label={<StructureLabel title='Quản Lý Nhân Sự' />}
+              >
+                <TreeNode
+                  label={<StructureLabel title='Thành Viên' />}
+                />
+              </TreeNode>
+              <TreeNode
+                label={<StructureLabel title='Thiết Kế & Thư Ký' />}
+              />
+              <TreeNode
+                label={<StructureLabel title='Kỹ Thuật' />}
+              />
+            </Tree>
           </div>
         </div>
         <div className='flex gap-8 flex-col md:flex-row'>

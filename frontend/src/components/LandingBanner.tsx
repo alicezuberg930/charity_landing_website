@@ -8,18 +8,9 @@ import {
 } from '@/components/ui/carousel'
 import { useGetBannersHook } from '../hooks/banner.hook'
 import LoadingShimmerList from './LoadingShimmerList'
+import type { SliderProps } from './custom-carousel'
 
-type BannerSliderProps = {
-  children: ReactNode
-  slidesToShow?: number
-  autoplay?: boolean
-  autoplaySpeed?: number
-  loop?: boolean
-  showDot?: boolean
-  showButton?: boolean
-}
-
-const BannerSlider = ({
+const CustomSlider = ({
   children,
   slidesToShow = 1,
   autoplay = false,
@@ -27,7 +18,7 @@ const BannerSlider = ({
   loop = true,
   showDot = true,
   showButton = true
-}: BannerSliderProps) => {
+}: SliderProps) => {
   const [api, setApi] = useState<CarouselApi>()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
@@ -110,31 +101,30 @@ const BannerSlider = ({
   )
 }
 
+const settings = {
+  slidesToShow: 1,
+  autoplay: false,
+  autoplaySpeed: 3000,
+  loop: true,
+  showDot: true,
+} as SliderProps
+
 const LandingBanner = () => {
-  const bannerSettings = {
-    slidesToShow: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    loop: true,
-    showDot: true,
-  }
   const { data: banners, isLoading } = useGetBannersHook({ isActive: true })
 
   return (
     <>
-      {isLoading ? <LoadingShimmerList /> :
-        <BannerSlider {...bannerSettings}>
-          {
-            banners && banners.data.map(banner => {
-              return (
-                <div key={banner._id} className='aspect-video w-full max-h-[75vh]'>
-                  <img className='object-center h-full w-full' src={banner.image} alt={banner.image} />
-                </div>
-              )
-            })
-          }
-        </BannerSlider>
-      }
+      {isLoading ? (
+        <LoadingShimmerList />
+      ) : (
+        <CustomSlider {...settings}>
+          {banners?.data.map(banner => (
+            <div key={banner._id} className='aspect-video'>
+              <img className='object-center h-full w-full' src={banner.image} alt={banner.image} />
+            </div>
+          ))}
+        </CustomSlider>
+      )}
     </>
   )
 }

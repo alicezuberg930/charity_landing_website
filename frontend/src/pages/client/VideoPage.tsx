@@ -55,33 +55,14 @@ function VideoPage() {
 
   return (
     <>
-      {
-        playlists.map(playlist => {
-          return (
-            <div key={playlist.title}>
-              <Section title={playlist.title} />
-              <PlayListSlider videos={playlist.playlist} />
-            </div>
-          )
-        })
-      }
+      {playlists.map(playlist => (
+        <div key={playlist.title}>
+          <Section title={playlist.title} />
+          <PlayListSlider videos={playlist.playlist} />
+        </div>
+      ))}
     </>
   )
 }
+
 export default VideoPage
-
-// https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=5&pageToken=EAAaBlBUOkNBVQ&playlistId=PLPKGUz9dF9sLHRvV9ENks8WQrWNQsb1SD&key=AIzaSyBEUVRN522VqnGAxtZLtq9d9yYejaE05T8
-
-// {
-//   "kind": "youtube#playlistItemListResponse",
-//   "etag": etag,
-//   "nextPageToken": string,
-//   "prevPageToken": string,
-//   "pageInfo": {
-//     "totalResults": integer,
-//     "resultsPerPage": integer
-//   },
-//   "items": [
-//     playlistItem Resource
-//   ]
-// }

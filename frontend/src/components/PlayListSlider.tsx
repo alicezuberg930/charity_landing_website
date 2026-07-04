@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import CustomSlider from './CustomSlider'
 
 const PlayListSlider = ({ videos }) => {
@@ -22,29 +22,21 @@ const PlayListSlider = ({ videos }) => {
 
   return (
     <div className='my-4 -mx-2'>
-      {
-        <CustomSlider {...settings}>
-          {
-            videos.map((video, i) => {
-              const videoId = 'https://www.youtube-nocookie.com/embed/' + video
-              return (
-                <div key={i} className='px-2'>
-                  <iframe
-                    title={video}
-                    key={video}
-                    width={'100%'}
-                    height={'250'}
-                    src={videoId}
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                    allowFullScreen
-                    style={{ border: '0px' }}
-                  />
-                </div>
-              )
-            })
-          }
-        </CustomSlider>
-      }
+      <CustomSlider {...settings}>
+        {videos.map((video, i) => (
+          <div key={i} className='px-2'>
+            <iframe
+              title={video}
+              key={video}
+              src={`https://www.youtube-nocookie.com/embed/${video}`}
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              allowFullScreen
+              loading='lazy'
+              className='w-full h-60 border-0'
+            />
+          </div>
+        ))}
+      </CustomSlider>
     </div >
   )
 }

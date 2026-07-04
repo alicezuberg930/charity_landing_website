@@ -11,8 +11,7 @@ import {
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { ROOT_HOME } from '../routes/path'
-import { ROUTES } from '../routes/path'
+import { ROUTES, ROOT_HOME } from '../routes/path'
 
 type NavItem = {
   name: string
@@ -91,13 +90,13 @@ const desktopTabs = [tabs[2], tabs[3], tabs[0], tabs[4], tabs[1]]
 
 const Header = () => {
   return (
-    <header className='bg-white h-20 content-center z-10 shadow-md flex-none px-2'>
-      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-3 lg:px-0'>
+    <header className='bg-white h-20 content-center z-10 shadow-md flex-none'>
+      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-2 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <Link to={ROOT_HOME}>
-            <img src='./assets/logo.png' className='inline-block mr-3 w-14 h-14' alt='logo' />
+            <img src='./assets/logo.png' className='inline-block w-14 h-14' alt='logo' />
           </Link>
-          <span className='hidden md:block'>
+          <span className='hidden md:block ml-3'>
             <div className='flex flex-col items-end'>
               <h4 className='text-main-color font-bold text-2xl tracking-tighter'>ÁNH SÁNG TỪ THIỆN</h4>
               <span className='font-semibold'>Since 2010</span>
