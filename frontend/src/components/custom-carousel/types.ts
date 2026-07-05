@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 export type SliderProps = {
-    children: ReactNode
+    children?: ReactNode
     slidesToShow?: number
     autoplay?: boolean
     autoplaySpeed?: number

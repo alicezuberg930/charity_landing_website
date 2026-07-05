@@ -2,12 +2,13 @@ import { memo, useEffect, useState } from "react"
 import { Link } from "@tanstack/react-router"
 import { CircleX } from "lucide-react"
 import { useGetEventsHook } from "../hooks/event.hook"
-import { ROUTES } from '../routes/path'
+import { ROUTES } from '@/routes/path'
 import {
     Dialog,
     DialogClose,
     DialogContent,
 } from '@/components/ui/dialog'
+import { LazyLoadImage } from "./lazy-load-image"
 
 const EventOverlay = () => {
     const { data: event } = useGetEventsHook({ filter: { isActive: true } })
@@ -31,10 +32,16 @@ const EventOverlay = () => {
                         />
                     </div>
                     <Link to={ROUTES.news} className='w-full h-full'>
-                        <img
+                        <LazyLoadImage
+                            widths={[
+                                { screenWidth: 640, imageWidth: 640 },  // Phone
+                                { screenWidth: 1024, imageWidth: 1024 },  // Tablet
+                                { screenWidth: 1920, imageWidth: 1920 },  // Desktop and larger
+                            ]}
                             alt='event'
                             src={event?.data?.[0]?.image}
                             className='object-cover w-full h-full'
+                            effect='blur'
                         />
                     </Link>
                 </div>

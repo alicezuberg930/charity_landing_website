@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { ROUTES, ROOT_HOME } from '../routes/path'
+import { ROUTES, ROOT_HOME } from '@/routes/path'
 
 type NavItem = {
   name: string

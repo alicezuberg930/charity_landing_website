@@ -33,7 +33,7 @@ export default function LazyLoadImage({ placeholderSrc, effect, wrapperClassName
     const srcSet = widths ? generateSrcSet(props.src, widths) : undefined
 
     return (
-        <div ref={containerRef} className={cn("relative overflow-hidden", wrapperClassName)}>
+        <div ref={containerRef} className={cn("relative overflow-hidden h-full", wrapperClassName)}>
             {!isLoaded && placeholderSrc && (
                 <img
                     src={placeholderSrc}
@@ -58,7 +58,7 @@ export default function LazyLoadImage({ placeholderSrc, effect, wrapperClassName
                     alt={props.alt}
                     className={cn(
                         props.className,
-                        "transition-opacity duration-500 ease-in-out",
+                        "transition-all duration-500 ease-in-out",
                         isLoaded ? "opacity-100" : "opacity-0",
                         effect === 'blur' && !isLoaded && "blur-sm",
                         effect === 'black-and-white' && !isLoaded && "grayscale"

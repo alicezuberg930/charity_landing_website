@@ -4,6 +4,7 @@ import Section from '@/components/Section'
 import { getYoutubePlaylistVideos } from '@/services/api.service'
 import { showResponseError } from '@/lib/utils'
 import { playlistIds } from '@/lib/constants'
+import type { SliderProps } from '@/components/custom-carousel/types'
 
 type FetchYoutubePlaylistVideosParams = {
   playlistId: string
@@ -55,10 +56,10 @@ function VideoPage() {
 
   return (
     <>
-      {playlists.map(playlist => (
+      {playlists.map((playlist, i) => (
         <div key={playlist.title}>
           <Section title={playlist.title} />
-          <PlayListSlider videos={playlist.playlist} />
+          <PlayListSlider videoIds={playlist.playlist} />
         </div>
       ))}
     </>

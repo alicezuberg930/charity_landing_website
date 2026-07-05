@@ -1,4 +1,4 @@
-import Section from '../../components/Section'
+import Section from '@/components/Section'
 import { Tree, TreeNode } from 'react-organizational-chart'
 
 const StructureLabel = ({ title }: { title: string }) => (

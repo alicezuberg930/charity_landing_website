@@ -9,6 +9,7 @@ import {
 import { useGetBannersHook } from '../hooks/banner.hook'
 import LoadingShimmerList from './LoadingShimmerList'
 import type { SliderProps } from './custom-carousel'
+import LazyLoadImage from './lazy-load-image/LazyLoadImage'
 
 const CustomSlider = ({
   children,
@@ -120,7 +121,17 @@ const LandingBanner = () => {
         <CustomSlider {...settings}>
           {banners?.data.map(banner => (
             <div key={banner._id} className='aspect-video'>
-              <img className='object-center h-full w-full' src={banner.image} alt={banner.image} />
+              <LazyLoadImage
+                widths={[
+                  { screenWidth: 640, imageWidth: 640 },  // Phone
+                  { screenWidth: 1024, imageWidth: 1024 },  // Tablet
+                  { screenWidth: 1920, imageWidth: 1920 },  // Desktop and larger
+                ]}
+                className='object-center h-full w-full'
+                alt={banner._id}
+                src={banner.image}
+                effect='blur'
+              />
             </div>
           ))}
         </CustomSlider>

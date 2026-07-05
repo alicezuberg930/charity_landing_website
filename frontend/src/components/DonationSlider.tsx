@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/carousel'
 import Section from './Section'
 import type { SliderProps } from './custom-carousel'
+import LazyLoadImage from './lazy-load-image/LazyLoadImage'
 
 const donationItems = [
   {
@@ -47,7 +48,7 @@ const settings = {
   autoplay: true,
   autoplaySpeed: 5000,
   loop: true,
-  showDot: true,
+  showDot: false,
   showButton: true,
   responsive: [
     {
@@ -180,10 +181,10 @@ const DonationSlider = () => {
             <div className='w-full px-3' key={index}>
               <div className='bg-gray-100 rounded-md overflow-hidden'>
                 <div className='aspect-square overflow-hidden'>
-                  <img
-                    src={item.image}
-                    className='w-full h-full object-cover hover:scale-110 transition-all duration-1000'
+                  <LazyLoadImage
                     alt={item.image}
+                    className='w-full h-full object-cover hover:scale-110 transition-all duration-1000'
+                    effect='blur'
                   />
                 </div>
                 <div className='p-2'>

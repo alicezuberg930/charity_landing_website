@@ -2,7 +2,6 @@ import { Outlet } from '@tanstack/react-router'
 import { Toaster } from '@/components/ui/sonner'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import EventOverlay from '@/components/EventOverlay'
 
 const PublicPage = () => {
   return (
@@ -20,7 +19,6 @@ const PublicPage = () => {
           </div>
         </div>
       </div>
-      <EventOverlay />
       <Toaster richColors />
     </>
   )

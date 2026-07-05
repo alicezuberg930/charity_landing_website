@@ -13,13 +13,9 @@ const createQueryClient = () => new QueryClient({
             retry: (failureCount, error) => {
                 // eslint-disable-next-line no-console
                 if (import.meta.env.DEV) console.log({ failureCount, error })
-
                 if (failureCount >= 0 && import.meta.env.DEV) return false
                 if (failureCount > 3 && import.meta.env.PROD) return false
-
-                return !(
-                    error instanceof HttpError && [401, 403].includes(error.status ?? 0)
-                )
+                return !(error instanceof HttpError && [401, 403].includes(error.status ?? 0))
             },
             // With SSR, we usually want to set some default staleTime
             // above 0 to avoid refetching immediately on the client
