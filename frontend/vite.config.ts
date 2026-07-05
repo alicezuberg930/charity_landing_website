@@ -4,41 +4,75 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
+import { slugify } from './src/lib/utils.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const siteUrl = process.env.SITE_URL || 'https://anhsangtuthien.com'
 const staticRoutes = [
-    '/',
-    '/design',
-    '/photoshoot',
-    '/video',
-    '/chao-tinh-thuong',
-    '/chuong-trinh-thuong-nien',
-    '/ho-tro-hoan-canh',
-    '/tiep-suc-tri-thuc',
-    '/rule',
-    '/criteria',
-    '/structure',
-    '/contact',
-    '/news',
+  '/',
+  '/design',
+  '/photoshoot',
+  '/video',
+  '/chao-tinh-thuong',
+  '/chuong-trinh-thuong-nien',
+  '/ho-tro-hoan-canh',
+  '/tiep-suc-tri-thuc',
+  '/rule',
+  '/criteria',
+  '/structure',
+  '/contact',
+  '/news',
 ]
+const postCategories = ['chao-tinh-thuong', 'chuong-trinh-thuong-nien', 'ho-tro-hoan-canh', 'tiep-suc-tri-thuc']
+
+const escapeXml = (value: string) => value
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/'/g, '&quot;')
+  .replace(/'/g, '&apos;')
+
+const fetchPostRoutesByCategory = async (category: string): Promise<string[]> => {
+  try {
+    const response = await fetch(`https://webtinhthuong.onrender.com/api/v1/posts?category=${category}`)
+    const payload = await response.json() as { data: any }
+    const posts = payload.data ?? []
+    return posts.map((post: any) => `/${post.category}/${slugify(post.title)}-${post._id}`)
+  } catch {
+    return []
+  }
+}
+
+const getPostRoutes = async () => {
+  const allDynamicRoutes: string[] = []
+  for (const category of postCategories) {
+    const routes = await fetchPostRoutesByCategory(category)
+    allDynamicRoutes.push(...routes)
+  }
+  return allDynamicRoutes
+}
 
 export const sitemapGenerator = (): Plugin => {
-    return {
-        name: 'sitemap-generator',
-        apply: 'build',
-        writeBundle() {
-            const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticRoutes.map((route) => `<url>
-<loc>${siteUrl}${route}</loc>
+  return {
+    name: 'sitemap-generator',
+    apply: 'build',
+    async writeBundle() {
+      const postRoutes = await getPostRoutes()
+      const sitemapRoutes = [
+        ...staticRoutes,
+        ...(postRoutes.length > 0 ? postRoutes : []),
+      ]
+
+      const sitemap = `<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+${sitemapRoutes.map((route) => `<url>
+<loc>${escapeXml(`https://www.anhsangtuthien.com/${route}`)}</loc>
 </url>`).join('\n')}
 </urlset>`.trim()
 
-            fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true })
-            fs.writeFileSync(path.join(__dirname, 'dist', 'sitemap.xml'), sitemap)
-        },
-    }
+      fs.mkdirSync(path.join(__dirname, 'dist'), { recursive: true })
+      fs.writeFileSync(path.join(__dirname, 'dist', 'sitemap.xml'), sitemap)
+    },
+  }
 }
 
 // https://vite.dev/config/

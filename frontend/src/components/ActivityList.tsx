@@ -19,7 +19,7 @@ const ActivityList = ({ posts }: ActivityListProps) => {
                   to={`/${post.category}/${slugify(post.title)}-${post._id}`}
                   state={(prev) => ({ ...prev, details: post })}
                 >
-                  <div className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-2 z-[1]'>
+                  <div className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-2 z-1'>
                     <span className='text-white text-xs'>{post.date}</span>
                   </div>
 
