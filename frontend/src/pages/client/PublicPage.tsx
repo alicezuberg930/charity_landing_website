@@ -12,7 +12,7 @@ const PublicPage = () => {
           <div className='flex flex-col h-full overflow-hidden'>
             <Header />
             <div className='flex-auto overflow-y-auto overflow-x-hidden'>
-              <div className='max-w-screen-xl mx-auto px-3 lg:px-0'>
+              <div className='max-w-7xl mx-auto px-3 lg:px-0'>
                 <Outlet />
               </div>
               <Footer />

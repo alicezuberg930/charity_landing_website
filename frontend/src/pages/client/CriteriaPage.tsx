@@ -4,7 +4,7 @@ const CriteriaPage = () => {
   return (
     <>
       <Section title='TIÊU CHÍ NHÓM' />
-      <div className='space-y-12 mb-6 max-w-screen-md mx-auto'>
+      <div className='space-y-12 mb-6 max-w-3xl mx-auto'>
         <div className='shadow-md rounded-lg overflow-hidden'>
           <div className='overflow-hidden'>
             <img className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'

@@ -13,7 +13,7 @@ const StructurePage = () => {
       <Section title='CƠ CẤU TỔ CHỨC CỦA NHÓM' />
       <div className='space-y-12 mb-6'>
         <div className='overflow-x-auto py-6'>
-          <div className='mx-auto max-w-screen-lg'>
+          <div className='mx-auto max-w-5xl'>
             <Tree
               lineWidth={'3px'}
               lineColor='#8b5cf6'

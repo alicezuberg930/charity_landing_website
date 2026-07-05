@@ -15,7 +15,7 @@ const DesignPage = () => {
           return (
             <React.Fragment key={design.name}>
               <Section title={design.name} />
-              <div className='max-w-screen-md mx-auto'>
+              <div className='max-w-3xl mx-auto'>
                 {
                   design.images.map(image => {
                     return (

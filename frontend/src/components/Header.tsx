@@ -91,7 +91,7 @@ const desktopTabs = [tabs[2], tabs[3], tabs[0], tabs[4], tabs[1]]
 const Header = () => {
   return (
     <header className='bg-white h-20 content-center z-10 shadow-md flex-none'>
-      <nav className='flex font-semibold justify-between items-center relative max-w-screen-xl mx-auto px-2 lg:px-0'>
+      <nav className='flex font-semibold justify-between items-center relative max-w-7xl mx-auto px-2 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <Link to={ROOT_HOME}>
             <img src='./assets/logo.png' className='inline-block w-14 h-14' alt='logo' />
