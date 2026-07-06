@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { toast } from "sonner"
+import { toast } from 'sonner'
 import { HttpError } from './repository/http-error'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -8,24 +8,26 @@ export const cn = (...inputs: ClassValue[]) => {
 }
 
 export const showResponseError = (error: unknown) => {
-  if (error instanceof HttpError) {
-    const data = error.data as { message?: unknown } | undefined
-    const err = data?.message ?? error.message
+  const httpError = error instanceof HttpError ? error : undefined
+
+  if (httpError) {
+    const data = httpError.data as { message?: unknown } | undefined
+    const err = data?.message ?? httpError.message
     if (Array.isArray(err)) {
-      err.forEach(e => toast.error(String(e)))
+      err.forEach((e) => toast.error(String(e)))
     } else {
       toast.error(String(err))
     }
   } else if (error instanceof Error) {
     toast.error(error.message)
   } else {
-    toast.error("Lỗi không xác định")
+    toast.error('Lỗi không xác định')
   }
 }
 
 export const slugify = (text: string) => {
   // Map of Vietnamese characters to their base Latin equivalents
-  const vietnameseMap = {
+  const vietnameseMap: Record<string, string> = {
     'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
     'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
     'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
@@ -56,7 +58,7 @@ export const slugify = (text: string) => {
 
   return text
     // Replace Vietnamese characters with base Latin characters
-    .split('').map(char => vietnameseMap[char] || char).join('')
+    .split('').map((char) => vietnameseMap[char] ?? char).join('')
     // Replace all whitespace with hyphen
     .replace(/\s+/g, '-')
     // Remove any special characters except hyphen

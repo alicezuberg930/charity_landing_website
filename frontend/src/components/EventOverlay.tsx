@@ -1,31 +1,52 @@
-import { memo, useRef } from "react"
+import { memo, useEffect, useState } from "react"
 import { Link } from "@tanstack/react-router"
 import { CircleX } from "lucide-react"
 import { useGetEventsHook } from "../hooks/event.hook"
-import { ROUTES } from '../routes/path'
+import { ROUTES } from '@/routes/path'
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+} from '@/components/ui/dialog'
+import { LazyLoadImage } from "./lazy-load-image"
 
 const EventOverlay = () => {
-    const ref = useRef<HTMLDivElement | null>(null)
     const { data: event } = useGetEventsHook({ filter: { isActive: true } })
-    const removeOverlay = () => ref.current?.classList.add('hidden')
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        if (event?.data) setOpen(true)
+    }, [event?.data])
 
     return (
-        <>
-            {event && event.data &&
-                <div ref={ref} className="fixed block w-full h-full content-center top-0 bottom-0 left-0 right-0 bg-[#57575780] z-[999]" onClick={removeOverlay}>
-                    <div className="max-w-screen-md aspect-video cursor-pointer mx-auto px-2 md:px-0">
-                        <div className='relative'>
-                            <div className='absolute top-3 right-3'>
-                                <CircleX size={24} onClick={removeOverlay} color="purple" />
-                            </div>
-                            <Link to={ROUTES.news} className="w-full h-full block">
-                                <img alt='event' src={event.data[0].image} className="object-cover w-full h-full" />
-                            </Link>
-                        </div>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent showCloseButton={false} className='p-0 max-w-6xl!'>
+                <div className='relative h-full w-full'>
+                    <div className='absolute top-3 right-3 z-10'>
+                        <DialogClose
+                            render={
+                                <button className='rounded-full bg-white p-1 shadow-md'>
+                                    <CircleX size={24} color='purple' />
+                                </button>
+                            }
+                        />
                     </div>
+                    <Link to={ROUTES.news} className='w-full h-full'>
+                        <LazyLoadImage
+                            widths={[
+                                { screenWidth: 640, imageWidth: 640 },  // Phone
+                                { screenWidth: 1024, imageWidth: 1024 },  // Tablet
+                                { screenWidth: 1920, imageWidth: 1920 },  // Desktop and larger
+                            ]}
+                            alt='event'
+                            src={event?.data?.[0]?.image}
+                            className='object-cover w-full h-full'
+                            effect='blur'
+                        />
+                    </Link>
                 </div>
-            }
-        </>
+            </DialogContent>
+        </Dialog>
     )
 }
 

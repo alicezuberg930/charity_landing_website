@@ -2,7 +2,6 @@ import { type Response as ApiResponse } from '@/@types/response'
 import { HttpError } from './http-error'
 import { InterceptorManager } from './interceptor'
 
-const DEFAULT_BASE_URL = 'http://localhost:8080/api/v1'
 const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2I4NWIyODRkZjBjOGM3YTQzNzY3YTgiLCJlbWFpbCI6IkxpbGlhbmExMjNAZ21haWwuY29tIiwiaWF0IjoxNzQwMTM1MzIxLCJleHAiOjE3NDg3NzUzMjF9.xqJ_u3Pkg_tdTH5VOxDd4_KFbF_DEAu3NXQVXj8X6Vg'
 
 const getBaseUrl = () => {
@@ -12,14 +11,12 @@ const getBaseUrl = () => {
   const apiUrl = import.meta.env.VITE_API_URL
 
   if (environment === 'development') {
-    return developmentApi ?? apiUrl ?? productionApi ?? DEFAULT_BASE_URL
+    return developmentApi ?? apiUrl
   }
-
   if (environment === 'production') {
-    return productionApi ?? apiUrl ?? DEFAULT_BASE_URL
+    return productionApi ?? apiUrl
   }
-
-  return apiUrl ?? productionApi ?? developmentApi ?? DEFAULT_BASE_URL
+  return apiUrl ?? productionApi ?? developmentApi
 }
 
 const BASE_URL = getBaseUrl()

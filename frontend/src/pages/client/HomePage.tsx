@@ -6,13 +6,13 @@ import EventOverlay from '@/components/EventOverlay'
 
 const HomePage = () => {
   return (
-    <>
+    <div className='mb-12'>
       <LandingBanner />
       <Body />
       <DonationSlider />
       <GoogleMap />
       <EventOverlay />
-    </>
+    </div>
   )
 }
 

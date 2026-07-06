@@ -4,6 +4,7 @@ import Section from '@/components/Section'
 import { getYoutubePlaylistVideos } from '@/services/api.service'
 import { showResponseError } from '@/lib/utils'
 import { playlistIds } from '@/lib/constants'
+import type { SliderProps } from '@/components/custom-carousel/types'
 
 type FetchYoutubePlaylistVideosParams = {
   playlistId: string
@@ -55,33 +56,14 @@ function VideoPage() {
 
   return (
     <>
-      {
-        playlists.map(playlist => {
-          return (
-            <div key={playlist.title}>
-              <Section title={playlist.title} />
-              <PlayListSlider videos={playlist.playlist} />
-            </div>
-          )
-        })
-      }
+      {playlists.map((playlist, i) => (
+        <div key={playlist.title}>
+          <Section title={playlist.title} />
+          <PlayListSlider videoIds={playlist.playlist} />
+        </div>
+      ))}
     </>
   )
 }
+
 export default VideoPage
-
-// https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=5&pageToken=EAAaBlBUOkNBVQ&playlistId=PLPKGUz9dF9sLHRvV9ENks8WQrWNQsb1SD&key=AIzaSyBEUVRN522VqnGAxtZLtq9d9yYejaE05T8
-
-// {
-//   "kind": "youtube#playlistItemListResponse",
-//   "etag": etag,
-//   "nextPageToken": string,
-//   "prevPageToken": string,
-//   "pageInfo": {
-//     "totalResults": integer,
-//     "resultsPerPage": integer
-//   },
-//   "items": [
-//     playlistItem Resource
-//   ]
-// }

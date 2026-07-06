@@ -8,18 +8,10 @@ import {
 } from '@/components/ui/carousel'
 import { useGetBannersHook } from '../hooks/banner.hook'
 import LoadingShimmerList from './LoadingShimmerList'
+import type { SliderProps } from './custom-carousel'
+import LazyLoadImage from './lazy-load-image/LazyLoadImage'
 
-type BannerSliderProps = {
-  children: ReactNode
-  slidesToShow?: number
-  autoplay?: boolean
-  autoplaySpeed?: number
-  loop?: boolean
-  showDot?: boolean
-  showButton?: boolean
-}
-
-const BannerSlider = ({
+const CustomSlider = ({
   children,
   slidesToShow = 1,
   autoplay = false,
@@ -27,7 +19,7 @@ const BannerSlider = ({
   loop = true,
   showDot = true,
   showButton = true
-}: BannerSliderProps) => {
+}: SliderProps) => {
   const [api, setApi] = useState<CarouselApi>()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
@@ -110,31 +102,40 @@ const BannerSlider = ({
   )
 }
 
+const settings = {
+  slidesToShow: 1,
+  autoplay: false,
+  autoplaySpeed: 3000,
+  loop: true,
+  showDot: true,
+} as SliderProps
+
 const LandingBanner = () => {
-  const bannerSettings = {
-    slidesToShow: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    loop: true,
-    showDot: true,
-  }
   const { data: banners, isLoading } = useGetBannersHook({ isActive: true })
 
   return (
     <>
-      {isLoading ? <LoadingShimmerList /> :
-        <BannerSlider {...bannerSettings}>
-          {
-            banners && banners.data.map(banner => {
-              return (
-                <div key={banner._id} className='aspect-video w-full max-h-[75vh]'>
-                  <img className='object-center h-full w-full' src={banner.image} alt={banner.image} />
-                </div>
-              )
-            })
-          }
-        </BannerSlider>
-      }
+      {isLoading ? (
+        <LoadingShimmerList />
+      ) : (
+        <CustomSlider {...settings}>
+          {banners?.data.map(banner => (
+            <div key={banner._id} className='aspect-video'>
+              <LazyLoadImage
+                widths={[
+                  { screenWidth: 640, imageWidth: 640 },  // Phone
+                  { screenWidth: 1024, imageWidth: 1024 },  // Tablet
+                  { screenWidth: 1920, imageWidth: 1920 },  // Desktop and larger
+                ]}
+                className='object-center h-full w-full'
+                alt={banner._id}
+                src={banner.image}
+                effect='blur'
+              />
+            </div>
+          ))}
+        </CustomSlider>
+      )}
     </>
   )
 }
