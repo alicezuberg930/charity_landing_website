@@ -15,6 +15,7 @@ import { FileModule } from './modules/file/file.module';
 import { InformationModule } from './modules/information/information.module';
 import { EventsModule } from './modules/events/events.module';
 import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist';
+import { LogsModule } from './modules/logs/logs.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist';
     FileModule,
     BannersModule,
     EventsModule,
+    LogsModule,
     // Env config module
     ConfigModule.forRoot({ isGlobal: true }),
     // Mongodb config mondule
