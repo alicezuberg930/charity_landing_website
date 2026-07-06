@@ -2,8 +2,9 @@ import { useEffect, useState, type FormEvent } from 'react'
 import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreateBannerHook, useUpdateBannerHook } from '../hooks/banner.hook'
-import CustomSwitch from './CustomSwitch'
 import { LoadingOverlay } from '@/layout/admin'
+import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
 import type { Banner, BannerPayload } from '@/@types/banner'
 
 type HandleBannerBodyProps = {
@@ -63,15 +64,13 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Thứ tự</span>
                     <div className='mt-2'>
-                        <input type='number' placeholder='Nhập thứ tự' name='order' defaultValue={selectedBanner?.order ?? ''}
-                            className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-                        />
+                        <Input type='number' placeholder='Nhập thứ tự' name='order' defaultValue={selectedBanner?.order ?? ''} />
                     </div>
                 </div>
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Kích hoạt</span>
                     <div className='mt-2'>
-                        <CustomSwitch checked={isActive} onChange={(e) => setIsActive(e)} />
+                        <Switch checked={isActive} onCheckedChange={setIsActive} />
                     </div>
                 </div>
                 <div className='h-fit'>

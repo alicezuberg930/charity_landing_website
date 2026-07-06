@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from 'react'
-import CustomImagePicker, { type PickedImage } from '../../components/CustomImagePicker'
-import { useUploadFileHook } from '../../hooks/file.hook'
-import { useCreateEventHook } from '../../hooks/event.hook'
-import CustomSwitch from '../../components/CustomSwitch'
+import CustomImagePicker, { type PickedImage } from '../../../../components/CustomImagePicker'
+import { useUploadFileHook } from '../../../../hooks/file.hook'
+import { useCreateEventHook } from '../../../../hooks/event.hook'
 import { LoadingOverlay } from '@/layout/admin'
+import { Switch } from '@/components/ui/switch'
 import type { EventPayload } from '@/@types/event'
 
 const CreateEventPage = () => {
@@ -48,7 +48,7 @@ const CreateEventPage = () => {
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Kích hoạt</span>
           <div className='mt-2'>
-            <CustomSwitch onChange={(e) => setIsActive(e)} />
+            <Switch checked={isActive} onCheckedChange={setIsActive} />
           </div>
         </div>
         <div className='h-fit'>

@@ -4,6 +4,7 @@ import { CirclePlus, Pencil } from "lucide-react"
 import { ShimmerList } from "@/layout/common"
 import { ROUTES } from "@/routes/path"
 import { DeleteConfirmPopover } from "@/layout/admin"
+import { Input } from "@/components/ui/input"
 
 const BannersPage = () => {
     const { data: banners, isLoading } = useGetBannersHook()
@@ -26,7 +27,7 @@ const BannersPage = () => {
                 <div className='flex md:flex-row flex-col justify-between gap-2 text-white'>
                     <div className='flex items-center gap-4 mb-4 md:mb-0'>
                         <div>
-                            <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
+                            <Input placeholder='Tìm kiếm' type='text' className='shadow-md' />
                         </div>
                     </div>
                     <Link to={ROUTES.banner.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>

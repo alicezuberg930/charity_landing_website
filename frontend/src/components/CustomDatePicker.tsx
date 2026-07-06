@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { Input } from '@/components/ui/input'
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 const DatePickerComponent = DatePicker as any
@@ -12,15 +13,15 @@ const CustomDatePicker = ({ name, initialDate }: any) => {
     setStartDate(initialDate ?? null)
   }, [initialDate])
 
-  const CustomInput = React.forwardRef<HTMLInputElement, any>(({ value, onClick }, ref) => {
+  const DatePickerInput = React.forwardRef<HTMLInputElement, any>(({ value, onClick }, ref) => {
     return (
-      <input value={value} onClick={onClick} ref={ref} readOnly name={name}
-        className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-      />
+      <Input value={value} onClick={onClick} ref={ref} readOnly name={name} />
     )
   })
 
-  return (<DatePickerComponent dateFormat={'dd/MM/yyyy'} selected={startDate} onChange={(date: Date | null) => setStartDate(date)} customInput={<CustomInput />} />)
+  DatePickerInput.displayName = 'DatePickerInput'
+
+  return (<DatePickerComponent dateFormat={'dd/MM/yyyy'} selected={startDate} onChange={(date: Date | null) => setStartDate(date)} customInput={<DatePickerInput />} />)
 }
 
 export default CustomDatePicker

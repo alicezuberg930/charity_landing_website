@@ -4,6 +4,7 @@ import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreatePostHook, useUpdatePostHook } from '../hooks/post.hook'
 import { LoadingOverlay } from '@/layout/admin'
+import { Input } from '@/components/ui/input'
 import type { Post, PostPayload } from '@/@types/post'
 const CustomCKEditor = lazy(() => import('./CustomCKEditor'))
 
@@ -84,9 +85,7 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Tiêu đề</span>
                     <div className='mt-2'>
-                        <input type='text' placeholder='Nhập tiêu đề' name='title' defaultValue={selectedPost?.title ?? ''}
-                            className='rounded-md w-full p-2 border border-gray-400 focus:outline-main-color'
-                        />
+                        <Input type='text' placeholder='Nhập tiêu đề' name='title' defaultValue={selectedPost?.title ?? ''} />
                     </div>
                 </div>
                 <div className='h-fit'>

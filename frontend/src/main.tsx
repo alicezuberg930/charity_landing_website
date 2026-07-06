@@ -4,14 +4,17 @@ import reportWebVitals from './reportWebVitals'
 import './styles/global.css'
 import { Router } from '@/routes'
 import { QueryClientProvider } from './providers/query-client-provider'
+import { ThemeProvider } from './providers/theme-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider>
-      <Router />
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider>
+        <Router />
+      </QueryClientProvider>
+    </ThemeProvider>
   </React.StrictMode>
 )
 

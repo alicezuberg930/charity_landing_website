@@ -4,6 +4,7 @@ import { useDeletePostHook, useGetPostsHook } from '../../../hooks/post.hook'
 import { ShimmerList } from '@/layout/common'
 import { ROUTES } from '@/routes/path'
 import { DeleteConfirmPopover } from '@/layout/admin'
+import { Input } from '@/components/ui/input'
 
 const PostsPage = () => {
   const filter = { page: 1 }
@@ -23,7 +24,7 @@ const PostsPage = () => {
         <div className='flex md:flex-row flex-col justify-between gap-2 text-white'>
           <div className='flex items-center gap-4 mb-4 md:mb-0'>
             <div>
-              <input placeholder='Tìm kiếm' type='text' className='focus:border-main-color shadow-md p-2 rounded-md' />
+              <Input placeholder='Tìm kiếm' type='text' className='shadow-md' />
             </div>
           </div>
           <Link to={ROUTES.post.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
