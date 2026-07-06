@@ -8,7 +8,6 @@ import { hashPassword } from 'src/common/utils'
 import { v4 } from 'uuid'
 import dayjs from 'dayjs'
 import { UserQuery } from './query/user.query'
-import { DeliveryAddressDto } from './dto/delivery.address.dto'
 import { VerifyDto } from '../auth/dto/verify-auth.dto'
 import { RegisterDto } from '../auth/dto/create-auth.dto'
 

@@ -1,22 +1,22 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './modules/users/users.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from './modules/auth/auth.module';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-// import { JwtAuthGuard } from './modules/auth/passport/jwt-auth.guard';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
-import { AllExceptionsFilter } from './common/exceptions/exception.filter';
-import { PostsModule } from './modules/posts/posts.module';
-import { BannersModule } from './modules/banners/banners.module';
-import { FileModule } from './modules/file/file.module';
-import { InformationModule } from './modules/information/information.module';
-import { EventsModule } from './modules/events/events.module';
-import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist';
-import { LogsModule } from './modules/logs/logs.module';
-import { LogsMiddleware } from './common/middleware/logs.middleware';
+import { MiddlewareConsumer, Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { MongooseModule } from '@nestjs/mongoose'
+import { UsersModule } from './modules/users/users.module'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { AuthModule } from './modules/auth/auth.module'
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
+// import { JwtAuthGuard } from './modules/auth/passport/jwt-auth.guard'
+import { TransformInterceptor } from './common/interceptors/transform.interceptor'
+import { AllExceptionsFilter } from './common/exceptions/exception.filter'
+import { PostsModule } from './modules/posts/posts.module'
+import { BannersModule } from './modules/banners/banners.module'
+import { FileModule } from './modules/file/file.module'
+import { InformationModule } from './modules/information/information.module'
+import { EventsModule } from './modules/events/events.module'
+import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist'
+import { LogsModule } from './modules/logs/logs.module'
+import { LogsMiddleware } from './common/middleware/logs.middleware'
 
 @Module({
   imports: [
@@ -49,7 +49,7 @@ import { LogsMiddleware } from './common/middleware/logs.middleware';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(IpWhitelistMiddleware).forRoutes('*');
+    consumer.apply(IpWhitelistMiddleware).forRoutes('*')
     consumer.apply(LogsMiddleware).forRoutes('*')
   }
 }

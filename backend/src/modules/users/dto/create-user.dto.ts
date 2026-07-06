@@ -1,5 +1,4 @@
 import { IsEmail, IsNotEmpty, IsOptional, Length, Max } from 'class-validator';
-import { Wallet } from '../schemas/wallet.schema';
 
 export class CreateUserDto {
     @IsNotEmpty({ message: "Tên người dùng không được để trống" })

@@ -1,7 +1,6 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
-import { Wallet } from './wallet.schema'
 import { DeliveryAddress } from './delivery.address.schema'
 
 export type UserDocument = HydratedDocument<User>
@@ -37,9 +36,6 @@ export class User {
 
     @Prop({ type: Date })
     codeExpired: Date
-
-    @Prop({ type: Wallet, default: () => ({ balance: 0 }) })
-    wallet: Wallet
 
     @Prop({ type: [DeliveryAddress], default: [] })
     deliveryAddresses: DeliveryAddress[]
