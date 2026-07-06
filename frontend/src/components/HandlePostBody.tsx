@@ -1,12 +1,13 @@
 import { lazy, useEffect, useState, type FormEvent } from 'react'
-import CustomDatePicker from './CustomDatePicker'
+import { DatePicker } from './date-picker'
 import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreatePostHook, useUpdatePostHook } from '../hooks/post.hook'
 import { LoadingOverlay } from '@/layout/admin'
 import { Input } from '@/components/ui/input'
 import type { Post, PostPayload } from '@/@types/post'
-const CustomCKEditor = lazy(() => import('./CustomCKEditor'))
+
+const CustomCKEditor = lazy(() => import('./cke-editor').then((module) => ({ default: module.CustomCKEditor })))
 
 type HandlePostBodyProps = {
     selectedPost?: Post
@@ -97,7 +98,7 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Ngày thực hiện</span>
                     <div className='mt-2'>
-                        <CustomDatePicker name='date' initialDate={date} />
+                        <DatePicker value={date} onChange={(v) => { }} />
                     </div>
                 </div>
                 <div className='h-fit'>

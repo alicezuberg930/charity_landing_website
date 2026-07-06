@@ -3,11 +3,11 @@ import { twMerge } from 'tailwind-merge'
 import { toast } from 'sonner'
 import { HttpError } from './repository/http-error'
 
-export const cn = (...inputs: ClassValue[]) => {
+const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-export const showResponseError = (error: unknown) => {
+const showResponseError = (error: unknown) => {
   const httpError = error instanceof HttpError ? error : undefined
 
   if (httpError) {
@@ -25,7 +25,7 @@ export const showResponseError = (error: unknown) => {
   }
 }
 
-export const slugify = (text: string) => {
+const slugify = (text: string) => {
   // Map of Vietnamese characters to their base Latin equivalents
   const vietnameseMap: Record<string, string> = {
     'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
@@ -69,3 +69,24 @@ export const slugify = (text: string) => {
     .replace(/^-+|-+$/g, '')
     .toLowerCase()
 }
+
+const alpha = (color: string, opacity: number): string => {
+  // Handle hex colors
+  if (color.startsWith('#')) {
+    const hex = color.replace('#', '')
+    const r = Number.parseInt(hex.substring(0, 2), 16)
+    const g = Number.parseInt(hex.substring(2, 4), 16)
+    const b = Number.parseInt(hex.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`
+  }
+  // Handle rgb/rgba colors
+  if (color.startsWith('rgb')) {
+    const match = color.match(/\d+/g)
+    if (match && match.length >= 3) {
+      return `rgba(${match[0]}, ${match[1]}, ${match[2]}, ${opacity})`
+    }
+  }
+  return `rgba(0, 0, 0, ${opacity})`
+}
+
+export { cn, showResponseError, slugify, alpha }

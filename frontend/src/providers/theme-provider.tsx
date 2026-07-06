@@ -1,7 +1,7 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes'
 
-const ThemeProvider = ({
+export const ThemeProvider = ({
   children,
   defaultTheme = 'light',
   storageKey = 'theme',
@@ -21,5 +21,3 @@ const ThemeProvider = ({
     </NextThemesProvider>
   )
 }
-
-export { ThemeProvider }

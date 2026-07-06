@@ -140,10 +140,10 @@ export default defineConfig({
           query: ['@tanstack/react-query'],
           ui: ['@base-ui/react', 'lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge', 'next-themes'],
           animation: ['framer-motion'],
-          utils: ['moment'],
+          utils: ['moment', 'react-dropzone', 'react-hook-form', 'zod'],
           editor: ['ckeditor5', '@ckeditor/ckeditor5-react'],
           charts: ['recharts', 'react-organizational-chart'],
-          components: ['sonner', 'vaul', 'react-resizable-panels', 'embla-carousel-react', 'input-otp']
+          components: ['react-day-picker', 'sonner', 'vaul', 'react-resizable-panels', 'embla-carousel-react', 'input-otp']
         },
       },
     },

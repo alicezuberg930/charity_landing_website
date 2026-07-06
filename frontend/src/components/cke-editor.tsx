@@ -79,7 +79,7 @@ import '../styles/custom_ckeditor.css'
 const LICENSE_KEY = 'GPL' // or <YOUR_LICENSE_KEY>.
 const TypedCKEditor = CKEditor as any
 
-const CustomCKEditor = ({ onChange, initialData }: any) => {
+export const CustomCKEditor = ({ onChange, initialData }: any) => {
   const editorContainerRef = useRef<HTMLDivElement | null>(null)
   const editorMenuBarRef = useRef<HTMLDivElement | null>(null)
   const editorToolbarRef = useRef<HTMLDivElement | null>(null)
@@ -425,5 +425,3 @@ const CustomCKEditor = ({ onChange, initialData }: any) => {
     </div>
   )
 }
-
-export default CustomCKEditor

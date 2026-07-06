@@ -19,7 +19,7 @@ const BannersPage = () => {
     }
 
     return (
-        <div className='bg-white rounded-md p-4'>
+        <div className='rounded-md p-4'>
             <div className='space-y-4'>
                 <div className='w-full'>
                     <span className='text-xl font-bold'>Ảnh banner</span>

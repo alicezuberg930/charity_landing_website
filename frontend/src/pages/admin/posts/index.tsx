@@ -16,7 +16,7 @@ const PostsPage = () => {
   }
 
   return (
-    <div className='bg-white rounded-md p-4'>
+    <div className='rounded-md p-4'>
       <div className='space-y-4'>
         <div className='w-full'>
           <span className='text-xl font-bold'>Bài viết về hoạt động</span>
@@ -57,7 +57,7 @@ const PostsPage = () => {
               </tr>
             </thead>
 
-            <tbody className='bg-white divide-y divide-gray-200'>
+            <tbody className='divide-y divide-gray-200'>
               {isLoading ?
                 <tr>
                   <td colSpan={7}>

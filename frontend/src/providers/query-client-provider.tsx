@@ -76,4 +76,4 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
     return <QCP client={queryClient()}>{children}</QCP>
 }
 
-export { queryClient, QueryClientProvider }
+export { QueryClientProvider, queryClient }

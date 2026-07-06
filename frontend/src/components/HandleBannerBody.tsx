@@ -52,7 +52,7 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
     }
 
     return (
-        <div className='bg-white rounded-md p-4'>
+        <div className='rounded-md p-4'>
             <div className='flex flex-col gap-1 mb-10'>
                 <span className='text-xl font-bold'>{selectedBanner ? 'Sửa' : 'Tạo'} banner</span>
                 <span className='text-sm text-gray-500'>
