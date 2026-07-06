@@ -1,3 +1,5 @@
 export { default as AdminHeader } from './admin-header'
 export { default as AdminSidebar } from './admin-sidebar'
 export { default as AdminLayout } from './admin-layout'
+export { default as DeleteConfirmPopover } from './delete-confirm-popover'
+export { default as LoadingOverlay } from './loading-overlay'

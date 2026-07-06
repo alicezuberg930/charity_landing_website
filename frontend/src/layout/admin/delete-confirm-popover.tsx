@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import {
   Popover,
@@ -54,4 +54,4 @@ const DeleteConfirmPopover = ({ onConfirm }: DeleteConfirmPopoverProps) => {
   )
 }
 
-export default DeleteConfirmPopover
+export default memo(DeleteConfirmPopover)

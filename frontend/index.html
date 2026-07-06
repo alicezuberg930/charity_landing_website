@@ -33,7 +33,51 @@
 
 <body>
   <div id='root'></div>
-  <script type='application/ld+json'>{`{'@context': 'http://schema.org'}`}</script>
+  <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.anhsangtuthien.com/#website",
+          "url": "https://www.anhsangtuthien.com/",
+          "name": "Nhóm ánh sáng từ thiện",
+          "inLanguage": "vi-VN"
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://www.anhsangtuthien.com/#main-navigation",
+          "name": "Main navigation",
+          "itemListElement": [
+            {
+              "@type": "SiteNavigationElement",
+              "position": 1,
+              "name": "Cháo tình thương",
+              "url": "https://www.anhsangtuthien.com/chao-tinh-thuong"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 2,
+              "name": "Chương trình thường niên",
+              "url": "https://www.anhsangtuthien.com/chuong-trinh-thuong-nien"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 3,
+              "name": "Hỗ trợ hoàn cảnh",
+              "url": "https://www.anhsangtuthien.com/ho-tro-hoan-canh"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 4,
+              "name": "Tiếp sức tri thức",
+              "url": "https://www.anhsangtuthien.com/tiep-suc-tri-thuc"
+            }
+          ]
+        }
+      ]
+    }
+  </script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

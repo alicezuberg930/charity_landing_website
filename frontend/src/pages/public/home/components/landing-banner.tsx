@@ -7,7 +7,7 @@ import {
   type CarouselApi
 } from '@/components/ui/carousel'
 import { useGetBannersHook } from '../../../../hooks/banner.hook'
-import LoadingShimmerList from '../../../../components/LoadingShimmerList'
+import ShimmerList from '../../../../layout/common/shimmer-list'
 import type { SliderProps } from '../../../../components/custom-carousel'
 import LazyLoadImage from '../../../../components/lazy-load-image/LazyLoadImage'
 
@@ -116,7 +116,7 @@ const LandingBanner = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingShimmerList />
+        <ShimmerList />
       ) : (
         <CustomSlider {...settings}>
           {banners?.data.map(banner => (

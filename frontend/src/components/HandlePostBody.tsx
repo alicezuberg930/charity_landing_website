@@ -3,7 +3,7 @@ import CustomDatePicker from './CustomDatePicker'
 import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreatePostHook, useUpdatePostHook } from '../hooks/post.hook'
-import LoadingOverlay from './LoadingOverlay'
+import { LoadingOverlay } from '@/layout/admin'
 import type { Post, PostPayload } from '@/@types/post'
 const CustomCKEditor = lazy(() => import('./CustomCKEditor'))
 

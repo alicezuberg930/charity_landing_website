@@ -1,9 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { Check, CirclePlus, CircleX, Pencil } from 'lucide-react'
-import LoadingShimmerList from '../../../components/LoadingShimmerList'
+import { ShimmerList } from '@/layout/common'
 import { useDeleteEventHook, useGetEventsHook } from '../../../hooks/event.hook'
-import { ROUTES } from '../../../routes/path'
-import DeleteConfirmPopover from '../../../components/DeleteConfirmPopover'
+import { ROUTES } from '@/routes/path'
+import { DeleteConfirmPopover } from '@/layout/admin'
 
 const EventsPage = () => {
   const { data: events, isLoading } = useGetEventsHook({})
@@ -13,7 +13,7 @@ const EventsPage = () => {
     dummy.push(i)
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     remove.mutate({ id })
   }
 
@@ -57,7 +57,7 @@ const EventsPage = () => {
                 <tr>
                   <td colSpan={7}>
                     <div className='p-3'>
-                      <LoadingShimmerList />
+                      <ShimmerList />
                     </div>
                   </td>
                 </tr> : events && events.data.map((event, i) => {

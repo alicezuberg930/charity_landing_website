@@ -3,7 +3,7 @@ import CustomImagePicker, { type PickedImage } from '../../components/CustomImag
 import { useUploadFileHook } from '../../hooks/file.hook'
 import { useCreateEventHook } from '../../hooks/event.hook'
 import CustomSwitch from '../../components/CustomSwitch'
-import LoadingOverlay from '../../components/LoadingOverlay'
+import { LoadingOverlay } from '@/layout/admin'
 import type { EventPayload } from '@/@types/event'
 
 const CreateEventPage = () => {

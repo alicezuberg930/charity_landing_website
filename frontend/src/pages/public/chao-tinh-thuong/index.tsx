@@ -1,7 +1,7 @@
 import Section from '@/layout/public/section'
 import { useGetPostsHook } from '@/hooks/post.hook'
-import ActivityList from '@/components/ActivityList'
-import LoadingShimmerItemList from '@/components/LoadingShimmerItemList'
+import ActivityList from '@/layout/public/activity-list'
+import ShimmerItemList from '@/layout/public/shimmer-item-list'
 
 const ChaoTinhThuongPage = () => {
   const { data: posts, isLoading } = useGetPostsHook({ filter: { category: 'chao-tinh-thuong' } })
@@ -10,7 +10,7 @@ const ChaoTinhThuongPage = () => {
     <>
       <Section title='HOẠT ĐỘNG CHÁO TÌNH THƯƠNG' />
       {isLoading ? (
-        <LoadingShimmerItemList count={9} />
+        <ShimmerItemList count={9} />
       ) : (
         posts?.data && <ActivityList posts={posts.data} />
       )}

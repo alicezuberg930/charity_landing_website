@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
 import './styles/global.css'
 import { Router } from '@/routes'
-import { QueryClientProvider } from './components/QueryClientProvider'
+import { QueryClientProvider } from './providers/query-client-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 

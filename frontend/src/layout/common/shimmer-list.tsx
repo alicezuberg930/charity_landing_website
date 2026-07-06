@@ -1,6 +1,6 @@
 import { memo } from "react"
 
-const LoadingShimmerList = () => {
+const ShimmerList = () => {
     return (
         <div className="animate-pulse" >
             <div className="mb-2.5 h-10 rounded bg-gray-200 dark:bg-gray-700"></div>
@@ -19,4 +19,4 @@ const LoadingShimmerList = () => {
     )
 }
 
-export default memo(LoadingShimmerList)
+export default memo(ShimmerList)

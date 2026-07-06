@@ -1,16 +1,16 @@
 import { Link } from '@tanstack/react-router'
 import { CirclePlus, Pencil } from 'lucide-react'
 import { useDeletePostHook, useGetPostsHook } from '../../../hooks/post.hook'
-import LoadingShimmerList from '../../../components/LoadingShimmerList'
-import { ROUTES } from '../../../routes/path'
-import DeleteConfirmPopover from '../../../components/DeleteConfirmPopover'
+import { ShimmerList } from '@/layout/common'
+import { ROUTES } from '@/routes/path'
+import { DeleteConfirmPopover } from '@/layout/admin'
 
 const PostsPage = () => {
   const filter = { page: 1 }
   const { data: posts, isLoading } = useGetPostsHook({ filter })
   const remove = useDeletePostHook()
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     remove.mutate({ id })
   }
 
@@ -61,7 +61,7 @@ const PostsPage = () => {
                 <tr>
                   <td colSpan={7}>
                     <div className='p-3'>
-                      <LoadingShimmerList />
+                      <ShimmerList />
                     </div>
                   </td>
                 </tr> : posts && posts.data.map((post, i) => {

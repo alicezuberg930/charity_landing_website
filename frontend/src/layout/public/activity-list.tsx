@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { slugify } from "@/lib/utils"
 import type { Post } from '@/@types/post'
-import LazyLoadImage from './lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '@/components/lazy-load-image/LazyLoadImage'
 
 type ActivityListProps = {
   posts: Post[]

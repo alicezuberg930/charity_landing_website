@@ -1,6 +1,6 @@
 import { memo } from "react"
 
-const LoadingShimmerItemList = ({ count = 5 }) => {
+const ShimmerItemList = ({ count = 5 }) => {
     return (
         <div className="flex flex-wrap mb-4 animate-pulse -mx-2.5">
             {
@@ -26,4 +26,4 @@ const LoadingShimmerItemList = ({ count = 5 }) => {
     )
 }
 
-export default memo(LoadingShimmerItemList)
+export default memo(ShimmerItemList)

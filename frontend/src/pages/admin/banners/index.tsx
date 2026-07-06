@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router"
 import { useDeleteBannerHook, useGetBannersHook } from "../../../hooks/banner.hook"
 import { CirclePlus, Pencil } from "lucide-react"
-import LoadingShimmerList from "../../../components/LoadingShimmerList"
-import { ROUTES } from "../../../routes/path"
-import DeleteConfirmPopover from "../../../components/DeleteConfirmPopover"
+import { ShimmerList } from "@/layout/common"
+import { ROUTES } from "@/routes/path"
+import { DeleteConfirmPopover } from "@/layout/admin"
 
 const BannersPage = () => {
     const { data: banners, isLoading } = useGetBannersHook()
@@ -13,7 +13,7 @@ const BannersPage = () => {
         dummy.push(i)
     }
 
-    const handleDelete = (id) => {
+    const handleDelete = (id: string) => {
         remove.mutate({ id })
     }
 
@@ -58,7 +58,7 @@ const BannersPage = () => {
                                 <tr>
                                     <td colSpan={7}>
                                         <div className='p-3'>
-                                            <LoadingShimmerList />
+                                            <ShimmerList />
                                         </div>
                                     </td>
                                 </tr> : banners && banners.data.map((banner, i) => {

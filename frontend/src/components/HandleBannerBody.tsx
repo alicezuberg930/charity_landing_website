@@ -3,7 +3,7 @@ import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
 import { useUploadFileHook } from '../hooks/file.hook'
 import { useCreateBannerHook, useUpdateBannerHook } from '../hooks/banner.hook'
 import CustomSwitch from './CustomSwitch'
-import LoadingOverlay from './LoadingOverlay'
+import { LoadingOverlay } from '@/layout/admin'
 import type { Banner, BannerPayload } from '@/@types/banner'
 
 type HandleBannerBodyProps = {

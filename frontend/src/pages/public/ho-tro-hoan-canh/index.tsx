@@ -1,5 +1,5 @@
-import LoadingShimmerItemList from '@/components/LoadingShimmerItemList'
-import ActivityList from '@/components/ActivityList'
+import ShimmerItemList from '@/layout/public/shimmer-item-list'
+import ActivityList from '@/layout/public/activity-list'
 import Section from '@/layout/public/section'
 import { useGetPostsHook } from '@/hooks/post.hook'
 
@@ -10,7 +10,7 @@ const HoTroHoanCanhPage = () => {
     <>
       <Section title='HOẠT ĐỘNG HỖ TRỢ HOÀN CẢNH' />
       {isLoading ? (
-        <LoadingShimmerItemList count={9} />
+        <ShimmerItemList count={9} />
       ) : (
         posts?.data && <ActivityList posts={posts.data} />
       )}

@@ -2,8 +2,8 @@ import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterPro
 import { lazy, Suspense, type ComponentType } from "react"
 import { VideoPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/public'
 import { ROOT_CMS } from "./path"
-import { queryClient } from "@/components/QueryClientProvider"
-import LoadingShimmerList from "@/components/LoadingShimmerList"
+import { queryClient } from "@/providers/query-client-provider"
+import ShimmerList from "@/layout/common/shimmer-list"
 import { PublicLayout } from "@/layout/public"
 
 const LoginPage = lazy(() => import('@/pages/admin/login'))
@@ -17,7 +17,7 @@ const CreateEventPage = lazy(() => import('@/pages/admin/CreateEventPage'))
 const InformationPage = lazy(() => import('@/pages/admin/information'))
 
 const lazyRoute = (Component: ComponentType) => () => (
-    <Suspense fallback={<LoadingShimmerList />}>
+    <Suspense fallback={<ShimmerList />}>
         <Component />
     </Suspense>
 )
