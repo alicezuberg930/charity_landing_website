@@ -7,7 +7,7 @@ import { LoadingOverlay } from '@/layout/admin'
 import { Input } from '@/components/ui/input'
 import type { Post, PostPayload } from '@/@types/post'
 
-const CustomCKEditor = lazy(() => import('./cke-editor').then((module) => ({ default: module.CustomCKEditor })))
+const CKEditor = lazy(() => import('./ck-editor').then((module) => ({ default: module.CKEditor })))
 
 type HandlePostBodyProps = {
     selectedPost?: Post
@@ -92,7 +92,7 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Nội dung</span>
                     <div className='mt-2'>
-                        <CustomCKEditor initialData={description ?? ''} defaultValue={'Nhập nội dung'} onChange={(val) => setDescription(val)} />
+                        <CKEditor initialData={description ?? ''} defaultValue={'Nhập nội dung'} onChange={(val) => setDescription(val)} />
                     </div>
                 </div>
                 <div className='h-fit'>
