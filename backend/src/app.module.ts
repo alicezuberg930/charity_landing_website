@@ -16,7 +16,6 @@ import { InformationModule } from './modules/information/information.module'
 import { EventsModule } from './modules/events/events.module'
 import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist'
 import { LogsModule } from './modules/logs/logs.module'
-import { LogsMiddleware } from './common/middleware/logs.middleware'
 
 @Module({
   imports: [
@@ -50,6 +49,5 @@ import { LogsMiddleware } from './common/middleware/logs.middleware'
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(IpWhitelistMiddleware).forRoutes('*')
-    consumer.apply(LogsMiddleware).forRoutes('*')
   }
 }

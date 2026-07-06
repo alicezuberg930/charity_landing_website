@@ -1,0 +1,8 @@
+export { default as PostsPage } from './posts'
+export { default as EventsPage } from './events'
+export { default as CreateEventPage } from './CreateEventPage'
+export { default as InformationPage } from './information'
+export { default as BannersPage } from './banners'
+export { default as LoginPage } from './login'
+export { default as UpdateCreatePostPage } from './UpdateCreatePostPage'
+export { default as UpdateCreateBannerPage } from './UpdateCreateBannerPage'

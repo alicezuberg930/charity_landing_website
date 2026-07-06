@@ -1,19 +1,20 @@
 import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterProvider } from "@tanstack/react-router"
 import { lazy, Suspense, type ComponentType } from "react"
-import { VideoPage, PublicPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/client'
+import { VideoPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/public'
 import { ROOT_CMS } from "./path"
 import { queryClient } from "@/components/QueryClientProvider"
 import LoadingShimmerList from "@/components/LoadingShimmerList"
+import { PublicLayout } from "@/layout/public"
 
-const LoginPage = lazy(() => import('../pages/cms/LoginPage'))
-const AdminPage = lazy(() => import('../pages/cms/AdminPage'))
-const PostsPage = lazy(() => import('../pages/cms/PostsPage'))
-const UpdateCreatePostPage = lazy(() => import('../pages/cms/UpdateCreatePostPage'))
-const BannersPage = lazy(() => import('../pages/cms/BannersPage'))
-const UpdateCreateBannerPage = lazy(() => import('../pages/cms/UpdateCreateBannerPage'))
-const EventsPage = lazy(() => import('../pages/cms/EventsPage'))
-const CreateEventPage = lazy(() => import('../pages/cms/CreateEventPage'))
-const InformationPage = lazy(() => import('../pages/cms/InformationPage'))
+const LoginPage = lazy(() => import('@/pages/admin/login'))
+const AdminPage = lazy(() => import('@/layout/admin/admin-layout'))
+const PostsPage = lazy(() => import('@/pages/admin/posts'))
+const UpdateCreatePostPage = lazy(() => import('@/pages/admin/UpdateCreatePostPage'))
+const BannersPage = lazy(() => import('@/pages/admin/banners'))
+const UpdateCreateBannerPage = lazy(() => import('@/pages/admin/UpdateCreateBannerPage'))
+const EventsPage = lazy(() => import('@/pages/admin/events'))
+const CreateEventPage = lazy(() => import('@/pages/admin/CreateEventPage'))
+const InformationPage = lazy(() => import('@/pages/admin/information'))
 
 const lazyRoute = (Component: ComponentType) => () => (
     <Suspense fallback={<LoadingShimmerList />}>
@@ -34,7 +35,7 @@ const loginRoute = createRoute({
 const publicRoute = createRoute({
     getParentRoute: () => rootRoute,
     id: 'public',
-    component: PublicPage,
+    component: PublicLayout,
 })
 
 const homeRoute = createRoute({

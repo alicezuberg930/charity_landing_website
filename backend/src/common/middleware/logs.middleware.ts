@@ -6,15 +6,15 @@ import { LogsService } from '../../modules/logs/logs.service'
 export class LogsMiddleware implements NestMiddleware {
   constructor(private readonly logsService: LogsService) { }
 
-  async use(req: Request, res: Response, next: NextFunction) {
+  use(req: Request, res: Response, next: NextFunction) {
     const ipAddress = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip || req.socket.remoteAddress || ''
 
-    await this.logsService.create({
+    void this.logsService.create({
       ipAddress,
       userAgent: req.get('user-agent') || '',
       path: req.originalUrl || req.url,
       method: req.method,
-      referrer: req.get('referer') || req.get('referrer') || null,
+      referrer: req.get('referer') || req.get('referrer') || '',
     }).catch((error) => {
       console.error('Failed to save request log', error)
     })
