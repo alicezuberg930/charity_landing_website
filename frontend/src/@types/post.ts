@@ -6,6 +6,13 @@ export type PostCategory =
   | 'ho-tro-hoan-canh'
   | 'tiep-suc-tri-thuc'
 
+export const postCategoryTitles: Record<PostCategory, string> = {
+  'chao-tinh-thuong': 'Cháo tình thương',
+  'chuong-trinh-thuong-nien': 'Chương trình thường niên',
+  'ho-tro-hoan-canh': 'Hỗ trợ hoàn cảnh',
+  'tiep-suc-tri-thuc': 'Tiếp sức tri thức'
+}
+
 export type Post = {
   _id: EntityId
   title: string

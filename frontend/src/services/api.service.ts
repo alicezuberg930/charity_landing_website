@@ -24,6 +24,12 @@ import type {
     UpdateInformationParams,
 } from '@/@types/information'
 import type {
+    DeleteLogParams,
+    GetLogsParams,
+    LogListResponse,
+    LogMutationResponse,
+} from '@/@types/log'
+import type {
     CreatePostParams,
     DeletePostParams,
     GetPostDetailsParams,
@@ -84,6 +90,15 @@ export const getPosts = async ({ filter }: GetPostsParams = {}) => {
 
 export const getPostDetails = async ({ id }: GetPostDetailsParams) => {
     return httpClient.get<PostDetailsResponse>(`${API.POSTS}/${id}`)
+}
+
+// log
+export const getLogs = async ({ filter }: GetLogsParams = {}) => {
+    return httpClient.get<LogListResponse>(API.LOGS, filter)
+}
+
+export const deleteLog = async ({ id }: DeleteLogParams) => {
+    return httpClient.delete<LogMutationResponse>(`${API.LOGS}/${id}`)
 }
 
 // information

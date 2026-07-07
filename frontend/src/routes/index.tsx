@@ -7,8 +7,9 @@ import ShimmerList from "@/layout/common/shimmer-list"
 import { PublicLayout } from "@/layout/public"
 
 const LoginPage = lazy(() => import('@/pages/admin/login'))
-const AdminPage = lazy(() => import('@/layout/admin/admin-layout'))
+const AdminLayout = lazy(() => import('@/layout/admin/admin-layout'))
 const PostsPage = lazy(() => import('@/pages/admin/posts'))
+const LogsPage = lazy(() => import('@/pages/admin/logs'))
 const BannersPage = lazy(() => import('@/pages/admin/banners'))
 const CreateBannerPage = lazy(() => import('@/pages/admin/banners/create'))
 const UpdateBannerPage = lazy(() => import('@/pages/admin/banners/update'))
@@ -64,30 +65,32 @@ const publicChildRoutes = [
     createRoute({ getParentRoute: () => publicRoute, path: 'chuong-trinh-thuong-nien/$slug', component: ActivityDetailsPage }),
 ]
 
-const cmsRoute = createRoute({
+const adminRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: ROOT_CMS,
-    component: lazyRoute(AdminPage),
+    component: lazyRoute(AdminLayout),
 })
 
-const cmsChildRoutes = [
-    createRoute({ getParentRoute: () => cmsRoute, path: '/', component: () => <Navigate to='/cms/post/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post', component: () => <Navigate to='/cms/post/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/list', component: lazyRoute(PostsPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner', component: () => <Navigate to='/cms/banner/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/list', component: lazyRoute(BannersPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/new', component: lazyRoute(CreateBannerPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'banner/edit/$id', component: lazyRoute(UpdateBannerPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'event', component: () => <Navigate to='/cms/event/list' replace /> }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'event/list', component: lazyRoute(EventsPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'event/new', component: lazyRoute(CreateEventPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'information', component: lazyRoute(InformationPage) }),
+const adminChildRoutes = [
+    createRoute({ getParentRoute: () => adminRoute, path: '/', component: () => <Navigate to='/cms/post/list' replace /> }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'post', component: () => <Navigate to='/cms/post/list' replace /> }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'post/list', component: lazyRoute(PostsPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'log', component: () => <Navigate to='/cms/log/list' replace /> }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'log/list', component: lazyRoute(LogsPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'banner', component: () => <Navigate to='/cms/banner/list' replace /> }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'banner/list', component: lazyRoute(BannersPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'banner/new', component: lazyRoute(CreateBannerPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'banner/edit/$id', component: lazyRoute(UpdateBannerPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'event', component: () => <Navigate to='/cms/event/list' replace /> }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'event/list', component: lazyRoute(EventsPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'event/new', component: lazyRoute(CreateEventPage) }),
+    createRoute({ getParentRoute: () => adminRoute, path: 'information', component: lazyRoute(InformationPage) }),
 ]
 
 const routeTree = rootRoute.addChildren([
     loginRoute,
     publicRoute.addChildren(publicChildRoutes),
-    cmsRoute.addChildren(cmsChildRoutes),
+    adminRoute.addChildren(adminChildRoutes),
 ])
 
 const router = createRouter({

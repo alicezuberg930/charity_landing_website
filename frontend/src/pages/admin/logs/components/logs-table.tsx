@@ -11,7 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { type Post } from '@/@types/post'
+import { type RequestLog } from '@/@types/log'
 import {
   DataTablePagination,
   DataTableToolbar,
@@ -24,33 +24,28 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { postsColumns as columns } from './posts-columns'
 import { useTableUrlState, type NavigateFn } from '@/hooks/use-table-url-state'
+import { logsColumns as columns } from './logs-columns'
 
-type PostsTableProps = {
-  data: Post[]
+type LogsTableProps = {
+  data: RequestLog[]
   search: Record<string, unknown>
   navigate: NavigateFn
 }
 
-const categoryOptions = [
-  { label: 'Cháo tình thương', value: 'chao-tinh-thuong' },
-  { label: 'Chương trình thường niên', value: 'chuong-trinh-thuong-nien' },
-  { label: 'Hỗ trợ hoàn cảnh', value: 'ho-tro-hoan-canh' },
-  { label: 'Tiếp sức tri thức', value: 'tiep-suc-tri-thuc' },
+const methodOptions = [
+  { label: 'GET', value: 'GET' },
+  { label: 'POST', value: 'POST' },
+  { label: 'PATCH', value: 'PATCH' },
+  { label: 'PUT', value: 'PUT' },
+  { label: 'DELETE', value: 'DELETE' },
 ]
 
-export const PostsTable = ({ data, search, navigate }: PostsTableProps) => {
-  // Local UI-only states
+export const LogsTable = ({ data, search, navigate }: LogsTableProps) => {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
 
-  // Local state management for table (uncomment to use local-only state, not synced with URL)
-  // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
-  // const [pagination, onPaginationChange] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
-
-  // Synced with URL states (keys/defaults mirror users route search schema)
   const {
     columnFilters,
     onColumnFiltersChange,
@@ -63,9 +58,10 @@ export const PostsTable = ({ data, search, navigate }: PostsTableProps) => {
     pagination: { defaultPage: 1, defaultPageSize: 10 },
     globalFilter: { enabled: false },
     columnFilters: [
-      { columnId: 'title', searchKey: 'title', type: 'string' },
-      { columnId: 'date', searchKey: 'date', type: 'string' },
-      { columnId: 'category', searchKey: 'category', type: 'array' },
+      { columnId: 'path', searchKey: 'path', type: 'string' },
+      { columnId: 'ipAddress', searchKey: 'ipAddress', type: 'string' },
+      { columnId: 'createdAt', searchKey: 'createdAt', type: 'string' },
+      { columnId: 'method', searchKey: 'method', type: 'array' },
     ],
   })
 
@@ -101,22 +97,28 @@ export const PostsTable = ({ data, search, navigate }: PostsTableProps) => {
     <div className='flex flex-1 flex-col gap-4'>
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Tìm theo tiêu đề...'
-        searchKey='title'
+        searchPlaceholder='Tim theo duong dan...'
+        searchKey='path'
         filters={[
           {
-            columnId: 'date',
-            title: 'Ngày',
+            columnId: 'createdAt',
+            title: 'Thoi gian',
             type: 'date',
           },
           {
-            columnId: 'category',
-            title: 'Loại',
-            options: categoryOptions,
+            columnId: 'ipAddress',
+            title: 'IP',
+            type: 'string',
+            placeholder: 'Tim theo IP...',
+          },
+          {
+            columnId: 'method',
+            title: 'Method',
+            options: methodOptions,
           },
         ]}
       />
-      <div className='table-scroll overflow-hidden rounded-md border'>
+      <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -154,7 +156,7 @@ export const PostsTable = ({ data, search, navigate }: PostsTableProps) => {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  Không có bài viết.
+                  Khong co log.
                 </TableCell>
               </TableRow>
             )}

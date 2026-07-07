@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { alpha } from './utils'
 
 type BgBlurProps = {
@@ -56,9 +57,8 @@ export function bgGradient(props?: BgGradientProps) {
 
   if (imgUrl) {
     return {
-      background: `linear-gradient(${direction}, ${startColor || color}, ${
-        endColor || color
-      }), url(${imgUrl})`,
+      background: `linear-gradient(${direction}, ${startColor || color}, ${endColor || color
+        }), url(${imgUrl})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
@@ -93,7 +93,7 @@ export const hideScrollbarY = {
   '&::-webkit-scrollbar': {
     display: 'none',
   },
-} as const
+} as CSSProperties
 
 export const hideScrollbarX = {
   msOverflowStyle: 'none',
@@ -102,4 +102,4 @@ export const hideScrollbarX = {
   '&::-webkit-scrollbar': {
     display: 'none',
   },
-} as const
+} as CSSProperties

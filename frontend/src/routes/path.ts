@@ -33,6 +33,10 @@ export const ROUTES = {
     root: 'post',
     list: path(ROOT_CMS, '/post/list'),
   },
+  log: {
+    root: 'log',
+    list: path(ROOT_CMS, '/log/list'),
+  },
   event: {
     root: 'event',
     list: path(ROOT_CMS, '/event/list'),

@@ -7,7 +7,7 @@ import { PostsTable } from './components/posts-table'
 import { getRouteApi } from '@tanstack/react-router'
 import type { NavigateFn } from '@/hooks/use-table-url-state'
 
-const route = getRouteApi('/cms/posts/')
+const route = getRouteApi('/cms/post/list')
 
 const PostsPage = () => {
   const filter = { page: 1 }

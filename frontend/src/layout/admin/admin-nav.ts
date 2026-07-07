@@ -1,4 +1,4 @@
-import { CalendarDays, FilePlus2, Flag, Info, type LucideIcon } from 'lucide-react'
+import { CalendarDays, FilePlus2, FileText, Flag, Info, type LucideIcon } from 'lucide-react'
 import { ROUTES } from '@/routes/path'
 
 export type AdminNavItem = {
@@ -14,6 +14,12 @@ export const adminNavItems: AdminNavItem[] = [
     url: ROUTES.post.list,
     activePrefix: '/cms/post',
     icon: FilePlus2,
+  },
+  {
+    title: 'Logs',
+    url: ROUTES.log.list,
+    activePrefix: '/cms/log',
+    icon: FileText,
   },
   {
     title: 'Sự kiện',

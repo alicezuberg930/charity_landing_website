@@ -137,4 +137,6 @@ const getPageNumbers = (currentPage: number, totalPages: number) => {
   return rangeWithDots
 }
 
-export { cn, showResponseError, slugify, alpha, getPageNumbers }
+const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+
+export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml }

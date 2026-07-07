@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 
 const LoginPage = () => {
     return (
-        <div className="flex min-h-svh w-full items-center justify-center bg-muted/30 p-4">
+        <div className="flex min-h-svh w-full items-center justify-center p-4">
             <Card className="w-full max-w-sm shadow-sm">
                 <CardHeader className="items-center text-center">
                     <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">

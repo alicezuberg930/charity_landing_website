@@ -1,33 +1,24 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import { type Post } from '@/@types/post'
+import moment from 'moment'
+import { postCategoryTitles, type Post } from '@/@types/post'
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/data-table'
 import { DataTableRowActions } from './data-table-row-actions'
-
-const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+import { LazyLoadImage } from '@/components/lazy-load-image'
+import { LongText } from '@/components/long-text'
+import { stripHtml } from '@/lib/utils'
 
 const normalizeDateFilterValue = (value: unknown) => {
   const raw = String(value ?? '').trim()
   if (!raw) return ''
-
-  const dateParts = raw.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/)
-  if (dateParts) {
-    const [, day, month, year] = dateParts
-    return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`
-  }
-
-  const date = new Date(raw)
-  if (Number.isNaN(date.getTime())) return raw.toLowerCase()
-
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  return `${day}-${month}-${date.getFullYear()}`
-}
-
-const formatDateTime = (value?: string) => {
-  if (!value) return '-'
-  const date = new Date(value)
-  return Number.isNaN(date.getTime()) ? value : date.toLocaleString('vi-VN')
+  const date = moment(raw, [
+    'D/M/YYYY',
+    'DD/MM/YYYY',
+    'D-M-YYYY',
+    'DD-MM-YYYY',
+    moment.ISO_8601,
+  ], true)
+  return date.isValid() ? date.format('DD-MM-YYYY') : raw.toLowerCase()
 }
 
 export const postsColumns: ColumnDef<Post>[] = [
@@ -35,9 +26,9 @@ export const postsColumns: ColumnDef<Post>[] = [
     accessorKey: 'title',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Tiêu đề' />,
     cell: ({ row }) => (
-      <div className='max-w-64 line-clamp-3 font-medium'>
+      <LongText className='w-64'>
         {row.original.title}
-      </div>
+      </LongText>
     ),
     enableHiding: false,
   },
@@ -45,25 +36,23 @@ export const postsColumns: ColumnDef<Post>[] = [
     accessorKey: 'description',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Mô tả' />,
     cell: ({ row }) => (
-      <div className='max-w-80 line-clamp-3 text-muted-foreground'>
-        {stripHtml(row.original.description)}
-      </div>
+      <LongText className='w-80'>
+        {(row.original.description)}
+      </LongText>
     ),
   },
   {
     accessorKey: 'date',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Ngày' />,
     cell: ({ row }) => <span className='whitespace-nowrap'>{row.original.date}</span>,
-    filterFn: (row, id, value) =>
-      normalizeDateFilterValue(row.getValue(id)) ===
-      normalizeDateFilterValue(value),
+    filterFn: (row, id, value) => normalizeDateFilterValue(row.getValue(id)) === normalizeDateFilterValue(value),
   },
   {
     accessorKey: 'category',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Loại' />,
     cell: ({ row }) => (
       <Badge variant='outline' className='whitespace-nowrap'>
-        {row.original.category}
+        {postCategoryTitles[row.original.category]}
       </Badge>
     ),
     filterFn: (row, id, value: string[]) => value.includes(row.getValue(id)),
@@ -72,11 +61,17 @@ export const postsColumns: ColumnDef<Post>[] = [
     accessorKey: 'cover',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Ảnh bìa' />,
     cell: ({ row }) => (
-      <div className='h-20 w-28 overflow-hidden rounded-md border bg-muted'>
-        <img
-          src={row.original.cover}
+      <div className='h-24 w-32 rounded-md overflow-hidden'>
+        <LazyLoadImage
+          widths={[
+            { screenWidth: 640, imageWidth: 300 },  // Phone
+            { screenWidth: 1024, imageWidth: 400 },  // Tablet
+            { screenWidth: 1920, imageWidth: 500 },  // Desktop and larger
+          ]}
+          className='hover:scale-105 h-full w-full object-cover'
           alt={row.original.title}
-          className='h-full w-full object-cover'
+          src={row.original.cover}
+          effect='blur'
         />
       </div>
     ),
@@ -86,14 +81,14 @@ export const postsColumns: ColumnDef<Post>[] = [
     accessorKey: 'createdAt',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Ngày tạo' />,
     cell: ({ row }) => (
-      <span className='whitespace-nowrap'>{formatDateTime(row.original.createdAt)}</span>
+      <span className='whitespace-nowrap'>{moment(row.original.createdAt).format('DD/MM/YYYY HH:mm:ss')}</span>
     ),
   },
   {
     accessorKey: 'updatedAt',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Ngày cập nhật' />,
     cell: ({ row }) => (
-      <span className='whitespace-nowrap'>{formatDateTime(row.original.updatedAt)}</span>
+      <span className='whitespace-nowrap'>{moment(row.original.updatedAt).format('DD/MM/YYYY HH:mm:ss')}</span>
     ),
   },
   {

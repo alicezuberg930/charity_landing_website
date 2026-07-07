@@ -2,6 +2,8 @@ import { Link } from '@tanstack/react-router'
 import { slugify } from "@/lib/utils"
 import type { Post } from '@/@types/post'
 import LazyLoadImage from '@/components/lazy-load-image/LazyLoadImage'
+import { stripHtml } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
 
 type ActivityListProps = {
   posts: Post[]
@@ -18,9 +20,9 @@ const ActivityList = ({ posts }: ActivityListProps) => {
               to={`/${post.category}/${slugify(post.title)}-${post._id}`}
               state={(prev) => ({ ...prev, details: post })}
             >
-              <div className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-2 z-1'>
-                <span className='text-white text-xs'>{post.date}</span>
-              </div>
+              <Badge className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-3 z-1'>
+                {post.date}
+              </Badge>
 
               <div className='shadow-md space-y-3 rounded-lg overflow-hidden'>
                 <div className='w-full h-72 overflow-hidden'>
@@ -38,7 +40,7 @@ const ActivityList = ({ posts }: ActivityListProps) => {
                 </div>
                 <div className='space-y-3 p-3'>
                   <h5 className='line-clamp-1 text-lg font-bold'>{post.title}</h5>
-                  <p className='line-clamp-2'>{post.description}</p>
+                  <p className='line-clamp-2'>{stripHtml(post.description)}</p>
                 </div>
               </div>
             </Link>
