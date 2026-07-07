@@ -14,7 +14,7 @@ interface RHFInputRangeProps {
   rightInut?: React.ComponentProps<'input'>
 }
 
-export default function RHFInputRange({
+export const RHFInputRange = ({
   name,
   min,
   max,
@@ -23,7 +23,7 @@ export default function RHFInputRange({
   container,
   leftInput,
   rightInut,
-}: Readonly<RHFInputRangeProps>) {
+}: Readonly<RHFInputRangeProps>) => {
   const { control } = useFormContext()
 
   return (

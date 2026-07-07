@@ -21,11 +21,11 @@ type RFHStyledSelectProps = {
   }[]
 }
 
-export function RFHStyledSelect({
+export const RFHStyledSelect = ({
   name,
   fieldLabel,
   groups,
-}: RFHStyledSelectProps) {
+}: RFHStyledSelectProps) => {
   const { control } = useFormContext()
   const items = groups.flatMap((group) => group.items)
 
@@ -71,13 +71,13 @@ type RHFSelectProps = React.ComponentProps<'select'> & {
   children: React.ReactNode
 }
 
-export function RHFSelect({
+export const RHFSelect = ({
   name,
   fieldLabel,
   children,
   size, // Destructure size to prevent it from being passed to NativeSelect
   ...other
-}: RHFSelectProps) {
+}: RHFSelectProps) => {
   const { control } = useFormContext()
 
   return (
@@ -103,12 +103,12 @@ type RHFMultiSelectProps = Omit<MultiSelectProps, 'onValueChange'> & {
   fieldLabel: string
 }
 
-export function RHFMultiSelect({
+export const RHFMultiSelect = ({
   name,
   fieldLabel,
   children,
   ...other
-}: RHFMultiSelectProps) {
+}: RHFMultiSelectProps) => {
   const { control } = useFormContext()
 
   return (

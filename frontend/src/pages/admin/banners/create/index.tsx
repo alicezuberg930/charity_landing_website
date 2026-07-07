@@ -1,4 +1,4 @@
-import HandleBannerBody from "@/components/HandleBannerBody"
+import HandleBannerBody from "../components/handle-banner"
 
 const CreateBannerPage = () => {
     return (<HandleBannerBody selectedBanner={undefined} />)

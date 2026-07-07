@@ -1,24 +1,29 @@
 import { lazy, useEffect, useState, type FormEvent } from 'react'
-import { DatePicker } from './date-picker'
-import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
-import { useUploadFileHook } from '../hooks/file.hook'
-import { useCreatePostHook, useUpdatePostHook } from '../hooks/post.hook'
+import { DatePicker } from '../../../../components/date-picker'
+import { useUploadFileHook } from '../../../../hooks/file.hook'
+import { useCreatePostHook, useUpdatePostHook } from '../../../../hooks/post.hook'
 import { LoadingOverlay } from '@/layout/admin'
 import { Input } from '@/components/ui/input'
+import {
+    Upload,
+    createUploadImage,
+    isLocalUploadImage,
+    type UploadImage,
+} from '@/components/upload'
 import type { Post, PostPayload } from '@/@types/post'
 
-const CKEditor = lazy(() => import('./ck-editor').then((module) => ({ default: module.CKEditor })))
+const CKEditor = lazy(() => import('../../../../components/ck-editor').then((module) => ({ default: module.CKEditor })))
 
-type HandlePostBodyProps = {
+type HandlePostProps = {
     selectedPost?: Post
 }
 
-const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
+const HandlePost = ({ selectedPost }: HandlePostProps) => {
     const [isProcessing, setIsProcessing] = useState(false)
     const [description, setDescription] = useState<string | null>(null)
-    const [cover, setCover] = useState<PickedImage[]>([])
+    const [cover, setCover] = useState<UploadImage | null>(null)
     const upload = useUploadFileHook()
-    const [images, setImages] = useState<PickedImage[]>([])
+    const [images, setImages] = useState<UploadImage[]>([])
     const create = useCreatePostHook()
     const update = useUpdatePostHook()
     const [date, setDate] = useState(new Date())
@@ -27,10 +32,8 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
         if (selectedPost !== undefined) {
             const [day, month, year] = selectedPost.date.split("/").map(Number);
             setDate(new Date(year, month - 1, day))
-            const detailImages: PickedImage[] = []
-            selectedPost.images.forEach(image => { detailImages.push({ file: null, url: image }) })
-            setCover([{ file: null, url: selectedPost.cover }])
-            setImages(detailImages)
+            setCover(selectedPost.cover)
+            setImages(selectedPost.images)
             setDescription(selectedPost.description)
         }
     }, [selectedPost])
@@ -40,11 +43,11 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
         setIsProcessing(true)
         const form = new FormData(e.currentTarget)
         const entries: Record<string, FormDataEntryValue> = Object.fromEntries(form.entries())
-        let coverUrl = cover[0]?.url ?? ''
-        let imageUrls = images.map(image => image.url)
-        if (cover.length > 0 && cover[0].file != null) {
+        let coverUrl = typeof cover === 'string' ? cover : ''
+        let imageUrls = images.filter((image): image is string => typeof image === 'string')
+        if (isLocalUploadImage(cover)) {
             const coverForm = new FormData()
-            coverForm.set('files', cover[0].file)
+            coverForm.set('files', cover)
             await new Promise(resolve => {
                 upload.mutate({ file: coverForm }, {
                     onSuccess(data) {
@@ -54,13 +57,14 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
                 })
             })
         }
-        if (images.length > 0) {
+        const localImages = images.filter(isLocalUploadImage)
+        if (localImages.length > 0) {
             const imagesForm = new FormData()
-            images.forEach((image) => { if (image.file != null) imagesForm.append('files', image.file) })
+            localImages.forEach((image) => imagesForm.append('files', image))
             await new Promise(resolve => {
                 upload.mutate({ file: imagesForm }, {
                     onSuccess(data) {
-                        imageUrls = data.data
+                        imageUrls = [...imageUrls, ...data.data]
                         resolve(null)
                     }
                 })
@@ -115,13 +119,37 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Ảnh bìa</span>
                     <div className='mt-2 p-3 bg-gray-100 rounded-md'>
-                        <CustomImagePicker isMultiple={false} images={cover} setImages={setCover} id='cover' />
+                        <Upload
+                            accept={{ 'image/*': [] }}
+                            file={cover}
+                            onDrop={(acceptedFiles) => {
+                                const file = acceptedFiles[0]
+                                if (file) setCover(createUploadImage(file))
+                            }}
+                            onDelete={() => setCover(null)}
+                        />
                     </div>
                 </div>
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Ảnh chi tiết</span>
                     <div className='mt-2 p-3 bg-gray-100 rounded-md'>
-                        <CustomImagePicker limit={99} images={images} setImages={setImages} id='images' />
+                        <Upload
+                            multiple
+                            thumbnail
+                            accept={{ 'image/*': [] }}
+                            maxFiles={99}
+                            files={images}
+                            onDrop={(acceptedFiles) => {
+                                setImages((prev) => [
+                                    ...prev,
+                                    ...acceptedFiles.map(createUploadImage),
+                                ].slice(0, 99))
+                            }}
+                            onRemove={(file) => {
+                                setImages((prev) => prev.filter((image) => image !== file))
+                            }}
+                            onRemoveAll={() => setImages([])}
+                        />
                     </div>
                 </div>
                 <button type='submit' className='rounded-md px-6 py-2 bg-main-color '>
@@ -133,4 +161,4 @@ const HandlePostBody = ({ selectedPost }: HandlePostBodyProps) => {
     )
 }
 
-export default HandlePostBody
+export default HandlePost

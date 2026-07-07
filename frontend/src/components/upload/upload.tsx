@@ -69,6 +69,7 @@ export default function Upload({
 
       {hasFile && onDelete && (
         <Button
+          type='button'
           size='sm'
           onClick={onDelete}
           className='absolute top-4 right-4 z-10 bg-gray-900/70 text-white/80 hover:bg-gray-900/50'
@@ -89,13 +90,13 @@ export default function Upload({
 
           <div className='flex justify-end gap-1.5'>
             {onRemoveAll && (
-              <Button variant='outline' size='sm' onClick={onRemoveAll}>
+              <Button type='button' variant='outline' size='sm' onClick={onRemoveAll}>
                 Remove all
               </Button>
             )}
 
             {onUpload && (
-              <Button size='sm' onClick={onUpload}>
+              <Button type='button' size='sm' onClick={onUpload}>
                 Upload files
               </Button>
             )}

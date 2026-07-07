@@ -4,9 +4,7 @@ import type {
   OnChangeFn,
   PaginationState,
 } from '@tanstack/react-table'
-    // "@tanstack/react-table": "8.21.3",
-    // "react-hook-form": "7.72.0",
-    // "zod": "4.3.6",
+
 type SearchRecord = Record<string, unknown>
 
 export type NavigateFn = (opts: {

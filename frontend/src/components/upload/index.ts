@@ -1,4 +1,5 @@
 export * from './types'
+export * from './utils'
 export { default as RejectionFiles } from './errors/rejection-files'
 export { default as AvatarPreview } from './preview/avatar-preview'
 export { default as MultiFilePreview } from './preview/multi-file-preview'

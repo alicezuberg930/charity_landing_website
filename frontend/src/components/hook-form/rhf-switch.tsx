@@ -10,13 +10,13 @@ type RHFSwitchProps = {
   className?: string
 }
 
-export default function RHFSwitch({
+export const RHFSwitch = ({
   name,
   label,
   helperText,
   disabled,
   className,
-}: Readonly<RHFSwitchProps>) {
+}: Readonly<RHFSwitchProps>) => {
   const { control } = useFormContext()
 
   return (

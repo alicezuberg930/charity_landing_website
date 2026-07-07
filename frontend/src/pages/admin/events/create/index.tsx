@@ -1,14 +1,19 @@
 import { useState, type FormEvent } from 'react'
-import CustomImagePicker, { type PickedImage } from '../../../../components/CustomImagePicker'
 import { useUploadFileHook } from '../../../../hooks/file.hook'
 import { useCreateEventHook } from '../../../../hooks/event.hook'
 import { LoadingOverlay } from '@/layout/admin'
 import { Switch } from '@/components/ui/switch'
+import {
+  Upload,
+  createUploadImage,
+  isLocalUploadImage,
+  type UploadImage,
+} from '@/components/upload'
 import type { EventPayload } from '@/@types/event'
 
 const CreateEventPage = () => {
   const [isProcessing, setIsProcessing] = useState(false)
-  const [image, setImage] = useState<PickedImage[]>([])
+  const [image, setImage] = useState<UploadImage | null>(null)
   const upload = useUploadFileHook()
   const create = useCreateEventHook()
   const [isActive, setIsActive] = useState(false)
@@ -17,9 +22,9 @@ const CreateEventPage = () => {
     e.preventDefault()
     setIsProcessing(true)
     let imageUrl = ""
-    if (image.length > 0 && image[0].file != null) {
+    if (isLocalUploadImage(image)) {
       const imageForm = new FormData()
-      imageForm.set("files", image[0].file)
+      imageForm.set("files", image)
       await new Promise(resolve => {
         upload.mutate({ file: imageForm }, {
           onSuccess(data) {
@@ -54,11 +59,14 @@ const CreateEventPage = () => {
         <div className='h-fit'>
           <span className='font-semibold text-lg'>Ảnh</span>
           <div className='mt-2 p-3 bg-gray-100 rounded-md'>
-            <CustomImagePicker
-              isMultiple={false}
-              images={image}
-              setImages={setImage}
-              id='image'
+            <Upload
+              accept={{ 'image/*': [] }}
+              file={image}
+              onDrop={(acceptedFiles) => {
+                const file = acceptedFiles[0]
+                if (file) setImage(createUploadImage(file))
+              }}
+              onDelete={() => setImage(null)}
             />
           </div>
         </div>

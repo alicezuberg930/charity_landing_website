@@ -1,19 +1,24 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import CustomImagePicker, { type PickedImage } from './CustomImagePicker'
-import { useUploadFileHook } from '../hooks/file.hook'
-import { useCreateBannerHook, useUpdateBannerHook } from '../hooks/banner.hook'
+import { useUploadFileHook } from '../../../../hooks/file.hook'
+import { useCreateBannerHook, useUpdateBannerHook } from '../../../../hooks/banner.hook'
 import { LoadingOverlay } from '@/layout/admin'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
+import {
+    Upload,
+    createUploadImage,
+    isLocalUploadImage,
+    type UploadImage,
+} from '@/components/upload'
 import type { Banner, BannerPayload } from '@/@types/banner'
 
-type HandleBannerBodyProps = {
+type HandleBannerProps = {
     selectedBanner?: Banner
 }
 
-const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
+const HandleBanner = ({ selectedBanner }: HandleBannerProps) => {
     const [isProcessing, setIsProcessing] = useState(false)
-    const [image, setImage] = useState<PickedImage[]>([])
+    const [image, setImage] = useState<UploadImage | null>(null)
     const upload = useUploadFileHook()
     const create = useCreateBannerHook()
     const update = useUpdateBannerHook()
@@ -21,7 +26,7 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
 
     useEffect(() => {
         if (selectedBanner !== undefined) {
-            setImage([{ file: null, url: selectedBanner.image }])
+            setImage(selectedBanner.image)
             setIsActive(selectedBanner.isActive)
         }
     }, [selectedBanner])
@@ -30,10 +35,10 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         const entries: Record<string, FormDataEntryValue> = Object.fromEntries(form.entries())
-        let imageUrl: string = image[0]?.url ?? ''
-        if (image.length > 0 && image[0].file != null) {
+        let imageUrl = typeof image === 'string' ? image : ''
+        if (isLocalUploadImage(image)) {
             const imageForm = new FormData()
-            imageForm.set("files", image[0].file)
+            imageForm.set("files", image)
             await new Promise<void>(resolve => {
                 upload.mutate({ file: imageForm }, {
                     onSuccess(data) {
@@ -76,11 +81,14 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
                 <div className='h-fit'>
                     <span className='font-semibold text-lg'>Ảnh</span>
                     <div className='mt-2 p-3 bg-gray-100 rounded-md'>
-                        <CustomImagePicker
-                            isMultiple={false}
-                            images={image}
-                            setImages={setImage}
-                            id='image'
+                        <Upload
+                            accept={{ 'image/*': [] }}
+                            file={image}
+                            onDrop={(acceptedFiles) => {
+                                const file = acceptedFiles[0]
+                                if (file) setImage(createUploadImage(file))
+                            }}
+                            onDelete={() => setImage(null)}
                         />
                     </div>
                 </div>
@@ -93,4 +101,4 @@ const HandleBannerBody = ({ selectedBanner }: HandleBannerBodyProps) => {
     )
 }
 
-export default HandleBannerBody
+export default HandleBanner

@@ -40,6 +40,7 @@ export default function MultiFilePreview({
 
               {onRemove && (
                 <Button
+                  type='button'
                   size={'icon-sm'}
                   variant='ghost'
                   className='absolute top-1 right-1 rounded-full bg-gray-900/60 hover:bg-gray-900/70'
@@ -75,6 +76,7 @@ export default function MultiFilePreview({
 
             {onRemove && (
               <Button
+                type='button'
                 size={'icon-sm'}
                 variant='ghost'
                 className='absolute top-1 right-1 h-8 w-8 rounded-full bg-gray-900/60 hover:bg-gray-900/70'

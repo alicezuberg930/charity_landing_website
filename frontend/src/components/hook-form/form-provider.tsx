@@ -7,12 +7,12 @@ type Props = {
   id?: string
 }
 
-export default function FormProvider({
+export const FormProvider = ({
   children,
   onSubmit,
   methods,
   id,
-}: Readonly<Props>) {
+}: Readonly<Props>) => {
   return (
     <Form {...methods}>
       <form onSubmit={onSubmit} id={id}>

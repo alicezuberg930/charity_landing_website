@@ -16,13 +16,13 @@ type RHFDatePickerProps = Omit<DayPickerProps, 'mode'> & {
   fieldLabel: string
 }
 
-export function RHFSingleDatePicker({
+export const RHFSingleDatePicker = ({
   placeholder,
   name,
   fieldLabel,
   withTime = false,
   ...other
-}: RHFDatePickerProps) {
+}: RHFDatePickerProps) => {
   const { control } = useFormContext()
 
   return (
@@ -106,12 +106,12 @@ export function RHFSingleDatePicker({
   )
 }
 
-export function RHFRangeDatePicker({
+export const RHFRangeDatePicker = ({
   name,
   fieldLabel,
   placeholder,
   ...other
-}: RHFDatePickerProps) {
+}: RHFDatePickerProps) => {
   const { control } = useFormContext()
 
   return (

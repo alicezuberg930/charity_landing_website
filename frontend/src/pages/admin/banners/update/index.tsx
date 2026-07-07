@@ -1,6 +1,6 @@
 import { useParams } from "@tanstack/react-router"
 import { useGetBannerDetailsHook } from "../../../../hooks/banner.hook"
-import HandleBannerBody from "@/components/HandleBannerBody"
+import HandleBannerBody from "@/pages/admin/banners/components/handle-banner"
 
 const UpdateCreateBannerPage = () => {
     const { id } = useParams({ strict: false }) as { id?: string }

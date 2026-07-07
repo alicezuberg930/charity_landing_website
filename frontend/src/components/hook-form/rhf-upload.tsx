@@ -10,7 +10,7 @@ interface Props extends Omit<UploadProps, 'file'> {
   fieldLabel: string
 }
 
-export function RHFUploadAvatar({ name, ...other }: Readonly<Props>) {
+export const RHFUploadAvatar = ({ name, ...other }: Readonly<Props>) => {
   const { control } = useFormContext()
 
   return (
@@ -33,13 +33,13 @@ export function RHFUploadAvatar({ name, ...other }: Readonly<Props>) {
   )
 }
 
-export function RHFUpload({
+export const RHFUpload = ({
   name,
   multiple,
   helperText,
   fieldLabel,
   ...other
-}: Readonly<Props>) {
+}: Readonly<Props>) => {
   const { control } = useFormContext()
 
   return (

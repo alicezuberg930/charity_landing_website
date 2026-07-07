@@ -1,6 +1,6 @@
 import { useParams } from "@tanstack/react-router"
 import { useGetPostDetailsHook } from "../../../../hooks/post.hook"
-import HandlePostBody from "@/components/HandlePostBody"
+import HandlePostBody from "@/pages/admin/posts/components/handle-post"
 
 const UpdatePostPage = () => {
     const { id } = useParams({ strict: false }) as { id?: string }
