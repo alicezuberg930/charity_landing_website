@@ -57,29 +57,29 @@ export const LogsDeleteDialog = ({
         <DialogHeader className='text-start'>
           <DialogTitle className='text-destructive'>
             <AlertTriangle className='me-1 inline-block stroke-destructive' size={18} />
-            Xoa log
+            Xóa log
           </DialogTitle>
           <DialogDescription>
-            Thao tac nay se xoa vinh vien log da chon.
+            Thao tác này sẽ xóa vĩnh viễn log đã chọn.
           </DialogDescription>
         </DialogHeader>
         <div className='space-y-4'>
           <p>
-            Nhap lai duong dan{' '}
-            <span className='font-semibold'>{confirmValue}</span> de xac nhan.
+            Nhập lại đường dẫn{' '}
+            <span className='font-semibold'>{confirmValue}</span> để xác nhận.
           </p>
           <Field>
-            <FieldLabel>Duong dan</FieldLabel>
+            <FieldLabel>Đường dẫn</FieldLabel>
             <Input
               value={value}
               onChange={(event) => setValue(event.target.value)}
-              placeholder='Nhap duong dan de xac nhan'
+              placeholder='Nhập đường dẫn để xác nhận'
             />
           </Field>
           <Alert variant='destructive'>
-            <AlertTitle>Canh bao</AlertTitle>
+            <AlertTitle>Cảnh báo</AlertTitle>
             <AlertDescription>
-              Log da xoa khong the khoi phuc.
+              Log đã xóa không thể khôi phục.
             </AlertDescription>
           </Alert>
         </div>
@@ -90,7 +90,7 @@ export const LogsDeleteDialog = ({
             disabled={!isConfirmed || remove.isPending}
             onClick={handleDelete}
           >
-            {remove.isPending ? 'Dang xoa...' : 'Xoa'}
+            {remove.isPending ? 'Đang xóa...' : 'Xóa'}
           </Button>
         </DialogFooter>
       </DialogContent>

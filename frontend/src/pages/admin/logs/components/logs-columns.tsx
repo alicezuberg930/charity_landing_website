@@ -22,7 +22,7 @@ const normalizeDateFilterValue = (value: unknown) => {
 export const logsColumns: ColumnDef<RequestLog>[] = [
   {
     accessorKey: 'method',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Phuong thuc' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Method' />,
     cell: ({ row }) => (
       <Badge variant='outline' className='whitespace-nowrap'>
         {row.original.method}
@@ -33,7 +33,7 @@ export const logsColumns: ColumnDef<RequestLog>[] = [
   },
   {
     accessorKey: 'path',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Duong dan' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Path' />,
     cell: ({ row }) => (
       <LongText className='w-40'>
         {row.original.path}
@@ -44,7 +44,7 @@ export const logsColumns: ColumnDef<RequestLog>[] = [
   },
   {
     accessorKey: 'ipAddress',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Dia chi IP' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='IP Address' />,
     cell: ({ row }) => (
       <span className='whitespace-nowrap'>{row.original.ipAddress}</span>
     ),
@@ -53,7 +53,7 @@ export const logsColumns: ColumnDef<RequestLog>[] = [
   },
   {
     accessorKey: 'userAgent',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='User agent' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='User Agent' />,
     cell: ({ row }) => (
       <LongText className='w-90'>
         {row.original.userAgent}
@@ -71,7 +71,7 @@ export const logsColumns: ColumnDef<RequestLog>[] = [
   },
   {
     accessorKey: 'createdAt',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Thoi gian' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Created At' />,
     cell: ({ row }) => (
       <span className='whitespace-nowrap'>{moment(row.original.createdAt).format('DD/MM/YYYY HH:mm:ss')}</span>
     ),

@@ -38,7 +38,7 @@ export const DataTableRowActions = ({ row }: DataTableRowActionsProps) => {
             setOpen('delete')
           }}
         >
-          Xoa
+          Xóa
           <DropdownMenuShortcut>
             <Trash2 size={16} />
           </DropdownMenuShortcut>

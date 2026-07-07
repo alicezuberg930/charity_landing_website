@@ -182,7 +182,8 @@ const DonationSlider = () => {
               <div className='bg-gray-100 rounded-md overflow-hidden'>
                 <div className='aspect-square overflow-hidden'>
                   <LazyLoadImage
-                    alt={item.image}
+                    alt={item.name}
+                    src={item.image}
                     className='w-full h-full object-cover hover:scale-110 transition-all duration-1000'
                     effect='blur'
                   />

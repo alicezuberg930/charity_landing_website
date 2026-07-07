@@ -27,7 +27,7 @@ import moment from 'moment'
 type PostFormValues = {
   title: string
   description: string
-  date: Date
+  date?: Date
   category: PostCategory
   cover: UploadImage | null
 }
@@ -45,11 +45,9 @@ const postFormSchema = z.object({
 
 const zodResolver: Resolver<PostFormValues> = async (values) => {
   const result = postFormSchema.safeParse(values)
-
   if (result.success) {
     return { values: result.data, errors: {} }
   }
-
   return {
     values: {},
     errors: result.error.issues.reduce<Record<string, { type: string; message: string }>>((errors, issue) => {
@@ -68,7 +66,7 @@ const zodResolver: Resolver<PostFormValues> = async (values) => {
 const defaultValues = (post?: Post): PostFormValues => ({
   title: post?.title ?? '',
   description: post?.description ?? '',
-  date: moment(post?.date, 'DD/MM/YYYY', true).toDate(),
+  date: post?.date ? moment(post.date, 'DD/MM/YYYY', true).toDate() : undefined,
   category: post?.category ?? 'chao-tinh-thuong',
   cover: post?.cover ?? null,
 })

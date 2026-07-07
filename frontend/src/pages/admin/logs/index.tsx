@@ -20,7 +20,7 @@ const LogsPage = () => {
         <div className='space-y-4'>
           <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
             <div className='w-full'>
-              <span className='text-xl font-bold'>Danh sach log</span>
+              <span className='text-xl font-bold'>Danh sách log</span>
             </div>
           </div>
           {isLoading ? (
