@@ -9,8 +9,6 @@ import { PublicLayout } from "@/layout/public"
 const LoginPage = lazy(() => import('@/pages/admin/login'))
 const AdminPage = lazy(() => import('@/layout/admin/admin-layout'))
 const PostsPage = lazy(() => import('@/pages/admin/posts'))
-const UpdatePostPage = lazy(() => import('@/pages/admin/posts/update'))
-const CreatePostPage = lazy(() => import('@/pages/admin/posts/create'))
 const BannersPage = lazy(() => import('@/pages/admin/banners'))
 const CreateBannerPage = lazy(() => import('@/pages/admin/banners/create'))
 const UpdateBannerPage = lazy(() => import('@/pages/admin/banners/update'))
@@ -76,8 +74,6 @@ const cmsChildRoutes = [
     createRoute({ getParentRoute: () => cmsRoute, path: '/', component: () => <Navigate to='/cms/post/list' replace /> }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'post', component: () => <Navigate to='/cms/post/list' replace /> }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'post/list', component: lazyRoute(PostsPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/new', component: lazyRoute(CreatePostPage) }),
-    createRoute({ getParentRoute: () => cmsRoute, path: 'post/edit/$id', component: lazyRoute(UpdatePostPage) }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'banner', component: () => <Navigate to='/cms/banner/list' replace /> }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'banner/list', component: lazyRoute(BannersPage) }),
     createRoute({ getParentRoute: () => cmsRoute, path: 'banner/new', component: lazyRoute(CreateBannerPage) }),

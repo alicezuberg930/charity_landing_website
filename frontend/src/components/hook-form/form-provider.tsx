@@ -3,7 +3,7 @@ import { FormProvider as Form, type UseFormReturn } from 'react-hook-form'
 type Props = {
   children: React.ReactNode
   methods: UseFormReturn<any>
-  onSubmit?: VoidFunction
+  onSubmit?: React.FormEventHandler<HTMLFormElement>
   id?: string
 }
 

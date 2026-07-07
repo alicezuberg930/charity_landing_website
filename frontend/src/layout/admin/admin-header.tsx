@@ -13,13 +13,13 @@ import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { getAdminPageTitle } from './admin-nav'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { ProfileDropdown } from './profile-dropdown'
+import { ProfileDropdown } from '../../components/profile-dropdown'
 
 const AdminHeader = () => {
   const pageTitle = useRouterState({ select: (state) => getAdminPageTitle(state.location.pathname) })
 
   return (
-    <header className='sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/75'>
+    <header className='sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/75'>
       <SidebarTrigger />
       <Separator orientation='vertical' className='h-full' />
 

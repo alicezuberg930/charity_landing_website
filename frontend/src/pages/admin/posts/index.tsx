@@ -1,114 +1,41 @@
-import { Link } from '@tanstack/react-router'
-import { CirclePlus, Pencil } from 'lucide-react'
-import { useDeletePostHook, useGetPostsHook } from '../../../hooks/post.hook'
+import { useGetPostsHook } from '../../../hooks/post.hook'
 import { ShimmerList } from '@/layout/common'
-import { ROUTES } from '@/routes/path'
-import { DeleteConfirmPopover } from '@/layout/admin'
-import { Input } from '@/components/ui/input'
+import { PostsDialogs } from './components/posts-dialogs'
+import { PostsPrimaryButtons } from './components/posts-primary-buttons'
+import { PostsProvider } from './components/posts-provider'
+import { PostsTable } from './components/posts-table'
+import { getRouteApi } from '@tanstack/react-router'
+import type { NavigateFn } from '@/hooks/use-table-url-state'
+
+const route = getRouteApi('/cms/posts/')
 
 const PostsPage = () => {
   const filter = { page: 1 }
   const { data: posts, isLoading } = useGetPostsHook({ filter })
-  const remove = useDeletePostHook()
-
-  const handleDelete = (id: string) => {
-    remove.mutate({ id })
-  }
+  const search = route.useSearch()
+  const navigate = route.useNavigate() as NavigateFn
 
   return (
-    <div className='rounded-md p-4'>
-      <div className='space-y-4'>
-        <div className='w-full'>
-          <span className='text-xl font-bold'>Bài viết về hoạt động</span>
-        </div>
-        <div className='flex md:flex-row flex-col justify-between gap-2 text-white'>
-          <div className='flex items-center gap-4 mb-4 md:mb-0'>
-            <div>
-              <Input placeholder='Tìm kiếm' type='text' className='shadow-md' />
+    <PostsProvider>
+      <div className='rounded-md p-4'>
+        <div className='space-y-4'>
+          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+            <div className='w-full'>
+              <span className='text-xl font-bold'>Bài viết về hoạt động</span>
             </div>
+            <PostsPrimaryButtons />
           </div>
-          <Link to={ROUTES.post.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
-            <CirclePlus size={20} />
-            <span className='pl-2'>Thêm mới</span>
-          </Link>
+          {isLoading ? (
+            <div className='rounded-md border p-3'>
+              <ShimmerList />
+            </div>
+          ) : (
+            <PostsTable data={posts?.data ?? []} search={search} navigate={navigate} />
+          )}
         </div>
-        <div className='shadow-lg rounded-lg overflow-hidden'>
-          <table className='w-full'>
-            <thead>
-              <tr className='text-sm text-gray-500 uppercase border-b bg-gray-100'>
-                <th className='px-3 py-2 text-start'>
-                  <span>STT</span>
-                </th>
-                <th className='px-3 py-2 text-start w-52'>
-                  <span>Tiêu đề</span>
-                </th>
-                <th className='px-3 py-2 text-start w-52'>
-                  <span>Mô tả</span>
-                </th>
-                <th className='px-3 py-2 text-start w-36'>
-                  <span>Ảnh bìa</span>
-                </th>
-                <th className='px-3 py-2 text-start'>
-                  <span>Ngày đăng</span>
-                </th>
-                <th className='px-3 py-2 text-start'>
-                  <span>Hành động</span>
-                </th>
-              </tr>
-            </thead>
-
-            <tbody className='divide-y divide-gray-200'>
-              {isLoading ?
-                <tr>
-                  <td colSpan={7}>
-                    <div className='p-3'>
-                      <ShimmerList />
-                    </div>
-                  </td>
-                </tr> : posts && posts.data.map((post, i) => {
-                  return (
-                    <tr key={i} className='font-medium text-sm'>
-                      <td className='px-3 py-2'>
-                        <span>{i + 1}</span>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <span className='w-52 text-ellipsis line-clamp-3'>{post.title}</span>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <span className='w-52 text-ellipsis line-clamp-3'>{post.description}</span>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <div className='w-36 h-44 relative'>
-                          <img src={post.cover} alt={post.cover} className='w-full h-full object-cover' />
-                        </div>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <span>{post.date}</span>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                          <DeleteConfirmPopover onConfirm={() => handleDelete(post._id)} />
-
-                          <Link to={ROUTES.post.edit(post._id)} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
-                            <Pencil size={16} color='#fff' />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
-        </div>
-        {/* Phan trang */}
       </div>
-    </div >
+      <PostsDialogs />
+    </PostsProvider>
   )
 }
 

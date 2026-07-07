@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -24,6 +24,10 @@ export const DatePicker = ({
   withTime = false
 }: DatePickerProps) => {
   const [date, setDate] = useState<Date | undefined>(value)
+
+  useEffect(() => {
+    setDate(value)
+  }, [value])
 
   const handleDateChange = (selectedDate: Date | undefined) => {
     if (!selectedDate) return

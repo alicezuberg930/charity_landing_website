@@ -32,8 +32,6 @@ export const ROUTES = {
   post: {
     root: 'post',
     list: path(ROOT_CMS, '/post/list'),
-    new: path(ROOT_CMS, '/post/new'),
-    edit: (id: string) => path(ROOT_CMS, `/post/edit/${id}`),
   },
   event: {
     root: 'event',

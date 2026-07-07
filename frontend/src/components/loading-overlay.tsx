@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { Spinner } from "../../components/ui/spinner"
+import { Spinner } from "./ui/spinner"
 
 const LoadingOverlay = ({ isLoading }: { isLoading: boolean }) => {
     return (
