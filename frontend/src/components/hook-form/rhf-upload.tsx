@@ -60,6 +60,7 @@ export const RHFUpload = ({
           <Field data-invalid={!!error}>
             <FieldLabel htmlFor={field.name}>{fieldLabel}</FieldLabel>
             <Upload
+              thumbnail
               multiple
               accept={{ 'image/*': [] }}
               files={field.value}

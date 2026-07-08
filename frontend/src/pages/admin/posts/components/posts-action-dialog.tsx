@@ -151,7 +151,7 @@ export const PostsActionDialog = ({
           methods={form}
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className='grid gap-4 md:grid-cols-2'>
+          <div className='grid gap-4 md:grid-cols-1'>
             <RHFTextField
               name='title'
               fieldLabel='Tiêu đề'
@@ -172,6 +172,12 @@ export const PostsActionDialog = ({
             <RHFUpload
               name='cover'
               fieldLabel='Ảnh bìa'
+              accept={{ 'image/*': [] }}
+            />
+            <RHFUpload
+              name='images'
+              multiple
+              fieldLabel='Ảnh sự kiện'
               accept={{ 'image/*': [] }}
             />
           </div>
