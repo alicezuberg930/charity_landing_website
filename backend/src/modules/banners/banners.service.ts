@@ -26,7 +26,12 @@ export class BannersService {
   async findAll(query: QueryBanner) {
     try {
       const { page, isActive } = query
-      const banners = await this.bannerModel.find().sort({ order: 1 })
+      let banners: Banner[] = []
+      const filter: Partial<Record<string, any>> = {}
+      if (isActive) {
+        filter.isActive = isActive
+      }
+      banners = await this.bannerModel.find(filter).sort({ order: 1 })
       return banners
     } catch (error) {
       throw new BadRequestException(error)
