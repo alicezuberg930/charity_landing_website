@@ -35,7 +35,7 @@ type PostFormValues = {
 const postFormSchema = z.object({
   title: z.string().trim().min(1, 'Vui lòng nhập tiêu đề.'),
   description: z.string().trim().min(1, 'Vui lòng nhập nội dung.'),
-  date: z.date(),
+  date: z.date().nullable().refine((date) => date !== null, 'Vui lòng chọn ngày.'),
   category: z.enum(Object.entries(postCategoryTitles).map(p => p[0]) as PostCategory[], 'Định dạng không đúng'),
   cover: z.custom<UploadImage>(
     (value) => typeof value === 'string' || (typeof value === 'object' && value !== null),
@@ -113,7 +113,7 @@ export const PostsActionDialog = ({
       const post: PostPayload = {
         title: values.title,
         description: values.description,
-        date: moment(values.date).format('dd/MM/yyyy'),
+        date: moment(values.date).format('DD/MM/YYYY'),
         category: values.category,
         cover: coverUrl,
       }

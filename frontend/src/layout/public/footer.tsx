@@ -66,7 +66,6 @@ const Footer = () => {
                 title="facebook"
                 src={`https://www.facebook.com/plugins/page.php?href=${information?.data?.facebookUrl}&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
                 className='overflow-hidden h-100 w-full'
-                allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
               />
             </div>
           </div>

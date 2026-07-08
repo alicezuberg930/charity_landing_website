@@ -6,6 +6,7 @@ import { PostsProvider } from './components/posts-provider'
 import { PostsTable } from './components/posts-table'
 import { getRouteApi } from '@tanstack/react-router'
 import type { NavigateFn } from '@/hooks/use-table-url-state'
+import { Main } from '@/layout/admin'
 
 const route = getRouteApi('/cms/post/list')
 
@@ -17,23 +18,21 @@ const PostsPage = () => {
 
   return (
     <PostsProvider>
-      <div className='rounded-md p-4'>
-        <div className='space-y-4'>
-          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-            <div className='w-full'>
-              <span className='text-xl font-bold'>Bài viết về hoạt động</span>
-            </div>
-            <PostsPrimaryButtons />
+      <Main>
+        <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+          <div className='w-full'>
+            <span className='text-xl font-bold'>Bài viết về hoạt động</span>
           </div>
-          {isLoading ? (
-            <div className='rounded-md border p-3'>
-              <ShimmerList />
-            </div>
-          ) : (
-            <PostsTable data={posts?.data ?? []} search={search} navigate={navigate} />
-          )}
+          <PostsPrimaryButtons />
         </div>
-      </div>
+        {isLoading ? (
+          <div className='rounded-md border p-3'>
+            <ShimmerList />
+          </div>
+        ) : (
+          <PostsTable data={posts?.data ?? []} search={search} navigate={navigate} />
+        )}
+      </Main>
       <PostsDialogs />
     </PostsProvider>
   )

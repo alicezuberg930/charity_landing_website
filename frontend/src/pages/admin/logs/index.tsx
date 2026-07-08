@@ -5,6 +5,7 @@ import type { NavigateFn } from '@/hooks/use-table-url-state'
 import { LogsDialogs } from './components/logs-dialogs'
 import { LogsProvider } from './components/logs-provider'
 import { LogsTable } from './components/logs-table'
+import { Main } from '@/layout/admin'
 
 const route = getRouteApi('/cms/log/list')
 
@@ -16,22 +17,20 @@ const LogsPage = () => {
 
   return (
     <LogsProvider>
-      <div className='rounded-md p-4'>
-        <div className='space-y-4'>
-          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-            <div className='w-full'>
-              <span className='text-xl font-bold'>Danh sách log</span>
-            </div>
+      <Main>
+        <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+          <div className='w-full'>
+            <span className='text-xl font-bold'>Danh sách log</span>
           </div>
-          {isLoading ? (
-            <div className='rounded-md border p-3'>
-              <ShimmerList />
-            </div>
-          ) : (
-            <LogsTable data={logs?.data ?? []} search={search} navigate={navigate} />
-          )}
         </div>
-      </div>
+        {isLoading ? (
+          <div className='rounded-md border p-3'>
+            <ShimmerList />
+          </div>
+        ) : (
+          <LogsTable data={logs?.data ?? []} search={search} navigate={navigate} />
+        )}
+      </Main>
       <LogsDialogs />
     </LogsProvider>
   )
