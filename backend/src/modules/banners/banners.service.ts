@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Banner, BannerDocument } from './shemas/banner.schema'
 import { Model } from 'mongoose'
 import { FileService } from '../file/file.service'
-import { FilterBanner } from './dto/filter-banner.dto'
+import { QueryBanner } from './dto/query-banner.dto'
 
 @Injectable()
 export class BannersService {
@@ -23,9 +23,10 @@ export class BannersService {
     }
   }
 
-  async findAll(dto: FilterBanner) {
+  async findAll(query: QueryBanner) {
     try {
-      const banners = await this.bannerModel.find(dto).sort({ order: 1 })
+      const { page, isActive } = query
+      const banners = await this.bannerModel.find().sort({ order: 1 })
       return banners
     } catch (error) {
       throw new BadRequestException(error)

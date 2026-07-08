@@ -1,6 +1,9 @@
 import { IsOptional } from "class-validator";
 
-export class FilterBanner {
+export class QueryBanner {
     @IsOptional()
     isActive: string
+
+    @IsOptional()
+    page: number
 }

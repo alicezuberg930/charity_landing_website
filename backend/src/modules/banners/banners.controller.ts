@@ -3,7 +3,7 @@ import { BannersService } from './banners.service'
 import { BannerData } from './dto/create-banner.dto'
 import { UpdateBannerData } from './dto/update-banner.dto'
 import { ResponseMessage } from 'src/common/decorators/public.decorator'
-import { FilterBanner } from './dto/filter-banner.dto'
+import { QueryBanner } from './dto/query-banner.dto'
 
 @Controller('banners')
 export class BannersController {
@@ -17,8 +17,8 @@ export class BannersController {
 
   @ResponseMessage('Lấy thông tin banner thành công')
   @Get()
-  findAll(@Query() dto: FilterBanner) {
-    return this.bannersService.findAll(dto)
+  findAll(@Query() query: QueryBanner) {
+    return this.bannersService.findAll(query)
   }
 
   @ResponseMessage('Lấy thông tin banner thành công')
