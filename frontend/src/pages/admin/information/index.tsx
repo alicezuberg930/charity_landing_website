@@ -1,81 +1,188 @@
-import { Main } from "@/layout/admin"
-import { useGetInformationHook, useUpdateInformationHook } from "../../../hooks/information.hook"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Pen } from "lucide-react"
+import { useEffect } from 'react'
+import { type Resolver, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Pen } from 'lucide-react'
+import type { WebsiteInformation } from '@/@types/information'
+import { FormProvider, RHFTextField } from '@/components/hook-form'
+import { Button } from '@/components/ui/button'
+import { useGetInformationHook, useUpdateInformationHook } from '@/hooks/information.hook'
+import { Main } from '@/layout/admin'
+
+const informationFormSchema = z.object({
+  activityAddress: z.string().trim(),
+  storageAddress: z.string().trim(),
+  email: z.string().trim(),
+  hotline: z.string().trim(),
+  facebookUrl: z.string().trim(),
+  zaloURL: z.string().trim(),
+  youtubeURL: z.string().trim(),
+  googleMapURL: z.string().trim(),
+  websiteURL: z.string().trim(),
+  achaubankNumber: z.string().trim(),
+  vpbankNumber: z.string().trim(),
+})
+
+type InformationFormValues = z.infer<typeof informationFormSchema>
+
+const zodResolver: Resolver<InformationFormValues> = async (values) => {
+  const result = informationFormSchema.safeParse(values)
+  if (result.success) {
+    return { values: result.data, errors: {} }
+  }
+
+  return {
+    values: {},
+    errors: result.error.issues.reduce<Record<string, { type: string; message: string }>>((errors, issue) => {
+      const fieldName = issue.path[0]
+      if (typeof fieldName === 'string') {
+        errors[fieldName] = {
+          type: issue.code,
+          message: issue.message,
+        }
+      }
+      return errors
+    }, {}),
+  }
+}
+
+const defaultValues = (information?: WebsiteInformation): InformationFormValues => ({
+  activityAddress: information?.activityAddress ?? '',
+  storageAddress: information?.storageAddress ?? '',
+  email: information?.email ?? '',
+  hotline: information?.hotline ?? '',
+  facebookUrl: information?.facebookUrl ?? '',
+  zaloURL: information?.zaloURL ?? '',
+  youtubeURL: information?.youtubeURL ?? '',
+  googleMapURL: information?.googleMapURL ?? '',
+  websiteURL: information?.websiteURL ?? '',
+  achaubankNumber: information?.achaubankNumber ?? '',
+  vpbankNumber: information?.vpbankNumber ?? '',
+})
+
+const informationFields: {
+  name: keyof InformationFormValues
+  label: string
+  placeholder: string
+  type?: string
+}[] = [
+  {
+    name: 'activityAddress',
+    label: 'Địa chỉ nấu cháo',
+    placeholder: 'Nhập địa chỉ nấu cháo',
+  },
+  {
+    name: 'storageAddress',
+    label: 'Địa chỉ kho',
+    placeholder: 'Nhập địa chỉ kho',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    placeholder: 'Nhập email',
+    type: 'email',
+  },
+  {
+    name: 'hotline',
+    label: 'Hotline',
+    placeholder: 'Nhập hotline',
+  },
+  {
+    name: 'facebookUrl',
+    label: 'Trang facebook',
+    placeholder: 'Nhập địa chỉ URL trang facebook',
+  },
+  {
+    name: 'zaloURL',
+    label: 'Trang zalo',
+    placeholder: 'Nhập địa chỉ URL trang zalo',
+  },
+  {
+    name: 'youtubeURL',
+    label: 'Trang youtube',
+    placeholder: 'Nhập địa chỉ URL trang youtube',
+  },
+  {
+    name: 'googleMapURL',
+    label: 'URL google map',
+    placeholder: 'Nhập URL của google map',
+  },
+  {
+    name: 'websiteURL',
+    label: 'Địa chỉ website',
+    placeholder: 'Nhập địa chỉ URL của website',
+  },
+  {
+    name: 'achaubankNumber',
+    label: 'STK Á châu bank',
+    placeholder: 'Nhập STK ngân hàng',
+  },
+  {
+    name: 'vpbankNumber',
+    label: 'STK VP bank',
+    placeholder: 'Nhập STK ngân hàng',
+  },
+]
 
 const InformationPage = () => {
-  const update = useUpdateInformationHook()
+  const updateInformation = useUpdateInformationHook()
   const { data: information } = useGetInformationHook()
+  const form = useForm<InformationFormValues>({
+    resolver: zodResolver,
+    defaultValues: defaultValues(),
+  })
 
-  const handleSubmitForm = async (e) => {
-    e.preventDefault()
-    const form = new FormData(e.currentTarget)
-    const entries = Object.fromEntries(form.entries())
-    const information = { ...entries }
-    update.mutate({ information })
+  const { formState: { isSubmitting } } = form
+
+  useEffect(() => {
+    if (information?.data) {
+      form.reset(defaultValues(information.data))
+    }
+  }, [form, information?.data])
+
+  const onSubmit = async (values: InformationFormValues) => {
+    try {
+      await updateInformation.mutateAsync({ information: values })
+    } catch {
+      // Hook-level onError handlers show the API error.
+    }
   }
 
   return (
     <Main>
-      <div className='flex flex-col gap-1 mb-10'>
+      <div className='mb-10 flex flex-col gap-1'>
         <span className='text-xl font-bold'>Chỉnh sửa thông tin website</span>
         <span className='text-sm text-gray-500'>
           Điền đầy đủ thông tin của website
         </span>
       </div>
 
-      <form onSubmit={handleSubmitForm} className='space-y-6'>
-        <span className='font-semibold text-lg'>Địa chỉ nấu cháo</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ nấu cháo' name='activityAddress' defaultValue={information?.data?.activityAddress} />
+      <FormProvider
+        id='information-form'
+        methods={form}
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className='grid gap-4 md:grid-cols-2'>
+          {informationFields.map((field) => (
+            <RHFTextField
+              key={field.name}
+              name={field.name}
+              fieldLabel={field.label}
+              placeholder={field.placeholder}
+              type={field.type ?? 'text'}
+            />
+          ))}
         </div>
-        <span className='font-semibold text-lg'>Địa chỉ kho</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ kho' name='storageAddress' defaultValue={information?.data?.storageAddress} />
-        </div>
-        <span className='font-semibold text-lg'>Email</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ kho' name='email' defaultValue={information?.data?.email} />
-        </div>
-        <span className='font-semibold text-lg'>Hotline</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập hotline' name='hotline' defaultValue={information?.data?.hotline} />
-        </div>
-        <span className='font-semibold text-lg'>Trang facebook</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ url trang facebook' name='facebookUrl' defaultValue={information?.data?.facebookUrl} />
-        </div>
-        <span className='font-semibold text-lg'>Trang zalo</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ url trang zalo' name='zaloURL' defaultValue={information?.data?.zaloURL} />
-        </div>
-        <span className='font-semibold text-lg'>Trang youtube</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ url trang youtube' name='youtubeURL' defaultValue={information?.data?.youtubeURL} />
-        </div>
-        <span className='font-semibold text-lg'>URL google map</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập url của google map' name='googleMapURL' defaultValue={information?.data?.googleMapURL} />
-        </div>
-        <span className='font-semibold text-lg'>Địa chỉ website</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập địa chỉ URL của website' name='websiteURL' defaultValue={information?.data?.websiteURL} />
-        </div>
-        <span className='font-semibold text-lg'>STK Á châu bank</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập STK ngân hàng' name='achaubankNumber' defaultValue={information?.data?.achaubankNumber} />
-        </div>
-        <span className='font-semibold text-lg'>STK VP bank</span>
-        <div className='mt-2'>
-          <Input type='text' placeholder='Nhập STK ngân hàng' name='vpbankNumber' defaultValue={information?.data?.vpbankNumber} />
-        </div>
-        <Button className='gap-1.5'>
+        <Button
+          type='submit'
+          form='information-form'
+          className='mt-6 gap-1.5'
+          disabled={isSubmitting || updateInformation.isPending}
+        >
           <Pen size={18} />
-          <span>Chỉnh sửa</span>
+          <span>{isSubmitting || updateInformation.isPending ? 'Đang lưu...' : 'Chỉnh sửa'}</span>
         </Button>
-      </form>
-    </Main >
+      </FormProvider>
+    </Main>
   )
 }
 

@@ -1,104 +1,41 @@
-import { Link } from "@tanstack/react-router"
-import { useDeleteBannerHook, useGetBannersHook } from "../../../hooks/banner.hook"
-import { CirclePlus, Pencil } from "lucide-react"
-import { ShimmerList } from "@/layout/common"
-import { ROUTES } from "@/routes/path"
-import { DeleteConfirmPopover } from "@/layout/admin"
-import { Input } from "@/components/ui/input"
+import { getRouteApi } from '@tanstack/react-router'
+import type { NavigateFn } from '@/hooks/use-table-url-state'
+import { useGetBannersHook } from '@/hooks/banner.hook'
+import { Main } from '@/layout/admin'
+import { ShimmerList } from '@/layout/common'
+import { BannersDialogs } from './components/banners-dialogs'
+import { BannersPrimaryButtons } from './components/banners-primary-buttons'
+import { BannersProvider } from './components/banners-provider'
+import { BannersTable } from './components/banners-table'
+
+const route = getRouteApi('/cms/banner/list')
 
 const BannersPage = () => {
-    const { data: banners, isLoading } = useGetBannersHook()
-    const remove = useDeleteBannerHook()
-    const dummy: number[] = []
-    for (let i = 0; i <= 100; i++) {
-        dummy.push(i)
-    }
+  const filter = { page: 1 }
+  const { data: banners, isLoading } = useGetBannersHook(filter)
+  const search = route.useSearch()
+  const navigate = route.useNavigate() as NavigateFn
 
-    const handleDelete = (id: string) => {
-        remove.mutate({ id })
-    }
-
-    return (
-        <div className='rounded-md p-4'>
-            <div className='space-y-4'>
-                <div className='w-full'>
-                    <span className='text-xl font-bold'>Ảnh banner</span>
-                </div>
-                <div className='flex md:flex-row flex-col justify-between gap-2 text-white'>
-                    <div className='flex items-center gap-4 mb-4 md:mb-0'>
-                        <div>
-                            <Input placeholder='Tìm kiếm' type='text' className='shadow-md' />
-                        </div>
-                    </div>
-                    <Link to={ROUTES.banner.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
-                        <CirclePlus size={20} />
-                        <span className='pl-2'>Thêm mới</span>
-                    </Link>
-                </div>
-                <div className='shadow-lg rounded-lg overflow-hidden'>
-                    <table className='w-full'>
-                        <thead>
-                            <tr className='text-sm text-gray-500 uppercase border-b bg-gray-100'>
-                                <th className='px-3 py-2 text-start'>
-                                    <span>STT</span>
-                                </th>
-                                <th className='px-3 py-2 text-start'>
-                                    <span>Thứ tự</span>
-                                </th>
-                                <th className='px-3 py-2 text-start w-60'>
-                                    <span>Ảnh bìa</span>
-                                </th>
-                                <th className='px-3 py-2 text-start'>
-                                    <span>Hành động</span>
-                                </th>
-                            </tr>
-                        </thead>
-
-                        <tbody className='bg-white divide-y divide-gray-200'>
-                            {isLoading ?
-                                <tr>
-                                    <td colSpan={7}>
-                                        <div className='p-3'>
-                                            <ShimmerList />
-                                        </div>
-                                    </td>
-                                </tr> : banners && banners.data.map((banner, i) => {
-                                    return (
-                                        <tr key={i} className='font-medium text-sm'>
-                                            <td className='px-3 py-2'>
-                                                <span>{i}</span>
-                                            </td>
-
-                                            <td className='px-3 py-2'>
-                                                <span>{banner.order}</span>
-                                            </td>
-
-                                            <td className='px-3 py-2'>
-                                                <div className='aspect-video relative'>
-                                                    <img src={banner.image} alt={banner.image} className='w-full h-full object-cover' />
-                                                </div>
-                                            </td>
-
-                                            <td className='px-3 py-2'>
-                                                <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                                                    <DeleteConfirmPopover onConfirm={() => handleDelete(banner._id)} />
-
-                                                    <Link to={ROUTES.banner.edit(banner._id)} className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
-                                                        <Pencil size={16} color='#fff' />
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                {/* Phan trang */}
-            </div>
-        </div >
-    )
+  return (
+    <BannersProvider>
+      <Main>
+        <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+          <div className='w-full'>
+            <span className='text-xl font-bold'>Ảnh banner</span>
+          </div>
+          <BannersPrimaryButtons />
+        </div>
+        {isLoading ? (
+          <div className='rounded-md border p-3'>
+            <ShimmerList />
+          </div>
+        ) : (
+          <BannersTable data={banners?.data ?? []} search={search} navigate={navigate} />
+        )}
+      </Main>
+      <BannersDialogs />
+    </BannersProvider>
+  )
 }
 
 export default BannersPage

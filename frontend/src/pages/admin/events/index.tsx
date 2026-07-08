@@ -1,102 +1,40 @@
-import { Link } from '@tanstack/react-router'
-import { Check, CirclePlus, CircleX, Pencil } from 'lucide-react'
+import { getRouteApi } from '@tanstack/react-router'
+import type { NavigateFn } from '@/hooks/use-table-url-state'
+import { useGetEventsHook } from '@/hooks/event.hook'
+import { Main } from '@/layout/admin'
 import { ShimmerList } from '@/layout/common'
-import { useDeleteEventHook, useGetEventsHook } from '../../../hooks/event.hook'
-import { ROUTES } from '@/routes/path'
-import { DeleteConfirmPopover } from '@/layout/admin'
-import { Input } from '@/components/ui/input'
+import { EventsDialogs } from './components/events-dialogs'
+import { EventsPrimaryButtons } from './components/events-primary-buttons'
+import { EventsProvider } from './components/events-provider'
+import { EventsTable } from './components/events-table'
+
+const route = getRouteApi('/cms/event/list')
 
 const EventsPage = () => {
-  const { data: events, isLoading } = useGetEventsHook({})
-  const remove = useDeleteEventHook()
-  const dummy: number[] = []
-  for (let i = 0; i <= 100; i++) {
-    dummy.push(i)
-  }
-
-  const handleDelete = (id: string) => {
-    remove.mutate({ id })
-  }
+  const filter = { page: 1 }
+  const { data: events, isLoading } = useGetEventsHook({ filter })
+  const search = route.useSearch()
+  const navigate = route.useNavigate() as NavigateFn
 
   return (
-    <div className='bg-white rounded-md p-4'>
-      <div className='space-y-4'>
-        <div className='w-full'>
-          <span className='text-xl font-bold'>Ảnh sự kiện</span>
-        </div>
-        <div className='flex md:flex-row flex-col justify-between gap-2 text-white'>
-          <div className='flex items-center gap-4 mb-4 md:mb-0'>
-            <div>
-              <Input placeholder='Tìm kiếm' type='text' className='shadow-md' />
-            </div>
+    <EventsProvider>
+      <Main>
+        <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+          <div className='w-full'>
+            <span className='text-xl font-bold'>Ảnh sự kiện</span>
           </div>
-          <Link to={ROUTES.event.new} className='flex items-center bg-main-color px-4 rounded-xl w-fit'>
-            <CirclePlus size={20} />
-            <span className='pl-2'>Thêm mới</span>
-          </Link>
+          <EventsPrimaryButtons />
         </div>
-        <div className='shadow-lg rounded-lg overflow-hidden'>
-          <table className='w-full'>
-            <thead>
-              <tr className='text-sm text-gray-500 uppercase border-b bg-gray-100'>
-                <th className='px-3 py-2 text-start'>
-                  <span>STT</span>
-                </th>
-                <th className='px-3 py-2 text-start w-60'>
-                  <span>Ảnh</span>
-                </th>
-                <th className='px-3 py-2 text-start'>
-                  <span>Kích hoạt</span>
-                </th>
-                <th className='px-3 py-2 text-start'>
-                  <span>Hành động</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className='bg-white divide-y divide-gray-200'>
-              {isLoading ?
-                <tr>
-                  <td colSpan={7}>
-                    <div className='p-3'>
-                      <ShimmerList />
-                    </div>
-                  </td>
-                </tr> : events && events.data.map((event, i) => {
-                  return (
-                    <tr key={i} className='font-medium text-sm'>
-                      <td className='px-3 py-2'>
-                        <span>{i}</span>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <div className='aspect-video relative'>
-                          <img src={event.image} alt={event.image} className='w-full h-full object-cover' />
-                        </div>
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        {event.isActive ? <Check size={24} color='green' /> : <CircleX size={24} color='red' />}
-                      </td>
-
-                      <td className='px-3 py-2'>
-                        <div className='flex flex-col sm:flex-row gap-2 w-fit'>
-                          <DeleteConfirmPopover onConfirm={() => handleDelete(event._id)} />
-
-                          <button className='bg-main-color p-3 rounded-lg' title='Sửa thông tin'>
-                            <Pencil size={16} color='#fff' />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
-        </div>
-        {/* Phan trang */}
-      </div>
-    </div >
+        {isLoading ? (
+          <div className='rounded-md border p-3'>
+            <ShimmerList />
+          </div>
+        ) : (
+          <EventsTable data={events?.data ?? []} search={search} navigate={navigate} />
+        )}
+      </Main>
+      <EventsDialogs />
+    </EventsProvider>
   )
 }
 

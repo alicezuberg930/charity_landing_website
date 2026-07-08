@@ -11,10 +11,7 @@ const AdminLayout = lazy(() => import('@/layout/admin/admin-layout'))
 const PostsPage = lazy(() => import('@/pages/admin/posts'))
 const LogsPage = lazy(() => import('@/pages/admin/logs'))
 const BannersPage = lazy(() => import('@/pages/admin/banners'))
-const CreateBannerPage = lazy(() => import('@/pages/admin/banners/create'))
-const UpdateBannerPage = lazy(() => import('@/pages/admin/banners/update'))
 const EventsPage = lazy(() => import('@/pages/admin/events'))
-const CreateEventPage = lazy(() => import('@/pages/admin/events/create'))
 const InformationPage = lazy(() => import('@/pages/admin/information'))
 
 const lazyRoute = (Component: ComponentType) => () => (
@@ -79,11 +76,8 @@ const adminChildRoutes = [
     createRoute({ getParentRoute: () => adminRoute, path: 'log/list', component: lazyRoute(LogsPage) }),
     createRoute({ getParentRoute: () => adminRoute, path: 'banner', component: () => <Navigate to='/cms/banner/list' replace /> }),
     createRoute({ getParentRoute: () => adminRoute, path: 'banner/list', component: lazyRoute(BannersPage) }),
-    createRoute({ getParentRoute: () => adminRoute, path: 'banner/new', component: lazyRoute(CreateBannerPage) }),
-    createRoute({ getParentRoute: () => adminRoute, path: 'banner/edit/$id', component: lazyRoute(UpdateBannerPage) }),
     createRoute({ getParentRoute: () => adminRoute, path: 'event', component: () => <Navigate to='/cms/event/list' replace /> }),
     createRoute({ getParentRoute: () => adminRoute, path: 'event/list', component: lazyRoute(EventsPage) }),
-    createRoute({ getParentRoute: () => adminRoute, path: 'event/new', component: lazyRoute(CreateEventPage) }),
     createRoute({ getParentRoute: () => adminRoute, path: 'information', component: lazyRoute(InformationPage) }),
 ]
 

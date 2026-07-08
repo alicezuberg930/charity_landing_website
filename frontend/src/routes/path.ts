@@ -26,8 +26,6 @@ export const ROUTES = {
   banner: {
     root: 'banner',
     list: path(ROOT_CMS, '/banner/list'),
-    new: path(ROOT_CMS, '/banner/new'),
-    edit: (id: string) => path(ROOT_CMS, `/banner/edit/${id}`),
   },
   post: {
     root: 'post',
@@ -40,7 +38,6 @@ export const ROUTES = {
   event: {
     root: 'event',
     list: path(ROOT_CMS, '/event/list'),
-    new: path(ROOT_CMS, '/event/new'),
     edit: (id: string) => path(ROOT_CMS, `/event/edit/${id}`),
   },
   information: 'information',
