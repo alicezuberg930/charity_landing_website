@@ -49,8 +49,8 @@ export default function Upload({
       <div
         {...getRootProps()}
         className={cn(
-          'relative cursor-pointer rounded-lg border border-dashed border-gray-400 bg-gray-100 p-10 transition-all hover:opacity-70',
-          isDragActive && 'opacity-70',
+          'relative cursor-pointer rounded-lg border border-dashed border-main-color bg-main-color p-10 text-white transition-all hover:opacity-80',
+          isDragActive && 'opacity-80',
           isError && 'border-red-300 bg-red-50 text-red-600',
           disabled && 'pointer-events-none opacity-50',
           hasFile && 'aspect-4/3'
@@ -72,7 +72,8 @@ export default function Upload({
           type='button'
           size='sm'
           onClick={onDelete}
-          className='absolute top-4 right-4 z-10 bg-gray-900/70 text-white/80 hover:bg-gray-900/50'
+          aria-label='Xóa tệp'
+          className='absolute top-4 right-4 z-10 bg-main-color/80 text-white hover:bg-main-color'
         >
           <CircleX width={18} />
         </Button>
@@ -90,14 +91,25 @@ export default function Upload({
 
           <div className='flex justify-end gap-1.5'>
             {onRemoveAll && (
-              <Button type='button' variant='outline' size='sm' onClick={onRemoveAll}>
-                Remove all
+              <Button
+                type='button'
+                variant='outline'
+                size='sm'
+                onClick={onRemoveAll}
+                className='border-main-color text-main-color hover:bg-main-color/10'
+              >
+                Xóa tất cả
               </Button>
             )}
 
             {onUpload && (
-              <Button type='button' size='sm' onClick={onUpload}>
-                Upload files
+              <Button
+                type='button'
+                size='sm'
+                onClick={onUpload}
+                className='bg-main-color text-white hover:bg-main-color/80'
+              >
+                Tải tệp lên
               </Button>
             )}
           </div>
@@ -111,9 +123,6 @@ function Placeholder({
   className,
   ...other
 }: Readonly<React.HTMLAttributes<HTMLDivElement>>) {
-  // const { translate } = useLocales()
-  const translate = (key: string) => key
-
   return (
     <div
       className={cn(
@@ -124,16 +133,16 @@ function Placeholder({
     >
       <UploadIllustration style={{ width: 220 }} />
       <div>
-        <Typography variant='h5'>{translate('drop_or_select_file')}</Typography>
-        <Typography variant='p' className='text-sm text-gray-700'>
-          {translate('drop_files_here_or_click')}
+        <Typography variant='h5'>Kéo thả hoặc chọn tệp</Typography>
+        <Typography variant='p' className='text-sm opacity-80'>
+          Kéo tệp vào đây hoặc bấm
           <Typography
             variant='span'
-            className='text-main-500 mx-1 inline-block underline lg:text-sm'
+            className='mx-1 inline-block underline lg:text-sm'
           >
-            {translate('browse')}
+            chọn tệp
           </Typography>
-          {translate('thorough_your_machine')}
+          từ máy của bạn
         </Typography>
       </div>
     </div>

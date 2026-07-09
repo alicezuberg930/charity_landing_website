@@ -19,7 +19,7 @@ export default function SingleFilePreview({ file }: Readonly<Props>) {
   console.log(imgUrl)
   return (
     <img
-      alt='file preview'
+      alt='Xem trước tệp'
       src={imgUrl}
       className={`absolute top-2 left-2 z-10 h-[calc(100%-16px)] w-[calc(100%-16px)] rounded-lg ${format !== 'image' ? 'object-contain p-8' : 'object-cover'}`}
     />
