@@ -2,8 +2,6 @@ import { type Response as ApiResponse } from '@/@types/response'
 import { HttpError } from './http-error'
 import { InterceptorManager } from './interceptor'
 
-const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2I4NWIyODRkZjBjOGM3YTQzNzY3YTgiLCJlbWFpbCI6IkxpbGlhbmExMjNAZ21haWwuY29tIiwiaWF0IjoxNzQwMTM1MzIxLCJleHAiOjE3NDg3NzUzMjF9.xqJ_u3Pkg_tdTH5VOxDd4_KFbF_DEAu3NXQVXj8X6Vg'
-
 const getBaseUrl = () => {
   const environment = import.meta.env.VITE_ENVIRONMENT
   const productionApi = import.meta.env.VITE_PRODUCTION_API
@@ -71,18 +69,10 @@ export class HttpClient {
 
   private async fetchJson<T = any>(
     url: string,
-    options: RequestInit = {},
-    includeAuth = !isAbsoluteUrl(url)
+    options: RequestInit = {}
   ): Promise<T> {
     const headers = new Headers(options.headers)
     headers.set('Accept', headers.get('Accept') ?? 'application/json')
-
-    if (includeAuth) {
-      headers.set(
-        'Authorization',
-        headers.get('Authorization') ?? `Bearer ${AUTH_TOKEN}`
-      )
-    }
 
     if (options.body !== undefined && !(options.body instanceof FormData)) {
       headers.set(
@@ -162,8 +152,7 @@ export class HttpClient {
         method: 'GET',
         credentials: 'include',
         ...options,
-      },
-      !isAbsoluteUrl(endpoint)
+      }
     )
   }
 
@@ -180,8 +169,7 @@ export class HttpClient {
               : JSON.stringify(body)
             : undefined,
         ...options,
-      },
-      !isAbsoluteUrl(endpoint)
+      }
     )
   }
 
@@ -198,8 +186,7 @@ export class HttpClient {
               : JSON.stringify(body)
             : undefined,
         ...options,
-      },
-      !isAbsoluteUrl(endpoint)
+      }
     )
   }
 
@@ -216,8 +203,7 @@ export class HttpClient {
               : JSON.stringify(body)
             : undefined,
         ...options,
-      },
-      !isAbsoluteUrl(endpoint)
+      }
     )
   }
 
@@ -228,8 +214,7 @@ export class HttpClient {
         method: 'DELETE',
         credentials: 'include',
         ...options,
-      },
-      !isAbsoluteUrl(endpoint)
+      }
     )
   }
 }

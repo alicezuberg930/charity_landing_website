@@ -5,6 +5,7 @@ import './styles/global.css'
 import { Router } from '@/routes'
 import { QueryClientProvider } from './providers/query-client-provider'
 import { ThemeProvider } from './providers/theme-provider'
+import { AuthProvider } from './providers/auth-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <QueryClientProvider>
-        <Router />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>

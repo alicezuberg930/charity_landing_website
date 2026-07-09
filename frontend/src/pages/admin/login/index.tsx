@@ -1,4 +1,7 @@
+import { useNavigate } from '@tanstack/react-router'
+import { useForm } from 'react-hook-form'
 import { HandHeart } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -7,10 +10,62 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
+import { FieldGroup } from '@/components/ui/field'
+import { FormProvider, RHFPasswordField, RHFTextField } from '@/components/hook-form'
+import { useAuth } from '@/providers/auth-provider'
+import { showResponseError } from '@/lib/utils'
+import { type Resolver } from 'react-hook-form'
+import { z } from 'zod'
+
+const loginFormSchema = z.object({
+    username: z.string().trim().min(1, 'Vui lòng nhập email').email('Email không hợp lệ'),
+    password: z.string().min(1, 'Vui lòng nhập mật khẩu'),
+})
+
+type LoginFormValues = z.infer<typeof loginFormSchema>
+
+const loginFormResolver: Resolver<LoginFormValues> = async (values) => {
+    const result = loginFormSchema.safeParse(values)
+    if (result.success) {
+        return { values: result.data, errors: {} }
+    }
+    return {
+        values: {},
+        errors: result.error.issues.reduce<Record<string, { type: string; message: string }>>((errors, issue) => {
+            const fieldName = issue.path[0]
+            if (typeof fieldName === 'string') {
+                errors[fieldName] = {
+                    type: issue.code,
+                    message: issue.message,
+                }
+            }
+            return errors
+        }, {}),
+    }
+}
 
 const LoginPage = () => {
+    const navigate = useNavigate()
+    const { login, isLoggingIn } = useAuth()
+
+    const form = useForm<LoginFormValues>({
+        resolver: loginFormResolver,
+        defaultValues: {
+            username: '',
+            password: '',
+        },
+    })
+
+    const onSubmit = async (values: LoginFormValues) => {
+        try {
+            await login(values)
+            toast.success('Đăng nhập thành công')
+            await navigate({ to: '/cms/post/list' })
+        } catch (error) {
+            showResponseError(error)
+        }
+    }
+
     return (
         <div className="flex min-h-svh w-full items-center justify-center p-4">
             <Card className="w-full max-w-sm shadow-sm">
@@ -22,31 +77,33 @@ const LoginPage = () => {
                     <CardDescription>Ánh sáng từ thiện</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form>
+                    <FormProvider
+                        methods={form}
+                        onSubmit={form.handleSubmit(onSubmit)}
+                    >
                         <FieldGroup>
-                            <Field>
-                                <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
-                                <Input
-                                    id="phone"
-                                    name="phone"
-                                    type="tel"
-                                    autoComplete="username"
-                                />
-                            </Field>
-                            <Field>
-                                <FieldLabel htmlFor="password">Mật khẩu</FieldLabel>
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                />
-                            </Field>
-                            <Button type="submit" className="w-full">
-                                Đăng nhập
+                            <RHFTextField
+                                name="username"
+                                fieldLabel="Email"
+                                type="email"
+                                autoComplete="username"
+                                disabled={isLoggingIn}
+                            />
+                            <RHFPasswordField
+                                name="password"
+                                fieldLabel="Mật khẩu"
+                                autoComplete="current-password"
+                                disabled={isLoggingIn}
+                            />
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={isLoggingIn || form.formState.isSubmitting}
+                            >
+                                {isLoggingIn ? 'Đang đăng nhập...' : 'Đăng nhập'}
                             </Button>
                         </FieldGroup>
-                    </form>
+                    </FormProvider>
                 </CardContent>
             </Card>
         </div>
