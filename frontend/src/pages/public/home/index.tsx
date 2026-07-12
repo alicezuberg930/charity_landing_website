@@ -8,11 +8,11 @@ import { VideoPlayer } from '@/components/video/video-player'
 const HomePage = () => {
   return (
     <div className='mb-12'>
-      {/* <LandingBanner />
+      <LandingBanner />
       <Body />
       <DonationSlider />
-      <GoogleMap /> */}
-      <VideoPlayer videoUrl='/videos/22.07.2018-chao-tinh-thuong.mp4' />
+      <GoogleMap />
+      {/* <VideoPlayer videoUrl='/videos/22.07.2018-chao-tinh-thuong.mp4' /> */}
       <EventDialog />
     </div>
   )
