@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import { useFormContext, Controller } from 'react-hook-form'
 import { CalendarIcon } from 'lucide-react'
 import { type DateRange, type DayPickerProps } from 'react-day-picker'
@@ -8,6 +7,7 @@ import { Calendar } from '../ui/calendar'
 import { Field, FieldError, FieldLabel } from '../ui/field'
 import { Input } from '../ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import { format } from 'date-fns'
 
 type RHFDatePickerProps = Omit<DayPickerProps, 'mode'> & {
   placeholder?: string
@@ -56,12 +56,13 @@ export const RHFSingleDatePicker = ({
               <PopoverTrigger
                 render={
                   <Button
+                    type='button'
                     variant='outline'
                     data-empty={!field.value}
                     className={cn(
                       'justify-start text-start font-normal data-[empty=true]:text-muted-foreground',
                       invalid &&
-                        'border-destructive ring-3 ring-destructive/20 dark:border-destructive/50 dark:ring-destructive/40'
+                      'border-destructive ring-3 ring-destructive/20 dark:border-destructive/50 dark:ring-destructive/40'
                     )}
                   >
                     {field.value ? (
@@ -84,7 +85,7 @@ export const RHFSingleDatePicker = ({
                   captionLayout='dropdown'
                   selected={field.value}
                   onSelect={handleDateChange}
-                  disabled={(date: Date) => date < new Date('1900-01-01')}
+                  disabled={(date: Date) => date < new Date('2000-01-01')}
                 />
                 {withTime && (
                   <div className='flex items-center gap-2 border-t p-3'>
@@ -139,12 +140,13 @@ export const RHFRangeDatePicker = ({
               <PopoverTrigger
                 render={
                   <Button
+                    type='button'
                     variant='outline'
                     data-empty={!range?.from}
                     className={cn(
                       'justify-start text-start font-normal data-[empty=true]:text-muted-foreground',
                       invalid &&
-                        'border-destructive ring-3 ring-destructive/20 dark:border-destructive/50 dark:ring-destructive/40'
+                      'border-destructive ring-3 ring-destructive/20 dark:border-destructive/50 dark:ring-destructive/40'
                     )}
                   >
                     {formatDisplay()}

@@ -35,7 +35,7 @@ export default function UploadAvatar({
       <div
         {...getRootProps()}
         className={cn(
-          'relative mx-auto flex h-36 w-36 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-dashed border-gray-400 transition-opacity',
+          'relative mx-auto flex h-36 w-36 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-dashed border-main-color bg-main-color transition-opacity',
           isDragActive && 'opacity-70',
           isError && 'border-red-300',
           isError && hasFile && 'bg-red-50',
@@ -49,14 +49,14 @@ export default function UploadAvatar({
 
         <div
           className={cn(
-            'placeholder absolute z-7 flex h-[calc(100%-16px)] w-[calc(100%-16px)] flex-col items-center justify-center rounded-full bg-gray-50 text-gray-600 transition-opacity hover:opacity-70',
-            hasFile && 'z-10 bg-gray-900/60 text-white opacity-0',
+            'placeholder absolute z-7 flex h-[calc(100%-16px)] w-[calc(100%-16px)] flex-col items-center justify-center rounded-full bg-main-color text-white transition-opacity hover:opacity-80',
+            hasFile && 'z-10 bg-main-color/75 text-white opacity-0',
             isError && 'bg-red-50 text-red-600'
           )}
         >
           <ImagePlus className='mb-2' />
           <Typography variant='caption'>
-            {file ? 'Update photo' : 'Upload photo'}
+            {file ? 'Cập nhật ảnh' : 'Tải ảnh lên'}
           </Typography>
         </div>
       </div>

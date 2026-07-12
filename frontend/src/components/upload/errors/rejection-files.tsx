@@ -10,6 +10,13 @@ type Props = {
   fileRejections: readonly FileRejection[]
 }
 
+const rejectionMessages: Record<string, string> = {
+  'file-invalid-type': 'Định dạng tệp không được hỗ trợ',
+  'file-too-large': 'Tệp vượt quá dung lượng cho phép',
+  'file-too-small': 'Tệp nhỏ hơn dung lượng tối thiểu',
+  'too-many-files': 'Bạn đã chọn quá số lượng tệp cho phép',
+}
+
 export default function RejectionFiles({ fileRejections }: Readonly<Props>) {
   if (!fileRejections.length) return null
 
@@ -26,7 +33,7 @@ export default function RejectionFiles({ fileRejections }: Readonly<Props>) {
 
             {errors.map((error) => (
               <Typography key={error.code} variant='p' className='m-0'>
-                - {error.message}
+                - {rejectionMessages[error.code] ?? 'Không thể tải tệp này lên'}
               </Typography>
             ))}
           </div>

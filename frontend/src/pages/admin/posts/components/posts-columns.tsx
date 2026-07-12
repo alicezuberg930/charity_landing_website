@@ -37,7 +37,7 @@ export const postsColumns: ColumnDef<Post>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title='Mô tả' />,
     cell: ({ row }) => (
       <LongText className='w-80'>
-        {(row.original.description)}
+        {stripHtml(row.original.description)}
       </LongText>
     ),
   },

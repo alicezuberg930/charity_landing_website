@@ -52,4 +52,22 @@ export class LogsService {
       throw new BadRequestException(error)
     }
   }
+
+  async removeMany(filter: Partial<Pick<Log, 'ipAddress' | 'userAgent' | 'path' | 'method' | 'referrer'>>) {
+    try {
+      const entries = Object.entries(filter ?? {})
+      if (entries.length !== 1) {
+        throw new BadRequestException('Provide exactly one of: ipAddress, userAgent, path, method, referrer')
+      }
+      const [field, value] = entries[0]
+      const allowedFields = ['ipAddress', 'userAgent', 'path', 'method', 'referrer'] as const
+      if (!allowedFields.includes(field as (typeof allowedFields)[number])) {
+        throw new BadRequestException('Only one of ipAddress, userAgent, path, method, referrer is allowed')
+      }
+      const result = await this.logModel.deleteMany({ [field]: value })
+      return { deletedCount: result.deletedCount ?? 0 }
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
+  }
 }

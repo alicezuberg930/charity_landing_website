@@ -31,6 +31,12 @@ export class LogsController {
     return this.logsService.update(id, logData)
   }
 
+  @ResponseMessage('Delete logs successfully')
+  @Delete('many')
+  removeMany(@Body() filter: Partial<Pick<Log, 'ipAddress' | 'userAgent' | 'path' | 'method' | 'referrer'>>) {
+    return this.logsService.removeMany(filter)
+  }
+
   @ResponseMessage('Delete log successfully')
   @Delete(':id')
   remove(@Param('id') id: string) {

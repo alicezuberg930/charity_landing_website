@@ -1,5 +1,10 @@
 import { httpClient } from '@/lib/repository/http-client'
 import type {
+    LoginParams,
+    LoginResponse,
+    ProfileResponse,
+} from '@/@types/auth'
+import type {
     BannerDetailsResponse,
     BannerListResponse,
     BannerMutationResponse,
@@ -44,6 +49,15 @@ import type {
     YoutubePlaylistVideosResponse,
 } from '@/@types/youtube'
 import { API } from '../lib/api'
+
+// auth
+export const login = async (params: LoginParams) => {
+    return httpClient.post<LoginResponse>(API.AUTH.LOGIN, params)
+}
+
+export const getProfile = async () => {
+    return httpClient.get<ProfileResponse>(API.USERS.PROFILE)
+}
 
 // common
 export const uploadFile = async ({ file }: UploadFileParams) => {

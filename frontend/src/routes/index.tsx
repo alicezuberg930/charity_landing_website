@@ -3,6 +3,7 @@ import { lazy, Suspense, type ComponentType } from "react"
 import { VideoPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/public'
 import { ROOT_CMS } from "./path"
 import { queryClient } from "@/providers/query-client-provider"
+import { AuthGuard } from "@/layout/admin/auth-guard"
 import ShimmerList from "@/layout/common/shimmer-list"
 import { PublicLayout } from "@/layout/public"
 
@@ -18,6 +19,14 @@ const lazyRoute = (Component: ComponentType) => () => (
     <Suspense fallback={<ShimmerList />}>
         <Component />
     </Suspense>
+)
+
+const guardedLazyRoute = (Component: ComponentType) => () => (
+    <AuthGuard>
+        <Suspense fallback={<ShimmerList />}>
+            <Component />
+        </Suspense>
+    </AuthGuard>
 )
 
 const rootRoute = createRootRoute({
@@ -65,7 +74,7 @@ const publicChildRoutes = [
 const adminRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: ROOT_CMS,
-    component: lazyRoute(AdminLayout),
+    component: guardedLazyRoute(AdminLayout),
 })
 
 const adminChildRoutes = [

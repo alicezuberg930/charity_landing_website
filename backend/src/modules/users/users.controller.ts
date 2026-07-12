@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { ResponseMessage } from 'src/common/decorators/public.decorator'
+import { AuthRequired, ResponseMessage } from 'src/common/decorators/public.decorator'
 import { UserQuery } from './query/user.query'
 import { CurrentUser } from 'src/common/decorators/id.decorator'
 
@@ -23,6 +23,7 @@ export class UsersController {
   }
 
   @Get('profile')
+  @AuthRequired()
   findOne(@CurrentUser('_id') userId: string) {
     return this.usersService.findOne(userId)
   }

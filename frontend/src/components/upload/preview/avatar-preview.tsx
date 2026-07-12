@@ -11,7 +11,7 @@ export default function AvatarPreview({ file }: Readonly<Props>) {
 
   return (
     <LazyLoadImage
-      alt='avatar'
+      alt='Ảnh đại diện'
       src={imgUrl}
       className='absolute z-10 h-[calc(100%-16px)] w-[calc(100%-16px)] overflow-hidden rounded-full'
       effect='blur'

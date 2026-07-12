@@ -43,7 +43,8 @@ export default function MultiFilePreview({
                   type='button'
                   size={'icon-sm'}
                   variant='ghost'
-                  className='absolute top-1 right-1 rounded-full bg-gray-900/60 hover:bg-gray-900/70'
+                  aria-label='Xóa tệp'
+                  className='absolute top-1 right-1 rounded-full bg-main-color/70 hover:bg-main-color/80'
                   onClick={() => onRemove(file)}
                 >
                   <CircleX className='size-5 stroke-white' />
@@ -79,7 +80,8 @@ export default function MultiFilePreview({
                 type='button'
                 size={'icon-sm'}
                 variant='ghost'
-                className='absolute top-1 right-1 h-8 w-8 rounded-full bg-gray-900/60 hover:bg-gray-900/70'
+                aria-label='Xóa tệp'
+                className='absolute top-1 right-1 h-8 w-8 rounded-full bg-main-color/70 hover:bg-main-color/80'
                 onClick={() => onRemove(file)}
               >
                 <CircleX className='size-4 stroke-white' />

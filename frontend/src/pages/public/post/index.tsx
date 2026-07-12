@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { LucideVolume2 } from 'lucide-react'
 import { stripHtml } from '@/lib/utils'
 import { useSpeechSynthesis } from '@/providers/speech-synthesis-provider'
-import { useEffect, useState } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const ActivityDetailsPage = () => {

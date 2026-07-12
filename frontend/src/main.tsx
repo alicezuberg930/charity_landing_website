@@ -6,17 +6,20 @@ import { Router } from '@/routes'
 import { QueryClientProvider } from './providers/query-client-provider'
 import { ThemeProvider } from './providers/theme-provider'
 import { SpeechSynthesisProvider } from './providers/speech-synthesis-provider'
+import { AuthProvider } from './providers/auth-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <QueryClientProvider>
-        <SpeechSynthesisProvider>
+      <AuthProvider>
+        <QueryClientProvider>
+          <SpeechSynthesisProvider>
             <Router />
-        </SpeechSynthesisProvider>
-      </QueryClientProvider>
+          </SpeechSynthesisProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 )

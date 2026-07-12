@@ -27,7 +27,7 @@ export class EventsService {
       const { page, isActive } = query
       const filter: Record<string, any> = {}
       if (isActive) filter.isActive = isActive
-      const events = await this.eventsModel.find(filter)
+      const events = await this.eventsModel.find(filter).sort({ createdAt: -1 })
       return events
     } catch (error) {
       throw new BadRequestException(error)

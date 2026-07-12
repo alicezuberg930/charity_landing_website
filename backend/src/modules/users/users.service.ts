@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { User, UserDocument } from './schemas/user.schema'
-import mongoose, { Model, Types } from 'mongoose'
+import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
 import { hashPassword } from 'src/common/utils'
 import { v4 } from 'uuid'
@@ -71,7 +71,7 @@ export class UsersService {
 
   async findOne(userId: string) {
     try {
-      const user = await this.userModel.findById(userId)
+      const user = await this.userModel.findById(userId).select('-password')
       if (!user) throw new NotFoundException('Không tìm thấy người dùng')
       return user
     } catch (error) {

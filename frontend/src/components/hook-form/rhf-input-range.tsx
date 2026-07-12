@@ -33,14 +33,11 @@ export const RHFInputRange = ({
       render={({ field, fieldState: { error, invalid } }) => {
         const [start, end] = field.value || [undefined, undefined]
 
-        const handleChange =
-          (index: 0 | 1) => (e: React.ChangeEvent<HTMLInputElement>) => {
-            const newValue =
-              e.target.value === '' ? undefined : Number(e.target.value)
-            const updated: [number | undefined, number | undefined] =
-              index === 0 ? [newValue, end] : [start, newValue]
-            field.onChange(updated)
-          }
+        const handleChange = (index: 0 | 1) => (e: React.ChangeEvent<HTMLInputElement>) => {
+          const newValue = e.target.value === '' ? undefined : Number(e.target.value)
+          const updated: [number | undefined, number | undefined] = index === 0 ? [newValue, end] : [start, newValue]
+          field.onChange(updated)
+        }
 
         return (
           <Field data-invalid={invalid}>

@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { UsersModule } from './modules/users/users.module'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { AuthModule } from './modules/auth/auth.module'
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 // import { JwtAuthGuard } from './modules/auth/passport/jwt-auth.guard'
 import { TransformInterceptor } from './common/interceptors/transform.interceptor'
 import { AllExceptionsFilter } from './common/exceptions/exception.filter'
@@ -16,6 +16,7 @@ import { InformationModule } from './modules/information/information.module'
 import { EventsModule } from './modules/events/events.module'
 import { IpWhitelistMiddleware } from './common/middleware/ip.whitelist'
 import { LogsModule } from './modules/logs/logs.module'
+import { JwtAuthGuard } from './modules/auth/passport/jwt-auth.guard'
 
 @Module({
   imports: [
@@ -41,7 +42,7 @@ import { LogsModule } from './modules/logs/logs.module'
   controllers: [AppController],
   providers: [
     AppService,
-    // { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
     { provide: APP_FILTER, useClass: AllExceptionsFilter }
   ],

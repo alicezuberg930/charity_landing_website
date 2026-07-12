@@ -1,23 +1,29 @@
-import { Body, Controller, FileTypeValidator, Get, HttpStatus, MaxFileSizeValidator, ParseFilePipe, ParseFilePipeBuilder, Post, Request, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Request, Res, UseGuards } from '@nestjs/common';
+import type { CookieOptions, Response } from 'express';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/create-auth.dto';
 import { LocalAuthGuard } from './passport/local-auth.guard';
 import { Public, ResponseMessage } from 'src/common/decorators/public.decorator';
-import { MailerService } from '@nestjs-modules/mailer';
 import { VerifyDto } from './dto/verify-auth.dto';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { FileSizeValidationPipe } from 'src/common/helpers/exception/file.validator';
+import { ConfigService } from '@nestjs/config';
+
+const ACCESS_TOKEN_COOKIE = 'accessToken'
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
+  ) { }
 
   @UseGuards(LocalAuthGuard)
   @Public()
   @Post("login")
   @ResponseMessage("Đăng nhập thành công")
-  login(@Request() request: any) {
-    return this.authService.login(request.user)
+  async login(@Request() request: any, @Res({ passthrough: true }) response: Response) {
+    const loginResult = await this.authService.login(request.user)
+    this.setAccessTokenCookie(response, loginResult.access_token)
+    return loginResult
   }
 
   @Public()
@@ -31,5 +37,37 @@ export class AuthController {
   @ResponseMessage("Xác thực mã thành công")
   verify(@Body() data: VerifyDto) {
     return this.authService.verify(data)
+  }
+
+  private setAccessTokenCookie(response: Response, accessToken: string) {
+    const isProduction = process.env.NODE_ENV === 'production'
+    const sameSite: CookieOptions['sameSite'] = isProduction ? 'none' : 'lax'
+
+    response.cookie(ACCESS_TOKEN_COOKIE, accessToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite,
+      path: '/',
+      maxAge: this.getAccessTokenCookieMaxAge(),
+    })
+  }
+
+  private getAccessTokenCookieMaxAge() {
+    const expiresIn = this.configService.get<string>('JWT_EXPIRED_IN')
+    if (!expiresIn) return undefined
+
+    const match = /^(\d+)([smhd])?$/i.exec(expiresIn.trim())
+    if (!match) return undefined
+
+    const value = Number(match[1])
+    const unit = match[2]?.toLowerCase() ?? 's'
+    const multipliers: Record<string, number> = {
+      s: 1000,
+      m: 60 * 1000,
+      h: 60 * 60 * 1000,
+      d: 24 * 60 * 60 * 1000,
+    }
+
+    return value * multipliers[unit]
   }
 }

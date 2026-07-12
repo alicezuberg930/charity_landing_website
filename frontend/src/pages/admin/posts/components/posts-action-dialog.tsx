@@ -97,7 +97,7 @@ export const PostsActionDialog = ({
     defaultValues: defaultValues(currentRow ?? undefined),
   })
 
-  const { formState: { isSubmitting } } = form
+  const { formState: { isSubmitting }, handleSubmit } = form
 
   useEffect(() => {
     if (open) {
@@ -108,13 +108,22 @@ export const PostsActionDialog = ({
   const onSubmit = async (values: PostFormValues) => {
     try {
       let coverUrl = typeof values.cover === 'string' ? values.cover : ''
+      let images: string[] = []
 
+      const formData = new FormData()
       if (isLocalUploadImage(values.cover)) {
-        const formData = new FormData()
         formData.set('files', values.cover)
         const response = await upload.mutateAsync({ file: formData })
         coverUrl = response.data[0] ?? ''
       }
+      formData.delete('files')
+      for (let i = 0; i < values.images.length; i++) {
+        if (isLocalUploadImage(values.images[i])) {
+          formData.append('files', values.images[i])
+        }
+      }
+      const imagesResponse = await upload.mutateAsync({ file: formData })
+      images = imagesResponse.data
 
       const post: PostPayload = {
         title: values.title,
@@ -122,6 +131,7 @@ export const PostsActionDialog = ({
         date: moment(values.date).format('DD/MM/YYYY'),
         category: values.category,
         cover: coverUrl,
+        images
       }
 
       if (currentRow) {
@@ -155,7 +165,7 @@ export const PostsActionDialog = ({
         <FormProvider
           id='post-form'
           methods={form}
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className='grid gap-4 md:grid-cols-1'>
             <RHFTextField

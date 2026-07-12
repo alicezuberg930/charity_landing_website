@@ -25,7 +25,7 @@ export class PostsService {
       const { page, category } = query
       const filter: Record<string, any> = {}
       if (category) filter.category = category
-      let posts = await this.postModel.find(filter)
+      let posts = await this.postModel.find(filter).sort({ createdAt: -1 })
       return posts
     } catch (error) {
       throw new BadRequestException(error)
