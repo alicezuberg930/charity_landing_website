@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { slideLeft, slideRight } from '@/lib/animate'
 import { Separator } from '../../../../components/ui/separator'
-import LazyLoadImage from '../../../../components/lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '../../../../components/lazy-load-image/lazy-load-image'
 
 const Body = () => {
   return (

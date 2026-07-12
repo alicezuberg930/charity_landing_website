@@ -9,7 +9,7 @@ import {
 import { useGetBannersHook } from '../../../../hooks/banner.hook'
 import ShimmerList from '../../../../layout/common/shimmer-list'
 import type { SliderProps } from '../../../../components/custom-carousel'
-import LazyLoadImage from '../../../../components/lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '../../../../components/lazy-load-image/lazy-load-image'
 
 const settings = {
   slidesToShow: 1,

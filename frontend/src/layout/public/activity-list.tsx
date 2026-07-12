@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { slugify } from "@/lib/utils"
 import type { Post } from '@/@types/post'
-import LazyLoadImage from '@/components/lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '@/components/lazy-load-image/lazy-load-image'
 import { stripHtml } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 

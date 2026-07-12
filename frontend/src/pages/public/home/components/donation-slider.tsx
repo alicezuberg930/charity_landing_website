@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/carousel'
 import Section from '../../../../layout/public/section'
 import type { SliderProps } from '../../../../components/custom-carousel'
-import LazyLoadImage from '../../../../components/lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '../../../../components/lazy-load-image/lazy-load-image'
 
 const donationItems = [
   {

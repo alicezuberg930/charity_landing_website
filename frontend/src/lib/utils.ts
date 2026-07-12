@@ -139,4 +139,11 @@ const getPageNumbers = (currentPage: number, totalPages: number) => {
 
 const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 
-export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml}
+const formatDuration = (duration: number): string => {
+  const hour = duration >= 3600 ? `${(Math.floor(duration / 3600)).toString()}:` : ''
+  const minute = ((Math.floor(duration / 60) % 60)).toString().padStart(2, '0')
+  const second = (duration % 60).toString().padStart(2, '0')
+  return `${hour}${minute}:${second}`
+}
+
+export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml, formatDuration }

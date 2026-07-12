@@ -1,7 +1,7 @@
 import { useLocation } from '@tanstack/react-router'
 import { SEO } from '@/lib/seo'
 import type { Post } from '@/@types/post'
-import LazyLoadImage from '@/components/lazy-load-image/LazyLoadImage'
+import LazyLoadImage from '@/components/lazy-load-image/lazy-load-image'
 import { Button } from '@/components/ui/button'
 import { LucideVolume2 } from 'lucide-react'
 import { stripHtml } from '@/lib/utils'
