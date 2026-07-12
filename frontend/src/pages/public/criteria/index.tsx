@@ -1,3 +1,4 @@
+import { LazyLoadImage } from '@/components/lazy-load-image'
 import Section from '@/layout/public/section'
 
 const CriteriaPage = () => {
@@ -6,12 +7,12 @@ const CriteriaPage = () => {
       <Section title='TIÊU CHÍ NHÓM' />
       <div className='space-y-12 mb-6 max-w-3xl mx-auto'>
         <div className='shadow-md rounded-lg overflow-hidden'>
-          <div className='overflow-hidden'>
-            <img className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
-              src='./assets/criteria/chao-tinh-thuong-criteria.jpg'
-              alt='chuong-trinh-thuong-nien'
-            />
-          </div>
+          <LazyLoadImage
+            className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
+            src='./assets/criteria/chao-tinh-thuong-criteria.jpg'
+            alt='chao-tinh-thuong'
+            effect='blur'
+          />
           <div className='p-3'>
             <span className='font-bold text-lg text-main-color'>CHÁO TÌNH THƯƠNG</span>
             <ul>
@@ -21,13 +22,14 @@ const CriteriaPage = () => {
             </ul>
           </div>
         </div>
+
         <div className='shadow-md rounded-lg overflow-hidden'>
-          <div className='overflow-hidden'>
-            <img className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
-              src='./assets/criteria/chuong-trinh-thuong-nien-criteria.jpg'
-              alt='chuong-trinh-thuong-nien'
-            />
-          </div>
+          <LazyLoadImage
+            className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
+            src='./assets/criteria/chuong-trinh-thuong-nien-criteria.jpg'
+            alt='chuong-trinh-thuong-nien'
+            effect='blur'
+          />
           <div className='p-3'>
             <span className='font-bold text-lg text-main-color'>CHƯƠNG TRÌNH THƯỜNG NIÊN</span>
             <ul>
@@ -39,13 +41,14 @@ const CriteriaPage = () => {
             </ul>
           </div>
         </div>
+
         <div className='shadow-md rounded-lg overflow-hidden'>
-          <div className='overflow-hidden'>
-            <img className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
-              src='./assets/criteria/ho-tro-hoan-canh.jpg'
-              alt='chuong-trinh-thuong-nien'
-            />
-          </div>
+          <LazyLoadImage
+            className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
+            src='./assets/criteria/ho-tro-hoan-canh.jpg'
+            alt='ho-tro-hoan-canh'
+            effect='blur'
+          />
           <div className='p-3'>
             <span className='font-bold text-lg text-main-color'>
               CÁC HOÀN CẢNH KHÓ KHĂN
@@ -63,13 +66,14 @@ const CriteriaPage = () => {
             </ul>
           </div>
         </div>
+
         <div className='shadow-md rounded-lg overflow-hidden'>
-          <div className='overflow-hidden'>
-            <img className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
-              src='./assets/criteria/tiep-suc-tri-thuc-criteria.jpg'
-              alt='chuong-trinh-thuong-nien'
-            />
-          </div>
+          <LazyLoadImage
+            className='w-full aspect-video object-cover hover:scale-110 transition-all duration-1000'
+            src='./assets/criteria/tiep-suc-tri-thuc-criteria.jpg'
+            alt='tiep-suc-tri-thuc'
+            effect='blur'
+          />
           <div className='p-3'>
             <span className='font-bold text-lg text-main-color'>TIẾP SỨC TRI THỨC</span>
             <ul>

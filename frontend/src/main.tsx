@@ -5,6 +5,7 @@ import './styles/global.css'
 import { Router } from '@/routes'
 import { QueryClientProvider } from './providers/query-client-provider'
 import { ThemeProvider } from './providers/theme-provider'
+import { SpeechSynthesisProvider } from './providers/speech-synthesis-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <QueryClientProvider>
-        <Router />
+        <SpeechSynthesisProvider>
+            <Router />
+        </SpeechSynthesisProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>

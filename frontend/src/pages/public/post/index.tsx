@@ -2,10 +2,19 @@ import { useLocation } from '@tanstack/react-router'
 import { SEO } from '@/lib/seo'
 import type { Post } from '@/@types/post'
 import LazyLoadImage from '@/components/lazy-load-image/LazyLoadImage'
+import { Button } from '@/components/ui/button'
+import { LucideVolume2 } from 'lucide-react'
+import { stripHtml } from '@/lib/utils'
+import { useSpeechSynthesis } from '@/providers/speech-synthesis-provider'
+import { useEffect, useState } from 'react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const ActivityDetailsPage = () => {
   const location = useLocation()
   const { details } = location.state as unknown as { details: Post }
+  const { textToSpeech } = useSpeechSynthesis()
+
+  const handleTextToSpeech = () => textToSpeech(stripHtml(details.description))
 
   return (
     <>
@@ -36,7 +45,21 @@ const ActivityDetailsPage = () => {
             />
           </div>
         </div>
-        <div className='mt-4'>
+        <div className='mt-4 w-fit mx-auto'>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button className='bg-main-color hover:bg-main-color/80 size-12' onClick={handleTextToSpeech}>
+                  <LucideVolume2 size={32} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Bấm vào để dược nghe chuyển thông tin thành giọng nói</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+        <div className='mt-4 w-full'>
           <div className='w-fit mx-auto' dangerouslySetInnerHTML={{ __html: details.description }}></div>
         </div>
         <div className='my-4'>

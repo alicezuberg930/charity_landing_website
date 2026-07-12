@@ -30,6 +30,7 @@ type PostFormValues = {
   date?: Date
   category: PostCategory
   cover: UploadImage | null
+  images: UploadImage[]
 }
 
 const postFormSchema = z.object({
@@ -40,6 +41,10 @@ const postFormSchema = z.object({
   cover: z.custom<UploadImage>(
     (value) => typeof value === 'string' || (typeof value === 'object' && value !== null),
     { message: 'Vui lòng chọn ảnh bìa.' }
+  ),
+  images: z.custom<UploadImage[]>(
+    (value) => Array.isArray(value) && value.every((v) => typeof v === 'string' || (typeof v === 'object' && v !== null)),
+    { message: 'Vui lòng chọn ảnh sự kiện.' }
   ),
 })
 
@@ -69,6 +74,7 @@ const defaultValues = (post?: Post): PostFormValues => ({
   date: post?.date ? moment(post.date, 'DD/MM/YYYY', true).toDate() : undefined,
   category: post?.category ?? 'chao-tinh-thuong',
   cover: post?.cover ?? null,
+  images: post?.images ?? [],
 })
 
 type PostsActionDialogProps = {

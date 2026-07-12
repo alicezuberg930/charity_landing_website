@@ -1,4 +1,4 @@
-import { HandHeart } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
     Card,
@@ -7,48 +7,100 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
+import { Field, FieldGroup } from '@/components/ui/field'
+import { FormProvider, RHFPasswordField, RHFTextField } from '@/components/hook-form'
+import z from 'zod'
+import { useForm, type Resolver } from 'react-hook-form'
+import { loginFormSchema } from '@/lib/validators/auth-validator'
+import { useMutation } from '@tanstack/react-query'
+import { auth } from '@/lib/queries/auth'
+import { Spinner } from '@/components/ui/spinner'
+import { useNavigate } from '@tanstack/react-router'
+
+const zodResolver: Resolver<z.infer<typeof loginFormSchema>> = async (values) => {
+    const result = loginFormSchema.safeParse(values)
+    if (result.success) {
+        return { values: result.data, errors: {} }
+    }
+
+    return {
+        values: {},
+        errors: result.error.issues.reduce<Record<string, { type: string; message: string }>>((errors, issue) => {
+            const fieldName = issue.path[0]
+            if (typeof fieldName === 'string') {
+                errors[fieldName] = {
+                    type: issue.code,
+                    message: issue.message,
+                }
+            }
+            return errors
+        }, {}),
+    }
+}
 
 const LoginPage = () => {
+    const { mutateAsync } = useMutation(auth().login.mutationOptions())
+    const navigate = useNavigate()
+    const form = useForm<z.infer<typeof loginFormSchema>>({
+        resolver: zodResolver,
+        defaultValues: {
+            username: '',
+            password: ''
+        },
+    })
+
+    const { formState: { isSubmitting }, handleSubmit } = form
+
+    const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
+        await mutateAsync(values, {
+            onSuccess() {
+                navigate({ to: '/cms' })
+            }
+        })
+    }
+
     return (
-        <div className="flex min-h-svh w-full items-center justify-center p-4">
-            <Card className="w-full max-w-sm shadow-sm">
-                <CardHeader className="items-center text-center">
-                    <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                        <HandHeart className="size-5" />
-                    </div>
-                    <CardTitle>Đăng nhập quản lý CMS</CardTitle>
-                    <CardDescription>Ánh sáng từ thiện</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form>
-                        <FieldGroup>
-                            <Field>
-                                <FieldLabel htmlFor="phone">Số điện thoại</FieldLabel>
-                                <Input
-                                    id="phone"
-                                    name="phone"
-                                    type="tel"
-                                    autoComplete="username"
-                                />
-                            </Field>
-                            <Field>
-                                <FieldLabel htmlFor="password">Mật khẩu</FieldLabel>
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                />
-                            </Field>
-                            <Button type="submit" className="w-full">
-                                Đăng nhập
-                            </Button>
-                        </FieldGroup>
-                    </form>
-                </CardContent>
-            </Card>
+        <div className='flex min-h-svh w-full items-center justify-center p-6 md:p-10'>
+            <div className='w-full max-w-sm'>
+                <div className={cn('flex flex-col gap-6')}>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Trang quản lý ánh sáng từ thiện</CardTitle>
+                            <CardDescription>
+                                Nhập tên người dùng và mật khẩu để đăng nhập
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <FormProvider
+                                methods={form}
+                                onSubmit={handleSubmit(onSubmit)}
+                            >
+                                <FieldGroup>
+                                    <RHFTextField
+                                        name='username'
+                                        fieldLabel='Tên người dùng'
+                                        placeholder='admin'
+                                    />
+                                    <RHFPasswordField
+                                        name='password'
+                                        fieldLabel='Mật khẩu'
+                                        placeholder='*******'
+                                    />
+                                    <Field>
+                                        <Button disabled={isSubmitting} type='submit'>
+                                            {isSubmitting ? (
+                                                <Spinner />
+                                            ) : (
+                                                <>Đăng nhập</>
+                                            )}
+                                        </Button>
+                                    </Field>
+                                </FieldGroup>
+                            </FormProvider>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
         </div>
     )
 }

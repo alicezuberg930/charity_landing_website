@@ -6,6 +6,27 @@ import { ValidationPipe } from '@nestjs/common'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const configService = app.get(ConfigService)
+  const cspValue = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https:",
+    "font-src 'self' data: https:",
+    "connect-src 'self' https:",
+    "frame-src 'self' https:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "upgrade-insecure-requests",
+  ].join('; ')
+
+  app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', cspValue)
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+    next()
+  })
+
   // Enable trust proxy to handle X-Forwarded-For headers
   app.getHttpAdapter().getInstance().enable('trust proxy')
   // set prefix for every endpoint to api/v1

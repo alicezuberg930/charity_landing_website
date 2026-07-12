@@ -139,4 +139,4 @@ const getPageNumbers = (currentPage: number, totalPages: number) => {
 
 const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 
-export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml }
+export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml}

@@ -22,6 +22,6 @@ export type DeleteParams = {
 
 export type MutationResponse = Response<null>
 
-export type DataResponse<T> = Response<T> & {
+export type DataResponse<T = unknown> = Response<T> & {
   data: T
 }
