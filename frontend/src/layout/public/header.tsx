@@ -94,7 +94,7 @@ const Header = () => {
       <nav className='flex font-semibold justify-between items-center relative max-w-7xl mx-auto px-2 lg:px-0'>
         <div className='flex items-center flex-auto'>
           <Link to={ROOT_HOME}>
-            <img src='./assets/logo.png' className='inline-block w-14 h-14' alt='logo' />
+            <img src='/assets/logo.png' className='inline-block w-14 h-14' alt='logo' />
           </Link>
           <span className='hidden md:block ml-3'>
             <div className='flex flex-col items-end'>
