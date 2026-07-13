@@ -39,7 +39,7 @@
     top: 0;
     bottom: 0;
     right: calc(100% - var(--progress-position)*100%);
-    background-color: #721799;
+    background-color: purple;
 }
 
 .thumb-indicator {
@@ -49,7 +49,7 @@
     height: 200%;
     top: -50%;
     left: calc((var(--progress-position)*100%) - 2px);
-    background-color: #721799;
+    background-color: purple;
     border-radius: 50%;
     transition: transform 250ms ease-in-out;
     aspect-ratio: 1/1;

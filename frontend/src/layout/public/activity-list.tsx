@@ -18,7 +18,6 @@ const ActivityList = ({ posts }: ActivityListProps) => {
             <Link
               className='block relative'
               to={`/${post.category}/${slugify(post.title)}-${post._id}`}
-              state={(prev) => ({ ...prev, details: post })}
             >
               <Badge className='absolute flex items-center bg-main-color rounded-md top-3 left-3 p-3 z-1'>
                 {post.date}
