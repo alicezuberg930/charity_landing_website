@@ -1,22 +1,23 @@
 import '@/styles/video-player.css'
-import { useEffect, useRef, useState } from "react"
-import { formatDuration } from "@/lib/utils"
-import type { VideoPlayerProps } from "./types"
-import { Maximize, Minimize, PauseCircle, PictureInPicture, PlayCircle, Settings, Volume1, Volume2, VolumeOff } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useEffect, useRef, useState } from 'react'
+import { formatDuration } from '@/lib/utils'
+import type { VideoPlayerProps } from './types'
+import { Maximize, Minimize, PauseCircle, PictureInPicture, PlayCircle, Settings, Volume1, Volume2, VolumeOff } from 'lucide-react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isFullscreen, setIsFullscreen] = useState(false)
     const [volume, setVolume] = useState(50)
-    const [currentTime, setCurrentTime] = useState(0)
     const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+    // refs to prevent component re-rendering too many times
     const timelineContainer = useRef<HTMLDivElement | null>(null)
     const videoContainer = useRef<HTMLDivElement | null>(null)
     const videoPlayer = useRef<HTMLVideoElement | null>(null)
     const previewVideo = useRef<HTMLVideoElement | null>(null)
     const previewCanvas = useRef<HTMLCanvasElement | null>(null)
-    const isScrubbingRef = useRef<boolean>(false)
+    const currentTime = useRef<HTMLSpanElement | null>(null)
+    const isScrubbing = useRef<boolean>(false)
 
     const toggleVideo = () => {
         if (!videoPlayer.current) return
@@ -29,27 +30,26 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
         }
     }
 
-    const videoKeyDown = (e: React.KeyboardEvent<HTMLVideoElement>) => {
+    const handleVideoKeyDown = (e: React.KeyboardEvent<HTMLVideoElement>) => {
         if (!videoPlayer.current) return
-        if (e.code === "Space") toggleVideo()
-        if (e.code === "ArrowLeft") videoPlayer.current.currentTime -= 5
-        if (e.code === "ArrowRight") videoPlayer.current.currentTime += 5
+        if (e.code === 'Space') toggleVideo()
+        if (e.code === 'ArrowLeft') videoPlayer.current.currentTime -= 5
+        if (e.code === 'ArrowRight') videoPlayer.current.currentTime += 5
     }
 
-    const toggleFullScreen = () => {
+    const toggleFullScreen = async () => {
         setIsFullscreen(!isFullscreen)
         if (!document.fullscreenElement) {
             if (!videoContainer.current || !videoPlayer.current) return
-            videoContainer.current.classList.remove('theater')
-            videoContainer.current.requestFullscreen()
+            await videoContainer.current.requestFullscreen()
         } else {
-            document.exitFullscreen()
+            await document.exitFullscreen()
         }
     }
 
     const togglePictureInPicture = () => {
         if (!videoPlayer.current) return
-        if (videoPlayer.current.classList.contains("mini-player")) {
+        if (document.pictureInPictureElement === videoPlayer.current) {
             document.exitPictureInPicture()
         } else {
             videoPlayer.current.requestPictureInPicture()
@@ -84,9 +84,9 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
         if (!videoPlayer.current || !timelineContainer.current) return
         const rect = timelineContainer.current.getBoundingClientRect()
         const percent = Math.min(Math.max(0, e.x - rect!.x), rect!.width) / rect.width
-        isScrubbingRef.current = (e.buttons & 1) === 1
-        timelineContainer.current.classList.toggle("scrubbing", isScrubbingRef.current)
-        if (isScrubbingRef.current) {
+        isScrubbing.current = (e.buttons & 1) === 1
+        timelineContainer.current.classList.toggle('scrubbing', isScrubbing.current)
+        if (isScrubbing.current) {
             videoPlayer.current.pause()
             videoPlayer.current.currentTime = percent * (videoPlayer.current.duration || Infinity)
         } else {
@@ -99,13 +99,13 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
         if (!timelineContainer.current) return
         const rect = timelineContainer.current.getBoundingClientRect()
         const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-        timelineContainer.current.style.setProperty("--preview-position", percent.toString())
+        timelineContainer.current.style.setProperty('--preview-position', percent.toString())
         if (previewVideo.current && Number.isFinite(previewVideo.current.duration)) {
             previewVideo.current.currentTime = percent * previewVideo.current.duration
         }
-        if (isScrubbingRef.current) {
+        if (isScrubbing.current) {
             e.preventDefault()
-            timelineContainer.current.style.setProperty("--progress-position", percent.toString())
+            timelineContainer.current.style.setProperty('--progress-position', percent.toString())
         }
     }
 
@@ -137,37 +137,38 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
     }, [videoUrl])
 
     useEffect(() => {
-        if (!videoPlayer.current || !timelineContainer.current) return
-        videoPlayer.current.addEventListener('enterpictureinpicture', () => {
-            videoPlayer.current?.classList.add('mini-player')
-        })
-        videoPlayer.current.addEventListener('leavepictureinpicture', () => {
-            videoPlayer.current?.classList.remove('mini-player')
-        })
-        videoPlayer.current.addEventListener('timeupdate', () => {
-            setCurrentTime(Math.round(videoPlayer.current?.currentTime || 0))
+        if (!videoPlayer.current || !timelineContainer.current || !currentTime.current || !videoContainer.current) return
+        const handleFullscreenChange = () => {
+            setIsFullscreen(document.fullscreenElement === videoContainer.current)
+        }
+        const handleUpdateTime = () => {
             const percent = (videoPlayer.current?.currentTime || 0) / (videoPlayer.current?.duration || Infinity)
-            timelineContainer.current?.style.setProperty("--progress-position", percent.toString())
-        })
+            timelineContainer.current?.style.setProperty('--progress-position', percent.toString())
+            currentTime.current!.innerText = formatDuration(Math.floor(videoPlayer.current?.currentTime ?? 0))
+        }
+        videoPlayer.current.addEventListener('timeupdate', handleUpdateTime)
         timelineContainer.current?.addEventListener('mousemove', handleVideoPlaying)
         timelineContainer.current?.addEventListener('mousedown', toggleScrubbing)
+        document.addEventListener('fullscreenchange', handleFullscreenChange)
         document.addEventListener('mouseup', (e) => {
-            if (isScrubbingRef.current) toggleScrubbing(e)
+            if (isScrubbing.current) toggleScrubbing(e)
         })
         document.addEventListener('mousemove', (e) => {
-            if (isScrubbingRef.current) toggleScrubbing(e)
+            if (isScrubbing.current) toggleScrubbing(e)
         })
         return () => {
-            document.removeEventListener('mouseup', (e) => {
-                if (isScrubbingRef.current) toggleScrubbing(e)
-            })
-            document.removeEventListener('mousemove', (e) => {
-                if (isScrubbingRef.current) toggleScrubbing(e)
-            })
+            videoPlayer.current?.removeEventListener('timeupdate', handleUpdateTime)
             timelineContainer.current?.removeEventListener('mousemove', handleVideoPlaying)
             timelineContainer.current?.removeEventListener('mousedown', toggleScrubbing)
+            document.removeEventListener('fullscreenchange', handleFullscreenChange)
+            document.removeEventListener('mouseup', (e) => {
+                if (isScrubbing.current) toggleScrubbing(e)
+            })
+            document.removeEventListener('mousemove', (e) => {
+                if (isScrubbing.current) toggleScrubbing(e)
+            })
         }
-    }, [videoPlayer, timelineContainer])
+    }, [])
 
     useEffect(() => {
         if (!videoPlayer.current) return
@@ -178,51 +179,51 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
         <div ref={videoContainer} className='relative h-fit aspect-video'>
             <video
                 ref={videoPlayer}
-                className="w-full h-full rounded-xl"
+                className='w-full h-full rounded-xl'
                 onClick={toggleVideo}
                 tabIndex={0}
-                onKeyDown={videoKeyDown}
+                onKeyDown={handleVideoKeyDown}
             />
             <video
                 ref={previewVideo}
                 src={videoUrl}
-                preload="metadata"
+                preload='metadata'
                 muted
-                className="hidden"
+                className='hidden'
                 onSeeked={drawPreviewFrame}
             />
-            <div className="px-2 absolute bottom-0 left-0 right-0 video-controls-container">
+            <div className='px-2 absolute bottom-0 left-0 right-0 video-controls-container'>
                 <div
-                    className="timeline-container h-2 rounded-full cursor-pointer flex items-center"
+                    className='timeline-container h-2 rounded-full cursor-pointer flex items-center'
                     ref={timelineContainer}
                 >
-                    <div className="timeline">
+                    <div className='timeline'>
                         <canvas
                             ref={previewCanvas}
                             width={160}
                             height={90}
-                            className="preview-img bg-black object-cover"
-                            aria-hidden="true"
+                            className='preview-img bg-black object-cover'
+                            aria-hidden='true'
                         />
-                        <div className="thumb-indicator"></div>
+                        <div className='thumb-indicator'></div>
                     </div>
                 </div>
-                <div className="relative flex items-center text-white py-1 px-3 gap-3">
+                <div className='relative flex items-center text-white py-1 px-3 gap-3'>
                     {isPlaying ? (
                         <PauseCircle strokeWidth={1} size={36} onClick={toggleVideo} />
                     ) : (
                         <PlayCircle strokeWidth={1} size={36} onClick={toggleVideo} />
                     )}
-                    <div className="flex items-center group gap-2">
+                    <div className='flex items-center group gap-2'>
                         <span onClick={muteAudio}>
                             {(volume < 50 && volume > 0) && <Volume1 strokeWidth={1} size={30} />}
                             {volume >= 50 && <Volume2 strokeWidth={1} size={30} />}
                             {volume === 0 && <VolumeOff strokeWidth={1} size={30} />}
                         </span>
                         <div
-                            role="slider"
+                            role='slider'
                             tabIndex={0}
-                            aria-label="Volume"
+                            aria-label='Volume'
                             aria-valuemin={0}
                             aria-valuemax={100}
                             aria-valuenow={volume}
@@ -234,48 +235,48 @@ export const VideoPlayer = ({ videoUrl }: VideoPlayerProps) => {
                             onPointerMove={(e) => {
                                 if (e.currentTarget.hasPointerCapture(e.pointerId)) updateVolumeFromPointer(e)
                             }}
-                            className="relative h-1 w-0 origin-left scale-x-0 cursor-pointer touch-none rounded-full bg-neutral-500/50 transition-all focus-visible:h-2 focus-visible:w-24 focus-visible:scale-x-100 focus-visible:outline-none group-hover:h-2 group-hover:w-24 group-hover:scale-x-100"
+                            className='relative h-1 w-0 origin-left scale-x-0 cursor-pointer touch-none rounded-full bg-neutral-500/50 transition-all focus-visible:h-2 focus-visible:w-24 focus-visible:scale-x-100 focus-visible:outline-none group-hover:h-2 group-hover:w-24 group-hover:scale-x-100'
                         >
                             <div
-                                className="absolute inset-y-0 left-0 rounded-full bg-main-bg"
+                                className='absolute inset-y-0 left-0 rounded-full bg-main-bg'
                                 style={{ width: `${volume}%` }}
                             />
                             <div
-                                className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-main-bg opacity-0 transition-opacity group-hover:opacity-100"
+                                className='absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-main-bg opacity-0 transition-opacity group-hover:opacity-100'
                                 style={{ left: `${volume}%` }}
                             />
                         </div>
                     </div>
-                    <div className="flex gap-1 text-sm flex-1">
-                        <span>{formatDuration(currentTime)}</span>
+                    <div className='flex gap-1 text-sm flex-1'>
+                        <span ref={currentTime}>00:00</span>
                         <span>/</span>
                         <span>{formatDuration(Math.floor(videoPlayer.current?.duration ?? 0))}</span>
                     </div>
                     <Popover open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-                        <PopoverTrigger aria-label="Playback speed" className="cursor-pointer">
+                        <PopoverTrigger aria-label='Playback speed' className='cursor-pointer'>
                             <Settings strokeWidth={1} size={30} />
                         </PopoverTrigger>
-                        <PopoverContent side="top" align="end" className="w-40 gap-0 bg-[#ffffff4d] p-0 text-white backdrop-blur-xs overflow-hidden">
+                        <PopoverContent side='top' align='end' className='w-40 gap-0 bg-[#ffffff4d] p-0 text-white backdrop-blur-xs overflow-hidden'>
                             {[0.25, 0.5, 1, 1.5, 2].map((speed) => (
                                 <button
                                     key={speed}
-                                    type="button"
+                                    type='button'
                                     onClick={() => changePlayBackRate(speed)}
-                                    className="flex w-full cursor-pointer items-center px-2 py-2 text-left hover:bg-[#ffffff33]"
+                                    className='flex w-full cursor-pointer items-center px-2 py-2 text-left hover:bg-[#ffffff33]'
                                 >
                                     {speed === 1 ? 'Tốc độ chuẩn' : `Tốc độ x${speed}`}
                                 </button>
                             ))}
                         </PopoverContent>
                     </Popover>
+                    {/* toggle picture in picture mode */}
+                    <PictureInPicture strokeWidth={1} size={30} onClick={togglePictureInPicture} />
                     {/* toggle fullscren and exit fullscreen */}
                     {isFullscreen ? (
                         <Minimize strokeWidth={1} size={30} onClick={toggleFullScreen} />
                     ) : (
                         <Maximize strokeWidth={1} size={30} onClick={toggleFullScreen} />
                     )}
-                    {/* toggle picture in picture mode */}
-                    <PictureInPicture strokeWidth={1} size={30} onClick={togglePictureInPicture} />
                 </div>
             </div>
         </div>

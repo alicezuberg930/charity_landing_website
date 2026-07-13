@@ -1,4 +1,4 @@
-import { type Response as ApiResponse } from '@/@types/response'
+import { type Response as ApiResponse } from '@/@types'
 import { HttpError } from './http-error'
 import { InterceptorManager } from './interceptor'
 
@@ -6,15 +6,14 @@ const getBaseUrl = () => {
   const environment = import.meta.env.VITE_ENVIRONMENT
   const productionApi = import.meta.env.VITE_PRODUCTION_API
   const developmentApi = import.meta.env.VITE_DEVELOPMENT_API
-  const apiUrl = import.meta.env.VITE_API_URL
 
   if (environment === 'development') {
-    return developmentApi ?? apiUrl
+    return developmentApi
   }
   if (environment === 'production') {
-    return productionApi ?? apiUrl
+    return productionApi
   }
-  return apiUrl ?? productionApi ?? developmentApi
+  return productionApi ?? developmentApi
 }
 
 const BASE_URL = getBaseUrl()

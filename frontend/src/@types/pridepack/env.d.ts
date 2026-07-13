@@ -1,3 +1,3 @@
-interface ImportMetaEnv {
-  readonly PROD: boolean
-}
+// interface ImportMetaEnv {
+//   readonly PROD: boolean
+// }
