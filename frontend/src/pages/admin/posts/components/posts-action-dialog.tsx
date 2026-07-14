@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { type Resolver, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { postCategoryTitles, type Post, type PostCategory, type PostPayload, } from '@/@types/post'
-import { useCreatePostHook, useUpdatePostHook, } from '@/hooks/post.hook'
 import { useUploadFileHook } from '@/hooks/file.hook'
 import {
   FormProvider,
@@ -23,32 +22,11 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import moment from 'moment'
+import { postFormSchema } from '@/lib/validators/post-validator'
+import { useMutation } from '@tanstack/react-query'
+import { posts } from '@/lib/queries/post'
 
-type PostFormValues = {
-  title: string
-  description: string
-  date?: Date
-  category: PostCategory
-  cover: UploadImage | null
-  images: UploadImage[]
-}
-
-const postFormSchema = z.object({
-  title: z.string().trim().min(1, 'Vui lòng nhập tiêu đề.'),
-  description: z.string().trim().min(1, 'Vui lòng nhập nội dung.'),
-  date: z.date().nullable().refine((date) => date !== null, 'Vui lòng chọn ngày.'),
-  category: z.enum(Object.entries(postCategoryTitles).map(p => p[0]) as PostCategory[], 'Định dạng không đúng'),
-  cover: z.custom<UploadImage>(
-    (value) => typeof value === 'string' || (typeof value === 'object' && value !== null),
-    { message: 'Vui lòng chọn ảnh bìa.' }
-  ),
-  images: z.custom<UploadImage[]>(
-    (value) => Array.isArray(value) && value.every((v) => typeof v === 'string' || (typeof v === 'object' && v !== null)),
-    { message: 'Vui lòng chọn ảnh sự kiện.' }
-  ),
-})
-
-const zodResolver: Resolver<PostFormValues> = async (values) => {
+const zodResolver: Resolver<z.infer<typeof postFormSchema>> = async (values) => {
   const result = postFormSchema.safeParse(values)
   if (result.success) {
     return { values: result.data, errors: {} }
@@ -68,10 +46,10 @@ const zodResolver: Resolver<PostFormValues> = async (values) => {
   }
 }
 
-const defaultValues = (post?: Post): PostFormValues => ({
+const defaultValues = (post?: Post): z.infer<typeof postFormSchema> => ({
   title: post?.title ?? '',
   description: post?.description ?? '',
-  date: post?.date ? moment(post.date, 'DD/MM/YYYY', true).toDate() : undefined,
+  date: post?.date ? moment(post.date, 'DD/MM/YYYY', true).toDate() : new Date(),
   category: post?.category ?? 'chao-tinh-thuong',
   cover: post?.cover ?? null,
   images: post?.images ?? [],
@@ -90,9 +68,9 @@ export const PostsActionDialog = ({
 }: PostsActionDialogProps) => {
   const isEdit = !!currentRow
   const upload = useUploadFileHook()
-  const createPost = useCreatePostHook()
-  const updatePost = useUpdatePostHook()
-  const form = useForm<PostFormValues>({
+  const { mutateAsync: create } = useMutation(posts().create.mutationOptions())
+  const { mutateAsync: update } = useMutation(posts().update.mutationOptions())
+  const form = useForm<z.infer<typeof postFormSchema>>({
     resolver: zodResolver,
     defaultValues: defaultValues(currentRow ?? undefined),
   })
@@ -105,46 +83,42 @@ export const PostsActionDialog = ({
     }
   }, [currentRow, form, open])
 
-  const onSubmit = async (values: PostFormValues) => {
-    try {
-      let coverUrl = typeof values.cover === 'string' ? values.cover : ''
-      let images: string[] = []
+  const onSubmit = async (values: z.infer<typeof postFormSchema>) => {
+    let coverUrl = typeof values.cover === 'string' ? values.cover : ''
+    let images: string[] = []
 
-      const formData = new FormData()
-      if (isLocalUploadImage(values.cover)) {
-        formData.set('files', values.cover)
-        const response = await upload.mutateAsync({ file: formData })
-        coverUrl = response.data[0] ?? ''
-      }
-      formData.delete('files')
-      for (let i = 0; i < values.images.length; i++) {
-        if (isLocalUploadImage(values.images[i])) {
-          formData.append('files', values.images[i])
-        }
-      }
-      const imagesResponse = await upload.mutateAsync({ file: formData })
-      images = imagesResponse.data
-
-      const post: PostPayload = {
-        title: values.title,
-        description: values.description,
-        date: moment(values.date).format('DD/MM/YYYY'),
-        category: values.category,
-        cover: coverUrl,
-        images
-      }
-
-      if (currentRow) {
-        await updatePost.mutateAsync({ id: currentRow._id, post })
-      } else {
-        await createPost.mutateAsync({ post })
-      }
-
-      form.reset(defaultValues())
-      onOpenChange(false)
-    } catch {
-      // Hook-level onError handlers show the API error.
+    const formData = new FormData()
+    if (isLocalUploadImage(values.cover)) {
+      formData.set('files', values.cover)
+      const response = await upload.mutateAsync({ file: formData })
+      coverUrl = response.data[0] ?? ''
     }
+    formData.delete('files')
+    for (let i = 0; i < values.images.length; i++) {
+      if (isLocalUploadImage(values.images[i])) {
+        formData.append('files', values.images[i])
+      }
+    }
+    const imagesResponse = await upload.mutateAsync({ file: formData })
+    images = imagesResponse.data
+
+    const post: PostPayload = {
+      title: values.title,
+      description: values.description,
+      date: moment(values.date).format('DD/MM/YYYY'),
+      category: values.category,
+      cover: coverUrl,
+      images
+    }
+
+    if (currentRow) {
+      await update({ id: currentRow._id, ...post })
+    } else {
+      await create({ ...post })
+    }
+
+    form.reset(defaultValues())
+    onOpenChange(false)
   }
 
   return (

@@ -1,4 +1,3 @@
-import { useGetPostsHook } from '../../../hooks/post.hook'
 import { ShimmerList } from '@/layout/common'
 import { PostsDialogs } from './components/posts-dialogs'
 import { PostsPrimaryButtons } from './components/posts-primary-buttons'
@@ -7,12 +6,13 @@ import { PostsTable } from './components/posts-table'
 import { getRouteApi } from '@tanstack/react-router'
 import type { NavigateFn } from '@/hooks/use-table-url-state'
 import { Main } from '@/layout/admin'
+import { useQuery } from '@tanstack/react-query'
+import { posts } from '@/lib/queries/post'
 
 const route = getRouteApi('/cms/post/list')
 
 const PostsPage = () => {
-  const filter = { page: 1 }
-  const { data: posts, isLoading } = useGetPostsHook({ filter })
+  const { data, isLoading } = useQuery(posts().all.queryOptions({ page: 1 }))
   const search = route.useSearch()
   const navigate = route.useNavigate() as NavigateFn
 
@@ -25,12 +25,13 @@ const PostsPage = () => {
           </div>
           <PostsPrimaryButtons />
         </div>
-        {isLoading ? (
+        {isLoading && (
           <div className='rounded-md border p-3'>
             <ShimmerList />
           </div>
-        ) : (
-          <PostsTable data={posts?.data ?? []} search={search} navigate={navigate} />
+        )}
+        {data && (
+          <PostsTable data={data} search={search} navigate={navigate} />
         )}
       </Main>
       <PostsDialogs />

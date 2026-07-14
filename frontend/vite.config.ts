@@ -6,7 +6,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const siteUrl = process.env.SITE_URL || 'https://www.anhsangtuthien.com'
+const siteUrl = 'https://www.anhsangtuthien.com'
 const staticRoutes = [
   '/',
   '/design',

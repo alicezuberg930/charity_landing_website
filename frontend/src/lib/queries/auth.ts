@@ -21,9 +21,6 @@ export const auth = () => ({
                         input
                     )
                 },
-                onSuccess(data) {
-                    toast.success(data.message)
-                }
             }),
     },
 })

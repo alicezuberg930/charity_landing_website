@@ -26,13 +26,12 @@ export type Post = {
 }
 
 export type PostPayload = {
-  title?: FormDataEntryValue
-  date?: FormDataEntryValue
-  category?: FormDataEntryValue | PostCategory
+  title?: string
+  date?: string
+  category?: PostCategory
   description?: string | null
   cover?: string
   images?: string[]
-  [key: string]: FormDataEntryValue | string | string[] | null | undefined
 }
 
 export type PostFilter = ApiQueryParams & {

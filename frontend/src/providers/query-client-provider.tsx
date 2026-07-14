@@ -28,6 +28,7 @@ const createQueryClient = () => new QueryClient({
         },
         mutations: {
             onError: (error) => {
+                console.log(error instanceof HttpError)
                 if (error instanceof HttpError) {
                     if (error.status === 304) {
                         toast.error('Content not modified!')
