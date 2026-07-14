@@ -3,8 +3,7 @@ import { SEO } from '@/lib/seo'
 import LazyLoadImage from '@/components/lazy-load-image/lazy-load-image'
 import { Button } from '@/components/ui/button'
 import { LucideVolume2 } from 'lucide-react'
-import { stripHtml } from '@/lib/utils'
-import { useSpeechSynthesis } from '@/providers/speech-synthesis-provider'
+import { stripHtml, textToSpeech } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { VideoPlayer } from '@/components/video/video-player'
 import { useGetPostDetailsHook } from '@/hooks/post.hook'
@@ -14,7 +13,6 @@ const ActivityDetailsPage = () => {
   const { slug } = useParams({ strict: false })
   const id = slug?.slice(slug.lastIndexOf('-') + 1)
   const { data: post, isLoading, isError } = useGetPostDetailsHook({ id })
-  const { textToSpeech } = useSpeechSynthesis()
 
   const handleTextToSpeech = () => {
     if (post?.data) textToSpeech(stripHtml(post?.data.description))

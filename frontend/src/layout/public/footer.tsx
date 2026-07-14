@@ -40,7 +40,7 @@ const Footer = () => {
                 >
                   <LazyLoadImage
                     className='w-12 h-12'
-                    src='./assets/facebook.png'
+                    src='/assets/facebook.png'
                     alt='facebook'
                     effect='blur'
                   />
@@ -53,7 +53,7 @@ const Footer = () => {
                 >
                   <LazyLoadImage
                     className='w-12 h-12'
-                    src='./assets/zalo.png'
+                    src='/assets/zalo.png'
                     alt='zalo'
                     effect='blur'
                   />
@@ -65,7 +65,7 @@ const Footer = () => {
                 >
                   <LazyLoadImage
                     className='w-12 h-12'
-                    src='./assets/youtube.png'
+                    src='/assets/youtube.png'
                     alt='youtube'
                     effect='blur'
                   />

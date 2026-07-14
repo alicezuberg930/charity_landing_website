@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { toast } from 'sonner'
 import { HttpError } from './repository/http-error'
+import { httpClient } from './repository/http-client'
 
 const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
@@ -146,4 +147,49 @@ const formatDuration = (duration: number): string => {
   return `${hour}${minute}:${second}`
 }
 
-export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml, formatDuration }
+const textToSpeech = async (text: string) => {
+  // first check to see if web speech API support vietnamese and use it
+  const utterance = new SpeechSynthesisUtterance(text)
+  const voices = window.speechSynthesis.getVoices()
+  const vietnameseVoices = voices.filter(voice => voice.lang === 'vi-VN' || voice.lang === 'vi')
+  if (vietnameseVoices[0]) {
+    utterance.voice = vietnameseVoices[0]
+    utterance.lang = 'vi-VN'
+    utterance.rate = 1.0
+    utterance.pitch = 1.0
+    utterance.volume = 1.0
+    window.speechSynthesis.speak(utterance)
+  } else {
+    const apiKey = import.meta.env.VITE_ELEVEN_LAB_API_KEY
+    // if web speech API is not supported switch to eleven lab TTS API
+    const response = await httpClient.post(
+      'https://api.elevenlabs.io/v1/text-to-speech/JBFqnCBsd6RMkjVDRZzb',
+      {
+        text,
+        model_id: 'eleven_v3',
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 1.0,
+        },
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(apiKey && { 'xi-api-key': apiKey }),
+        },
+        credentials: 'omit'
+      }
+    )
+
+    if (!response.ok) throw new Error('Failed to generate speech')
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+    const audio = new Audio(url)
+    audio.onended = () => {
+      URL.revokeObjectURL(url)
+    }
+    await audio.play()
+  }
+}
+
+export { cn, showResponseError, slugify, alpha, getPageNumbers, stripHtml, formatDuration, textToSpeech }
