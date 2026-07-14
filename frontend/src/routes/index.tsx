@@ -1,6 +1,6 @@
 import { createRootRoute, createRoute, createRouter, Navigate, Outlet, RouterProvider } from "@tanstack/react-router"
 import { lazy, Suspense, type ComponentType } from "react"
-import { VideoPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '../pages/public'
+import { NotFoundPage, VideoPage, HomePage, DesignPage, PhotoshootPage, ChaoTinhThuongPage, ChuongTrinhThuongNienPage, HoTroHoanCanhPage, TiepSucTriThucPage, RulePage, CriteriaPage, StructurePage, ContactPage, NewsPage, ActivityDetailsPage } from '@/pages/public'
 import { ROOT_CMS } from "./path"
 import { queryClient } from "@/providers/query-client-provider"
 import { AuthGuard } from "@/layout/admin/auth-guard"
@@ -31,6 +31,7 @@ const guardedLazyRoute = (Component: ComponentType) => () => (
 
 const rootRoute = createRootRoute({
     component: Outlet,
+    notFoundComponent: NotFoundPage,
 })
 
 const loginRoute = createRoute({
