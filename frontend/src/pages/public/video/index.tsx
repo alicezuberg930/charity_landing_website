@@ -11,40 +11,26 @@ function VideoPage() {
     ),
   })
 
-  // const isLoading = results.some((query) => query.isLoading)
-  // const errors = results.filter((query) => query.error)
   const queriedPlaylistIds = results.map((playlist) => [
     ...new Set(
       playlist.data?.items.map((item) => item.contentDetails.videoId) ?? []
     ),
   ])
 
-  const playlistSections = [
-    {
-      playlist: queriedPlaylistIds[0],
-      title: 'VIDEO CHÁO TÌNH THƯƠNG'
-    },
-    {
-      playlist: queriedPlaylistIds[1],
-      title: 'VIDEO TIẾP SỨC TRI THỨC'
-    },
-    {
-      playlist: queriedPlaylistIds[2],
-      title: 'VIDEO CHƯƠNG TRÌNH THƯỜNG NIÊN'
-    },
-    {
-      playlist: queriedPlaylistIds[3],
-      title: 'VIDEO HỖ TRỢ HOÀN CẢNH KHÓ KHĂN'
-    },
+  const titles = [
+    'VIDEO CHÁO TÌNH THƯƠNG',
+    'VIDEO TIẾP SỨC TRI THỨC',
+    'VIDEO CHƯƠNG TRÌNH THƯỜNG NIÊN',
+    'VIDEO HỖ TRỢ HOÀN CẢNH KHÓ KHĂN',
   ]
 
   return (
     <>
-      {playlistSections.map((playlist, index) => (
-        <div key={playlist.title}>
-          <Section title={playlist.title} />
+      {titles.map((title, index) => (
+        <div key={title}>
+          <Section title={title} />
           <PlayListSlider
-            videoIds={playlist.playlist}
+            videoIds={queriedPlaylistIds[index]}
             isLoading={results[index].isLoading}
           />
         </div>
