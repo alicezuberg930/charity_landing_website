@@ -1,6 +1,6 @@
 import { memo } from 'react'
 //
-import BackgroundIllustration from './BackgroundIllustration'
+import BackgroundIllustration from './background-illustration'
 
 const PRIMARY_LIGHTER = '#CFEBEB'
 const PRIMARY_MAIN = '#0E8080'

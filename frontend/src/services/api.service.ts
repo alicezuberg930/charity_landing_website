@@ -34,20 +34,6 @@ import type {
     LogListResponse,
     LogMutationResponse,
 } from '@/@types/log'
-import type {
-    CreatePostParams,
-    DeletePostParams,
-    GetPostDetailsParams,
-    GetPostsParams,
-    PostDetailsResponse,
-    PostListResponse,
-    PostMutationResponse,
-    UpdatePostParams,
-} from '@/@types/post'
-import type {
-    YoutubePlaylistVideosParams,
-    YoutubePlaylistVideosResponse,
-} from '@/@types/youtube'
 import { API } from '../lib/api'
 
 // auth
@@ -118,19 +104,4 @@ export const deleteEvent = async ({ id }: DeleteEventParams) => {
 
 export const getEvents = async ({ filter }: GetEventsParams = {}) => {
     return httpClient.get<EventListResponse>(API.EVENTS, filter)
-}
-
-export const getYoutubePlaylistVideos = async ({ playlistId }: YoutubePlaylistVideosParams) => {
-    const googleApiKey = import.meta.env.REACT_APP_GOOGLE_API_KEY ?? import.meta.env.VITE_GOOGLE_API_KEY
-
-    return httpClient.get<YoutubePlaylistVideosResponse>(
-        'https://youtube.googleapis.com/youtube/v3/playlistItems',
-        {
-            part: 'snippet,contentDetails',
-            maxResults: 20,
-            playlistId,
-            key: googleApiKey,
-        },
-        { credentials: 'omit' }
-    )
 }

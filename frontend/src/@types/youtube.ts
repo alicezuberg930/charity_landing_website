@@ -1,7 +1,3 @@
-export type YoutubePlaylistVideosParams = {
-  playlistId: string
-}
-
 export type YoutubePlaylistItem = {
   kind?: string
   etag?: string

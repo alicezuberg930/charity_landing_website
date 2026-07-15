@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { HttpError } from '@/lib/repository/http-error'
+import { showResponseError } from '@/lib/utils'
 
 const createQueryClient = () => new QueryClient({
     defaultOptions: {
@@ -46,19 +47,7 @@ const createQueryClient = () => new QueryClient({
     },
     queryCache: new QueryCache({
         onError: (error) => {
-            if (error instanceof HttpError) {
-                if (error.status === 401) {
-                    // toast.error('Session expired!')
-                    // const navigate = useNavigate()
-                    // navigate({ to: '/sign-in' })
-                }
-                if (error.status === 500) {
-                    toast.error('Internal Server Error!')
-                }
-                if (error.status === 403) {
-                    toast.error('Access denied!')
-                }
-            }
+            showResponseError(error)
         },
     }),
 })

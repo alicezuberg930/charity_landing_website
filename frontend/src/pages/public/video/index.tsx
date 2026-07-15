@@ -1,65 +1,52 @@
-import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import PlayListSlider from '@/pages/public/video/components/playlist-slider'
 import Section from '@/layout/public/section'
-import { getYoutubePlaylistVideos } from '@/services/api.service'
-import { showResponseError } from '@/lib/utils'
-import { playlistIds } from '@/lib/constants'
-import type { SliderProps } from '@/components/custom-carousel/types'
-
-type FetchYoutubePlaylistVideosParams = {
-  playlistId: string
-  setPlayList: Dispatch<SetStateAction<string[]>>
-}
+import { playlistIds as ids } from '@/lib/constants'
+import { useQueries } from '@tanstack/react-query'
+import { playlists } from '@/lib/queries/playlist'
 
 function VideoPage() {
-  const [playList_1, setPlayList_1] = useState<string[]>([])
-  const [playList_2, setPlayList_2] = useState<string[]>([])
-  const [playList_3, setPlayList_3] = useState<string[]>([])
-  const [playList_4, setPlayList_4] = useState<string[]>([])
+  const results = useQueries({
+    queries: ids.map((id) =>
+      playlists().one.queryOptions(id)
+    ),
+  })
 
-  const fetchYoutubePlaylistVideos = async ({ playlistId, setPlayList }: FetchYoutubePlaylistVideosParams) => {
-    try {
-      const response = await getYoutubePlaylistVideos({ playlistId })
-      let contentDetails: string[] = []
-      response.items.forEach(item => contentDetails.push(item.contentDetails.videoId))
-      setPlayList([...new Set(contentDetails)])
-    } catch (error) {
-      showResponseError(error)
-    }
-  }
+  // const isLoading = results.some((query) => query.isLoading)
+  // const errors = results.filter((query) => query.error)
+  const queriedPlaylistIds = results.map((playlist) => [
+    ...new Set(
+      playlist.data?.items.map((item) => item.contentDetails.videoId) ?? []
+    ),
+  ])
 
-  useEffect(() => {
-    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_1, setPlayList: setPlayList_1 })
-    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_2, setPlayList: setPlayList_2 })
-    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_3, setPlayList: setPlayList_3 })
-    fetchYoutubePlaylistVideos({ playlistId: playlistIds.PLAYLIST_4, setPlayList: setPlayList_4 })
-  }, [])
-
-  const playlists = [
+  const playlistSections = [
     {
-      playlist: playList_1,
+      playlist: queriedPlaylistIds[0],
       title: 'VIDEO CHÁO TÌNH THƯƠNG'
     },
     {
-      playlist: playList_2,
+      playlist: queriedPlaylistIds[1],
       title: 'VIDEO TIẾP SỨC TRI THỨC'
     },
     {
-      playlist: playList_3,
+      playlist: queriedPlaylistIds[2],
       title: 'VIDEO CHƯƠNG TRÌNH THƯỜNG NIÊN'
     },
     {
-      playlist: playList_4,
+      playlist: queriedPlaylistIds[3],
       title: 'VIDEO HỖ TRỢ HOÀN CẢNH KHÓ KHĂN'
     },
   ]
 
   return (
     <>
-      {playlists.map((playlist, i) => (
+      {playlistSections.map((playlist, index) => (
         <div key={playlist.title}>
           <Section title={playlist.title} />
-          <PlayListSlider videoIds={playlist.playlist} />
+          <PlayListSlider
+            videoIds={playlist.playlist}
+            isLoading={results[index].isLoading}
+          />
         </div>
       ))}
     </>

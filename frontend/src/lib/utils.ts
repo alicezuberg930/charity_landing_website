@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { toast } from 'sonner'
 import { HttpError } from './repository/http-error'
 import { httpClient } from './repository/http-client'
+import { useNavigate } from '@tanstack/react-router'
 
 const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
@@ -12,6 +13,10 @@ const showResponseError = (error: unknown) => {
   const httpError = error instanceof HttpError ? error : undefined
 
   if (httpError) {
+    if (httpError.status === 401) {
+      const navigate = useNavigate()
+      navigate({ to: '/sign-in' })
+    }
     const data = httpError.data as { message?: unknown } | undefined
     const err = data?.message ?? httpError.message
     if (Array.isArray(err)) {
