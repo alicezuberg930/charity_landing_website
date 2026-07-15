@@ -85,27 +85,6 @@ export const getBannerDetails = async ({ id }: GetBannerDetailsParams) => {
     return httpClient.get<BannerDetailsResponse>(`${API.BANNERS}/${id}`)
 }
 
-// post
-export const createPost = async ({ post }: CreatePostParams) => {
-    return httpClient.post<PostMutationResponse>(API.POSTS, post)
-}
-
-export const updatePost = async ({ id, post }: UpdatePostParams) => {
-    return httpClient.patch<PostMutationResponse>(`${API.POSTS}/${id}`, post)
-}
-
-export const deletePost = async ({ id }: DeletePostParams) => {
-    return httpClient.delete<PostMutationResponse>(`${API.POSTS}/${id}`)
-}
-
-export const getPosts = async ({ filter }: GetPostsParams = {}) => {
-    return httpClient.get<PostListResponse>(API.POSTS, filter)
-}
-
-export const getPostDetails = async ({ id }: GetPostDetailsParams) => {
-    return httpClient.get<PostDetailsResponse>(`${API.POSTS}/${id}`)
-}
-
 // log
 export const getLogs = async ({ filter }: GetLogsParams = {}) => {
     return httpClient.get<LogListResponse>(API.LOGS, filter)

@@ -14,7 +14,7 @@ root.render(
     <ThemeProvider>
       <AuthProvider>
         <QueryClientProvider>
-            <Router />
+          <Router />
         </QueryClientProvider>
       </AuthProvider>
     </ThemeProvider>
