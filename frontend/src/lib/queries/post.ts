@@ -1,5 +1,5 @@
 import { mutationOptions, queryOptions } from '@tanstack/react-query'
-import type { DataResponse, Post, PostFilter, PostPayload } from '@/@types'
+import type { ApiResponse, Post, PostFilter, PostPayload } from '@/@types'
 import { queryClient } from '@/providers/query-client-provider'
 import { httpClient } from '../repository/http-client'
 
@@ -18,7 +18,7 @@ export const posts = () => ({
             queryOptions({
                 queryKey: keys.all(opts),
                 queryFn: async () => {
-                    const { data } = await httpClient.get<DataResponse<Post[]>>('/posts', opts)
+                    const { data } = await httpClient.get<ApiResponse<Post[]>>('/posts', opts)
                     return data
                 },
             }),
@@ -30,7 +30,7 @@ export const posts = () => ({
             queryOptions({
                 queryKey: keys.one(id),
                 queryFn: async () => {
-                    const { data } = await httpClient.get<DataResponse<Post>>(`/posts/${id}`)
+                    const { data } = await httpClient.get<ApiResponse<Post>>(`/posts/${id}`)
                     return data
                 },
             }),
@@ -42,7 +42,7 @@ export const posts = () => ({
             mutationOptions({
                 mutationKey: keys.create(),
                 mutationFn: async ({ ...input }: PostPayload) => {
-                    return await httpClient.post<DataResponse>('/posts', input)
+                    return await httpClient.post<ApiResponse>('/posts', input)
                 },
                 onSuccess: () => {
                     queryClient().invalidateQueries({ queryKey: keys.all({}) })
@@ -56,7 +56,7 @@ export const posts = () => ({
             mutationOptions({
                 mutationKey: keys.update(),
                 mutationFn: async ({ id, ...input }: PostPayload & { id: string }) => {
-                    return await httpClient.put<DataResponse>(`/posts/${id}`, input)
+                    return await httpClient.put<ApiResponse>(`/posts/${id}`, input)
                 },
                 onSuccess: () => {
                     queryClient().invalidateQueries({ queryKey: keys.all({}) })
@@ -70,7 +70,7 @@ export const posts = () => ({
             mutationOptions({
                 mutationKey: keys.delete(),
                 mutationFn: async (id: string) => {
-                    return await httpClient.delete<DataResponse>(`/posts/${id}`)
+                    return await httpClient.delete<ApiResponse>(`/posts/${id}`)
                 },
                 onSuccess: () => {
                     queryClient().invalidateQueries({ queryKey: keys.all({}) })

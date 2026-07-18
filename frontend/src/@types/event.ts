@@ -1,4 +1,4 @@
-import type { ApiQueryParams, DataResponse, DeleteParams, EntityId, MutationResponse } from './api'
+import type { ApiQueryParams, ApiResponse, DeleteParams, EntityId } from './api'
 
 export type AppEvent = {
   _id: EntityId
@@ -35,6 +35,6 @@ export type UpdateEventParams = {
 
 export type DeleteEventParams = DeleteParams
 
-export type EventListResponse = DataResponse<AppEvent[]>
+export type EventListResponse = ApiResponse<AppEvent[]>
 
-export type EventMutationResponse = MutationResponse
+export type EventMutationResponse = ApiResponse

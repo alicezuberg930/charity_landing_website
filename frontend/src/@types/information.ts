@@ -1,5 +1,3 @@
-import type { DataResponse, MutationResponse } from './api'
-
 export type WebsiteInformation = {
   _id?: string
   activityAddress?: string
@@ -16,15 +14,3 @@ export type WebsiteInformation = {
   createdAt?: string
   updatedAt?: string
 }
-
-export type InformationPayload = Partial<
-  Record<keyof WebsiteInformation, FormDataEntryValue | string>
->
-
-export type UpdateInformationParams = {
-  information: InformationPayload
-}
-
-export type InformationResponse = DataResponse<WebsiteInformation>
-
-export type InformationMutationResponse = MutationResponse

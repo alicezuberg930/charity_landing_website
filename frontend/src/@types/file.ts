@@ -1,7 +1,7 @@
-import type { DataResponse } from './api'
+import type { ApiResponse } from './api'
 
 export type UploadFileParams = {
   file: FormData
 }
 
-export type UploadFileResponse = DataResponse<string[]>
+export type UploadFileResponse = ApiResponse<string[]>

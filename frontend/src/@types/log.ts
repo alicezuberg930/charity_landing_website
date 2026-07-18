@@ -1,9 +1,6 @@
 import type {
   ApiQueryParams,
-  DataResponse,
-  DeleteParams,
   EntityId,
-  MutationResponse,
 } from './api'
 
 export type RequestLog = {
@@ -27,9 +24,3 @@ export type LogFilter = ApiQueryParams & {
 export type GetLogsParams = {
   filter?: LogFilter
 }
-
-export type DeleteLogParams = DeleteParams
-
-export type LogListResponse = DataResponse<RequestLog[]>
-
-export type LogMutationResponse = MutationResponse

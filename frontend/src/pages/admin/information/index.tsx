@@ -5,8 +5,9 @@ import { Pen } from 'lucide-react'
 import type { WebsiteInformation } from '@/@types/information'
 import { FormProvider, RHFTextField } from '@/components/hook-form'
 import { Button } from '@/components/ui/button'
-import { useGetInformationHook, useUpdateInformationHook } from '@/hooks/information.hook'
 import { Main } from '@/layout/admin'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { information } from '@/lib/queries/information'
 
 const informationFormSchema = z.object({
   activityAddress: z.string().trim(),
@@ -22,9 +23,7 @@ const informationFormSchema = z.object({
   vpbankNumber: z.string().trim(),
 })
 
-type InformationFormValues = z.infer<typeof informationFormSchema>
-
-const zodResolver: Resolver<InformationFormValues> = async (values) => {
+const zodResolver: Resolver<WebsiteInformation> = async (values) => {
   const result = informationFormSchema.safeParse(values)
   if (result.success) {
     return { values: result.data, errors: {} }
@@ -45,7 +44,7 @@ const zodResolver: Resolver<InformationFormValues> = async (values) => {
   }
 }
 
-const defaultValues = (information?: WebsiteInformation): InformationFormValues => ({
+const defaultValues = (information?: WebsiteInformation) => ({
   activityAddress: information?.activityAddress ?? '',
   storageAddress: information?.storageAddress ?? '',
   email: information?.email ?? '',
@@ -60,73 +59,73 @@ const defaultValues = (information?: WebsiteInformation): InformationFormValues 
 })
 
 const informationFields: {
-  name: keyof InformationFormValues
+  name: keyof WebsiteInformation
   label: string
   placeholder: string
   type?: string
 }[] = [
-  {
-    name: 'activityAddress',
-    label: 'Địa chỉ nấu cháo',
-    placeholder: 'Nhập địa chỉ nấu cháo',
-  },
-  {
-    name: 'storageAddress',
-    label: 'Địa chỉ kho',
-    placeholder: 'Nhập địa chỉ kho',
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Nhập email',
-    type: 'email',
-  },
-  {
-    name: 'hotline',
-    label: 'Hotline',
-    placeholder: 'Nhập hotline',
-  },
-  {
-    name: 'facebookUrl',
-    label: 'Trang facebook',
-    placeholder: 'Nhập địa chỉ URL trang facebook',
-  },
-  {
-    name: 'zaloURL',
-    label: 'Trang zalo',
-    placeholder: 'Nhập địa chỉ URL trang zalo',
-  },
-  {
-    name: 'youtubeURL',
-    label: 'Trang youtube',
-    placeholder: 'Nhập địa chỉ URL trang youtube',
-  },
-  {
-    name: 'googleMapURL',
-    label: 'URL google map',
-    placeholder: 'Nhập URL của google map',
-  },
-  {
-    name: 'websiteURL',
-    label: 'Địa chỉ website',
-    placeholder: 'Nhập địa chỉ URL của website',
-  },
-  {
-    name: 'achaubankNumber',
-    label: 'STK Á châu bank',
-    placeholder: 'Nhập STK ngân hàng',
-  },
-  {
-    name: 'vpbankNumber',
-    label: 'STK VP bank',
-    placeholder: 'Nhập STK ngân hàng',
-  },
-]
+    {
+      name: 'activityAddress',
+      label: 'Địa chỉ nấu cháo',
+      placeholder: 'Nhập địa chỉ nấu cháo',
+    },
+    {
+      name: 'storageAddress',
+      label: 'Địa chỉ kho',
+      placeholder: 'Nhập địa chỉ kho',
+    },
+    {
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Nhập email',
+      type: 'email',
+    },
+    {
+      name: 'hotline',
+      label: 'Hotline',
+      placeholder: 'Nhập hotline',
+    },
+    {
+      name: 'facebookUrl',
+      label: 'Trang facebook',
+      placeholder: 'Nhập địa chỉ URL trang facebook',
+    },
+    {
+      name: 'zaloURL',
+      label: 'Trang zalo',
+      placeholder: 'Nhập địa chỉ URL trang zalo',
+    },
+    {
+      name: 'youtubeURL',
+      label: 'Trang youtube',
+      placeholder: 'Nhập địa chỉ URL trang youtube',
+    },
+    {
+      name: 'googleMapURL',
+      label: 'URL google map',
+      placeholder: 'Nhập URL của google map',
+    },
+    {
+      name: 'websiteURL',
+      label: 'Địa chỉ website',
+      placeholder: 'Nhập địa chỉ URL của website',
+    },
+    {
+      name: 'achaubankNumber',
+      label: 'STK Á châu bank',
+      placeholder: 'Nhập STK ngân hàng',
+    },
+    {
+      name: 'vpbankNumber',
+      label: 'STK VP bank',
+      placeholder: 'Nhập STK ngân hàng',
+    },
+  ]
 
 const InformationPage = () => {
-  const updateInformation = useUpdateInformationHook()
-  const { data: information } = useGetInformationHook()
-  const form = useForm<InformationFormValues>({
+  const { mutateAsync, isPending } = useMutation(information().update.mutationOptions())
+  const { data } = useQuery(information().one.queryOptions())
+  const form = useForm<WebsiteInformation>({
     resolver: zodResolver,
     defaultValues: defaultValues(),
   })
@@ -134,18 +133,12 @@ const InformationPage = () => {
   const { formState: { isSubmitting } } = form
 
   useEffect(() => {
-    if (information?.data) {
-      form.reset(defaultValues(information.data))
+    if (data) {
+      form.reset(defaultValues(data))
     }
-  }, [form, information?.data])
+  }, [form, data])
 
-  const onSubmit = async (values: InformationFormValues) => {
-    try {
-      await updateInformation.mutateAsync({ information: values })
-    } catch {
-      // Hook-level onError handlers show the API error.
-    }
-  }
+  const onSubmit = async (values: WebsiteInformation) => await mutateAsync(values)
 
   return (
     <Main>
@@ -176,10 +169,10 @@ const InformationPage = () => {
           type='submit'
           form='information-form'
           className='mt-6 gap-1.5'
-          disabled={isSubmitting || updateInformation.isPending}
+          disabled={isSubmitting || isPending}
         >
           <Pen size={18} />
-          <span>{isSubmitting || updateInformation.isPending ? 'Đang lưu...' : 'Chỉnh sửa'}</span>
+          <span>{isSubmitting || isPending ? 'Đang lưu...' : 'Chỉnh sửa'}</span>
         </Button>
       </FormProvider>
     </Main>

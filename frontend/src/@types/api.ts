@@ -1,5 +1,3 @@
-import type { Response } from './response'
-
 export type EntityId = string
 
 export type ApiQueryPrimitive = string | number | boolean
@@ -20,8 +18,16 @@ export type DeleteParams = {
   id: EntityId
 }
 
-export type MutationResponse = Response<null>
-
-export type DataResponse<T = unknown> = Response<T> & {
-  data: T
+export type ApiResponse<T = unknown> = {
+  message: string
+  data?: T
+  statusCode?: number
+  path?: string
+  method?: string
+  timestamp?: string
+  paginate?: {
+    limit: number
+    currentPage: number
+    totalPages: number
+  }
 }

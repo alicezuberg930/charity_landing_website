@@ -94,7 +94,7 @@ export const BannersActionDialog = ({
         const formData = new FormData()
         formData.set('files', values.image)
         const response = await upload.mutateAsync({ file: formData })
-        imageUrl = response.data[0] ?? ''
+        imageUrl = response.data![0] ?? ''
       }
 
       const banner: BannerPayload = {

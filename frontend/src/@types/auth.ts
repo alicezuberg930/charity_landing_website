@@ -1,4 +1,4 @@
-import type { Response } from './response'
+import type { ApiResponse } from "./api"
 
 export type AuthUser = {
   _id: string
@@ -19,5 +19,5 @@ export type LoginPayload = {
   user: AuthUser
 }
 
-export type LoginResponse = Response<LoginPayload>
-export type ProfileResponse = Response<AuthUser>
+export type LoginResponse = ApiResponse<LoginPayload>
+export type ProfileResponse = ApiResponse<AuthUser>

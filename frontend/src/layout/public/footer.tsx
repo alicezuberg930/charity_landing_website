@@ -1,10 +1,11 @@
 import { memo, useEffect } from 'react'
-import { useGetInformationHook } from '../../hooks/information.hook'
 import moment from 'moment'
 import { LazyLoadImage } from '@/components/lazy-load-image'
+import { useQuery } from '@tanstack/react-query'
+import { information } from '@/lib/queries/information'
 
 const Footer = () => {
-  const { data: information } = useGetInformationHook()
+  const { data } = useQuery(information().one.queryOptions())
 
   return (
     <>
@@ -17,25 +18,25 @@ const Footer = () => {
             <ul className='mt-3 space-y-2'>
               <li>
                 <span className='text-main-color'>Cháo tình thương: </span>
-                <span>{information?.data?.activityAddress ?? 'Không có'}</span>
+                <span>{data?.activityAddress ?? 'Không có'}</span>
               </li>
               <li>
                 <span className='text-main-color'>Kho hàng: </span>
-                <span>{information?.data?.storageAddress ?? 'Không có'}</span>
+                <span>{data?.storageAddress ?? 'Không có'}</span>
               </li>
               <li>
                 <span className='text-main-color'>Hotline: </span>
-                <span>{information?.data?.hotline}</span>
+                <span>{data?.hotline}</span>
               </li>
               <li>
                 <span className='text-main-color'>Email: </span>
-                <span>{information?.data?.email}</span>
+                <span>{data?.email}</span>
               </li>
               <li className='flex items-center'>
                 <a
                   target='_blank'
                   rel='noreferrer'
-                  href={information?.data?.facebookUrl}
+                  href={data?.facebookUrl}
                   className='mr-3'
                 >
                   <LazyLoadImage
@@ -48,7 +49,7 @@ const Footer = () => {
                 <a
                   target='_blank'
                   rel='noreferrer'
-                  href={information?.data?.zaloURL}
+                  href={data?.zaloURL}
                   className='mr-3'
                 >
                   <LazyLoadImage
@@ -61,7 +62,7 @@ const Footer = () => {
                 <a
                   target='_blank'
                   rel='noreferrer'
-                  href={information?.data?.youtubeURL}
+                  href={data?.youtubeURL}
                 >
                   <LazyLoadImage
                     className='w-12 h-12'
@@ -78,10 +79,10 @@ const Footer = () => {
               THEO DÕI CHÚNG TÔI
             </span>
             <div className='mt-3 w-full'>
-              {information?.data?.facebookUrl && (
+              {data?.facebookUrl && (
                 <iframe
                   title='facebook'
-                  src={`https://www.facebook.com/plugins/page.php?href=${information?.data?.facebookUrl}&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
+                  src={`https://www.facebook.com/plugins/page.php?href=${data?.facebookUrl}&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
                   className='overflow-hidden h-100 w-full'
                 />
               )}

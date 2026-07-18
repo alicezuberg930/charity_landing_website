@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { AlertTriangle } from 'lucide-react'
 import { type RequestLog } from '@/@types/log'
-import { useDeleteLogHook } from '@/hooks/log.hook'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
@@ -14,6 +13,8 @@ import {
 } from '@/components/ui/dialog'
 import { Field, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { useMutation } from '@tanstack/react-query'
+import { logs } from '@/lib/queries/log'
 
 type LogsDeleteDialogProps = {
   open: boolean
@@ -27,15 +28,15 @@ export const LogsDeleteDialog = ({
   currentRow,
 }: LogsDeleteDialogProps) => {
   const [value, setValue] = useState('')
-  const remove = useDeleteLogHook()
+  const { mutateAsync, isPending } = useMutation(logs().delete.mutationOptions())
   const confirmValue = currentRow.path || currentRow._id
   const isConfirmed = value.trim() === confirmValue
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!isConfirmed) return
 
-    remove.mutate(
-      { id: currentRow._id },
+    await mutateAsync(
+      currentRow._id,
       {
         onSuccess() {
           setValue('')
@@ -87,10 +88,10 @@ export const LogsDeleteDialog = ({
           <Button
             type='button'
             variant='destructive'
-            disabled={!isConfirmed || remove.isPending}
+            disabled={!isConfirmed || isPending}
             onClick={handleDelete}
           >
-            {remove.isPending ? 'Đang xóa...' : 'Xóa'}
+            {isPending ? 'Đang xóa...' : 'Xóa'}
           </Button>
         </DialogFooter>
       </DialogContent>

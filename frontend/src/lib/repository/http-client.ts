@@ -1,4 +1,4 @@
-import { type Response as ApiResponse } from '@/@types'
+import { type ApiResponse } from '@/@types'
 import { HttpError } from './http-error'
 import { InterceptorManager } from './interceptor'
 
@@ -92,7 +92,7 @@ export class HttpClient {
     try {
       const response = await fetch(url, config)
       if (!response.ok) {
-        const data = await parseResponseBody<ApiResponse<null> | string>(
+        const data = await parseResponseBody<ApiResponse | string>(
           response
         )
         throw new HttpError(response.status, getErrorMessage(data), data)

@@ -23,17 +23,6 @@ import type {
     UpdateEventParams,
 } from '@/@types/event'
 import type { UploadFileParams, UploadFileResponse } from '@/@types/file'
-import type {
-    InformationMutationResponse,
-    InformationResponse,
-    UpdateInformationParams,
-} from '@/@types/information'
-import type {
-    DeleteLogParams,
-    GetLogsParams,
-    LogListResponse,
-    LogMutationResponse,
-} from '@/@types/log'
 import { API } from '../lib/api'
 
 // auth
@@ -69,24 +58,6 @@ export const getBanners = async (params?: GetBannersParams) => {
 
 export const getBannerDetails = async ({ id }: GetBannerDetailsParams) => {
     return httpClient.get<BannerDetailsResponse>(`${API.BANNERS}/${id}`)
-}
-
-// log
-export const getLogs = async ({ filter }: GetLogsParams = {}) => {
-    return httpClient.get<LogListResponse>(API.LOGS, filter)
-}
-
-export const deleteLog = async ({ id }: DeleteLogParams) => {
-    return httpClient.delete<LogMutationResponse>(`${API.LOGS}/${id}`)
-}
-
-// information
-export const updateInformation = async ({ information }: UpdateInformationParams) => {
-    return httpClient.post<InformationMutationResponse>(API.INFORMATION, information)
-}
-
-export const getInformation = async () => {
-    return httpClient.get<InformationResponse>(API.INFORMATION)
 }
 
 // event

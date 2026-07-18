@@ -1,5 +1,5 @@
 import { mutationOptions } from '@tanstack/react-query'
-import { type DataResponse, } from '@/@types'
+import { type ApiResponse, } from '@/@types'
 import { loginFormSchema } from '@/lib/validators/auth-validator'
 import { httpClient } from '../repository/http-client'
 import type z from 'zod'
@@ -16,7 +16,7 @@ export const auth = () => ({
             mutationOptions({
                 mutationKey: keys.login(),
                 mutationFn: async (input: z.infer<typeof loginFormSchema>) => {
-                    return await httpClient.post<DataResponse>(
+                    return await httpClient.post<ApiResponse>(
                         '/auth/login',
                         input
                     )

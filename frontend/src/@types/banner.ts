@@ -1,4 +1,4 @@
-import type { ApiQueryParams, DataResponse, DeleteParams, DetailParams, EntityId, MutationResponse } from './api'
+import type { ApiQueryParams, ApiResponse, DeleteParams, DetailParams, EntityId } from './api'
 
 export type Banner = {
   _id: EntityId
@@ -38,8 +38,8 @@ export type DeleteBannerParams = DeleteParams
 
 export type GetBannerDetailsParams = DetailParams
 
-export type BannerListResponse = DataResponse<Banner[]>
+export type BannerListResponse = ApiResponse<Banner[]>
 
-export type BannerDetailsResponse = DataResponse<Banner>
+export type BannerDetailsResponse = ApiResponse<Banner>
 
-export type BannerMutationResponse = MutationResponse
+export type BannerMutationResponse = ApiResponse

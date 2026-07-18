@@ -17,11 +17,10 @@ const LandingBanner = () => {
 
   return (
     <>
-      {isLoading ? (
-        <ShimmerList />
-      ) : (
+      {isLoading && (<ShimmerList />)}
+      {banners && banners.data && (
         <CustomSlider {...settings}>
-          {banners?.data.map(banner => (
+          {banners.data.map(banner => (
             <div key={banner._id} className='aspect-video'>
               <LazyLoadImage
                 widths={[

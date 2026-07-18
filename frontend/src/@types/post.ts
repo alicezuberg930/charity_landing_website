@@ -1,4 +1,4 @@
-import type { ApiQueryParams, DataResponse, DeleteParams, DetailParams, EntityId, MutationResponse } from './api'
+import type { ApiQueryParams, ApiResponse, DeleteParams, DetailParams, EntityId } from './api'
 
 export type PostCategory =
   | 'chao-tinh-thuong'
@@ -53,13 +53,3 @@ export type UpdatePostParams = {
   id: EntityId
   post: PostPayload
 }
-
-export type DeletePostParams = DeleteParams
-
-export type GetPostDetailsParams = DetailParams
-
-export type PostListResponse = DataResponse<Post[]>
-
-export type PostDetailsResponse = DataResponse<Post>
-
-export type PostMutationResponse = MutationResponse

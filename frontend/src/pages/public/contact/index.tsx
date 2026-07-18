@@ -1,9 +1,10 @@
 import Section from '@/layout/public/section'
+import { information } from '@/lib/queries/information'
 import GoogleMap from '@/pages/public/home/components/google-map'
-import { useGetInformationHook } from '@/hooks/information.hook'
+import { useQuery } from '@tanstack/react-query'
 
 const ContactPage = () => {
-  const { data: information } = useGetInformationHook()
+  const { data } = useQuery(information().one.queryOptions())
 
   return (
     <div className='mb-6'>
@@ -18,28 +19,28 @@ const ContactPage = () => {
                 <strong>
                   Website:
                   <a
-                    href={information?.data?.websiteURL ?? "/"}
+                    href={data?.websiteURL ?? "/"}
                     className='text-main-color'
                   >
                     {' '}
-                    {information?.data?.websiteURL ?? ""}
+                    {data?.websiteURL ?? ""}
                   </a>
                 </strong>
               </p>
             </li>
             <li>
               <p>
-                <strong>Hotline</strong>: {information?.data?.hotline ?? ""}
+                <strong>Hotline</strong>: {data?.hotline ?? ""}
               </p>
             </li>
             <li>
               <p>
-                <strong>Địa chỉ nấu cháo:</strong> {information?.data?.activityAddress ?? ""}
+                <strong>Địa chỉ nấu cháo:</strong> {data?.activityAddress ?? ""}
               </p>
             </li>
             <li>
               <p>
-                <strong>Kho lưu trữ:</strong> {information?.data?.storageAddress ?? ""}
+                <strong>Kho lưu trữ:</strong> {data?.storageAddress ?? ""}
               </p>
             </li>
           </ul>
@@ -53,10 +54,10 @@ const ContactPage = () => {
               </p>
             </li>
             <li>
-              <p>Ngân hàng Á Châu: {information?.data?.achaubankNumber ?? ""}</p>
+              <p>Ngân hàng Á Châu: {data?.achaubankNumber ?? ""}</p>
             </li>
             <li>
-              <p>Ngân hàng VPBank: {information?.data?.vpbankNumber ?? ""}</p>
+              <p>Ngân hàng VPBank: {data?.vpbankNumber ?? ""}</p>
             </li>
           </ul>
         </div>

@@ -91,7 +91,7 @@ export const PostsActionDialog = ({
     if (isLocalUploadImage(values.cover)) {
       formData.set('files', values.cover)
       const response = await upload.mutateAsync({ file: formData })
-      coverUrl = response.data[0] ?? ''
+      coverUrl = response.data![0]
     }
     formData.delete('files')
     for (let i = 0; i < values.images.length; i++) {
@@ -100,7 +100,7 @@ export const PostsActionDialog = ({
       }
     }
     const imagesResponse = await upload.mutateAsync({ file: formData })
-    images = imagesResponse.data
+    images = imagesResponse.data!
 
     const post: PostPayload = {
       title: values.title,
