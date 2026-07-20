@@ -18,11 +18,11 @@ const Footer = () => {
             <ul className='mt-3 space-y-2'>
               <li>
                 <span className='text-main-color'>Cháo tình thương: </span>
-                <span>{data?.activityAddress ?? 'Không có'}</span>
+                <span>{data?.activityAddress}</span>
               </li>
               <li>
                 <span className='text-main-color'>Kho hàng: </span>
-                <span>{data?.storageAddress ?? 'Không có'}</span>
+                <span>{data?.storageAddress}</span>
               </li>
               <li>
                 <span className='text-main-color'>Hotline: </span>
