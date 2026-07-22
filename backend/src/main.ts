@@ -2,9 +2,13 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { ConfigService } from '@nestjs/config'
 import { ValidationPipe } from '@nestjs/common'
+import express from 'express'
+import { ExpressAdapter } from '@nestjs/platform-express'
+
+const server = express()
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
   const configService = app.get(ConfigService)
   const cspValue = [
     "default-src 'self'",
@@ -40,7 +44,7 @@ async function bootstrap() {
   const allowedOrigins = [
     'http://localhost:5173',
     'https://www.anhsangtuthien.com',
-  ]  
+  ]
   const corsOrigins = configService.get<string>('CORS_ORIGINS')
   if (corsOrigins) {
     allowedOrigins.push(...corsOrigins.split(',').map(origin => origin.trim()))
@@ -54,3 +58,4 @@ async function bootstrap() {
   await app.listen(4000)
 }
 bootstrap()
+export default server
