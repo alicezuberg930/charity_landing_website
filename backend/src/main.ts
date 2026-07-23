@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { ConfigService } from '@nestjs/config'
 import { ValidationPipe } from '@nestjs/common'
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import { INestApplication } from '@nestjs/common'
 
@@ -28,7 +28,7 @@ async function bootstrap() {
     "upgrade-insecure-requests",
   ].join('; ')
 
-  app.use((req, res, next) => {
+  app.use((_req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Content-Security-Policy', cspValue)
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
     res.setHeader('X-Content-Type-Options', 'nosniff')
@@ -46,7 +46,7 @@ async function bootstrap() {
   }))
   // cors configurations - allow origins from environment variable or defaults
   const allowedOrigins = [
-    'http://localhost:5173',
+    // 'http://localhost:5173',
     'https://www.anhsangtuthien.com',
   ]
   const corsOrigins = configService.get<string>('CORS_ORIGINS')
@@ -70,7 +70,7 @@ if (!isVercel) {
   bootstrap().then(app => app.listen(4000))
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: Request, res: Response) {
   await bootstrap()
   return server(req, res)
 }
