@@ -4,11 +4,15 @@ import { ConfigService } from '@nestjs/config'
 import { ValidationPipe } from '@nestjs/common'
 import express from 'express'
 import { ExpressAdapter } from '@nestjs/platform-express'
+import { INestApplication } from '@nestjs/common'
 
 const server = express()
+let app: INestApplication | null = null
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
+  if (app) return app
+
+  app = await NestFactory.create(AppModule, new ExpressAdapter(server))
   const configService = app.get(ConfigService)
   const cspValue = [
     "default-src 'self'",
@@ -55,7 +59,18 @@ async function bootstrap() {
     'preflightContinue': false,
     'credentials': true,
   })
-  await app.listen(4000)
+
+  await app.init()
+  return app
 }
-bootstrap()
-export default server
+
+const isVercel = Boolean(process.env.VERCEL)
+
+if (!isVercel) {
+  bootstrap().then(app => app.listen(4000))
+}
+
+export default async function handler(req: any, res: any) {
+  await bootstrap()
+  return server(req, res)
+}
